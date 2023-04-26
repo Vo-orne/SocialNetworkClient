@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#242235"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="48dp"
+        android:text="Settings"
+        android:textColor="#FAFAFA"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lucile Alvarado"
+        android:textColor="#FAFAFA"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText,MissingConstraints"
+        tools:layout_editor_absoluteY="240dp" />
+
+    <TextView
+        android:id="@+id/userCareer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Career"
+        android:textColor="#B2B2B3"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userName" />
+
+    <TextView
+        android:id="@+id/userHomeAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home address"
+        android:textColor="#B2B2B3"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userCareer" />
+
+    <Button
+        android:id="@+id/editProfile"
+        android:layout_width="328dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@color/white"
+        android:text="Edit profile"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/viewMyContacts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/viewMyContacts"
+        android:layout_width="328dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="15.5dp"
+        android:backgroundTint="#FB5E06"
+        android:text="View my contacts"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
