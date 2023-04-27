@@ -4,79 +4,143 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#242235"
+    android:background="@color/first_background_color"
     tools:context=".MainActivity">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/second_background_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/middleLine" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/userDataFloor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.42" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/middleLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/upperBorder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottomBorder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftBorder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightBorder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
 
     <TextView
         android:id="@+id/settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="48dp"
-        android:text="Settings"
-        android:textColor="#FAFAFA"
+        android:fontFamily="@font/open_sans_medium"
+        android:text="@string/settings"
+        android:textColor="@color/white_text_color"
         android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@id/leftBorder"
+        app:layout_constraintTop_toTopOf="@id/upperBorder" />
+
+    <ImageView
+        android:id="@+id/userAvatar"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/userName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        tools:srcCompat="@drawable/default_user_photo"
+        android:contentDescription="@string/todo" />
 
     <TextView
         android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_medium"
+        android:layout_marginBottom="8dp"
         android:text="Lucile Alvarado"
-        android:textColor="#FAFAFA"
+        android:textColor="@color/white_text_color"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteY="240dp" />
+        app:layout_constraintBottom_toTopOf="@+id/userCareer" />
 
     <TextView
         android:id="@+id/userCareer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_medium"
+        android:layout_marginBottom="16dp"
         android:text="Career"
-        android:textColor="#B2B2B3"
+        android:textColor="@color/light_grey_text_color"
         android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/userHomeAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/userHomeAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_medium"
         android:text="Home address"
-        android:textColor="#B2B2B3"
+        android:textColor="@color/light_grey_text_color"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userCareer" />
+        app:layout_constraintBottom_toBottomOf="@+id/userDataFloor" />
 
     <Button
         android:id="@+id/editProfile"
-        android:layout_width="328dp"
+        android:layout_width="0dp"
         android:layout_height="45dp"
         android:backgroundTint="@color/white"
         android:text="Edit profile"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/viewMyContacts"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/rightBorder"
+        app:layout_constraintStart_toStartOf="@id/leftBorder"
         tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/viewMyContacts"
-        android:layout_width="328dp"
+        android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="15.5dp"
-        android:backgroundTint="#FB5E06"
+        android:backgroundTint="@color/orange_button_color"
         android:text="View my contacts"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/bottomBorder"
+        app:layout_constraintEnd_toEndOf="@id/rightBorder"
+        app:layout_constraintStart_toStartOf="@id/leftBorder"
         tools:ignore="HardcodedText" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
