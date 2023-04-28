@@ -13,8 +13,17 @@
         android:background="@color/second_background_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/middleLine" />
+        app:layout_constraintTop_toTopOf="@id/middleLine"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/upperBorder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.02" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/userDataFloor"
@@ -31,11 +40,11 @@
         app:layout_constraintGuide_percent="0.50" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/upperBorder"
+        android:id="@+id/floorLineIcons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.02" />
+        app:layout_constraintGuide_percent="0.70" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottomBorder"
@@ -77,8 +86,8 @@
         app:layout_constraintBottom_toTopOf="@+id/userName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@drawable/default_user_photo"
-        android:contentDescription="@string/todo" />
+        android:src="@drawable/default_user_photo"
+        android:contentDescription="@string/content_description_user_avatar" />
 
     <TextView
         android:id="@+id/userName"
@@ -86,7 +95,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/open_sans_medium"
         android:layout_marginBottom="8dp"
-        android:text="Lucile Alvarado"
+        android:text="@string/name_surname"
         android:textColor="@color/white_text_color"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +108,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/open_sans_medium"
         android:layout_marginBottom="16dp"
-        android:text="Career"
+        android:text="@string/career"
         android:textColor="@color/light_grey_text_color"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/userHomeAddress"
@@ -111,36 +120,67 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/open_sans_medium"
-        android:text="Home address"
+        android:text="@string/home_address"
         android:textColor="@color/light_grey_text_color"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/userDataFloor" />
 
-    <Button
+    <ImageView
+        android:id="@+id/iconFacebook"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toTopOf="@id/floorLineIcons"
+        app:layout_constraintEnd_toStartOf="@id/iconLinkedin"
+        android:src="@drawable/icon_facebook_foreground"
+        android:contentDescription="@string/content_description_facebook_icon" />
+
+    <ImageView
+        android:id="@+id/iconLinkedin"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toTopOf="@id/floorLineIcons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/icon_linkedin_foreground"
+        android:contentDescription="@string/content_description_linkedin_icon" />
+
+    <ImageView
+        android:id="@+id/iconInstagram"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toTopOf="@id/floorLineIcons"
+        app:layout_constraintStart_toEndOf="@id/iconLinkedin"
+        android:src="@drawable/icon_instagram_foreground"
+        android:contentDescription="@string/content_description_instagram_icon" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/editProfile"
         android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:backgroundTint="@color/white"
-        android:text="Edit profile"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/viewMyContacts"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/frame_button_edit_profile"
+        android:text="@string/edit_profile"
+        android:textColor="@color/gray_text"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/viewMyContacts"
         app:layout_constraintEnd_toEndOf="@id/rightBorder"
-        app:layout_constraintStart_toStartOf="@id/leftBorder"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintStart_toStartOf="@id/leftBorder" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/viewMyContacts"
         android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:backgroundTint="@color/orange_button_color"
-        android:text="View my contacts"
+        android:layout_height="58dp"
+        android:background="@drawable/frame_button_view_my_contacts"
+        android:text="@string/view_my_contacts"
         android:textColor="@color/white"
+        android:textAllCaps="true"
         app:layout_constraintBottom_toBottomOf="@id/bottomBorder"
         app:layout_constraintEnd_toEndOf="@id/rightBorder"
-        app:layout_constraintStart_toStartOf="@id/leftBorder"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintStart_toStartOf="@id/leftBorder" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
