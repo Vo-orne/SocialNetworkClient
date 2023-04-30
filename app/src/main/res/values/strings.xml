@@ -10,4 +10,15 @@
     <string name="content_description_facebook_icon">Displays the Facebook icon</string>
     <string name="content_description_linkedin_icon">Displays the Linkedin icon</string>
     <string name="content_description_instagram_icon">Displays the Instagram icon</string>
+    <string name="titleText">Let\'s get acquainted</string>
+    <string name="subtitle_text">Fill out the profile and go to the application!</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="google">GOOGLE</string>
+    <string name="or">or</string>
+    <string name="register">REGISTER</string>
+    <string name="notice_agreement">By clicking Register you agree to our Terms and Conditions</string>
+    <string name="no_account">Already have an account?</string>
+    <string name="sign_in">Sign in</string>
 </resources>
