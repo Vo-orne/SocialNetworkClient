@@ -13,14 +13,10 @@ class MainActivity : AppCompatActivity() {
 
         val registerButton: AppCompatButton = findViewById(R.id.viewMyContacts)
 
-//        val isItFromStart = intent.getBooleanExtra("isItFromStart", false)
-//        val newUserName = intent.getStringExtra("userName")
-//
-//        if(isItFromStart) {
-//            findViewById<TextView>(R.id.userName).apply {
-//                text = newUserName
-//            }
-//        }
+        val newUserName = intent.getStringExtra("userName")
+        findViewById<TextView>(R.id.userName).apply {
+            text = newUserName
+        }
 
         registerButton.setOnClickListener {
             Intent(this, AuthActivity::class.java).also {

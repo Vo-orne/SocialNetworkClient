@@ -97,6 +97,7 @@
         app:layout_constraintTop_toBottomOf="@id/eMail">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextAddress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="@color/white_text_color"
