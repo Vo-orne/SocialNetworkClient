@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signInConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/first_background_color"
@@ -88,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@id/subtitle" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextEmailAddress"
+        android:id="@+id/textInputLayoutEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:boxBackgroundMode="none"
@@ -97,7 +98,7 @@
         app:layout_constraintTop_toBottomOf="@id/eMail">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditTextAddress"
+            android:id="@+id/textInputEditTextEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="@color/white_text_color"
@@ -117,10 +118,10 @@
         android:textColor="@color/grey_color"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/editTextEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/textInputLayoutPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:boxBackgroundMode="none"
@@ -129,6 +130,7 @@
         app:layout_constraintStart_toEndOf="@id/leftBorder">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white_text_color"
@@ -140,13 +142,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/memberInputDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/remember_me"
         android:textColor="@color/light_grey_text_color"
         app:layout_constraintStart_toEndOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonGoogle"

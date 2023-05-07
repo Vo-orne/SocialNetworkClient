@@ -86,7 +86,7 @@
         app:layout_constraintBottom_toTopOf="@+id/userName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/default_user_photo"
+        android:src="@mipmap/my_user_photo_round"
         android:contentDescription="@string/content_description_user_avatar" />
 
     <TextView
