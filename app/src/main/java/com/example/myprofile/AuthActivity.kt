@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.CheckBox
 import androidx.appcompat.widget.AppCompatButton
 import com.google.android.material.textfield.TextInputEditText
@@ -12,6 +13,7 @@ import com.google.android.material.textfield.TextInputEditText
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,70 +22,67 @@ class AuthActivity : AppCompatActivity() {
         val registerButton: AppCompatButton = findViewById(R.id.buttonRegister)
 
         sharedPreferences = getSharedPreferences("login_data", Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
+
         val receivedUserEmail = findViewById<TextInputEditText>(R.id.textInputEditTextEmail)
         val receivedUserPassword = findViewById<TextInputEditText>(R.id.textInputEditTextPassword)
-
-        val email = getLoginData().first
-        val password = getLoginData().second
-
-        receivedUserEmail.setText(email)
-        receivedUserPassword.setText(password)
-
         val memberInputDate = findViewById<CheckBox>(R.id.memberInputDate)
 
-        registerButton.setOnClickListener {
-            Intent(this, MainActivity::class.java).also {
-                val newEmail: String = receivedUserEmail.text.toString()
-                val newPassword = receivedUserPassword.text.toString()
-                saveLoginData(newEmail, newPassword)
+        val email = sharedPreferences.getString("email", null)
+        val password = sharedPreferences.getString("password", null)
 
-                val userName: String = parsEmail(receivedUserEmail)
-                it.putExtra("userName", userName)
-                startActivity(it)
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                finish()
+        if (email == null) {
+            Log.d("myTag", sharedPreferences.contains("email").toString())
+            registerButton.setOnClickListener {
+                Intent(this, MainActivity::class.java).also {
+                    val newEmail = receivedUserEmail.text.toString()
+                    val newPassword = receivedUserPassword.text.toString()
+                    if (memberInputDate.isChecked) {
+                        editor.clear()
+                        editor.apply()
+                        saveLoginData(newEmail, newPassword)
+                    }
+
+                    comeToNextActivity(newEmail, it)
+                }
+            }
+        } else {
+            Intent(this, MainActivity::class.java).also {
+                comeToNextActivity(email.toString(), it)
             }
         }
     }
 
-    private fun getLoginData(): Pair<String?, String?> {
-        val username = sharedPreferences.getString("username", null)
-        val password = sharedPreferences.getString("password", null)
-        return Pair(username, password)
+    private fun comeToNextActivity(email: String, it: Intent) {
+        val userName: String = parsEmail(email)
+        it.putExtra("userName", userName)
+        startActivity(it)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        finish()
     }
 
-    private fun saveLoginData(username: String, password: String) {
-        with(sharedPreferences.edit()) {
-            putString("username", username)
-            putString("password", password)
-            apply()
-        }
+    private fun saveLoginData(email: String, password: String) {
+        editor.putString("email", email)
+        editor.putString("password", password)
+        editor.apply()
     }
 
-    fun saveAutoLoginState(autoLogin: Boolean) {
-        with(sharedPreferences.edit()) {
-            putBoolean("autoLogin", autoLogin)
-            apply()
-        }
-    }
-
-    private fun parsEmail(receivedUserEmail: TextInputEditText): String {
-        val source: String = receivedUserEmail.text.toString()
+    private fun parsEmail(email: String): String {
         var result = ""
 
-        for (i in source.indices) {
+        for (i in email.indices) {
             if (i == 0 || result[result.length - 1] == ' ') {
-                result += source[i].uppercaseChar()
+                result += email[i].uppercaseChar()
                 continue
             }
             when {
-                source[i] == '@' -> return result
-                source[i] == '.' -> {
+                email[i] == '@' -> return result
+                email[i] == '.' -> {
                     result += " "
                     continue
                 }
             }
-            result += source[i].lowercaseChar()
+            result += email[i].lowercaseChar()
         }
         return result
     }

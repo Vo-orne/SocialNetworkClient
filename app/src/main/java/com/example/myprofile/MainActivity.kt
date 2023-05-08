@@ -11,17 +11,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val registerButton: AppCompatButton = findViewById(R.id.viewMyContacts)
-
         val newUserName = intent.getStringExtra("userName")
         findViewById<TextView>(R.id.userName).apply {
             text = newUserName
-        }
-
-        registerButton.setOnClickListener {
-            Intent(this, AuthActivity::class.java).also {
-                startActivity(it)
-            }
         }
     }
 }

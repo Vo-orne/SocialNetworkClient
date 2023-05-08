@@ -147,6 +147,7 @@
         android:layout_height="wrap_content"
         android:text="@string/remember_me"
         android:textColor="@color/light_grey_text_color"
+        android:checked="false"
         app:layout_constraintStart_toEndOf="@id/leftBorder"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
 
