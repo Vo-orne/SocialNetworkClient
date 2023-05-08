@@ -3,9 +3,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="first_background_color">#242235</color>
-    <color name="second_background_color">#E7E7E7</color>
-    <color name="white_text_color">#FAFAFA</color>
-    <color name="light_grey_text_color">#B2B2B3</color>
-    <color name="orange_button_color">#FB5E06</color>
+    <color name="first_background_color">#191825</color>
+    <color name="second_background_color">#242235</color>
+    <color name="main_text_color">#E1FAFAFA</color>
+    <color name="second_main_text_color">#E2E2E3</color>
+    <color name="secondary_text_color">#B2B2B3</color>
+    <color name="grey_color">#BDBDBD</color>
+    <color name="orange_button_color">#D65207</color>
+    <color name="google_button_color">#B2B2B3</color>
+    <color name="google_button_text_color">#18181F</color>
 </resources>

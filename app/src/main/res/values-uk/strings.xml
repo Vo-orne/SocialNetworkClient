@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Мій профіль</string>
+    <string name="settings">Налаштування</string>
+    <string name="name_surname">Ім\'я Прізвище</string>
+    <string name="career">Кар\'єра</string>
+    <string name="home_address">Домашня адреса</string>
+    <string name="edit_profile">Редагувати профіль</string>
+    <string name="view_my_contacts">Переглянути мої контакти</string>
+    <string name="content_description_user_avatar">Відображає аватар користувача</string>
+    <string name="content_description_facebook_icon">Відображає іконку Facebook</string>
+    <string name="content_description_linkedin_icon">Відображає іконку Linkedin</string>
+    <string name="content_description_instagram_icon">Відображає іконку Instagram</string>
+    <string name="titleText">Давай знайомитись</string>
+    <string name="subtitle_text">Заповніть профіль і переходьте до застосунку!</string>
+    <string name="e_mail">Електронна пошта</string>
+    <string name="password">Пароль</string>
+    <string name="remember_me">Запам\'ятати мене</string>
+    <string name="google">Google</string>
+    <string name="or">або</string>
+    <string name="register">Зареєструватися</string>
+    <string name="notice_agreement">Натиснувши «Зареєструватися», ви погодитиметесь з нашими Умовами та Правилами</string>
+    <string name="have_account">Вже є аккаунт?</string>
+    <string name="sign_in">Увійти</string>
+</resources>
