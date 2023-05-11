@@ -13,14 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.24" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/floorButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.68" />
+        app:layout_constraintGuide_percent="0.02" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottomBorder"
@@ -35,13 +28,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.04" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/borderNoAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.20" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/rightBorder"
@@ -154,6 +140,7 @@
         android:id="@+id/buttonGoogle"
         android:layout_width="@dimen/button_width"
         android:layout_height="@dimen/button_google_height"
+        android:layout_marginEnd="@dimen/smallest_margin"
         android:backgroundTint="@color/google_button_color"
         android:text="@string/google"
         android:textAllCaps="true"
@@ -163,60 +150,66 @@
         app:iconGravity="textStart"
         app:iconSize="@dimen/ic_google_size"
         app:iconTint="@null"
-        app:layout_constraintEnd_toEndOf="@id/rightBorder"
+        app:layout_constraintBottom_toTopOf="@id/noticeAgreement"
+        app:layout_constraintEnd_toStartOf="@id/or"
         app:layout_constraintStart_toStartOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/floorButton" />
+        app:layout_constraintTop_toBottomOf="@id/memberInputDate" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/or"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/smallest_margin"
+        android:layout_marginBottom="@dimen/smallest_margin"
         android:fontFamily="@font/open_sans_medium"
         android:text="@string/or"
         android:textColor="@color/main_text_color"
         android:textSize="@dimen/text_large_size"
+        app:layout_constraintBottom_toTopOf="@id/noticeAgreement"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonGoogle" />
+        app:layout_constraintTop_toBottomOf="@id/memberInputDate" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonRegister"
         android:layout_width="@dimen/button_width"
-        android:layout_height="@dimen/button_register_height"
-        android:layout_marginTop="@dimen/smallest_margin"
+        android:layout_height="@dimen/button_land_register_height"
+        android:layout_marginStart="@dimen/smallest_margin"
         android:background="@drawable/frame_button_register"
         android:text="@string/register"
         android:textAllCaps="true"
         android:textColor="@color/main_text_color"
         android:textSize="@dimen/text_medium_size"
+        app:layout_constraintBottom_toBottomOf="@id/buttonGoogle"
         app:layout_constraintEnd_toEndOf="@id/rightBorder"
-        app:layout_constraintStart_toStartOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/or" />
+        app:layout_constraintStart_toEndOf="@id/or"
+        app:layout_constraintTop_toTopOf="@id/buttonGoogle" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/noticeAgreement"
-        android:layout_width="@dimen/button_width"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/smallest_margin"
         android:fontFamily="@font/open_sans_medium"
         android:text="@string/notice_agreement"
         android:textColor="@color/secondary_text_color"
         android:textSize="@dimen/text_smallest_size"
-        app:layout_constraintEnd_toEndOf="@id/rightBorder"
+        app:layout_constraintBottom_toBottomOf="@id/bottomBorder"
+        app:layout_constraintEnd_toStartOf="@id/haveAccount"
         app:layout_constraintStart_toStartOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/buttonRegister" />
+        app:layout_constraintTop_toBottomOf="@id/buttonGoogle" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/haveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/smallest_margin"
         android:fontFamily="@font/open_sans_medium"
         android:text="@string/have_account"
         android:textColor="@color/secondary_text_color"
         android:textSize="@dimen/text_small_size"
         app:layout_constraintBottom_toBottomOf="@id/bottomBorder"
-        app:layout_constraintStart_toStartOf="@id/borderNoAccount" />
+        app:layout_constraintEnd_toStartOf="@id/signIn"
+        app:layout_constraintTop_toBottomOf="@id/buttonRegister" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/signIn"
@@ -228,7 +221,8 @@
         android:textColor="@color/main_text_color"
         android:textSize="@dimen/text_small_size"
         app:layout_constraintBottom_toBottomOf="@id/bottomBorder"
-        app:layout_constraintStart_toEndOf="@id/haveAccount" />
+        app:layout_constraintEnd_toEndOf="@id/rightBorder"
+        app:layout_constraintTop_toBottomOf="@id/buttonRegister" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
