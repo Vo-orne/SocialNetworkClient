@@ -1,228 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/signInConstraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/first_background_color"
-    tools:context=".AuthActivity">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/borderOfTitle"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/signInConstraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.02" />
+        android:background="@color/first_background_color"
+        tools:context=".AuthActivity">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottomBorder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.98" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/leftBorder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.04" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/rightBorder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.96" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans_medium"
-        android:text="@string/titleText"
-        android:textColor="@color/main_text_color"
-        android:textSize="@dimen/text_largest_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/borderOfTitle" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/smallest_margin"
-        android:fontFamily="@font/open_sans_medium"
-        android:text="@string/subtitle_text"
-        android:textColor="@color/secondary_text_color"
-        android:textSize="@dimen/text_smallest_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/eMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_margin"
-        android:layout_marginTop="@dimen/very_large_margin"
-        android:fontFamily="@font/open_sans_medium"
-        android:text="@string/e_mail"
-        android:textColor="@color/grey_color"
-        android:textSize="@dimen/text_small_size"
-        app:layout_constraintStart_toStartOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/subtitle" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutEmail"
-        android:layout_width="@dimen/text_input_layout_width"
-        android:layout_height="wrap_content"
-        app:boxBackgroundMode="none"
-        app:layout_constraintEnd_toEndOf="@id/rightBorder"
-        app:layout_constraintStart_toEndOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/eMail">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditTextEmail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/main_text_color"
-            android:textSize="@dimen/text_large_size"
-            android:theme="@style/MyEditText" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_margin"
-        android:layout_marginTop="@dimen/very_large_margin"
-        android:fontFamily="@font/open_sans_medium"
-        android:text="@string/password"
-        android:textColor="@color/grey_color"
-        android:textSize="@dimen/text_small_size"
-        app:layout_constraintStart_toStartOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutPassword"
-        android:layout_width="@dimen/text_input_layout_width"
-        android:layout_height="wrap_content"
-        app:boxBackgroundMode="none"
-        app:layout_constraintEnd_toEndOf="@id/rightBorder"
-        app:layout_constraintStart_toEndOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/password">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditTextPassword"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/borderOfTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.02" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottomBorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.98" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/leftBorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/rightBorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.96" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_medium"
+            android:text="@string/titleText"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/text_largest_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/borderOfTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallest_margin"
+            android:fontFamily="@font/open_sans_medium"
+            android:text="@string/subtitle_text"
+            android:textColor="@color/secondary_text_color"
+            android:textSize="@dimen/text_smallest_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/eMail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="@dimen/very_large_margin"
+            android:fontFamily="@font/open_sans_medium"
+            android:text="@string/e_mail"
+            android:textColor="@color/grey_color"
+            android:textSize="@dimen/text_small_size"
+            app:layout_constraintStart_toStartOf="@id/leftBorder"
+            app:layout_constraintTop_toBottomOf="@id/subtitle" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEmail"
+            android:layout_width="@dimen/text_input_layout_width"
+            android:layout_height="wrap_content"
+            app:boxBackgroundMode="none"
+            app:layout_constraintEnd_toEndOf="@id/rightBorder"
+            app:layout_constraintStart_toEndOf="@id/leftBorder"
+            app:layout_constraintTop_toBottomOf="@id/eMail">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/main_text_color"
+                android:textSize="@dimen/text_large_size"
+                android:theme="@style/MyEditText" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="@dimen/very_large_margin"
+            android:fontFamily="@font/open_sans_medium"
+            android:text="@string/password"
+            android:textColor="@color/grey_color"
+            android:textSize="@dimen/text_small_size"
+            app:layout_constraintStart_toStartOf="@id/leftBorder"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPassword"
+            android:layout_width="@dimen/text_input_layout_width"
+            android:layout_height="wrap_content"
+            app:boxBackgroundMode="none"
+            app:layout_constraintEnd_toEndOf="@id/rightBorder"
+            app:layout_constraintStart_toEndOf="@id/leftBorder"
+            app:layout_constraintTop_toBottomOf="@id/password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/main_text_color"
+                android:textSize="@dimen/text_large_size"
+                android:theme="@style/MyEditText" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/memberInputDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="@string/remember_me"
+            android:textColor="@color/secondary_text_color"
+            app:layout_constraintStart_toEndOf="@id/leftBorder"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonGoogle"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_google_height"
+            android:layout_marginEnd="@dimen/smallest_margin"
+            android:backgroundTint="@color/google_button_color"
+            android:text="@string/google"
+            android:textAllCaps="true"
+            android:textColor="@color/google_button_text_color"
+            android:textSize="@dimen/text_medium_size"
+            app:icon="@drawable/ic_google_foreground"
+            app:iconGravity="textStart"
+            app:iconSize="@dimen/ic_google_size"
+            app:iconTint="@null"
+            app:layout_constraintBottom_toTopOf="@id/noticeAgreement"
+            app:layout_constraintEnd_toStartOf="@id/or"
+            app:layout_constraintStart_toStartOf="@id/leftBorder"
+            app:layout_constraintTop_toBottomOf="@id/memberInputDate" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/or"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/smallest_margin"
+            android:fontFamily="@font/open_sans_medium"
+            android:text="@string/or"
             android:textColor="@color/main_text_color"
             android:textSize="@dimen/text_large_size"
-            android:theme="@style/MyEditText" />
+            app:layout_constraintBottom_toTopOf="@id/noticeAgreement"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/memberInputDate" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonRegister"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_land_register_height"
+            android:layout_marginStart="@dimen/smallest_margin"
+            android:background="@drawable/frame_button_register"
+            android:text="@string/register"
+            android:textAllCaps="true"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/text_medium_size"
+            app:layout_constraintBottom_toBottomOf="@id/buttonGoogle"
+            app:layout_constraintEnd_toEndOf="@id/rightBorder"
+            app:layout_constraintStart_toEndOf="@id/or"
+            app:layout_constraintTop_toTopOf="@id/buttonGoogle" />
 
-    <CheckBox
-        android:id="@+id/memberInputDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:text="@string/remember_me"
-        android:textColor="@color/secondary_text_color"
-        app:layout_constraintStart_toEndOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/noticeAgreement"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallest_margin"
+            android:fontFamily="@font/open_sans_medium"
+            android:text="@string/notice_agreement"
+            android:textColor="@color/secondary_text_color"
+            android:textSize="@dimen/text_smallest_size"
+            app:layout_constraintBottom_toBottomOf="@id/bottomBorder"
+            app:layout_constraintEnd_toStartOf="@id/haveAccount"
+            app:layout_constraintStart_toStartOf="@id/leftBorder"
+            app:layout_constraintTop_toBottomOf="@id/buttonGoogle" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonGoogle"
-        android:layout_width="@dimen/button_width"
-        android:layout_height="@dimen/button_google_height"
-        android:layout_marginEnd="@dimen/smallest_margin"
-        android:backgroundTint="@color/google_button_color"
-        android:text="@string/google"
-        android:textAllCaps="true"
-        android:textColor="@color/google_button_text_color"
-        android:textSize="@dimen/text_medium_size"
-        app:icon="@drawable/ic_google_foreground"
-        app:iconGravity="textStart"
-        app:iconSize="@dimen/ic_google_size"
-        app:iconTint="@null"
-        app:layout_constraintBottom_toTopOf="@id/noticeAgreement"
-        app:layout_constraintEnd_toStartOf="@id/or"
-        app:layout_constraintStart_toStartOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/memberInputDate" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/haveAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/smallest_margin"
+            android:fontFamily="@font/open_sans_medium"
+            android:text="@string/have_account"
+            android:textColor="@color/secondary_text_color"
+            android:textSize="@dimen/text_small_size"
+            app:layout_constraintBottom_toBottomOf="@id/bottomBorder"
+            app:layout_constraintEnd_toStartOf="@id/signIn"
+            app:layout_constraintTop_toBottomOf="@id/buttonRegister" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/or"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/smallest_margin"
-        android:fontFamily="@font/open_sans_medium"
-        android:text="@string/or"
-        android:textColor="@color/main_text_color"
-        android:textSize="@dimen/text_large_size"
-        app:layout_constraintBottom_toTopOf="@id/noticeAgreement"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/memberInputDate" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonRegister"
-        android:layout_width="@dimen/button_width"
-        android:layout_height="@dimen/button_land_register_height"
-        android:layout_marginStart="@dimen/smallest_margin"
-        android:background="@drawable/frame_button_register"
-        android:text="@string/register"
-        android:textAllCaps="true"
-        android:textColor="@color/main_text_color"
-        android:textSize="@dimen/text_medium_size"
-        app:layout_constraintBottom_toBottomOf="@id/buttonGoogle"
-        app:layout_constraintEnd_toEndOf="@id/rightBorder"
-        app:layout_constraintStart_toEndOf="@id/or"
-        app:layout_constraintTop_toTopOf="@id/buttonGoogle" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/noticeAgreement"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/smallest_margin"
-        android:fontFamily="@font/open_sans_medium"
-        android:text="@string/notice_agreement"
-        android:textColor="@color/secondary_text_color"
-        android:textSize="@dimen/text_smallest_size"
-        app:layout_constraintBottom_toBottomOf="@id/bottomBorder"
-        app:layout_constraintEnd_toStartOf="@id/haveAccount"
-        app:layout_constraintStart_toStartOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/buttonGoogle" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/haveAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/smallest_margin"
-        android:fontFamily="@font/open_sans_medium"
-        android:text="@string/have_account"
-        android:textColor="@color/secondary_text_color"
-        android:textSize="@dimen/text_small_size"
-        app:layout_constraintBottom_toBottomOf="@id/bottomBorder"
-        app:layout_constraintEnd_toStartOf="@id/signIn"
-        app:layout_constraintTop_toBottomOf="@id/buttonRegister" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/signIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/medium_margin"
-        android:fontFamily="@font/open_sans_medium"
-        android:text="@string/sign_in"
-        android:textColor="@color/main_text_color"
-        android:textSize="@dimen/text_small_size"
-        app:layout_constraintBottom_toBottomOf="@id/bottomBorder"
-        app:layout_constraintEnd_toEndOf="@id/rightBorder"
-        app:layout_constraintTop_toBottomOf="@id/buttonRegister" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/signIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:fontFamily="@font/open_sans_medium"
+            android:text="@string/sign_in"
+            android:textColor="@color/main_text_color"
+            android:textSize="@dimen/text_small_size"
+            app:layout_constraintBottom_toBottomOf="@id/bottomBorder"
+            app:layout_constraintEnd_toEndOf="@id/rightBorder"
+            app:layout_constraintTop_toBottomOf="@id/buttonRegister" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
