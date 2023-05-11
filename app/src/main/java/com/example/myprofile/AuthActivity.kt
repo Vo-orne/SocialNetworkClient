@@ -18,36 +18,45 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        val registerButton: AppCompatButton = findViewById(R.id.buttonRegister)
-
         sharedPreferences = getSharedPreferences("login_data", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
 
+        accountLogin()
+    }
+
+    private fun accountLogin() {
+        val email = sharedPreferences.getString("email", null)
+        if (email == null) {
+            defaultAccountLogin()
+        } else {
+            autoLogin(email)
+        }
+    }
+
+    private fun defaultAccountLogin() {
+        val registerButton: AppCompatButton = findViewById(R.id.buttonRegister)
         val receivedUserEmail = findViewById<TextInputEditText>(R.id.textInputEditTextEmail)
         val receivedUserPassword = findViewById<TextInputEditText>(R.id.textInputEditTextPassword)
         val memberInputDate = findViewById<CheckBox>(R.id.memberInputDate)
 
-        val email = sharedPreferences.getString("email", null)
-//        val password = sharedPreferences.getString("password", null)
-
-        if (email == null) {
-            registerButton.setOnClickListener {
-                Intent(this, MainActivity::class.java).also {
-                    val newEmail = receivedUserEmail.text.toString()
-                    val newPassword = receivedUserPassword.text.toString()
-                    if (memberInputDate.isChecked) {
-                        editor.clear()
-                        editor.apply()
-                        saveLoginData(newEmail, newPassword)
-                    }
-                    comeToNextActivity(newEmail, it)
-                }
-            }
-        } else {
+        registerButton.setOnClickListener {
             Intent(this, MainActivity::class.java).also {
-                comeToNextActivity(email.toString(), it)
+                val newEmail = receivedUserEmail.text.toString()
+                val newPassword = receivedUserPassword.text.toString()
+                if (memberInputDate.isChecked) {
+                    editor.clear()
+                    editor.apply()
+                    saveLoginData(newEmail, newPassword)
+                }
+                comeToNextActivity(newEmail, it)
             }
         }
+    }
+
+    private fun saveLoginData(email: String, password: String) {
+        editor.putString("email", email)
+        editor.putString("password", password)
+        editor.apply()
     }
 
     private fun comeToNextActivity(email: String, it: Intent) {
@@ -58,10 +67,10 @@ class AuthActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun saveLoginData(email: String, password: String) {
-        editor.putString("email", email)
-        editor.putString("password", password)
-        editor.apply()
+    private fun autoLogin(email: String) {
+        Intent(this, MainActivity::class.java).also {
+            comeToNextActivity(email, it)
+        }
     }
 
     private fun parsEmail(email: String): String {
