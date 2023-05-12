@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.CheckBox
 import androidx.appcompat.widget.AppCompatButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 class AuthActivity : AppCompatActivity() {
 
@@ -40,18 +41,51 @@ class AuthActivity : AppCompatActivity() {
         val memberInputDate = findViewById<CheckBox>(R.id.memberInputDate)
 
         registerButton.setOnClickListener {
-            Intent(this, MainActivity::class.java).also {
-                val newEmail = receivedUserEmail.text.toString()
-                val newPassword = receivedUserPassword.text.toString()
-                if (memberInputDate.isChecked) {
-                    editor.clear()
-                    editor.apply()
-                    saveLoginData(newEmail, newPassword)
+            val newEmail = receivedUserEmail.text.toString()
+            val newPassword = receivedUserPassword.text.toString()
+
+            if (validateInputs(newEmail, newPassword)) {
+                Intent(this, MainActivity::class.java).also {
+                    if (memberInputDate.isChecked) {
+                        editor.clear()
+                        editor.apply()
+                        saveLoginData(newEmail, newPassword)
+                    }
+                    comeToNextActivity(newEmail, it)
                 }
-                comeToNextActivity(newEmail, it)
             }
         }
     }
+
+
+    private fun validateInputs(emailInput: String, passwordInput: String): Boolean {
+        var isValid = true
+
+        val emailInputLayout: TextInputLayout = findViewById(R.id.textInputLayoutEmail)
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            isValid = false
+            emailInputLayout.error = "Enter a valid email."
+        } else {
+            emailInputLayout.error = null
+        }
+
+        val passwordInputLayout: TextInputLayout = findViewById(R.id.textInputLayoutPassword)
+        if (passwordInput.isEmpty() || !isValidPassword(passwordInput)) {
+            isValid = false
+            passwordInputLayout.error = "Enter a valid password."
+        } else {
+            passwordInputLayout.error = null
+        }
+
+        return isValid
+    }
+
+    private fun isValidPassword(password: String): Boolean {
+        return password.all {
+            it in '0'..'9' || it in 'a'..'z' && it != ' ' && password.length >= 8
+        }
+    }
+
 
     private fun saveLoginData(email: String, password: String) {
         editor.putString("email", email)

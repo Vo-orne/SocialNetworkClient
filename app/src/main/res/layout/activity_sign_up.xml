@@ -9,13 +9,6 @@
     tools:context=".AuthActivity">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/borderOfTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.24" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/floorButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,44 +51,47 @@
         android:text="@string/titleText"
         android:textColor="@color/main_text_color"
         android:textSize="@dimen/text_largest_size"
+        android:layout_marginBottom="@dimen/smallest_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/borderOfTitle" />
+        app:layout_constraintBottom_toTopOf="@id/subtitle" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/smallest_margin"
+        android:layout_marginBottom="@dimen/very_large_margin"
         android:fontFamily="@font/open_sans_medium"
         android:text="@string/subtitle_text"
         android:textColor="@color/secondary_text_color"
         android:textSize="@dimen/text_smallest_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintBottom_toTopOf="@id/eMail" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/eMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/small_margin"
-        android:layout_marginTop="@dimen/very_large_margin"
+
         android:fontFamily="@font/open_sans_medium"
         android:text="@string/e_mail"
         android:textColor="@color/grey_color"
         android:textSize="@dimen/text_small_size"
         app:layout_constraintStart_toStartOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/subtitle" />
+        app:layout_constraintBottom_toTopOf="@id/textInputLayoutEmail" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutEmail"
         android:layout_width="@dimen/text_input_layout_width"
         android:layout_height="wrap_content"
+        app:errorEnabled="true"
         app:boxBackgroundMode="none"
         app:layout_constraintEnd_toEndOf="@id/rightBorder"
         app:layout_constraintStart_toEndOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/eMail">
+        app:layout_constraintBottom_toTopOf="@id/password">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditTextEmail"
@@ -118,16 +114,17 @@
         android:textColor="@color/grey_color"
         android:textSize="@dimen/text_small_size"
         app:layout_constraintStart_toStartOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
+        app:layout_constraintBottom_toTopOf="@id/textInputLayoutPassword" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutPassword"
         android:layout_width="@dimen/text_input_layout_width"
         android:layout_height="wrap_content"
+        app:errorEnabled="true"
         app:boxBackgroundMode="none"
         app:layout_constraintEnd_toEndOf="@id/rightBorder"
         app:layout_constraintStart_toEndOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/password">
+        app:layout_constraintBottom_toTopOf="@id/memberInputDate">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditTextPassword"
@@ -147,8 +144,9 @@
         android:checked="false"
         android:text="@string/remember_me"
         android:textColor="@color/secondary_text_color"
+        android:layout_marginBottom="@dimen/check_box_remember_me_margin"
         app:layout_constraintStart_toEndOf="@id/leftBorder"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
+        app:layout_constraintBottom_toTopOf="@id/floorButton"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonGoogle"
