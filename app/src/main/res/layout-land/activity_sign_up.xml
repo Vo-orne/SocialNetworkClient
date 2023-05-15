@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signInLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/signInConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/first_background_color"
@@ -82,8 +82,8 @@
             android:id="@+id/textInputLayoutEmail"
             android:layout_width="@dimen/text_input_layout_width"
             android:layout_height="wrap_content"
-            app:errorEnabled="true"
             app:boxBackgroundMode="none"
+            app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="@id/rightBorder"
             app:layout_constraintStart_toEndOf="@id/leftBorder"
             app:layout_constraintTop_toBottomOf="@id/eMail">
@@ -92,6 +92,7 @@
                 android:id="@+id/textInputEditTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/main_text_color"
                 android:textSize="@dimen/text_large_size"
                 android:theme="@style/MyEditText" />
@@ -115,8 +116,10 @@
             android:id="@+id/textInputLayoutPassword"
             android:layout_width="@dimen/text_input_layout_width"
             android:layout_height="wrap_content"
-            app:errorEnabled="true"
             app:boxBackgroundMode="none"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/grey_color"
+            app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="@id/rightBorder"
             app:layout_constraintStart_toEndOf="@id/leftBorder"
             app:layout_constraintTop_toBottomOf="@id/password">
@@ -232,4 +235,4 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

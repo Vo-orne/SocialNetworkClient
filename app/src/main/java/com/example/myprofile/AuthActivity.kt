@@ -5,28 +5,29 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.CheckBox
-import androidx.appcompat.widget.AppCompatButton
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
+import com.example.myprofile.databinding.ActivitySignUpBinding
 
 class AuthActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivitySignUpBinding
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        sharedPreferences = getSharedPreferences("login_data", Context.MODE_PRIVATE)
+        sharedPreferences =
+            getSharedPreferences(Constants.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
 
         accountLogin()
     }
 
     private fun accountLogin() {
-        val email = sharedPreferences.getString("email", null)
+        val email = sharedPreferences.getString(Constants.EMAIL_KEY, null)
         if (email == null) {
             defaultAccountLogin()
         } else {
@@ -35,18 +36,13 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun defaultAccountLogin() {
-        val registerButton: AppCompatButton = findViewById(R.id.buttonRegister)
-        val receivedUserEmail = findViewById<TextInputEditText>(R.id.textInputEditTextEmail)
-        val receivedUserPassword = findViewById<TextInputEditText>(R.id.textInputEditTextPassword)
-        val memberInputDate = findViewById<CheckBox>(R.id.memberInputDate)
-
-        registerButton.setOnClickListener {
-            val newEmail = receivedUserEmail.text.toString()
-            val newPassword = receivedUserPassword.text.toString()
+        binding.buttonRegister.setOnClickListener {
+            val newEmail = binding.textInputEditTextEmail.text.toString()
+            val newPassword = binding.textInputEditTextPassword.text.toString()
 
             if (validateInputs(newEmail, newPassword)) {
                 Intent(this, MainActivity::class.java).also {
-                    if (memberInputDate.isChecked) {
+                    if (binding.memberInputDate.isChecked) {
                         editor.clear()
                         editor.apply()
                         saveLoginData(newEmail, newPassword)
@@ -57,24 +53,21 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 
-
     private fun validateInputs(emailInput: String, passwordInput: String): Boolean {
         var isValid = true
 
-        val emailInputLayout: TextInputLayout = findViewById(R.id.textInputLayoutEmail)
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
             isValid = false
-            emailInputLayout.error = "Enter a valid email."
+            binding.textInputLayoutEmail.error = Constants.INCORRECTLY_EMAIL_MESSAGE
         } else {
-            emailInputLayout.error = null
+            binding.textInputLayoutEmail.error = null
         }
 
-        val passwordInputLayout: TextInputLayout = findViewById(R.id.textInputLayoutPassword)
         if (passwordInput.isEmpty() || !isValidPassword(passwordInput)) {
             isValid = false
-            passwordInputLayout.error = "Enter a valid password."
+            binding.textInputLayoutPassword.error = Constants.INCORRECTLY_PASSWORD_MESSAGE
         } else {
-            passwordInputLayout.error = null
+            binding.textInputLayoutPassword.error = null
         }
 
         return isValid
@@ -82,20 +75,22 @@ class AuthActivity : AppCompatActivity() {
 
     private fun isValidPassword(password: String): Boolean {
         return password.all {
-            it in '0'..'9' || it in 'a'..'z' && it != ' ' && password.length >= 8
+            it in Constants.PASSWORD_VERIF_SYM[0]..Constants.PASSWORD_VERIF_SYM[1]
+                    || it in Constants.PASSWORD_VERIF_SYM[2]..Constants.PASSWORD_VERIF_SYM[3]
+                    && it != Constants.PASSWORD_VERIF_SYM[4]
+                    && password.length >= Constants.MAX_PASSWORD_SIZE
         }
     }
 
-
     private fun saveLoginData(email: String, password: String) {
-        editor.putString("email", email)
-        editor.putString("password", password)
+        editor.putString(Constants.EMAIL_KEY, email)
+        editor.putString(Constants.PASSWORD_KEY, password)
         editor.apply()
     }
 
     private fun comeToNextActivity(email: String, it: Intent) {
         val userName: String = parsEmail(email)
-        it.putExtra("userName", userName)
+        it.putExtra(Constants.USER_NAME_KEY, userName)
         startActivity(it)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         finish()
@@ -116,8 +111,8 @@ class AuthActivity : AppCompatActivity() {
                 continue
             }
             when {
-                email[i] == '@' -> return result
-                email[i] == '.' -> {
+                email[i] == Constants.EMAIL_PARSING_SYMBOLS[0] -> return result
+                email[i] == Constants.EMAIL_PARSING_SYMBOLS[1] -> {
                     result += " "
                     continue
                 }

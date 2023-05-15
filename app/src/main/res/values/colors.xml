@@ -16,4 +16,6 @@
     <color name="orange_button_color">#FB5E06</color>
     <color name="google_button_color">#FFFFFFFF</color>
     <color name="google_button_text_color">#18181F</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="light_blue">#00BCD4</color>
 </resources>
