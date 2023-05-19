@@ -36,13 +36,13 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun defaultAccountLogin() {
-        binding.buttonRegister.setOnClickListener {
-            val newEmail = binding.textInputEditTextEmail.text.toString()
-            val newPassword = binding.textInputEditTextPassword.text.toString()
+        binding.buttonSignUpRegister.setOnClickListener {
+            val newEmail = binding.textInputEditTextSignUpEmail.text.toString()
+            val newPassword = binding.textInputEditTextSignUpPassword.text.toString()
 
             if (validateInputs(newEmail, newPassword)) {
                 Intent(this, MainActivity::class.java).also {
-                    if (binding.memberInputDate.isChecked) {
+                    if (binding.checkBoxSignUpMemberInputDate.isChecked) {
                         editor.clear()
                         editor.apply()
                         saveLoginData(newEmail, newPassword)
@@ -58,16 +58,16 @@ class AuthActivity : AppCompatActivity() {
 
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
             isValid = false
-            binding.textInputLayoutEmail.error = Constants.INCORRECTLY_EMAIL_MESSAGE
+            binding.textInputLayoutSignUpEmail.error = Constants.INCORRECTLY_EMAIL_MESSAGE
         } else {
-            binding.textInputLayoutEmail.error = null
+            binding.textInputLayoutSignUpEmail.error = null
         }
 
         if (passwordInput.isEmpty() || !isValidPassword(passwordInput)) {
             isValid = false
-            binding.textInputLayoutPassword.error = Constants.INCORRECTLY_PASSWORD_MESSAGE
+            binding.textInputLayoutSignUpPassword.error = Constants.INCORRECTLY_PASSWORD_MESSAGE
         } else {
-            binding.textInputLayoutPassword.error = null
+            binding.textInputLayoutSignUpPassword.error = null
         }
 
         return isValid

@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         val newUserName = intent.getStringExtra(Constants.USER_NAME_KEY)
-        binding.userName.apply {
+        binding.textViewMainUserName.apply {
             text = newUserName
         }
     }

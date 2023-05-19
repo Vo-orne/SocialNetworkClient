@@ -2,7 +2,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/signInLayout"
+    android:id="@+id/layoutSignUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,35 +13,35 @@
         tools:context=".AuthActivity">
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/borderOfTitle"
+            android:id="@+id/guidelineSignUpBorderOfTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.02" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/bottomBorder"
+            android:id="@+id/guidelineSignUpBottomBorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.98" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/leftBorder"
+            android:id="@+id/guidelineSignUpLeftBorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.04" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/rightBorder"
+            android:id="@+id/guidelineSignUpRightBorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.96" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/title"
+            android:id="@+id/textViewSignUpTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_medium"
@@ -50,10 +50,10 @@
             android:textSize="@dimen/text_largest_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/borderOfTitle" />
+            app:layout_constraintTop_toTopOf="@id/guidelineSignUpBorderOfTitle" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/subtitle"
+            android:id="@+id/textViewSignUpSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/smallest_margin"
@@ -63,10 +63,10 @@
             android:textSize="@dimen/text_smallest_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            app:layout_constraintTop_toBottomOf="@id/textViewSignUpTitle" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/eMail"
+            android:id="@+id/textViewSignUpEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
@@ -75,21 +75,21 @@
             android:text="@string/e_mail"
             android:textColor="@color/grey_color"
             android:textSize="@dimen/text_small_size"
-            app:layout_constraintStart_toStartOf="@id/leftBorder"
-            app:layout_constraintTop_toBottomOf="@id/subtitle" />
+            app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
+            app:layout_constraintTop_toBottomOf="@id/textViewSignUpSubtitle" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutEmail"
+            android:id="@+id/textInputLayoutSignUpEmail"
             android:layout_width="@dimen/text_input_layout_width"
             android:layout_height="wrap_content"
             app:boxBackgroundMode="none"
             app:errorEnabled="true"
-            app:layout_constraintEnd_toEndOf="@id/rightBorder"
-            app:layout_constraintStart_toEndOf="@id/leftBorder"
-            app:layout_constraintTop_toBottomOf="@id/eMail">
+            app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
+            app:layout_constraintStart_toEndOf="@id/guidelineSignUpLeftBorder"
+            app:layout_constraintTop_toBottomOf="@id/textViewSignUpEmail">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextEmail"
+                android:id="@+id/textInputEditTextSignUpEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
@@ -100,7 +100,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/password"
+            android:id="@+id/textViewSignUpPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
@@ -109,23 +109,23 @@
             android:text="@string/password"
             android:textColor="@color/grey_color"
             android:textSize="@dimen/text_small_size"
-            app:layout_constraintStart_toStartOf="@id/leftBorder"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
+            app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpEmail" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutPassword"
+            android:id="@+id/textInputLayoutSignUpPassword"
             android:layout_width="@dimen/text_input_layout_width"
             android:layout_height="wrap_content"
             app:boxBackgroundMode="none"
             app:endIconMode="password_toggle"
             app:endIconTint="@color/grey_color"
             app:errorEnabled="true"
-            app:layout_constraintEnd_toEndOf="@id/rightBorder"
-            app:layout_constraintStart_toEndOf="@id/leftBorder"
-            app:layout_constraintTop_toBottomOf="@id/password">
+            app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
+            app:layout_constraintStart_toEndOf="@id/guidelineSignUpLeftBorder"
+            app:layout_constraintTop_toBottomOf="@id/textViewSignUpPassword">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextPassword"
+                android:id="@+id/textInputEditTextSignUpPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -136,17 +136,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
-            android:id="@+id/memberInputDate"
+            android:id="@+id/checkBoxSignUpMemberInputDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
             android:text="@string/remember_me"
             android:textColor="@color/secondary_text_color"
-            app:layout_constraintStart_toEndOf="@id/leftBorder"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
+            app:layout_constraintStart_toEndOf="@id/guidelineSignUpLeftBorder"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpPassword" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonGoogle"
+            android:id="@+id/buttonSignUpGoogle"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_google_height"
             android:layout_marginEnd="@dimen/smallest_margin"
@@ -159,13 +159,13 @@
             app:iconGravity="textStart"
             app:iconSize="@dimen/ic_google_size"
             app:iconTint="@null"
-            app:layout_constraintBottom_toTopOf="@id/noticeAgreement"
-            app:layout_constraintEnd_toStartOf="@id/or"
-            app:layout_constraintStart_toStartOf="@id/leftBorder"
-            app:layout_constraintTop_toBottomOf="@id/memberInputDate" />
+            app:layout_constraintBottom_toTopOf="@id/textViewSignUpNoticeAgreement"
+            app:layout_constraintEnd_toStartOf="@id/textViewSignUpOr"
+            app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
+            app:layout_constraintTop_toBottomOf="@id/checkBoxSignUpMemberInputDate" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/or"
+            android:id="@+id/textViewSignUpOr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/smallest_margin"
@@ -173,13 +173,13 @@
             android:text="@string/or"
             android:textColor="@color/main_text_color"
             android:textSize="@dimen/text_large_size"
-            app:layout_constraintBottom_toTopOf="@id/noticeAgreement"
+            app:layout_constraintBottom_toTopOf="@id/textViewSignUpNoticeAgreement"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/memberInputDate" />
+            app:layout_constraintTop_toBottomOf="@id/checkBoxSignUpMemberInputDate" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonRegister"
+            android:id="@+id/buttonSignUpRegister"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_land_register_height"
             android:layout_marginStart="@dimen/smallest_margin"
@@ -188,13 +188,13 @@
             android:textAllCaps="true"
             android:textColor="@color/main_text_color"
             android:textSize="@dimen/text_medium_size"
-            app:layout_constraintBottom_toBottomOf="@id/buttonGoogle"
-            app:layout_constraintEnd_toEndOf="@id/rightBorder"
-            app:layout_constraintStart_toEndOf="@id/or"
-            app:layout_constraintTop_toTopOf="@id/buttonGoogle" />
+            app:layout_constraintBottom_toBottomOf="@id/buttonSignUpGoogle"
+            app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
+            app:layout_constraintStart_toEndOf="@id/textViewSignUpOr"
+            app:layout_constraintTop_toTopOf="@id/buttonSignUpGoogle" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/noticeAgreement"
+            android:id="@+id/textViewSignUpNoticeAgreement"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/smallest_margin"
@@ -202,13 +202,13 @@
             android:text="@string/notice_agreement"
             android:textColor="@color/secondary_text_color"
             android:textSize="@dimen/text_smallest_size"
-            app:layout_constraintBottom_toBottomOf="@id/bottomBorder"
-            app:layout_constraintEnd_toStartOf="@id/haveAccount"
-            app:layout_constraintStart_toStartOf="@id/leftBorder"
-            app:layout_constraintTop_toBottomOf="@id/buttonGoogle" />
+            app:layout_constraintBottom_toBottomOf="@id/guidelineSignUpBottomBorder"
+            app:layout_constraintEnd_toStartOf="@id/textViewSignUpHaveAccount"
+            app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
+            app:layout_constraintTop_toBottomOf="@id/buttonSignUpGoogle" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/haveAccount"
+            android:id="@+id/textViewSignUpHaveAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/smallest_margin"
@@ -216,12 +216,12 @@
             android:text="@string/have_account"
             android:textColor="@color/secondary_text_color"
             android:textSize="@dimen/text_small_size"
-            app:layout_constraintBottom_toBottomOf="@id/bottomBorder"
-            app:layout_constraintEnd_toStartOf="@id/signIn"
-            app:layout_constraintTop_toBottomOf="@id/buttonRegister" />
+            app:layout_constraintBottom_toBottomOf="@id/guidelineSignUpBottomBorder"
+            app:layout_constraintEnd_toStartOf="@id/textViewSignUpSignIn"
+            app:layout_constraintTop_toBottomOf="@id/buttonSignUpRegister" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/signIn"
+            android:id="@+id/textViewSignUpSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/medium_margin"
@@ -229,9 +229,9 @@
             android:text="@string/sign_in"
             android:textColor="@color/main_text_color"
             android:textSize="@dimen/text_small_size"
-            app:layout_constraintBottom_toBottomOf="@id/bottomBorder"
-            app:layout_constraintEnd_toEndOf="@id/rightBorder"
-            app:layout_constraintTop_toBottomOf="@id/buttonRegister" />
+            app:layout_constraintBottom_toBottomOf="@id/guidelineSignUpBottomBorder"
+            app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
+            app:layout_constraintTop_toBottomOf="@id/buttonSignUpRegister" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
