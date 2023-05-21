@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/first_background_color"
+        android:background="?attr/colorFirstBackground"
         tools:context=".AuthActivity">
 
         <androidx.constraintlayout.widget.Guideline
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_medium"
             android:text="@string/titleText"
-            android:textColor="@color/main_text_color"
+            android:textColor="?attr/colorMainText"
             android:textSize="@dimen/text_largest_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
             android:layout_marginTop="@dimen/smallest_margin"
             android:fontFamily="@font/open_sans_medium"
             android:text="@string/subtitle_text"
-            android:textColor="@color/secondary_text_color"
+            android:textColor="?attr/colorMainText"
             android:textSize="@dimen/text_smallest_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
             android:layout_marginTop="@dimen/very_large_margin"
             android:fontFamily="@font/open_sans_medium"
             android:text="@string/e_mail"
-            android:textColor="@color/grey_color"
+            android:textColor="?attr/colorOfDataEntryFields"
             android:textSize="@dimen/text_small_size"
             app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
             app:layout_constraintTop_toBottomOf="@id/textViewSignUpSubtitle" />
@@ -93,7 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/main_text_color"
+                android:textColor="?attr/colorMainText"
                 android:textSize="@dimen/text_large_size"
                 android:theme="@style/MyEditText" />
 
@@ -107,7 +107,7 @@
             android:layout_marginTop="@dimen/very_large_margin"
             android:fontFamily="@font/open_sans_medium"
             android:text="@string/password"
-            android:textColor="@color/grey_color"
+            android:textColor="?attr/colorOfDataEntryFields"
             android:textSize="@dimen/text_small_size"
             app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpEmail" />
@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             app:boxBackgroundMode="none"
             app:endIconMode="password_toggle"
-            app:endIconTint="@color/grey_color"
+            app:endIconTint="?attr/colorOfDataEntryFields"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
             app:layout_constraintStart_toEndOf="@id/guidelineSignUpLeftBorder"
@@ -129,7 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:textColor="@color/main_text_color"
+                android:textColor="?attr/colorMainText"
                 android:textSize="@dimen/text_large_size"
                 android:theme="@style/MyEditText" />
 
@@ -141,7 +141,7 @@
             android:layout_height="wrap_content"
             android:checked="false"
             android:text="@string/remember_me"
-            android:textColor="@color/secondary_text_color"
+            android:textColor="?attr/colorSecondaryText"
             app:layout_constraintStart_toEndOf="@id/guidelineSignUpLeftBorder"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpPassword" />
 
@@ -150,10 +150,10 @@
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_google_height"
             android:layout_marginEnd="@dimen/smallest_margin"
-            android:backgroundTint="@color/google_button_color"
+            android:backgroundTint="?attr/colorGoogleButton"
             android:text="@string/google"
             android:textAllCaps="true"
-            android:textColor="@color/google_button_text_color"
+            android:textColor="?attr/colorGoogleButtonText"
             android:textSize="@dimen/text_medium_size"
             app:icon="@drawable/ic_google_foreground"
             app:iconGravity="textStart"
@@ -171,7 +171,7 @@
             android:layout_marginBottom="@dimen/smallest_margin"
             android:fontFamily="@font/open_sans_medium"
             android:text="@string/or"
-            android:textColor="@color/main_text_color"
+            android:textColor="?attr/colorMainText"
             android:textSize="@dimen/text_large_size"
             app:layout_constraintBottom_toTopOf="@id/textViewSignUpNoticeAgreement"
             app:layout_constraintEnd_toEndOf="parent"
@@ -186,7 +186,7 @@
             android:background="@drawable/frame_button_register"
             android:text="@string/register"
             android:textAllCaps="true"
-            android:textColor="@color/main_text_color"
+            android:textColor="?attr/colorMainText"
             android:textSize="@dimen/text_medium_size"
             app:layout_constraintBottom_toBottomOf="@id/buttonSignUpGoogle"
             app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
@@ -200,7 +200,7 @@
             android:layout_marginTop="@dimen/smallest_margin"
             android:fontFamily="@font/open_sans_medium"
             android:text="@string/notice_agreement"
-            android:textColor="@color/secondary_text_color"
+            android:textColor="?attr/colorMainText"
             android:textSize="@dimen/text_smallest_size"
             app:layout_constraintBottom_toBottomOf="@id/guidelineSignUpBottomBorder"
             app:layout_constraintEnd_toStartOf="@id/textViewSignUpHaveAccount"
@@ -214,7 +214,7 @@
             android:layout_marginEnd="@dimen/smallest_margin"
             android:fontFamily="@font/open_sans_medium"
             android:text="@string/have_account"
-            android:textColor="@color/secondary_text_color"
+            android:textColor="?attr/colorSecondaryText"
             android:textSize="@dimen/text_small_size"
             app:layout_constraintBottom_toBottomOf="@id/guidelineSignUpBottomBorder"
             app:layout_constraintEnd_toStartOf="@id/textViewSignUpSignIn"
@@ -227,7 +227,7 @@
             android:layout_marginStart="@dimen/medium_margin"
             android:fontFamily="@font/open_sans_medium"
             android:text="@string/sign_in"
-            android:textColor="@color/main_text_color"
+            android:textColor="?attr/colorMainText"
             android:textSize="@dimen/text_small_size"
             app:layout_constraintBottom_toBottomOf="@id/guidelineSignUpBottomBorder"
             app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"

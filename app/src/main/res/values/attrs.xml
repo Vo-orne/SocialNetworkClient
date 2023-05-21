@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorFirstBackground" format="color"/>
+    <attr name="colorSecondBackground" format="color"/>
+    <attr name="colorMainText" format="color"/>
+    <attr name="colorSecondMainText" format="color"/>
+    <attr name="colorSecondaryText" format="color"/>
+    <attr name="colorOfDataEntryFields" format="color"/>
+    <attr name="colorAccentButtons" format="color"/>
+    <attr name="colorGoogleButton" format="color"/>
+    <attr name="colorGoogleButtonText" format="color"/>
+</resources>

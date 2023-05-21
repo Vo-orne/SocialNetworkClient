@@ -4,7 +4,7 @@
     <stroke
         android:width="2dp"
         android:alpha="0"
-        android:color="@color/orange_button_color" />
+        android:color="?attr/colorAccentButtons" />
 
     <gradient
         android:angle="90"

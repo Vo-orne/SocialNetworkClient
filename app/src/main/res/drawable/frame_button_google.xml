@@ -4,10 +4,10 @@
     <stroke
         android:width="2dp"
         android:alpha="0"
-        android:color="@color/second_background_color" />
+        android:color="?attr/colorGoogleButton" />
 
     <gradient
         android:angle="90"
-        android:endColor="@color/second_background_color"
-        android:startColor="@color/second_background_color" />
+        android:endColor="?attr/colorGoogleButton"
+        android:startColor="?attr/colorGoogleButton" />
 </shape>
