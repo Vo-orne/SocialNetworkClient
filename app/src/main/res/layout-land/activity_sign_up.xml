@@ -44,10 +44,8 @@
             android:id="@+id/textViewSignUpTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans_medium"
             android:text="@string/titleText"
-            android:textColor="?attr/colorMainText"
-            android:textSize="@dimen/text_largest_size"
+            android:theme="@style/TextViewTitlesStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/guidelineSignUpBorderOfTitle" />
@@ -57,10 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/smallest_margin"
-            android:fontFamily="@font/open_sans_medium"
             android:text="@string/subtitle_text"
-            android:textColor="?attr/colorMainText"
-            android:textSize="@dimen/text_smallest_size"
+            android:theme="@style/TextViewSubtitlesStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewSignUpTitle" />
@@ -71,10 +67,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
             android:layout_marginTop="@dimen/very_large_margin"
-            android:fontFamily="@font/open_sans_medium"
             android:text="@string/e_mail"
-            android:textColor="?attr/colorOfDataEntryFields"
-            android:textSize="@dimen/text_small_size"
+            android:theme="@style/TextViewInputFieldTitleStyle"
             app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
             app:layout_constraintTop_toBottomOf="@id/textViewSignUpSubtitle" />
 
@@ -93,9 +87,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
+                android:fontFamily="@font/open_sans_medium"
                 android:textColor="?attr/colorMainText"
                 android:textSize="@dimen/text_large_size"
-                android:theme="@style/MyEditText" />
+                android:theme="@style/EditTextStyle" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,10 +100,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
             android:layout_marginTop="@dimen/very_large_margin"
-            android:fontFamily="@font/open_sans_medium"
             android:text="@string/password"
-            android:textColor="?attr/colorOfDataEntryFields"
-            android:textSize="@dimen/text_small_size"
+            android:theme="@style/TextViewInputFieldTitleStyle"
             app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpEmail" />
 
@@ -129,9 +122,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:fontFamily="@font/open_sans_medium"
                 android:textColor="?attr/colorMainText"
                 android:textSize="@dimen/text_large_size"
-                android:theme="@style/MyEditText" />
+                android:theme="@style/EditTextStyle" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -139,9 +133,8 @@
             android:id="@+id/checkBoxSignUpMemberInputDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/remember_me"
             android:textColor="?attr/colorSecondaryText"
+            android:theme="@style/CheckBoxStyle"
             app:layout_constraintStart_toEndOf="@id/guidelineSignUpLeftBorder"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpPassword" />
 
@@ -151,10 +144,8 @@
             android:layout_height="@dimen/button_google_height"
             android:layout_marginEnd="@dimen/smallest_margin"
             android:backgroundTint="?attr/colorGoogleButton"
-            android:text="@string/google"
-            android:textAllCaps="true"
             android:textColor="?attr/colorGoogleButtonText"
-            android:textSize="@dimen/text_medium_size"
+            android:theme="@style/ButtonGoogleStyle"
             app:icon="@drawable/ic_google_foreground"
             app:iconGravity="textStart"
             app:iconSize="@dimen/ic_google_size"
@@ -169,10 +160,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/smallest_margin"
-            android:fontFamily="@font/open_sans_medium"
             android:text="@string/or"
-            android:textColor="?attr/colorMainText"
-            android:textSize="@dimen/text_large_size"
+            android:theme="@style/TextViewMainTextStyle"
             app:layout_constraintBottom_toTopOf="@id/textViewSignUpNoticeAgreement"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -184,10 +173,7 @@
             android:layout_height="@dimen/button_land_register_height"
             android:layout_marginStart="@dimen/smallest_margin"
             android:background="@drawable/frame_button_register"
-            android:text="@string/register"
-            android:textAllCaps="true"
-            android:textColor="?attr/colorMainText"
-            android:textSize="@dimen/text_medium_size"
+            android:theme="@style/ButtonRegisterStyle"
             app:layout_constraintBottom_toBottomOf="@id/buttonSignUpGoogle"
             app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
             app:layout_constraintStart_toEndOf="@id/textViewSignUpOr"
@@ -198,10 +184,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/smallest_margin"
-            android:fontFamily="@font/open_sans_medium"
             android:text="@string/notice_agreement"
-            android:textColor="?attr/colorMainText"
-            android:textSize="@dimen/text_smallest_size"
+            android:theme="@style/TextViewSubtitlesStyle"
             app:layout_constraintBottom_toBottomOf="@id/guidelineSignUpBottomBorder"
             app:layout_constraintEnd_toStartOf="@id/textViewSignUpHaveAccount"
             app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
@@ -212,10 +196,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/smallest_margin"
-            android:fontFamily="@font/open_sans_medium"
             android:text="@string/have_account"
-            android:textColor="?attr/colorSecondaryText"
-            android:textSize="@dimen/text_small_size"
+            android:theme="@style/TextViewSecondaryTextStyle"
             app:layout_constraintBottom_toBottomOf="@id/guidelineSignUpBottomBorder"
             app:layout_constraintEnd_toStartOf="@id/textViewSignUpSignIn"
             app:layout_constraintTop_toBottomOf="@id/buttonSignUpRegister" />
@@ -225,10 +207,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/medium_margin"
-            android:fontFamily="@font/open_sans_medium"
             android:text="@string/sign_in"
-            android:textColor="?attr/colorMainText"
-            android:textSize="@dimen/text_small_size"
+            android:theme="@style/TextViewSecondMainTextStyle"
             app:layout_constraintBottom_toBottomOf="@id/guidelineSignUpBottomBorder"
             app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
             app:layout_constraintTop_toBottomOf="@id/buttonSignUpRegister" />

@@ -23,7 +23,7 @@
         <item name="colorSecondaryText">@color/grey_text_2</item>
         <item name="colorOfDataEntryFields">@color/grey_color</item>
         <item name="colorAccentButtons">@color/orange</item>
-        <item name="colorGoogleButton">@color/grey_color</item>
+        <item name="colorGoogleButton">@color/white</item>
         <item name="colorGoogleButtonText">@color/blue</item>
     </style>
 </resources>

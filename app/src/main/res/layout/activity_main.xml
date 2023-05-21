@@ -70,10 +70,8 @@
         android:id="@+id/textViewMainSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans_medium"
         android:text="@string/settings"
-        android:textColor="?attr/colorMainText"
-        android:textSize="@dimen/text_largest_size"
+        android:theme="@style/TextViewTitlesStyle"
         app:layout_constraintStart_toStartOf="@id/guidelineMainLeftBorder"
         app:layout_constraintTop_toTopOf="@id/guidelineMainUpperBorder" />
 
@@ -93,10 +91,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/smallest_margin"
-        android:fontFamily="@font/open_sans_medium"
         android:text="@string/name_surname"
-        android:textColor="?attr/colorMainText"
-        android:textSize="@dimen/text_large_size"
+        android:theme="@style/TextViewMainTextStyle"
         app:layout_constraintBottom_toTopOf="@+id/textViewMainUserCareer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -106,10 +102,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/large_margin"
-        android:fontFamily="@font/open_sans_medium"
         android:text="@string/career"
-        android:textColor="?attr/colorSecondaryText"
-        android:textSize="@dimen/text_small_size"
+        android:theme="@style/TextViewSecondaryTextStyle"
         app:layout_constraintBottom_toTopOf="@+id/textViewMainUserHomeAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -118,10 +112,8 @@
         android:id="@+id/textViewMainUserHomeAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans_medium"
         android:text="@string/home_address"
-        android:textColor="?attr/colorSecondaryText"
-        android:textSize="@dimen/text_small_size"
+        android:theme="@style/TextViewSecondaryTextStyle"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineMainUserDataFloor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -162,9 +154,7 @@
         android:layout_height="@dimen/button_edit_profile_height"
         android:layout_marginBottom="@dimen/large_margin"
         android:background="@drawable/frame_button_edit_profile"
-        android:text="@string/edit_profile"
-        android:textAllCaps="false"
-        android:textColor="?attr/colorSecondMainText"
+        android:theme="@style/ButtonEditProfileStyle"
         app:layout_constraintBottom_toTopOf="@id/buttonMainViewMyContacts"
         app:layout_constraintEnd_toEndOf="@id/guidelineMainRightBorder"
         app:layout_constraintStart_toStartOf="@id/guidelineMainLeftBorder" />
@@ -175,8 +165,7 @@
         android:layout_height="@dimen/button_view_my_contacts_height"
         android:background="@drawable/frame_button_view_my_contacts"
         android:text="@string/view_my_contacts"
-        android:textAllCaps="true"
-        android:textColor="?attr/colorMainText"
+        android:theme="@style/ButtonViewMyContactsStyle"
         app:layout_constraintBottom_toBottomOf="@id/guidelineMainBottomBorder"
         app:layout_constraintEnd_toEndOf="@id/guidelineMainRightBorder"
         app:layout_constraintStart_toStartOf="@id/guidelineMainLeftBorder" />
