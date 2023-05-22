@@ -63,23 +63,46 @@ class AuthActivity : AppCompatActivity() {
             binding.textInputLayoutSignUpEmail.error = null
         }
 
-        if (passwordInput.isEmpty() || !isValidPassword(passwordInput)) {
-            isValid = false
-            binding.textInputLayoutSignUpPassword.error = Constants.INCORRECTLY_PASSWORD_MESSAGE
-        } else {
+        if (isValidPassword(passwordInput) == Constants.PASSWORD_IS_CORRECT) {
             binding.textInputLayoutSignUpPassword.error = null
+        } else {
+            isValid = false
+            binding.textInputLayoutSignUpPassword.error = isValidPassword(passwordInput)
         }
 
         return isValid
     }
 
-    private fun isValidPassword(password: String): Boolean {
-        return password.all {
-            it in Constants.PASSWORD_VERIF_SYM[0]..Constants.PASSWORD_VERIF_SYM[1]
-                    || it in Constants.PASSWORD_VERIF_SYM[2]..Constants.PASSWORD_VERIF_SYM[3]
-                    && it != Constants.PASSWORD_VERIF_SYM[4]
-                    && password.length >= Constants.MAX_PASSWORD_SIZE
+    private fun isValidPassword(password: String): String {
+        var isHasEnoughLength = false
+        var isHasNumber = false
+        var isHasLetter = false
+        var isWithoutSymbols = true
+
+        if (password.length >= Constants.MAX_PASSWORD_SIZE) {
+            isHasEnoughLength = true
         }
+
+        for(i in password) {
+            when (i) {
+                in Constants.PASSWORD_VERIF_SYM[0]..Constants.PASSWORD_VERIF_SYM[1]
+                -> isHasNumber = true
+
+                in Constants.PASSWORD_VERIF_SYM[2]..Constants.PASSWORD_VERIF_SYM[3],
+                in Constants.PASSWORD_VERIF_SYM[4]..Constants.PASSWORD_VERIF_SYM[5]
+                -> isHasLetter = true
+
+                else -> isWithoutSymbols = false
+            }
+        }
+
+        when {
+            !isHasEnoughLength -> return Constants.PASSWORD_IS_SHORT
+            !isHasNumber -> return Constants.PASSWORD_WITHOUT_NUMBERS
+            !isHasLetter -> return Constants.PASSWORD_WITHOUT_LETTERS
+            !isWithoutSymbols -> return Constants.PASSWORD_WITH_CHARACTERS
+        }
+        return Constants.PASSWORD_IS_CORRECT
     }
 
     private fun saveLoginData(email: String, password: String) {
