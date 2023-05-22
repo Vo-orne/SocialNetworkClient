@@ -131,6 +131,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/check_box_remember_me_margin"
+        android:paddingStart="@dimen/smallest_margin"
+        android:button="@drawable/checkbox"
+        android:buttonTint="@color/white"
+        android:checked="true"
         android:textColor="?attr/colorSecondaryText"
         android:theme="@style/CheckBoxStyle"
         app:layout_constraintBottom_toTopOf="@id/guidelineSignUpFloorButton"
@@ -191,8 +195,9 @@
         android:layout_height="wrap_content"
         android:text="@string/have_account"
         android:theme="@style/TextViewSecondaryTextStyle"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintBottom_toBottomOf="@id/guidelineSignUpBottomBorder"
-        app:layout_constraintEnd_toStartOf="@id/guidelineSignUpRightBorder"
+        app:layout_constraintEnd_toStartOf="@id/textViewSignUpSignIn"
         app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -202,6 +207,7 @@
         android:layout_marginStart="@dimen/medium_margin"
         android:text="@string/sign_in"
         android:theme="@style/TextViewSecondMainTextStyle"
+        app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
         app:layout_constraintBottom_toBottomOf="@id/guidelineSignUpBottomBorder"
         app:layout_constraintStart_toEndOf="@id/textViewSignUpHaveAccount" />
 

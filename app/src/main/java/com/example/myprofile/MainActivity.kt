@@ -1,7 +1,7 @@
 package com.example.myprofile
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.myprofile.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,9 +13,6 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val newUserName = intent.getStringExtra(Constants.USER_NAME_KEY)
-        binding.textViewMainUserName.apply {
-            text = newUserName
-        }
+        binding.textViewMainUserName.text = intent.getStringExtra(Constants.USER_NAME_KEY)
     }
 }

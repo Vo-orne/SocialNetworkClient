@@ -3,50 +3,51 @@ package com.example.myprofile
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
+import androidx.appcompat.app.AppCompatActivity
 import com.example.myprofile.databinding.ActivitySignUpBinding
 
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var editor: SharedPreferences.Editor
+//    private lateinit var sharedPreferences: SharedPreferences
+//    private lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
-        sharedPreferences =
+        val sharedPreferences =
             getSharedPreferences(Constants.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
-        editor = sharedPreferences.edit()
+//        editor = sharedPreferences.edit()
 
-        accountLogin()
+        accountAutoLogin(sharedPreferences)
+        setListeners(sharedPreferences)
+
     }
 
-    private fun accountLogin() {
-        val email = sharedPreferences.getString(Constants.EMAIL_KEY, null)
-        if (email == null) {
-            defaultAccountLogin()
-        } else {
+    private fun accountAutoLogin(sharedPreferences: SharedPreferences) {
+        val email = sharedPreferences.getString(Constants.EMAIL_KEY, "") ?: ""
+        if (email.isNotEmpty()) {
             autoLogin(email)
         }
     }
 
-    private fun defaultAccountLogin() {
+    private fun setListeners(sharedPreferences: SharedPreferences) {
         binding.buttonSignUpRegister.setOnClickListener {
             val newEmail = binding.textInputEditTextSignUpEmail.text.toString()
             val newPassword = binding.textInputEditTextSignUpPassword.text.toString()
 
             if (validateInputs(newEmail, newPassword)) {
+                if (binding.checkBoxSignUpMemberInputDate.isChecked) {
+                    val editor = sharedPreferences.edit()
+                    editor.clear()
+                    editor.apply()
+                    saveLoginData(newEmail, newPassword, editor)
+                }
                 Intent(this, MainActivity::class.java).also {
-                    if (binding.checkBoxSignUpMemberInputDate.isChecked) {
-                        editor.clear()
-                        editor.apply()
-                        saveLoginData(newEmail, newPassword)
-                    }
                     comeToNextActivity(newEmail, it)
                 }
             }
@@ -56,9 +57,9 @@ class AuthActivity : AppCompatActivity() {
     private fun validateInputs(emailInput: String, passwordInput: String): Boolean {
         var isValid = true
 
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
             isValid = false
-            binding.textInputLayoutSignUpEmail.error = Constants.INCORRECTLY_EMAIL_MESSAGE
+            binding.textInputLayoutSignUpEmail.error = getString(R.string.error_on_email)
         } else {
             binding.textInputLayoutSignUpEmail.error = null
         }
@@ -83,29 +84,34 @@ class AuthActivity : AppCompatActivity() {
             isHasEnoughLength = true
         }
 
-        for(i in password) {
-            when (i) {
-                in Constants.PASSWORD_VERIF_SYM[0]..Constants.PASSWORD_VERIF_SYM[1]
-                -> isHasNumber = true
+        for (i in password) {
+//            when (i) {
+//                in Constants.PASSWORD_VERIF_SYM[0]..Constants.PASSWORD_VERIF_SYM[1]
+//                -> isHasNumber = true
+//
+//                in Constants.PASSWORD_VERIF_SYM[2]..Constants.PASSWORD_VERIF_SYM[3],
+//                in Constants.PASSWORD_VERIF_SYM[4]..Constants.PASSWORD_VERIF_SYM[5]
+//                -> isHasLetter = true
+//
+//                else -> isWithoutSymbols = false
+//            }
 
-                in Constants.PASSWORD_VERIF_SYM[2]..Constants.PASSWORD_VERIF_SYM[3],
-                in Constants.PASSWORD_VERIF_SYM[4]..Constants.PASSWORD_VERIF_SYM[5]
-                -> isHasLetter = true
+            if (password.contains(Regex("\\d+"))) isHasNumber = true
+            if (password.contains(Regex("[a-zA-Z]+"))) isHasLetter = true
+            if (!isHasEnoughLength || !isHasLetter) isWithoutSymbols = false
 
-                else -> isWithoutSymbols = false
-            }
         }
 
-        when {
-            !isHasEnoughLength -> return Constants.PASSWORD_IS_SHORT
-            !isHasNumber -> return Constants.PASSWORD_WITHOUT_NUMBERS
-            !isHasLetter -> return Constants.PASSWORD_WITHOUT_LETTERS
-            !isWithoutSymbols -> return Constants.PASSWORD_WITH_CHARACTERS
+        return when {
+            !isHasEnoughLength -> Constants.PASSWORD_IS_SHORT // TODO getString(R.string.)
+            !isHasNumber -> Constants.PASSWORD_WITHOUT_NUMBERS
+            !isHasLetter -> Constants.PASSWORD_WITHOUT_LETTERS
+            !isWithoutSymbols -> Constants.PASSWORD_WITH_CHARACTERS
+            else -> Constants.PASSWORD_IS_CORRECT
         }
-        return Constants.PASSWORD_IS_CORRECT
     }
 
-    private fun saveLoginData(email: String, password: String) {
+    private fun saveLoginData(email: String, password: String, editor: SharedPreferences.Editor) {
         editor.putString(Constants.EMAIL_KEY, email)
         editor.putString(Constants.PASSWORD_KEY, password)
         editor.apply()
@@ -127,21 +133,34 @@ class AuthActivity : AppCompatActivity() {
 
     private fun parsEmail(email: String): String {
         var result = ""
+        //das.das@d.asd
 
-        for (i in email.indices) {
-            if (i == 0 || result[result.length - 1] == ' ') {
-                result += email[i].uppercaseChar()
-                continue
+        val substring = email.substring(0, email.indexOf('@')) // qwe.rty@d.asd -> qwe.rty
+        val splittedEmail = substring.split('.') // qwe.rty -> [qwe, rty]
+
+        return when (splittedEmail.size) {
+            1 -> splittedEmail[0]
+            else -> {
+                val sb = StringBuilder()
+                splittedEmail.forEach { sb.append("$it ") }
+                sb.substring(0, sb.length - 1).toString()
             }
-            when {
-                email[i] == Constants.EMAIL_PARSING_SYMBOLS[0] -> return result
-                email[i] == Constants.EMAIL_PARSING_SYMBOLS[1] -> {
-                    result += " "
-                    continue
-                }
-            }
-            result += email[i].lowercaseChar()
         }
-        return result
+
+//        for (i in email.indices) {
+//            if (i == 0 || result[result.length - 1] == ' ') {
+//                result += email[i].uppercaseChar()
+//                continue
+//            }
+//            when {
+//                email[i] == Constants.EMAIL_PARSING_SYMBOLS[0] -> return result
+//                email[i] == Constants.EMAIL_PARSING_SYMBOLS[1] -> {
+//                    result += " "
+//                    continue
+//                }
+//            }
+//            result += email[i].lowercaseChar()
+//        }
+//        return result
     }
 }
