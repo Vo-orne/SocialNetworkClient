@@ -9,8 +9,8 @@
     tools:context=".MainActivity">
 
     <View
-        android:layout_width="@dimen/zero_dp"
-        android:layout_height="@dimen/zero_dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="?attr/colorSecondBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -151,7 +151,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonMainEditProfile"
-        android:layout_width="@dimen/button_width"
+        android:layout_width="0dp"
         android:layout_height="@dimen/button_edit_profile_height"
         android:layout_marginBottom="@dimen/large_margin"
         android:background="@drawable/frame_button_edit_profile"
@@ -162,7 +162,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonMainViewMyContacts"
-        android:layout_width="@dimen/button_width"
+        android:layout_width="0dp"
         android:layout_height="@dimen/button_view_my_contacts_height"
         android:background="@drawable/frame_button_view_my_contacts"
         android:text="@string/view_my_contacts"

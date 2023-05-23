@@ -7,12 +7,11 @@ import android.os.Bundle
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myprofile.databinding.ActivitySignUpBinding
+import java.util.*
 
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
-//    private lateinit var sharedPreferences: SharedPreferences
-//    private lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +20,6 @@ class AuthActivity : AppCompatActivity() {
 
         val sharedPreferences =
             getSharedPreferences(Constants.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
-//        editor = sharedPreferences.edit()
 
         accountAutoLogin(sharedPreferences)
         setListeners(sharedPreferences)
@@ -32,6 +30,37 @@ class AuthActivity : AppCompatActivity() {
         val email = sharedPreferences.getString(Constants.EMAIL_KEY, "") ?: ""
         if (email.isNotEmpty()) {
             autoLogin(email)
+        }
+    }
+
+    private fun autoLogin(email: String) {
+        Intent(this, MainActivity::class.java).also {
+            comeToNextActivity(email, it)
+        }
+    }
+
+    private fun comeToNextActivity(email: String, it: Intent) {
+        val userName: String = parsEmail(email)
+        it.putExtra(Constants.USER_NAME_KEY, userName)
+        startActivity(it)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        finish()
+    }
+
+    private fun parsEmail(email: String): String {
+        val substring = email.substring(0, email.indexOf('@')) // qwe.rty@d.asd -> qwe.rty
+        val splittedEmail = substring.split('.') // qwe.rty -> [qwe, rty]
+
+        return when (splittedEmail.size) {
+            1 -> splittedEmail[0]
+            else -> {
+                val sb = StringBuilder()
+                splittedEmail.forEach {
+                    val word = it.capitalize(Locale.ROOT)
+                    sb.append("$word ")
+                }
+                sb.substring(0, sb.length - 1).toString()
+            }
         }
     }
 
@@ -78,35 +107,20 @@ class AuthActivity : AppCompatActivity() {
         var isHasEnoughLength = false
         var isHasNumber = false
         var isHasLetter = false
-        var isWithoutSymbols = true
 
         if (password.length >= Constants.MAX_PASSWORD_SIZE) {
             isHasEnoughLength = true
         }
 
         for (i in password) {
-//            when (i) {
-//                in Constants.PASSWORD_VERIF_SYM[0]..Constants.PASSWORD_VERIF_SYM[1]
-//                -> isHasNumber = true
-//
-//                in Constants.PASSWORD_VERIF_SYM[2]..Constants.PASSWORD_VERIF_SYM[3],
-//                in Constants.PASSWORD_VERIF_SYM[4]..Constants.PASSWORD_VERIF_SYM[5]
-//                -> isHasLetter = true
-//
-//                else -> isWithoutSymbols = false
-//            }
-
             if (password.contains(Regex("\\d+"))) isHasNumber = true
             if (password.contains(Regex("[a-zA-Z]+"))) isHasLetter = true
-            if (!isHasEnoughLength || !isHasLetter) isWithoutSymbols = false
-
         }
 
         return when {
-            !isHasEnoughLength -> Constants.PASSWORD_IS_SHORT // TODO getString(R.string.)
-            !isHasNumber -> Constants.PASSWORD_WITHOUT_NUMBERS
-            !isHasLetter -> Constants.PASSWORD_WITHOUT_LETTERS
-            !isWithoutSymbols -> Constants.PASSWORD_WITH_CHARACTERS
+            !isHasEnoughLength -> getString(R.string.error_password_is_short)
+            !isHasNumber -> getString(R.string.error_password_without_numbers)
+            !isHasLetter -> getString(R.string.error_password_without_letters)
             else -> Constants.PASSWORD_IS_CORRECT
         }
     }
@@ -115,52 +129,5 @@ class AuthActivity : AppCompatActivity() {
         editor.putString(Constants.EMAIL_KEY, email)
         editor.putString(Constants.PASSWORD_KEY, password)
         editor.apply()
-    }
-
-    private fun comeToNextActivity(email: String, it: Intent) {
-        val userName: String = parsEmail(email)
-        it.putExtra(Constants.USER_NAME_KEY, userName)
-        startActivity(it)
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-        finish()
-    }
-
-    private fun autoLogin(email: String) {
-        Intent(this, MainActivity::class.java).also {
-            comeToNextActivity(email, it)
-        }
-    }
-
-    private fun parsEmail(email: String): String {
-        var result = ""
-        //das.das@d.asd
-
-        val substring = email.substring(0, email.indexOf('@')) // qwe.rty@d.asd -> qwe.rty
-        val splittedEmail = substring.split('.') // qwe.rty -> [qwe, rty]
-
-        return when (splittedEmail.size) {
-            1 -> splittedEmail[0]
-            else -> {
-                val sb = StringBuilder()
-                splittedEmail.forEach { sb.append("$it ") }
-                sb.substring(0, sb.length - 1).toString()
-            }
-        }
-
-//        for (i in email.indices) {
-//            if (i == 0 || result[result.length - 1] == ' ') {
-//                result += email[i].uppercaseChar()
-//                continue
-//            }
-//            when {
-//                email[i] == Constants.EMAIL_PARSING_SYMBOLS[0] -> return result
-//                email[i] == Constants.EMAIL_PARSING_SYMBOLS[1] -> {
-//                    result += " "
-//                    continue
-//                }
-//            }
-//            result += email[i].lowercaseChar()
-//        }
-//        return result
     }
 }

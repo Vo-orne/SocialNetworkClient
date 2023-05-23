@@ -22,4 +22,7 @@
     <string name="have_account">Вже є аккаунт?</string>
     <string name="sign_in">Увійти</string>
     <string name="error_on_email">Введіть коректний email</string>
+    <string name="error_password_is_short">Пароль менше 8 символів.</string>
+    <string name="error_password_without_numbers">Пароль не містить цифр.</string>
+    <string name="error_password_without_letters">Пароль не містить літер.</string>
 </resources>

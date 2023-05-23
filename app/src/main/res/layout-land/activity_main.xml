@@ -9,8 +9,8 @@
     tools:context=".MainActivity">
 
     <View
-        android:layout_width="@dimen/zero_dp"
-        android:layout_height="@dimen/zero_dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="?attr/colorSecondBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -116,7 +116,6 @@
         android:id="@+id/imageViewMainIcFacebook"
         android:layout_width="@dimen/ic_social_network_size"
         android:layout_height="@dimen/ic_social_network_size"
-        android:layout_marginEnd="@dimen/largest_margin"
         android:contentDescription="@string/content_description_facebook_icon"
         app:layout_constraintHorizontal_chainStyle="spread"
         android:src="@drawable/ic_facebook_foreground"
@@ -138,7 +137,6 @@
         android:id="@+id/imageViewMainIcInstagram"
         android:layout_width="@dimen/ic_social_network_size"
         android:layout_height="@dimen/ic_social_network_size"
-        android:layout_marginStart="@dimen/largest_margin"
         android:contentDescription="@string/content_description_instagram_icon"
         android:src="@drawable/ic_instagram_foreground"
         app:layout_constraintEnd_toEndOf="@id/guidelineMainRightBorder"
@@ -147,7 +145,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonMainEditProfile"
-        android:layout_width="@dimen/button_width"
+        android:layout_width="0dp"
         android:layout_height="@dimen/button_land_edit_profile_height"
         android:layout_marginEnd="@dimen/smallest_margin"
         android:background="@drawable/frame_button_edit_profile"

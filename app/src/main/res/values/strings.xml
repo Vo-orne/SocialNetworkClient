@@ -24,5 +24,8 @@
     <string name="have_account">Already have an account?</string>
     <string name="sign_in">Sign in</string>
     <string name="error_on_email">Enter a valid email.</string>
+    <string name="error_password_is_short">Password less than 8 characters.</string>
+    <string name="error_password_without_numbers">Password does not contain numbers.</string>
+    <string name="error_password_without_letters">Password does not contain letters.</string>
 
 </resources>

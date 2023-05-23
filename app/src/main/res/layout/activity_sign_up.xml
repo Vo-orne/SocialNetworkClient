@@ -71,7 +71,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutSignUpEmail"
-        android:layout_width="@dimen/text_input_layout_width"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:boxBackgroundMode="none"
         app:errorEnabled="true"
@@ -104,7 +104,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutSignUpPassword"
-        android:layout_width="@dimen/text_input_layout_width"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:boxBackgroundMode="none"
         app:endIconMode="password_toggle"
@@ -132,17 +132,18 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/check_box_remember_me_margin"
         android:paddingStart="@dimen/smallest_margin"
-        android:button="@drawable/checkbox"
-        android:buttonTint="@color/white"
+        android:button="@drawable/frame_checkbox"
+        android:buttonTint="?attr/colorMainText"
         android:checked="true"
         android:textColor="?attr/colorSecondaryText"
         android:theme="@style/CheckBoxStyle"
         app:layout_constraintBottom_toTopOf="@id/guidelineSignUpFloorButton"
-        app:layout_constraintStart_toEndOf="@id/guidelineSignUpLeftBorder" />
+        app:layout_constraintStart_toEndOf="@id/guidelineSignUpLeftBorder"
+        tools:ignore="RtlSymmetry" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSignUpGoogle"
-        android:layout_width="@dimen/button_width"
+        android:layout_width="0dp"
         android:layout_height="@dimen/button_google_height"
         android:backgroundTint="?attr/colorGoogleButton"
         android:textColor="?attr/colorGoogleButtonText"
@@ -168,7 +169,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSignUpRegister"
-        android:layout_width="@dimen/button_width"
+        android:layout_width="0dp"
         android:layout_height="@dimen/button_register_height"
         android:layout_marginTop="@dimen/smallest_margin"
         android:background="@drawable/frame_button_register"
@@ -179,7 +180,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSignUpNoticeAgreement"
-        android:layout_width="@dimen/button_width"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/smallest_margin"
         android:gravity="center"
