@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Мій профіль</string>
+
+    <!--    MyProfileActivity    -->
     <string name="settings">Налаштування</string>
     <string name="name_surname">Ім\'я Прізвище</string>
     <string name="career">Кар\'єра</string>
@@ -10,6 +12,8 @@
     <string name="content_description_facebook_icon">Відображає іконку Facebook</string>
     <string name="content_description_linkedin_icon">Відображає іконку Linkedin</string>
     <string name="content_description_instagram_icon">Відображає іконку Instagram</string>
+
+    <!--    AuthActivity    -->
     <string name="titleText">Давай знайомитись</string>
     <string name="subtitle_text">Заповніть профіль і переходьте до застосунку!</string>
     <string name="e_mail">Електронна пошта</string>
@@ -25,4 +29,11 @@
     <string name="error_password_is_short">Пароль менше 8 символів.</string>
     <string name="error_password_without_numbers">Пароль не містить цифр.</string>
     <string name="error_password_without_letters">Пароль не містить літер.</string>
+
+    <!--    MyContactsActivity    -->
+    <string name="contacts">Контакти</string>
+    <string name="add_contacts">Додати контакти</string>
+    <string name="search_button">Відображає кнопку пошуку.</string>
+    <string name="back_button">Відображає кнопку повернення.</string>
+    <string name="delete_button">Відображає кнопку видалення.</string>
 </resources>

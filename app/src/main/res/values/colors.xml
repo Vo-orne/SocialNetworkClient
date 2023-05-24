@@ -11,22 +11,9 @@
     <color name="white">#FAFAFA</color>
     <color name="grey_text">#18181F</color>
     <color name="grey_text_2">#B2B2B3</color>
+    <color name="grey_text_3">#828282</color>
     <color name="grey_color">#BDBDBD</color>
     <color name="orange">#FB5E06</color>
     <color name="yellow">#FFEB3B</color>
     <color name="light_blue">#00BCD4</color>
-
-    <!--
-    <color name="blue">#242235</color>
-    <color name="background">#E7E7E7</color>
-    <color name="white">#FAFAFA</color>
-    <color name="grey_text">#18181F</color>
-    <color name="secondary_text_color">#B2B2B3</color>
-    <color name="grey_color">#BDBDBD</color>
-    <color name="orange_button_color">#FB5E06</color>
-    <color name="google_button_color">#FFFFFFFF</color>
-    <color name="google_button_text_color">#18181F</color>
-    <color name="yellow">#FFEB3B</color>
-    <color name="light_blue">#00BCD4</color>
-    -->
 </resources>

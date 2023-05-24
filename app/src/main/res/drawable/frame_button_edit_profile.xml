@@ -5,7 +5,7 @@
             <stroke
                 android:width="2dp"
                 android:alpha="0"
-                android:color="@color/grey_text" />
+                android:color="?attr/colorSecondMainText" />
             <gradient
                 android:angle="90"
                 android:endColor="@color/light_blue"
@@ -23,7 +23,7 @@
                 android:angle="90"
                 android:endColor="#00000000"
                 android:startColor="#00000000" />
-            <solid android:color="@color/background" />
+            <solid android:color="?attr/colorSecondBackground" />
         </shape>
     </item>
 </selector>
