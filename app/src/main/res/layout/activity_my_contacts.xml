@@ -23,6 +23,13 @@
         app:layout_constraintGuide_percent="0" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineMyContactsBottomBorder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineMyContactsContactFieldBoundary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -94,10 +101,19 @@
         android:text="@string/add_contacts"
         android:fontFamily="@font/open_sans_medium"
         android:textSize="@dimen/text_small_size"
-        android:layout_marginTop="@dimen/largest_margin"
         android:textColor="?attr/colorMainText"
         app:layout_constraintStart_toStartOf="@id/guidelineMyContactsLeftBorder"
-        app:layout_constraintTop_toBottomOf="@id/linearLayoutMyContactsUpperTitle"/>
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutMyContactsUpperTitle"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineMyContactsContactFieldBoundary"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewContacts"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="@id/guidelineMyContactsRightBorder"
+        app:layout_constraintStart_toStartOf="@id/guidelineMyContactsLeftBorder"
+        app:layout_constraintTop_toTopOf="@id/guidelineMyContactsContactFieldBoundary"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineMyContactsBottomBorder"/>
 
     <LinearLayout
         android:layout_width="0dp"

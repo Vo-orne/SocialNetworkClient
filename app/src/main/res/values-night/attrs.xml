@@ -5,6 +5,7 @@
     <attr name="colorMainText" format="color"/>
     <attr name="colorSecondMainText" format="color"/>
     <attr name="colorSecondaryText" format="color"/>
+    <attr name="colorSecondaryTextForContacts" format="color"/>
     <attr name="colorOfDataEntryFields" format="color"/>
     <attr name="colorAccentButtons" format="color"/>
     <attr name="colorGoogleButton" format="color"/>
