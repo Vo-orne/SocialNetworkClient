@@ -1,4 +1,4 @@
-package com.example.myprofile
+package com.example.myprofile.main
 
 class Constants {
     companion object {
