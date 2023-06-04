@@ -26,6 +26,7 @@
         android:padding="16dp"
         android:layout_marginTop="@dimen/large_margin"
         android:background="@drawable/frame_contacts_data"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineMyContactsRightBorder"
         app:layout_constraintStart_toStartOf="@id/guidelineMyContactsLeftBorder">
 
