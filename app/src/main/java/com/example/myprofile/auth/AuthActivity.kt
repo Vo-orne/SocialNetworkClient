@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myprofile.main.Constants
+import com.example.myprofile.Constants
 import com.example.myprofile.main.MainActivity
 import com.example.myprofile.R
 import com.example.myprofile.databinding.ActivitySignUpBinding

@@ -4,6 +4,9 @@
 
     <!-- Permission to access the Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Permission to access contact list -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
     <application
         android:allowBackup="true"

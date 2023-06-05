@@ -10,14 +10,16 @@ class ContactsViewModel: ViewModel() {
     private val _contactsList = MutableLiveData<List<Contact>>() // Live data for saving the list of users
     val contactsList: LiveData<List<Contact>> = _contactsList // Public access to live data
 
-    fun loadContacts() {
+    fun loadContacts(contactsPhoneBook: MutableList<Contact>) {
         val contacts = contactsRepository.getUsers() // Get the list of users from the repository
+        contacts.addAll(contactsPhoneBook)
         _contactsList.value = contacts // Update live data values
     }
+
 }
 
 class ContactsRepository {
-    fun getUsers(): List<Contact> {
+    fun getUsers(): MutableList<Contact> {
         val contacts = mutableListOf<Contact>()
 
         // Generate contacts
@@ -59,4 +61,5 @@ class ContactsRepository {
         "https://randomuser.me/api/portraits/women/30.jpg",
         "https://images.pexels.com/photos/449977/pexels-photo-449977.jpeg?h=350&auto=compress&cs=tinysrgb"
     )
+
 }

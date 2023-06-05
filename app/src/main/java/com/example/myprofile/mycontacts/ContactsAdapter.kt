@@ -1,6 +1,5 @@
 package com.example.myprofile.mycontacts
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -16,8 +15,6 @@ class ContactsAdapter(var contacts: MutableList<Contact>) :
         fun bind(contact: Contact) {
             binding.textViewMyContactsUserName.text = contact.name
             binding.textViewMyContactsUserCareer.text = contact.career
-
-            Log.d("myTag", contact.avatar)
 
             Glide.with(binding.root)
                 .load(contact.avatar)
