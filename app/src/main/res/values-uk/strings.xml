@@ -36,4 +36,7 @@
     <string name="search_button">Відображає кнопку пошуку.</string>
     <string name="back_button">Відображає кнопку повернення.</string>
     <string name="delete_button">Відображає кнопку видалення.</string>
+    <string name="contact_removed">Контакт видалено.</string>
+    <string name="cancel">ВІДМІНИТИ</string>
+
 </resources>

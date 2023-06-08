@@ -47,7 +47,11 @@ class MyContactsActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         recyclerViewContacts = binding.recyclerViewContacts
         recyclerViewContacts.layoutManager = LinearLayoutManager(this)
-        contactsAdapter = ContactsAdapter(contactsViewModel.contactsList.value?.toMutableList() ?: mutableListOf())
+        contactsAdapter = ContactsAdapter(
+            contactsViewModel.contactsList.value?.toMutableList() ?: mutableListOf(),
+            binding.layoutMyContacts,
+            this
+        )
         recyclerViewContacts.adapter = contactsAdapter
     }
 

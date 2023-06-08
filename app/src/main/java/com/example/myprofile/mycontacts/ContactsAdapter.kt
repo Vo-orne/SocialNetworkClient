@@ -1,14 +1,20 @@
 package com.example.myprofile.mycontacts
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myprofile.databinding.ActivityContactItemBinding
 import com.bumptech.glide.Glide
 import com.example.myprofile.R
+import com.google.android.material.snackbar.Snackbar
 
-class ContactsAdapter(var contacts: MutableList<Contact>) :
-    RecyclerView.Adapter<ContactsAdapter.ContactViewHolder>() {
+class ContactsAdapter(
+    var contacts: MutableList<Contact>,
+    private val applicationContext: ConstraintLayout,
+    private val context: Context
+) : RecyclerView.Adapter<ContactsAdapter.ContactViewHolder>() {
 
     inner class ContactViewHolder(private val binding: ActivityContactItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -28,8 +34,31 @@ class ContactsAdapter(var contacts: MutableList<Contact>) :
                 if (position != RecyclerView.NO_POSITION) {
                     deleteContact(position)
                 }
+                showUndoSnackbar(contact, position)
             }
         }
+    }
+
+    private fun showUndoSnackbar(contact: Contact, position: Int) {
+        val snackbar = Snackbar.make(
+            applicationContext,
+            context.getString(R.string.contact_removed),
+            Snackbar.LENGTH_LONG
+        )
+        snackbar.setAction(context.getString(R.string.cancel)) {
+            undoDeleteContact(contact, position)
+        }
+        snackbar.show()
+
+        // Automatically close the Snackbar after 5 seconds
+        val handler = android.os.Handler()
+        val runnable = Runnable { snackbar.dismiss() }
+        handler.postDelayed(runnable, 5000)
+    }
+
+    private fun undoDeleteContact(contact: Contact, position: Int) {
+        contacts.add(position, contact)
+        notifyItemInserted(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
@@ -50,7 +79,7 @@ class ContactsAdapter(var contacts: MutableList<Contact>) :
         return contacts.size
     }
 
-    fun deleteContact(position: Int) {
+    private fun deleteContact(position: Int) {
         contacts.removeAt(position)
         notifyItemRemoved(position)
     }
