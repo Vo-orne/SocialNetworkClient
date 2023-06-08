@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myprofile.databinding.ActivityContactItemBinding
+import com.example.myprofile.databinding.ContactItemBinding
 import com.bumptech.glide.Glide
 import com.example.myprofile.R
 import com.google.android.material.snackbar.Snackbar
@@ -18,7 +18,7 @@ class ContactsAdapter(
     private val context: Context
 ) : RecyclerView.Adapter<ContactsAdapter.ContactViewHolder>() {
 
-    inner class ContactViewHolder(private val binding: ActivityContactItemBinding) :
+    inner class ContactViewHolder(private val binding: ContactItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(contact: Contact) {
             binding.textViewMyContactsUserName.text = contact.name
@@ -64,7 +64,7 @@ class ContactsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
-        val binding = ActivityContactItemBinding.inflate(
+        val binding = ContactItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
