@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myprofile.Constants
@@ -36,7 +37,6 @@ class MyContactsActivity : AppCompatActivity() {
         // Configure the watcher to update the user interface when data changes
         contactsViewModel.contactsList.observe(this) { contactsList ->
             contactsAdapter.contacts = contactsList as MutableList<Contact> // Update adapter data
-            contactsAdapter.notifyDataSetChanged() // Notify the adapter about changes
         }
 
         requestContactsPermission()
@@ -49,10 +49,31 @@ class MyContactsActivity : AppCompatActivity() {
         recyclerViewContacts.layoutManager = LinearLayoutManager(this)
         contactsAdapter = ContactsAdapter(
             contactsViewModel.contactsList.value?.toMutableList() ?: mutableListOf(),
-            binding.layoutMyContacts,
-            this
-        )
+            binding.layoutMyContacts, this)
         recyclerViewContacts.adapter = contactsAdapter
+        swipeToDelete()
+    }
+
+    private fun swipeToDelete() {
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                // There is no need to implement drag and drop, so we return false
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                val deletedContact = contactsAdapter.getContactAtPosition(position)
+                contactsAdapter.deleteContact(position)
+                contactsAdapter.showUndoSnackbar(deletedContact, position)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+        itemTouchHelper.attachToRecyclerView(recyclerViewContacts)
     }
 
     private fun setListeners() {

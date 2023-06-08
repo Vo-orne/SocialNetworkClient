@@ -1,6 +1,8 @@
 package com.example.myprofile.mycontacts
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +32,7 @@ class ContactsAdapter(
                 .into(binding.imageViewMyContactsUserAvatar)
 
             binding.buttonMyContactsDelete.setOnClickListener {
-                val position = adapterPosition
+                val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     deleteContact(position)
                 }
@@ -39,7 +41,7 @@ class ContactsAdapter(
         }
     }
 
-    private fun showUndoSnackbar(contact: Contact, position: Int) {
+    fun showUndoSnackbar(contact: Contact, position: Int) {
         val snackbar = Snackbar.make(
             applicationContext,
             context.getString(R.string.contact_removed),
@@ -51,7 +53,7 @@ class ContactsAdapter(
         snackbar.show()
 
         // Automatically close the Snackbar after 5 seconds
-        val handler = android.os.Handler()
+        val handler = Handler(Looper.getMainLooper())
         val runnable = Runnable { snackbar.dismiss() }
         handler.postDelayed(runnable, 5000)
     }
@@ -79,8 +81,13 @@ class ContactsAdapter(
         return contacts.size
     }
 
-    private fun deleteContact(position: Int) {
+    fun deleteContact(position: Int) {
         contacts.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    // Getting a contact by position
+    fun getContactAtPosition(position: Int): Contact {
+        return contacts[position]
     }
 }
