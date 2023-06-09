@@ -9,18 +9,6 @@
     <color name="grey_text_2">#B2B2B3</color>
     <color name="grey_text_3">#828282</color>
     <color name="grey_color">#BDBDBD</color>
+    <color name="grey_5">#E0E0E0</color>
     <color name="orange">#D65207</color>
-
-    <!--
-    <color name="black">#FF000000</color>
-    <color name="blue">#191825</color>
-    <color name="background">#242235</color>
-    <color name="white">#E1FAFAFA</color>
-    <color name="grey_text">#E2E2E3</color>
-    <color name="secondary_text_color">#B2B2B3</color>
-    <color name="grey_color">#BDBDBD</color>
-    <color name="orange_button_color">#D65207</color>
-    <color name="google_button_color">#B2B2B3</color>
-    <color name="google_button_text_color">#18181F</color>
-    -->
 </resources>

@@ -38,9 +38,24 @@
     <string name="delete_button">Displays the delete button.</string>
     <string name="contact_removed">Contact has been removed.</string>
     <string name="cancel">CANCEL</string>
+
+    <!--    AddContactDialog    -->
     <string name="add_contact">Add contact</string>
     <string name="username">Username</string>
     <string name="save">Save</string>
     <string name="displays_the_add_photo_button">Displays the add photo button.</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="cd_username">Contact name input field in the add contact window.</string>
+    <string name="cd_career">Contact career input field in the add contact window.</string>
+    <string name="cd_email">Contact email input field in the add contact window.</string>
+    <string name="cd_phone">The field for entering the phone number of the contact in the window for adding a contact.</string>
+    <string name="cd_address">Contact address input field in the add contact window.</string>
+    <string name="cd_date_of_birth">The field for entering the contact\'s date of birth in the window for adding a contact.</string>
+    <string name="example_email">name@gmail.com</string>
+    <string name="example_phone">+38-(050)-000-0000</string>
+    <string name="example_address">775 Westminster Avenue APT D5 Brooklyn, NY, 11230</string>
+    <string name="example_date_of_birth">20/12/1998</string>
 
 </resources>

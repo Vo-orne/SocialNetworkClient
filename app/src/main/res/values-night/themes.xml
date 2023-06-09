@@ -23,6 +23,9 @@
         <item name="colorSecondaryText">@color/grey_text_2</item>
         <item name="colorSecondaryTextForContacts">@color/grey_text_3</item>
         <item name="colorOfDataEntryFields">@color/grey_color</item>
+        <item name="colorOfDataEntryFieldsForAddContact">@color/grey_text_2</item>
+        <item name="colorTextForAddContact">@color/grey_text</item>
+        <item name="colorHintTextForAddContact">@color/grey_5</item>
         <item name="colorAccentButtons">@color/orange</item>
         <item name="colorGoogleButton">@color/white</item>
         <item name="colorGoogleButtonText">@color/blue</item>

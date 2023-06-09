@@ -3,9 +3,9 @@
 
     <!--Input field style-->
     <style name="EditTextStyle" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">@color/grey_color</item>
-        <item name="colorControlActivated">@color/grey_color</item>
-        <item name="colorControlHighlight">@color/grey_color</item>
+        <item name="colorControlNormal">?attr/colorOfDataEntryFields</item>
+        <item name="colorControlActivated">?attr/colorOfDataEntryFields</item>
+        <item name="colorControlHighlight">?attr/colorOfDataEntryFields</item>
     </style>
 
     <style name="TextViewTitlesStyle">
@@ -39,6 +39,12 @@
     </style>
 
     <style name="TextViewInputFieldTitleStyle">
+        <item name="android:fontFamily">@font/open_sans_medium</item>
+        <item name="android:textColor">?attr/colorOfDataEntryFields</item>
+        <item name="android:textSize">@dimen/text_small_size</item>
+    </style>
+
+    <style name="TextViewInputFieldTitleStyleForAddContact">
         <item name="android:fontFamily">@font/open_sans_medium</item>
         <item name="android:textColor">?attr/colorOfDataEntryFields</item>
         <item name="android:textSize">@dimen/text_small_size</item>

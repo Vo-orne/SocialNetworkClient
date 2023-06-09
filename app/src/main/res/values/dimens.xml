@@ -12,6 +12,8 @@
     <dimen name="large_margin">16dp</dimen>
     <dimen name="very_large_margin">24dp</dimen>
     <dimen name="largest_margin">32dp</dimen>
+    <dimen name="min_height_element">48dp</dimen>
+    <dimen name="max_width_element">300dp</dimen>
     <dimen name="check_box_remember_me_margin">66dp</dimen>
     <dimen name="ic_google_size">20dp</dimen>
     <dimen name="ic_social_network_size">60dp</dimen>
