@@ -19,6 +19,8 @@ import com.example.myprofile.Constants
 import com.example.myprofile.R
 import com.example.myprofile.databinding.ActivityMyContactsBinding
 import com.example.myprofile.main.MainActivity
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 class MyContactsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyContactsBinding
@@ -28,6 +30,7 @@ class MyContactsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        EventBus.getDefault().register(this)
         contactsViewModel = ViewModelProvider(this)[ContactsViewModel::class.java]
         binding = ActivityMyContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -84,6 +87,22 @@ class MyContactsActivity : AppCompatActivity() {
                 finish()
             }
         }
+        binding.textViewMyContactsAddContacts.setOnClickListener {
+            showAddContactDialog()
+        }
+    }
+
+    @Subscribe
+    fun onContactEvent(event: ContactEvent) {
+        val contact = event.contact
+        addContact(contact)
+    }
+
+
+
+    private fun showAddContactDialog() {
+        val addContactDialog = AddContactDialogFragment()
+        addContactDialog.show(supportFragmentManager, "AddContactDialog")
     }
 
     private fun requestContactsPermission() {
@@ -149,4 +168,10 @@ class MyContactsActivity : AppCompatActivity() {
         contactsAdapter.contacts.add(contact)
         contactsAdapter.notifyItemInserted(contactsAdapter.contacts.size - 1)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
+
 }
