@@ -2,7 +2,6 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layoutSignUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -151,7 +150,7 @@
             android:backgroundTint="?attr/colorGoogleButton"
             android:textColor="?attr/colorGoogleButtonText"
             android:theme="@style/ButtonGoogleStyle"
-            app:icon="@drawable/ic_google_foreground"
+            app:icon="@drawable/ic_google"
             app:iconGravity="textStart"
             app:iconSize="@dimen/ic_google_size"
             app:iconTint="@null"

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Мій профіль</string>
 
-    <!--    MyProfileActivity    -->
+    <!--    MainActivity    -->
     <string name="settings">Налаштування</string>
     <string name="name_surname">Ім\'я Прізвище</string>
     <string name="career">Кар\'єра</string>
@@ -47,12 +47,6 @@
     <string name="phone">Телефон</string>
     <string name="address">Адреса</string>
     <string name="date_of_birth">Дата народження</string>
-    <string name="cd_username">Поле вводу ім\'я контакта у вікні додавання контакту.</string>
-    <string name="cd_career">Поле вводу кар\'єри контакта у вікні додавання контакту.</string>
-    <string name="cd_email">Поле вводу електронної пошти контакта у вікні додавання контакту.</string>
-    <string name="cd_phone">Поле вводу телефону контакта у вікні додавання контакту.</string>
-    <string name="cd_address">Поле вводу адреси контакта у вікні додавання контакту.</string>
-    <string name="cd_date_of_birth">Поле вводу дати народження контакта у вікні додавання контакту.</string>
     <string name="example_email">name@gmail.com</string>
     <string name="example_phone">+38-(050)-000-0000</string>
     <string name="example_address">775 Westminster Avenue APT D5 Brooklyn, NY, 11230</string>

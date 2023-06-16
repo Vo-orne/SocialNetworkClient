@@ -19,7 +19,6 @@
         app:layout_constraintGuide_percent="0.96" />
 
     <LinearLayout
-        android:id="@+id/linearLayoutMyContactsContactCase"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

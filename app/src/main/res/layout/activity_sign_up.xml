@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layoutSignUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorFirstBackground"
@@ -141,17 +140,17 @@
         app:layout_constraintStart_toEndOf="@id/guidelineSignUpLeftBorder"
         tools:ignore="RtlSymmetry" />
 
-    <com.google.android.material.button.MaterialButton
+    <com.example.myprofile.auth.GoogleButton
         android:id="@+id/buttonSignUpGoogle"
         android:layout_width="0dp"
         android:layout_height="@dimen/button_google_height"
-        android:backgroundTint="?attr/colorGoogleButton"
+        app:icon="@drawable/ic_google"
+        app:iconGravityX="textStart"
+        app:iconSizeX="@dimen/ic_google_size"
+        app:text="@string/google"
+        android:textSize="@dimen/text_medium_size"
+        android:textAllCaps="true"
         android:textColor="?attr/colorGoogleButtonText"
-        android:theme="@style/ButtonGoogleStyle"
-        app:icon="@drawable/ic_google_foreground"
-        app:iconGravity="textStart"
-        app:iconSize="@dimen/ic_google_size"
-        app:iconTint="@null"
         app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
         app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
         app:layout_constraintTop_toBottomOf="@id/guidelineSignUpFloorButton" />

@@ -5,15 +5,12 @@
     <dimen name="text_medium_size">16sp</dimen>
     <dimen name="text_small_size">14sp</dimen>
     <dimen name="text_smallest_size">12sp</dimen>
-    <dimen name="text_input_layout_width">0dp</dimen>
     <dimen name="smallest_margin">8dp</dimen>
     <dimen name="small_margin">10dp</dimen>
     <dimen name="medium_margin">12dp</dimen>
     <dimen name="large_margin">16dp</dimen>
     <dimen name="very_large_margin">24dp</dimen>
-    <dimen name="largest_margin">32dp</dimen>
     <dimen name="min_height_element">48dp</dimen>
-    <dimen name="max_width_element">300dp</dimen>
     <dimen name="check_box_remember_me_margin">66dp</dimen>
     <dimen name="ic_google_size">20dp</dimen>
     <dimen name="ic_social_network_size">60dp</dimen>

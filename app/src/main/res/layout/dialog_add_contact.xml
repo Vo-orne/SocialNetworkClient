@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layoutAddContact"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -74,7 +73,6 @@
                 android:src="@drawable/ic_back_button_foreground" />
 
             <TextView
-                android:id="@+id/textViewAddContactContacts"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -194,7 +192,6 @@
             app:layout_constraintTop_toBottomOf="@id/textViewAddContactEmail">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextAddContactEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/open_sans_medium"
@@ -228,7 +225,6 @@
             app:layout_constraintTop_toBottomOf="@id/textViewAddContactPhone">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextAddContactPhone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/open_sans_medium"
@@ -262,7 +258,6 @@
             app:layout_constraintTop_toBottomOf="@id/textViewAddContactAddress">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextAddContactAddress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/open_sans_medium"
@@ -296,7 +291,6 @@
             app:layout_constraintTop_toBottomOf="@id/textViewAddContactDateOfBirth">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextAddContactDateOfBirth"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/open_sans_medium"
