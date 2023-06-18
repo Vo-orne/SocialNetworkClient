@@ -142,22 +142,22 @@
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpPassword"
             tools:ignore="RtlSymmetry" />
 
-        <com.google.android.material.button.MaterialButton
+        <com.example.myprofile.auth.GoogleButton
             android:id="@+id/buttonSignUpGoogle"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_google_height"
             android:layout_marginEnd="@dimen/smallest_margin"
-            android:backgroundTint="?attr/colorGoogleButton"
             android:textColor="?attr/colorGoogleButtonText"
-            android:theme="@style/ButtonGoogleStyle"
+            android:textSize="@dimen/text_medium_size"
             app:icon="@drawable/ic_google"
-            app:iconGravity="textStart"
-            app:iconSize="@dimen/ic_google_size"
-            app:iconTint="@null"
+            app:iconTextSpacing="@dimen/icon_text_spacing"
+            app:iconPaddingLeft="@dimen/icon_padding_left"
             app:layout_constraintBottom_toTopOf="@id/textViewSignUpNoticeAgreement"
             app:layout_constraintEnd_toStartOf="@id/textViewSignUpOr"
             app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxSignUpMemberInputDate" />
+            app:layout_constraintTop_toBottomOf="@id/checkBoxSignUpMemberInputDate"
+            app:text="@string/google"
+            app:textFontFamily="@font/open_sans_medium" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textViewSignUpOr"
@@ -174,7 +174,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonSignUpRegister"
             android:layout_width="0dp"
-            android:layout_height="@dimen/button_land_register_height"
+            android:layout_height="@dimen/button_google_height"
             android:layout_marginStart="@dimen/smallest_margin"
             android:background="@drawable/frame_button_register"
             android:theme="@style/ButtonRegisterStyle"

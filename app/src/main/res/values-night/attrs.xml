@@ -15,19 +15,12 @@
     <attr name="colorGoogleButtonText" format="color"/>
 
     <declare-styleable name="GoogleButton">
-        <attr name="buttonColor" format="color" />
         <attr name="icon" format="reference" />
-        <attr name="iconTint" format="color" />
-        <attr name="iconGravityX" format="enum">
-            <enum name="start" value="0" />
-            <enum name="end" value="1" />
-            <enum name="textStart" value="2" />
-            <enum name="textEnd" value="3" />
-        </attr>
-        <attr name="iconSizeX" format="dimension" />
+        <attr name="iconTextSpacing" format="dimension" />
+        <attr name="iconPaddingLeft" format="dimension" />
+        <attr name="textFontFamily" format="reference" />
         <attr name="text" format="string" />
         <attr name="android:textSize" />
-        <attr name="android:textAllCaps" />
         <attr name="android:textColor" />
         <attr name="buttonBackground" format="reference" />
     </declare-styleable>
