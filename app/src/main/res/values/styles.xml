@@ -57,12 +57,6 @@
         <item name="android:textSize">@dimen/text_small_size</item>
     </style>
 
-    <style name="ButtonGoogleStyle">
-        <item name="android:text">@string/google</item>
-        <item name="android:textSize">@dimen/text_medium_size</item>
-        <item name="textAllCaps">true</item>
-    </style>
-
     <style name="ButtonRegisterStyle">
         <item name="android:text">@string/register</item>
         <item name="android:textColor">?attr/colorMainText</item>

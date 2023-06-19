@@ -23,7 +23,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 class MyContactsActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMyContactsBinding
+    private val binding by lazy { ActivityMyContactsBinding.inflate(layoutInflater) }
     private lateinit var contactsViewModel: ContactsViewModel
     private lateinit var recyclerViewContacts: RecyclerView
     private lateinit var contactsAdapter: ContactsAdapter
@@ -32,7 +32,6 @@ class MyContactsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
         contactsViewModel = ViewModelProvider(this)[ContactsViewModel::class.java]
-        binding = ActivityMyContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupRecyclerView()

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/colorFirstBackground"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".auth.AuthActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorFirstBackground"
         tools:context=".auth.AuthActivity">
 
         <androidx.constraintlayout.widget.Guideline
@@ -39,188 +40,183 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.96" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewSignUpTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/titleText"
-            android:theme="@style/TextViewTitlesStyle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guidelineSignUpBorderOfTitle" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewSignUpSubtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/smallest_margin"
-            android:text="@string/subtitle_text"
-            android:theme="@style/TextViewSubtitlesStyle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewSignUpTitle" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewSignUpEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin"
-            android:layout_marginTop="@dimen/very_large_margin"
-            android:text="@string/e_mail"
-            android:theme="@style/TextViewInputFieldTitleStyle"
-            app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
-            app:layout_constraintTop_toBottomOf="@id/textViewSignUpSubtitle" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutSignUpEmail"
+        <LinearLayout
+            android:id="@+id/linearLayoutSignUpDataEntryBlock"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:boxBackgroundMode="none"
-            app:errorEnabled="true"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/linearLayoutSignUpButtonsBlock"
             app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
-            app:layout_constraintStart_toEndOf="@id/guidelineSignUpLeftBorder"
-            app:layout_constraintTop_toBottomOf="@id/textViewSignUpEmail">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextSignUpEmail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textEmailAddress"
-                android:fontFamily="@font/open_sans_medium"
-                android:textColor="?attr/colorMainText"
-                android:textSize="@dimen/text_large_size"
-                android:theme="@style/EditTextStyle" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewSignUpPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin"
-            android:layout_marginTop="@dimen/very_large_margin"
-            android:text="@string/password"
-            android:theme="@style/TextViewInputFieldTitleStyle"
             app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpEmail" />
+            app:layout_constraintTop_toTopOf="@id/guidelineSignUpBorderOfTitle">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutSignUpPassword"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:boxBackgroundMode="none"
-            app:endIconMode="password_toggle"
-            app:endIconTint="?attr/colorOfDataEntryFields"
-            app:errorEnabled="true"
-            app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
-            app:layout_constraintStart_toEndOf="@id/guidelineSignUpLeftBorder"
-            app:layout_constraintTop_toBottomOf="@id/textViewSignUpPassword">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextSignUpPassword"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewSignUpTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:fontFamily="@font/open_sans_medium"
-                android:textColor="?attr/colorMainText"
-                android:textSize="@dimen/text_large_size"
-                android:theme="@style/EditTextStyle" />
+                android:gravity="center"
+                android:text="@string/titleText"
+                android:theme="@style/TextViewTitlesStyle" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewSignUpSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_margin"
+                android:gravity="center"
+                android:text="@string/subtitle_text"
+                android:theme="@style/TextViewSubtitlesStyle" />
 
-        <CheckBox
-            android:id="@+id/checkBoxSignUpMemberInputDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/frame_checkbox"
-            android:buttonTint="?attr/colorMainText"
-            android:checked="true"
-            android:paddingStart="@dimen/smallest_margin"
-            android:textColor="?attr/colorSecondaryText"
-            android:theme="@style/CheckBoxStyle"
-            app:layout_constraintStart_toEndOf="@id/guidelineSignUpLeftBorder"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpPassword"
-            tools:ignore="RtlSymmetry" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewSignUpEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginTop="@dimen/very_large_margin"
+                android:text="@string/e_mail"
+                android:theme="@style/TextViewInputFieldTitleStyle" />
 
-        <com.example.myprofile.auth.GoogleButton
-            android:id="@+id/buttonSignUpGoogle"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutSignUpEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="none"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextSignUpEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/open_sans_medium"
+                    android:inputType="textEmailAddress"
+                    android:textColor="?attr/colorMainText"
+                    android:textSize="@dimen/text_large_size"
+                    android:theme="@style/EditTextStyle" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewSignUpPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginTop="@dimen/very_large_margin"
+                android:text="@string/password"
+                android:theme="@style/TextViewInputFieldTitleStyle" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutSignUpPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="none"
+                app:endIconMode="password_toggle"
+                app:endIconTint="?attr/colorOfDataEntryFields"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextSignUpPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_medium"
+                    android:inputType="textPassword"
+                    android:textColor="?attr/colorMainText"
+                    android:textSize="@dimen/text_large_size"
+                    android:theme="@style/EditTextStyle" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/checkBoxSignUpMemberInputDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/frame_checkbox"
+                android:buttonTint="?attr/colorMainText"
+                android:checked="true"
+                android:paddingStart="@dimen/smallest_margin"
+                android:textColor="?attr/colorSecondaryText"
+                android:theme="@style/CheckBoxStyle"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutSignUpButtonsBlock"
             android:layout_width="0dp"
-            android:layout_height="@dimen/button_google_height"
-            android:layout_marginEnd="@dimen/smallest_margin"
-            android:textColor="?attr/colorGoogleButtonText"
-            android:textSize="@dimen/text_medium_size"
-            app:icon="@drawable/ic_google"
-            app:iconTextSpacing="@dimen/icon_text_spacing"
-            app:iconPaddingLeft="@dimen/icon_padding_left"
-            app:layout_constraintBottom_toTopOf="@id/textViewSignUpNoticeAgreement"
-            app:layout_constraintEnd_toStartOf="@id/textViewSignUpOr"
-            app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxSignUpMemberInputDate"
-            app:text="@string/google"
-            app:textFontFamily="@font/open_sans_medium" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewSignUpOr"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/smallest_margin"
-            android:text="@string/or"
-            android:theme="@style/TextViewMainTextStyle"
-            app:layout_constraintBottom_toTopOf="@id/textViewSignUpNoticeAgreement"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxSignUpMemberInputDate" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonSignUpRegister"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/button_google_height"
-            android:layout_marginStart="@dimen/smallest_margin"
-            android:background="@drawable/frame_button_register"
-            android:theme="@style/ButtonRegisterStyle"
-            app:layout_constraintBottom_toBottomOf="@id/buttonSignUpGoogle"
-            app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
-            app:layout_constraintStart_toEndOf="@id/textViewSignUpOr"
-            app:layout_constraintTop_toTopOf="@id/buttonSignUpGoogle" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewSignUpNoticeAgreement"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/smallest_margin"
-            android:gravity="center"
-            android:text="@string/notice_agreement"
-            android:theme="@style/TextViewSubtitlesStyle"
-            app:layout_constraintEnd_toStartOf="@id/guidelineSignUpRightBorder"
-            app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
-            app:layout_constraintTop_toBottomOf="@id/buttonSignUpGoogle" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewSignUpHaveAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/smallest_margin"
-            android:text="@string/have_account"
-            android:theme="@style/TextViewSecondaryTextStyle"
-            app:layout_constraintHorizontal_chainStyle="packed"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@id/guidelineSignUpBottomBorder"
-            app:layout_constraintEnd_toStartOf="@id/textViewSignUpSignIn"
-            app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
-            app:layout_constraintTop_toBottomOf="@id/textViewSignUpNoticeAgreement" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewSignUpSignIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/smallest_margin"
-            android:layout_marginStart="@dimen/medium_margin"
-            android:text="@string/sign_in"
-            android:theme="@style/TextViewSecondMainTextStyle"
             app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
-            app:layout_constraintBottom_toBottomOf="@id/guidelineSignUpBottomBorder"
-            app:layout_constraintStart_toEndOf="@id/textViewSignUpHaveAccount"
-            app:layout_constraintTop_toBottomOf="@id/textViewSignUpNoticeAgreement" />
+            app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutSignUpDataEntryBlock">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.example.myprofile.auth.GoogleButton
+                    android:id="@+id/buttonSignUpGoogle"
+                    android:layout_width="320dp"
+                    android:layout_height="@dimen/button_google_height"
+                    android:layout_marginEnd="@dimen/smallest_margin"
+                    android:textColor="?attr/colorGoogleButtonText"
+                    android:textSize="@dimen/text_medium_size"
+                    app:icon="@drawable/ic_google"
+                    app:iconPaddingLeft="@dimen/icon_padding_left"
+                    app:iconTextSpacing="@dimen/icon_text_spacing"
+                    app:text="@string/google"
+                    app:textFontFamily="@font/open_sans_medium" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewSignUpOr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/or"
+                    android:theme="@style/TextViewMainTextStyle" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonSignUpRegister"
+                    android:layout_width="320dp"
+                    android:layout_height="@dimen/button_google_height"
+                    android:layout_marginStart="@dimen/smallest_margin"
+                    android:background="@drawable/frame_button_register"
+                    android:theme="@style/ButtonRegisterStyle" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewSignUpNoticeAgreement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_margin"
+                android:gravity="center"
+                android:text="@string/notice_agreement"
+                android:theme="@style/TextViewSubtitlesStyle" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewSignUpHaveAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/smallest_margin"
+                    android:text="@string/have_account"
+                    android:theme="@style/TextViewSecondaryTextStyle" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewSignUpSignIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/smallest_margin"
+                    android:text="@string/sign_in"
+                    android:theme="@style/TextViewSecondMainTextStyle" />
+            </LinearLayout>
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+</ScrollView>

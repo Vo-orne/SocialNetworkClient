@@ -14,11 +14,10 @@ import java.util.*
 
 class AuthActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySignUpBinding
+    private val binding by lazy { ActivitySignUpBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val sharedPreferences =
@@ -26,7 +25,6 @@ class AuthActivity : AppCompatActivity() {
 
         accountAutoLogin(sharedPreferences)
         setListeners(sharedPreferences)
-
     }
 
     private fun accountAutoLogin(sharedPreferences: SharedPreferences) {
@@ -54,17 +52,15 @@ class AuthActivity : AppCompatActivity() {
         val substring = email.substring(0, email.indexOf('@')) // qwe.rty@d.asd -> qwe.rty
         val splittedEmail = substring.split('.') // qwe.rty -> [qwe, rty]
 
-        return when (splittedEmail.size) {
-            1 -> splittedEmail[0]
-            else -> {
-                val sb = StringBuilder()
-                splittedEmail.forEach {
-                    val word = it.capitalize(Locale.ROOT)
-                    sb.append("$word ")
-                }
-                sb.substring(0, sb.length - 1).toString()
-            }
+        if (splittedEmail.size == 1) {
+            return splittedEmail[0]
         }
+        val sb = StringBuilder()
+        splittedEmail.forEach {
+            val word = it.capitalize(Locale.ROOT)
+            sb.append("$word ")
+        }
+        return sb.substring(0, sb.length - 1).toString()
     }
 
     private fun setListeners(sharedPreferences: SharedPreferences) {
@@ -115,10 +111,8 @@ class AuthActivity : AppCompatActivity() {
             isHasEnoughLength = true
         }
 
-        for (i in password) {
-            if (password.contains(Regex("\\d+"))) isHasNumber = true
-            if (password.contains(Regex("[a-zA-Z]+"))) isHasLetter = true
-        }
+        if (password.contains(Regex("\\d+"))) isHasNumber = true
+        if (password.contains(Regex("[a-zA-Z]+"))) isHasLetter = true
 
         return when {
             !isHasEnoughLength -> getString(R.string.error_password_is_short)

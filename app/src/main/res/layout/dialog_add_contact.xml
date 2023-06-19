@@ -70,7 +70,7 @@
                 android:layout_gravity="center"
                 android:background="@null"
                 android:contentDescription="@string/back_button"
-                android:src="@drawable/ic_back_button_foreground" />
+                android:src="@drawable/ic_back_button" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -93,10 +93,10 @@
 
         <ImageView
             android:id="@+id/imageViewAddContactAddPhoto"
-            android:layout_width="@dimen/image_user_avatar_size"
-            android:layout_height="@dimen/image_user_avatar_size"
+            android:layout_width="@dimen/image_add_photo_size"
+            android:layout_height="@dimen/image_add_photo_size"
             android:contentDescription="@string/displays_the_add_photo_button"
-            android:src="@drawable/ic_add_photo_button_foreground"
+            android:src="@drawable/ic_add_photo_button"
             app:layout_constraintBottom_toBottomOf="@id/guidelineAddContactFirstBackgroundBorder"
             app:layout_constraintEnd_toEndOf="@id/guidelineAddContactRightBorder"
             app:layout_constraintStart_toEndOf="@id/imageViewAddContactContactAvatar"

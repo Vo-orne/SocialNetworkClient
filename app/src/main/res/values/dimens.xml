@@ -12,14 +12,13 @@
     <dimen name="very_large_margin">24dp</dimen>
     <dimen name="min_height_element">48dp</dimen>
     <dimen name="check_box_remember_me_margin">66dp</dimen>
-    <dimen name="ic_google_size">20dp</dimen>
     <dimen name="icon_text_spacing">-180dp</dimen>
     <dimen name="icon_padding_left">90dp</dimen>
     <dimen name="ic_social_network_size">60dp</dimen>
     <dimen name="image_user_avatar_size">112dp</dimen>
+    <dimen name="image_add_photo_size">55dp</dimen>
     <dimen name="button_google_height">50dp</dimen>
     <dimen name="button_register_height">55dp</dimen>
-    <dimen name="button_land_register_height">40dp</dimen>
     <dimen name="button_edit_profile_height">48dp</dimen>
     <dimen name="button_view_my_contacts_height">58dp</dimen>
     <dimen name="button_land_edit_profile_height">58dp</dimen>

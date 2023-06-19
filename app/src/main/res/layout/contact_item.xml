@@ -69,7 +69,7 @@
             android:layout_height="54dp"
             android:layout_gravity="center"
             android:background="@null"
-            android:src="@drawable/ic_delete_button_foreground"
+            android:src="@drawable/ic_delete_button"
             android:contentDescription="@string/delete_button" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

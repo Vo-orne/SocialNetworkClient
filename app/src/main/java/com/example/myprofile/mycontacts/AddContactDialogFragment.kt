@@ -60,7 +60,7 @@ class AddContactDialogFragment : DialogFragment() {
         val imagePath = imageUri?.let { getUriAsString(requireContext().contentResolver, it) }
         val contact = Contact(imagePath.toString(), contactName, contactCareer)
 
-        // Опублікувати подію з контактом
+        // Publish an event with a contact
         EventBus.getDefault().post(ContactEvent(contact))
 
         dismiss()
