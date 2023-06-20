@@ -24,32 +24,29 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        accountAutoLogin(sharedPreferences)
-        setListeners(sharedPreferences)
+        accountAutoLogin()
+        setListeners()
     }
 
-    private fun accountAutoLogin(sharedPreferences: SharedPreferences) {
+    private fun accountAutoLogin() {
         val email = sharedPreferences.getString(Constants.EMAIL_KEY, "") ?: ""
         if (email.isNotEmpty()) {
-            autoLogin(email)
+            autoLogin()
         }
     }
 
-    private fun autoLogin(email: String) {
+    private fun autoLogin() {
         Intent(this, MainActivity::class.java).also {
-            comeToNextActivity(email, it)
+            comeToNextActivity(it)
         }
     }
 
-    private fun comeToNextActivity(email: String, it: Intent) {
-        val userName: String = parsEmail(email)
-        val editor = sharedPreferences.edit()
-        editor.putString(Constants.USER_NAME_KEY, userName)
-        editor.apply()
+    private fun comeToNextActivity(it: Intent) {
         startActivity(it)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         finish()
     }
+
 
     private fun parsEmail(email: String): String {
         val substring = email.substring(0, email.indexOf('@')) // qwe.rty@d.asd -> qwe.rty
@@ -66,20 +63,21 @@ class AuthActivity : AppCompatActivity() {
         return sb.substring(0, sb.length - 1).toString()
     }
 
-    private fun setListeners(sharedPreferences: SharedPreferences) {
+    private fun setListeners() {
         binding.buttonSignUpRegister.setOnClickListener {
             val newEmail = binding.textInputEditTextSignUpEmail.text.toString()
             val newPassword = binding.textInputEditTextSignUpPassword.text.toString()
+            val editor = sharedPreferences.edit()
 
             if (validateInputs(newEmail, newPassword)) {
                 if (binding.checkBoxSignUpMemberInputDate.isChecked) {
-                    val editor = sharedPreferences.edit()
                     editor.clear()
                     editor.apply()
                     saveLoginData(newEmail, newPassword, editor)
                 }
+                saveUserName(newEmail, editor)
                 Intent(this, MainActivity::class.java).also {
-                    comeToNextActivity(newEmail, it)
+                    comeToNextActivity(it)
                 }
             }
         }
@@ -128,6 +126,12 @@ class AuthActivity : AppCompatActivity() {
     private fun saveLoginData(email: String, password: String, editor: SharedPreferences.Editor) {
         editor.putString(Constants.EMAIL_KEY, email)
         editor.putString(Constants.PASSWORD_KEY, password)
+        editor.apply()
+    }
+
+    private fun saveUserName(email: String, editor: SharedPreferences.Editor) {
+        val userName: String = parsEmail(email)
+        editor.putString(Constants.USER_NAME_KEY, userName)
         editor.apply()
     }
 }
