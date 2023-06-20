@@ -156,7 +156,7 @@
 
                 <com.example.myprofile.auth.GoogleButton
                     android:id="@+id/buttonSignUpGoogle"
-                    android:layout_width="320dp"
+                    android:layout_width="250dp"
                     android:layout_height="@dimen/button_google_height"
                     android:layout_marginEnd="@dimen/smallest_margin"
                     android:textColor="?attr/colorGoogleButtonText"
@@ -176,7 +176,7 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/buttonSignUpRegister"
-                    android:layout_width="320dp"
+                    android:layout_width="250dp"
                     android:layout_height="@dimen/button_google_height"
                     android:layout_marginStart="@dimen/smallest_margin"
                     android:background="@drawable/frame_button_register"

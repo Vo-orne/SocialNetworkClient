@@ -12,8 +12,10 @@
     <dimen name="very_large_margin">24dp</dimen>
     <dimen name="min_height_element">48dp</dimen>
     <dimen name="check_box_remember_me_margin">66dp</dimen>
-    <dimen name="icon_text_spacing">-180dp</dimen>
-    <dimen name="icon_padding_left">90dp</dimen>
+    <dimen name="icon_text_spacing">-100dp</dimen>
+    <dimen name="icon_padding_left">60dp</dimen>
+    <dimen name="icon_text_spacing_land">-180dp</dimen>
+    <dimen name="icon_padding_left_land">90dp</dimen>
     <dimen name="ic_social_network_size">60dp</dimen>
     <dimen name="image_user_avatar_size">112dp</dimen>
     <dimen name="image_add_photo_size">55dp</dimen>
