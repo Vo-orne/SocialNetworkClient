@@ -1,5 +1,6 @@
 package com.example.myprofile.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +16,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.textViewMainUserName.text = intent.getStringExtra(Constants.USER_NAME_KEY)
+        val sharedPreferences = getSharedPreferences(
+            Constants.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE
+        )
+        val userName = sharedPreferences.getString(Constants.USER_NAME_KEY, "")
+        binding.textViewMainUserName.text = userName
         setListeners()
     }
 

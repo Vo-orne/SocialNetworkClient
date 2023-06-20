@@ -12,16 +12,17 @@ import com.example.myprofile.R
 import com.example.myprofile.databinding.ActivitySignUpBinding
 import java.util.*
 
+
 class AuthActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivitySignUpBinding.inflate(layoutInflater) }
+    private val sharedPreferences by lazy {
+        getSharedPreferences(Constants.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        val sharedPreferences =
-            getSharedPreferences(Constants.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
 
         accountAutoLogin(sharedPreferences)
         setListeners(sharedPreferences)
@@ -42,7 +43,9 @@ class AuthActivity : AppCompatActivity() {
 
     private fun comeToNextActivity(email: String, it: Intent) {
         val userName: String = parsEmail(email)
-        it.putExtra(Constants.USER_NAME_KEY, userName)
+        val editor = sharedPreferences.edit()
+        editor.putString(Constants.USER_NAME_KEY, userName)
+        editor.apply()
         startActivity(it)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         finish()
