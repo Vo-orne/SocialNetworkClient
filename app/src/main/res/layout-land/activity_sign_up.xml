@@ -12,43 +12,18 @@
         android:layout_height="wrap_content"
         tools:context=".auth.AuthActivity">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineSignUpBorderOfTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.02" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineSignUpBottomBorder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.98" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineSignUpLeftBorder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.04" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineSignUpRightBorder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.96" />
-
         <LinearLayout
             android:id="@+id/linearLayoutSignUpDataEntryBlock"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginTop="@dimen/largest_margin"
+            android:layout_marginStart="@dimen/largest_margin"
+            android:layout_marginEnd="@dimen/largest_margin"
             app:layout_constraintBottom_toTopOf="@id/linearLayoutSignUpButtonsBlock"
-            app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
-            app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
-            app:layout_constraintTop_toTopOf="@id/guidelineSignUpBorderOfTitle">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewSignUpTitle"
@@ -143,9 +118,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@id/guidelineSignUpBottomBorder"
-            app:layout_constraintEnd_toEndOf="@id/guidelineSignUpRightBorder"
-            app:layout_constraintStart_toStartOf="@id/guidelineSignUpLeftBorder"
+            android:layout_marginTop="@dimen/largest_margin"
+            android:layout_marginBottom="@dimen/smallest_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutSignUpDataEntryBlock">
 
             <LinearLayout

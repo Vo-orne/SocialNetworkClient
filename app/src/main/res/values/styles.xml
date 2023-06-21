@@ -44,6 +44,10 @@
         <item name="android:textSize">@dimen/text_small_size</item>
     </style>
 
+    <style name="roundedCorner" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
     <style name="TextViewInputFieldTitleStyleForAddContact">
         <item name="android:fontFamily">@font/open_sans_medium</item>
         <item name="android:textColor">?attr/colorOfDataEntryFields</item>

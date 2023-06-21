@@ -16,32 +16,11 @@
         app:layout_constraintTop_toTopOf="@id/guidelineMyContactsContactFieldBoundary" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineMyContactsUpperBorder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineMyContactsContactFieldBoundary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.16" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineMyContactsLeftBorder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.04" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineMyContactsRightBorder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.96" />
 
     <LinearLayout
         android:id="@+id/linearLayoutMyContactsUpperTitle"
@@ -49,9 +28,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="@id/guidelineMyContactsRightBorder"
-        app:layout_constraintStart_toStartOf="@id/guidelineMyContactsLeftBorder"
-        app:layout_constraintTop_toTopOf="@id/guidelineMyContactsUpperBorder">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/buttonMyContactsBack"
@@ -89,11 +68,12 @@
         android:id="@+id/textViewMyContactsAddContacts"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_margin"
         android:text="@string/add_contacts"
         android:fontFamily="@font/open_sans_medium"
         android:textSize="@dimen/text_small_size"
         android:textColor="?attr/colorMainText"
-        app:layout_constraintStart_toStartOf="@id/guidelineMyContactsLeftBorder"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayoutMyContactsUpperTitle"
         app:layout_constraintBottom_toBottomOf="@id/guidelineMyContactsContactFieldBoundary"/>
 

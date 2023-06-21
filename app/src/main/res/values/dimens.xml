@@ -10,8 +10,8 @@
     <dimen name="medium_margin">12dp</dimen>
     <dimen name="large_margin">16dp</dimen>
     <dimen name="very_large_margin">24dp</dimen>
+    <dimen name="largest_margin">60dp</dimen>
     <dimen name="min_height_element">48dp</dimen>
-    <dimen name="check_box_remember_me_margin">66dp</dimen>
     <dimen name="icon_text_spacing">-100dp</dimen>
     <dimen name="icon_padding_left">60dp</dimen>
     <dimen name="icon_text_spacing_land">-180dp</dimen>
