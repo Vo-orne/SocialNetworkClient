@@ -52,4 +52,8 @@
     <string name="example_address">775 Westminster Avenue APT D5 Brooklyn, NY, 11230</string>
     <string name="example_date_of_birth">20/12/1998</string>
 
+
+    <string name="profile">Профіль</string>
+    <string name="message">Повідомлення</string>
+
 </resources>

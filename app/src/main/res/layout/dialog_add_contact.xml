@@ -30,6 +30,7 @@
             android:id="@+id/linearLayoutAddContactUpperTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/min_height_element"
             android:orientation="horizontal"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
