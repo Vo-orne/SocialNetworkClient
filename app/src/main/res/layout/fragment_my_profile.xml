@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorFirstBackground"
-    tools:context=".main.MainActivity">
+    tools:context=".fragments.MyProfileFragment">
 
     <View
         android:layout_width="0dp"
@@ -14,52 +14,49 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guidelineMainMiddleLine" />
+        app:layout_constraintTop_toTopOf="@id/guidelineMyProfileMiddleLine" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineMainMiddleLine"
+        android:id="@+id/guidelineMyProfileMiddleLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
     <TextView
-        android:id="@+id/textViewMainSettings"
+        android:id="@+id/textViewMyProfileSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/text_largest_size"
+        android:layout_marginStart="@dimen/large_margin"
         android:layout_marginTop="@dimen/smallest_margin"
         android:text="@string/settings"
         android:theme="@style/TextViewTitlesStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageViewMainUserAvatar"
-        android:layout_width="@dimen/image_user_avatar_size"
-        android:layout_height="@dimen/image_user_avatar_size"
-        android:contentDescription="@string/content_description_user_avatar"
-        android:src="@drawable/my_user_photo"
-        android:theme="@style/roundedCorner"
-        app:layout_constraintBottom_toTopOf="@id/guidelineMainMiddleLine"
-        app:layout_constraintEnd_toStartOf="@id/linearLayoutMainUserInfoBlock"
-        app:layout_constraintStart_toEndOf="@id/textViewMainSettings"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
-        android:id="@+id/linearLayoutMainUserInfoBlock"
+        android:id="@+id/linearLayoutMyProfileUserInfoBlock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
 
-        app:layout_constraintBottom_toBottomOf="@id/guidelineMainMiddleLine"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineMyProfileMiddleLine"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imageViewMainUserAvatar"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewMyProfileSettings">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageViewMyProfileUserAvatar"
+            android:layout_width="@dimen/image_user_avatar_size"
+            android:layout_height="@dimen/image_user_avatar_size"
+            android:layout_marginBottom="@dimen/very_large_margin"
+            android:contentDescription="@string/content_description_user_avatar"
+            android:src="@drawable/my_user_photo"
+            android:theme="@style/roundedCorner" />
 
         <TextView
-            android:id="@+id/textViewMainUserName"
+            android:id="@+id/textViewMyProfileUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/smallest_margin"
@@ -67,81 +64,79 @@
             android:theme="@style/TextViewMainTextStyle" />
 
         <TextView
-            android:id="@+id/textViewMainUserCareer"
+            android:id="@+id/textViewMyProfileUserCareer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/large_margin"
             android:text="@string/career"
             android:theme="@style/TextViewSecondaryTextStyle" />
 
         <TextView
-            android:id="@+id/textViewMainUserHomeAddress"
+            android:id="@+id/textViewMyProfileUserHomeAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/large_margin"
             android:text="@string/home_address"
             android:theme="@style/TextViewSecondaryTextStyle" />
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageViewMainIcFacebook"
+        android:id="@+id/imageViewMyProfileIcFacebook"
         android:layout_width="@dimen/ic_social_network_size"
         android:layout_height="@dimen/ic_social_network_size"
         android:contentDescription="@string/content_description_facebook_icon"
         android:src="@drawable/ic_facebook"
-        app:layout_constraintBottom_toTopOf="@id/buttonMainEditProfile"
-        app:layout_constraintEnd_toStartOf="@id/imageViewMainIcLinkedin"
+        app:layout_constraintBottom_toTopOf="@id/buttonMyProfileEditProfile"
+        app:layout_constraintEnd_toStartOf="@id/imageViewMyProfileIcLinkedin"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guidelineMainMiddleLine" />
+        app:layout_constraintTop_toBottomOf="@id/guidelineMyProfileMiddleLine" />
 
     <ImageView
-        android:id="@+id/imageViewMainIcLinkedin"
+        android:id="@+id/imageViewMyProfileIcLinkedin"
         android:layout_width="@dimen/ic_social_network_size"
         android:layout_height="@dimen/ic_social_network_size"
         android:contentDescription="@string/content_description_linkedin_icon"
         android:src="@drawable/ic_linkedin"
-        app:layout_constraintBottom_toTopOf="@id/buttonMainEditProfile"
-        app:layout_constraintEnd_toStartOf="@id/imageViewMainIcInstagram"
-        app:layout_constraintStart_toEndOf="@id/imageViewMainIcFacebook"
-        app:layout_constraintTop_toBottomOf="@id/guidelineMainMiddleLine" />
+        app:layout_constraintBottom_toTopOf="@id/buttonMyProfileEditProfile"
+        app:layout_constraintEnd_toStartOf="@id/imageViewMyProfileIcInstagram"
+        app:layout_constraintStart_toEndOf="@id/imageViewMyProfileIcFacebook"
+        app:layout_constraintTop_toBottomOf="@id/guidelineMyProfileMiddleLine" />
 
     <ImageView
-        android:id="@+id/imageViewMainIcInstagram"
+        android:id="@+id/imageViewMyProfileIcInstagram"
         android:layout_width="@dimen/ic_social_network_size"
         android:layout_height="@dimen/ic_social_network_size"
         android:contentDescription="@string/content_description_instagram_icon"
         android:src="@drawable/ic_instagram"
-        app:layout_constraintBottom_toTopOf="@id/buttonMainEditProfile"
+        app:layout_constraintBottom_toTopOf="@id/buttonMyProfileEditProfile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imageViewMainIcLinkedin"
-        app:layout_constraintTop_toBottomOf="@id/guidelineMainMiddleLine" />
+        app:layout_constraintStart_toEndOf="@id/imageViewMyProfileIcLinkedin"
+        app:layout_constraintTop_toBottomOf="@id/guidelineMyProfileMiddleLine" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonMainEditProfile"
+        android:id="@+id/buttonMyProfileEditProfile"
         android:layout_width="0dp"
-        android:layout_height="@dimen/button_land_edit_profile_height"
-        android:layout_marginStart="@dimen/very_large_margin"
-        android:layout_marginEnd="@dimen/smallest_margin"
-        android:layout_marginBottom="@dimen/smallest_margin"
+        android:layout_height="@dimen/button_edit_profile_height"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_marginBottom="@dimen/large_margin"
         android:background="@drawable/frame_button_edit_profile"
         android:theme="@style/ButtonEditProfileStyle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/buttonMainViewMyContacts"
+        app:layout_constraintBottom_toTopOf="@id/buttonMyProfileViewMyContacts"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonMainViewMyContacts"
+        android:id="@+id/buttonMyProfileViewMyContacts"
         android:layout_width="0dp"
-        android:layout_height="@dimen/button_land_view_my_contacts_height"
-        android:layout_marginStart="@dimen/smallest_margin"
-        android:layout_marginEnd="@dimen/very_large_margin"
-        android:layout_marginBottom="@dimen/smallest_margin"
+        android:layout_height="@dimen/button_view_my_contacts_height"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_marginBottom="@dimen/large_margin"
         android:background="@drawable/frame_button_view_my_contacts"
         android:text="@string/view_my_contacts"
         android:theme="@style/ButtonViewMyContactsStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/buttonMainEditProfile" />
-
-
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

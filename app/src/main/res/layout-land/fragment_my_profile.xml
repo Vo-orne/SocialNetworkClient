@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorFirstBackground"
+    tools:context=".fragments.MyProfileFragment">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/colorSecondBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guidelineMyProfileMiddleLine" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineMyProfileMiddleLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/textViewMyProfileSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/text_largest_size"
+        android:layout_marginTop="@dimen/smallest_margin"
+        android:text="@string/settings"
+        android:theme="@style/TextViewTitlesStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageViewMyProfileUserAvatar"
+        android:layout_width="@dimen/image_user_avatar_size"
+        android:layout_height="@dimen/image_user_avatar_size"
+        android:contentDescription="@string/content_description_user_avatar"
+        android:src="@drawable/my_user_photo"
+        android:theme="@style/roundedCorner"
+        app:layout_constraintBottom_toTopOf="@id/guidelineMyProfileMiddleLine"
+        app:layout_constraintEnd_toStartOf="@id/linearLayoutMyProfileUserInfoBlock"
+        app:layout_constraintStart_toEndOf="@id/textViewMyProfileSettings"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutMyProfileUserInfoBlock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+
+        app:layout_constraintBottom_toBottomOf="@id/guidelineMyProfileMiddleLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewMyProfileUserAvatar"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewMyProfileUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/smallest_margin"
+            android:text="@string/name_surname"
+            android:theme="@style/TextViewMainTextStyle" />
+
+        <TextView
+            android:id="@+id/textViewMyProfileUserCareer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/career"
+            android:theme="@style/TextViewSecondaryTextStyle" />
+
+        <TextView
+            android:id="@+id/textViewMyProfileUserHomeAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_margin"
+            android:text="@string/home_address"
+            android:theme="@style/TextViewSecondaryTextStyle" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageViewMyProfileIcFacebook"
+        android:layout_width="@dimen/ic_social_network_size"
+        android:layout_height="@dimen/ic_social_network_size"
+        android:contentDescription="@string/content_description_facebook_icon"
+        android:src="@drawable/ic_facebook"
+        app:layout_constraintBottom_toTopOf="@id/buttonMyProfileEditProfile"
+        app:layout_constraintEnd_toStartOf="@id/imageViewMyProfileIcLinkedin"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineMyProfileMiddleLine" />
+
+    <ImageView
+        android:id="@+id/imageViewMyProfileIcLinkedin"
+        android:layout_width="@dimen/ic_social_network_size"
+        android:layout_height="@dimen/ic_social_network_size"
+        android:contentDescription="@string/content_description_linkedin_icon"
+        android:src="@drawable/ic_linkedin"
+        app:layout_constraintBottom_toTopOf="@id/buttonMyProfileEditProfile"
+        app:layout_constraintEnd_toStartOf="@id/imageViewMyProfileIcInstagram"
+        app:layout_constraintStart_toEndOf="@id/imageViewMyProfileIcFacebook"
+        app:layout_constraintTop_toBottomOf="@id/guidelineMyProfileMiddleLine" />
+
+    <ImageView
+        android:id="@+id/imageViewMyProfileIcInstagram"
+        android:layout_width="@dimen/ic_social_network_size"
+        android:layout_height="@dimen/ic_social_network_size"
+        android:contentDescription="@string/content_description_instagram_icon"
+        android:src="@drawable/ic_instagram"
+        app:layout_constraintBottom_toTopOf="@id/buttonMyProfileEditProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewMyProfileIcLinkedin"
+        app:layout_constraintTop_toBottomOf="@id/guidelineMyProfileMiddleLine" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonMyProfileEditProfile"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_land_edit_profile_height"
+        android:layout_marginStart="@dimen/very_large_margin"
+        android:layout_marginEnd="@dimen/smallest_margin"
+        android:layout_marginBottom="@dimen/smallest_margin"
+        android:background="@drawable/frame_button_edit_profile"
+        android:theme="@style/ButtonEditProfileStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonMyProfileViewMyContacts"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonMyProfileViewMyContacts"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_land_view_my_contacts_height"
+        android:layout_marginStart="@dimen/smallest_margin"
+        android:layout_marginEnd="@dimen/very_large_margin"
+        android:layout_marginBottom="@dimen/smallest_margin"
+        android:background="@drawable/frame_button_view_my_contacts"
+        android:text="@string/view_my_contacts"
+        android:theme="@style/ButtonViewMyContactsStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/buttonMyProfileEditProfile" />
+</androidx.constraintlayout.widget.ConstraintLayout>

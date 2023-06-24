@@ -26,7 +26,7 @@ import com.example.myprofile.mycontacts.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
-class MyContactsFragment : Fragment() {
+class MyContactsFragment: Fragment() {
     private var _binding: FragmentMyContactsBinding? = null
     private val binding get() = _binding!!
     private lateinit var contactsViewModel: ContactsViewModel
