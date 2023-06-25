@@ -21,7 +21,7 @@
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineAddContactFirstBackgroundBorder"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.30" />
@@ -53,6 +53,7 @@
                 android:theme="@style/TextViewTitlesStyle" />
         </LinearLayout>
 
+        <!-- Maybe add bg to photo? -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageViewAddContactContactAvatar"
             android:layout_width="@dimen/image_user_avatar_size"
@@ -78,7 +79,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayoutAddContactContactInfoBlock"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginEnd="@dimen/medium_margin"
@@ -90,6 +91,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guidelineAddContactFirstBackgroundBorder">
 
+            <!-- Why not hint? -->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewAddContactUsername"
                 android:layout_width="wrap_content"

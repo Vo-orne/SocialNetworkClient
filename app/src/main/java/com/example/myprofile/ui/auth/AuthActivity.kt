@@ -1,4 +1,4 @@
-package com.example.myprofile.auth
+package com.example.myprofile.ui.auth
 
 import android.content.Context
 import android.content.Intent
@@ -6,16 +6,17 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myprofile.Constants
-import com.example.myprofile.main.MainActivity
+import com.example.myprofile.constants.Constants
+import com.example.myprofile.ui.main.MainActivity
 import com.example.myprofile.R
 import com.example.myprofile.databinding.ActivitySignUpBinding
+import com.example.myprofile.ui.utils.etentions.navigateToActivity
 import java.util.*
 
 
 class AuthActivity : AppCompatActivity() {
 
-    private val binding by lazy { ActivitySignUpBinding.inflate(layoutInflater) }
+    private val binding by lazy { ActivitySignUpBinding.inflate(layoutInflater) }       //todo can be move to base-activity class
     private val sharedPreferences by lazy {
         getSharedPreferences(Constants.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE)
     }
@@ -36,9 +37,10 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun autoLogin() {
-        Intent(this, MainActivity::class.java).also {
-            comeToNextActivity(it)
-        }
+        navigateToActivity(MainActivity::class.java)
+//        Intent(this, MainActivity::class.java).also {
+//            comeToNextActivity(it)
+//        }
     }
 
     private fun comeToNextActivity(it: Intent) {
@@ -48,7 +50,7 @@ class AuthActivity : AppCompatActivity() {
     }
 
 
-    private fun parsEmail(email: String): String {
+    private fun parsEmail(email: String): String {      //todo maybe do it in main?
         val substring = email.substring(0, email.indexOf('@')) // qwe.rty@d.asd -> qwe.rty
         val splittedEmail = substring.split('.') // qwe.rty -> [qwe, rty]
 
@@ -57,43 +59,48 @@ class AuthActivity : AppCompatActivity() {
         }
         val sb = StringBuilder()
         splittedEmail.forEach {
-            val word = it.capitalize(Locale.ROOT)
+            val word = it.capitalize(Locale.ROOT)       //todo Deprecated
             sb.append("$word ")
         }
-        return sb.substring(0, sb.length - 1).toString()
+        return sb.substring(0, sb.length - 1).toString()    //todo why -1?
     }
 
     private fun setListeners() {
-        binding.buttonSignUpRegister.setOnClickListener {
-            val newEmail = binding.textInputEditTextSignUpEmail.text.toString()
-            val newPassword = binding.textInputEditTextSignUpPassword.text.toString()
-            val editor = sharedPreferences.edit()
+        with(binding) {
+            buttonSignUpRegister.setOnClickListener {
+                val newEmail = textInputEditTextSignUpEmail.text.toString()
+                val newPassword = textInputEditTextSignUpPassword.text.toString()
 
-            if (validateInputs(newEmail, newPassword)) {
-                if (binding.checkBoxSignUpMemberInputDate.isChecked) {
-                    editor.clear()
-                    editor.apply()
-                    saveLoginData(newEmail, newPassword, editor)
-                }
-                saveUserName(newEmail, editor)
-                Intent(this, MainActivity::class.java).also {
-                    comeToNextActivity(it)
+                val editor =
+                    sharedPreferences.edit()   //todo whats happiness when inputs not valid?
+
+                if (validateInputs(newEmail, newPassword)) {
+                    if (checkBoxSignUpMemberInputDate.isChecked) {
+                        editor.clear()
+                        editor.apply()
+                        saveLoginData(newEmail, newPassword, editor)
+                    }
+                    saveUserName(newEmail, editor)
+                    navigateToActivity(MainActivity::class.java)
+//                    Intent(this@AuthActivity, MainActivity::class.java).also {   //todo DRY (39)
+//                        comeToNextActivity(it)
+//                    }
                 }
             }
         }
     }
 
     private fun validateInputs(emailInput: String, passwordInput: String): Boolean {
-        var isValid = true
+        var isValid = true      //todo return
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {    //todo decompose
             isValid = false
             binding.textInputLayoutSignUpEmail.error = getString(R.string.error_on_email)
         } else {
             binding.textInputLayoutSignUpEmail.error = null
         }
 
-        if (isValidPassword(passwordInput) == Constants.PASSWORD_IS_CORRECT) {
+        if (isValidPassword(passwordInput) == Constants.PASSWORD_IS_CORRECT) {  //todo decompose
             binding.textInputLayoutSignUpPassword.error = null
         } else {
             isValid = false
@@ -112,8 +119,8 @@ class AuthActivity : AppCompatActivity() {
             isHasEnoughLength = true
         }
 
-        if (password.contains(Regex("\\d+"))) isHasNumber = true
-        if (password.contains(Regex("[a-zA-Z]+"))) isHasLetter = true
+        if (password.contains(Regex("\\d+"))) isHasNumber = true        //todo rejects to const
+        if (password.contains(Regex("[a-zA-Z]+"))) isHasLetter = true   //todo rejects to const
 
         return when {
             !isHasEnoughLength -> getString(R.string.error_password_is_short)

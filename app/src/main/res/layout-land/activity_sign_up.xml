@@ -5,12 +5,12 @@
     android:background="?attr/colorFirstBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".auth.AuthActivity">
+    tools:context=".ui.auth.AuthActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".auth.AuthActivity">
+        tools:context=".ui.auth.AuthActivity">
 
         <LinearLayout
             android:id="@+id/linearLayoutSignUpDataEntryBlock"
@@ -131,7 +131,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <com.example.myprofile.auth.GoogleButton
+                <com.example.myprofile.ui.auth.GoogleButton
                     android:id="@+id/buttonSignUpGoogle"
                     android:layout_width="250dp"
                     android:layout_height="@dimen/button_google_height"

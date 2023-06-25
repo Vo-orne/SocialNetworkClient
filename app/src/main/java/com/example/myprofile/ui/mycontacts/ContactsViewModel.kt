@@ -1,4 +1,4 @@
-package com.example.myprofile.mycontacts
+package com.example.myprofile.ui.mycontacts
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,13 +12,22 @@ class ContactsViewModel: ViewModel() {
 
     fun loadContacts(contactsPhoneBook: MutableList<Contact>) {
         val contacts = contactsRepository.getUsers() // Get the list of users from the repository
-        contacts.addAll(contactsPhoneBook)
+        //contacts.addAll(contactsPhoneBook)
         _contactsList.value = contacts // Update live data values
+    }
+
+
+    fun addContact (contact: Contact) {
+        _contactsList.value = _contactsList.value?.toMutableList()?.apply { add(contact) }
+    }
+
+    fun addContact (index: Int, contact: Contact) {
+        _contactsList.value = _contactsList.value?.toMutableList()?.apply { add(index, contact) }
     }
 
 }
 
-class ContactsRepository {
+class ContactsRepository {      //todo extract to class and to package data
     fun getUsers(): MutableList<Contact> {
         val contacts = mutableListOf<Contact>()
 

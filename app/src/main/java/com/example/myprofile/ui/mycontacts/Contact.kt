@@ -1,8 +1,8 @@
-package com.example.myprofile.mycontacts
+package com.example.myprofile.ui.mycontacts
 
 import java.io.Serializable
 
-data class Contact(
+data class Contact(     //todo package data/Model
     val avatar: String,
     val name: String,
     val career: String

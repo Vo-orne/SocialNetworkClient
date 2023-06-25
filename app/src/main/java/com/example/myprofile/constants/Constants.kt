@@ -1,7 +1,7 @@
-package com.example.myprofile
+package com.example.myprofile.constants
 
-class Constants {
-    companion object {
+object Constants {
+
         const val SHARED_PREFERENCES_KEY = "login_data"
         const val EMAIL_KEY = "email"
         const val PASSWORD_KEY = "password"
@@ -9,5 +9,5 @@ class Constants {
         const val MAX_PASSWORD_SIZE = 8
         const val PASSWORD_IS_CORRECT = "Password correct."
         const val CONTACTS_PERMISSION_CODE = 123
-    }
+
 }

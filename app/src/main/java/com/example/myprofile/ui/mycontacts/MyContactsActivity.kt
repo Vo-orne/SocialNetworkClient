@@ -1,4 +1,4 @@
-package com.example.myprofile.mycontacts
+package com.example.myprofile.ui.mycontacts
 
 import android.Manifest.permission.READ_CONTACTS
 import android.content.ContentResolver
@@ -8,6 +8,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -15,35 +16,37 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myprofile.Constants
+import com.example.myprofile.constants.Constants
 import com.example.myprofile.R
 import com.example.myprofile.databinding.ActivityMyContactsBinding
-import com.example.myprofile.main.MainActivity
+import com.example.myprofile.ui.main.MainActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 class MyContactsActivity : AppCompatActivity() {
-    private val binding by lazy { ActivityMyContactsBinding.inflate(layoutInflater) }
-    private lateinit var contactsViewModel: ContactsViewModel
+    private val binding by lazy { ActivityMyContactsBinding.inflate(layoutInflater) }   //todo base activity?
+   // private lateinit var contactsViewModel: ContactsViewModel   //todo use by viewModels()
+
+    val contactsViewModel: ContactsViewModel by viewModels()
     private lateinit var recyclerViewContacts: RecyclerView
     private lateinit var contactsAdapter: ContactsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
-        contactsViewModel = ViewModelProvider(this)[ContactsViewModel::class.java]
+        //contactsViewModel = ViewModelProvider(this)[ContactsViewModel::class.java]
         setContentView(binding.root)
 
         setupRecyclerView()
 
         // Configure the watcher to update the user interface when data changes
-        contactsViewModel.contactsList.observe(this) { contactsList ->
+        contactsViewModel.contactsList.observe(this) { contactsList ->                  //todo set observers and after set listeners
             contactsAdapter.contacts = contactsList as MutableList<Contact> // Update adapter data
         }
 
         requestContactsPermission()
 
-        setListeners()
+        setListeners()      //todo after set content
     }
 
     private fun setupRecyclerView() {
@@ -70,8 +73,8 @@ class MyContactsActivity : AppCompatActivity() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.bindingAdapterPosition
                 val deletedContact = contactsAdapter.getContactAtPosition(position)
-                contactsAdapter.deleteContact(position)
-                contactsAdapter.showUndoSnackbar(deletedContact, position)
+                contactsAdapter.deleteContact(position)                     //todo move to viewModel
+                contactsAdapter.showUndoSnackbar(deletedContact, position)  //todo move to viewModel
             }
         }
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
@@ -80,7 +83,7 @@ class MyContactsActivity : AppCompatActivity() {
 
     private fun setListeners() {
         binding.buttonMyContactsBack.setOnClickListener {
-            Intent(this, MainActivity::class.java).also {
+            Intent(this, MainActivity::class.java).also {           //todo decompose
                 startActivity(it)
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 finish()
@@ -101,11 +104,11 @@ class MyContactsActivity : AppCompatActivity() {
 
     private fun showAddContactDialog() {
         val addContactDialog = AddContactDialogFragment()
-        addContactDialog.show(supportFragmentManager, "AddContactDialog")
+        addContactDialog.show(supportFragmentManager, "AddContactDialog")       //todo tag to constants
     }
 
     private fun requestContactsPermission() {
-        if (ContextCompat.checkSelfPermission(this, READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {      //todo change to registerForActivityResult
             ActivityCompat.requestPermissions(this, arrayOf(READ_CONTACTS), Constants.CONTACTS_PERMISSION_CODE)
         } else {
             contactsViewModel.loadContacts(getContactsPhoneBook())
@@ -118,7 +121,7 @@ class MyContactsActivity : AppCompatActivity() {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 contactsViewModel.loadContacts(getContactsPhoneBook())
             } else {
-                Intent(this, MainActivity::class.java).also {
+                Intent(this, MainActivity::class.java).also {       //todo DRY (85)
                     startActivity(it)
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                     finish()
@@ -164,7 +167,8 @@ class MyContactsActivity : AppCompatActivity() {
     }
 
     private fun addContact(contact: Contact) {
-        contactsAdapter.contacts.add(contact)
+        contactsViewModel.addContact(contact)
+        //contactsAdapter.contacts.add(contact)
         contactsAdapter.notifyItemInserted(contactsAdapter.contacts.size - 1)
     }
 

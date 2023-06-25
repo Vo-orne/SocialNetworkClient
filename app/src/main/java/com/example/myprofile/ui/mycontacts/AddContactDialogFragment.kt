@@ -1,5 +1,6 @@
-package com.example.myprofile.mycontacts
+package com.example.myprofile.ui.mycontacts
 
+import android.app.Dialog
 import android.content.ContentResolver
 import android.net.Uri
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.example.myprofile.databinding.DialogAddContactBinding
@@ -20,30 +22,42 @@ class AddContactDialogFragment : DialogFragment() {
     private var imageUri: Uri? = null
 
 
-    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let { imageUri ->
-            this.imageUri = imageUri
-            Glide.with(requireContext())
-                .load(imageUri)
-                .into(binding.imageViewAddContactContactAvatar)
+    private val getContent =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let { imageUri ->
+                this.imageUri = imageUri
+                Glide.with(requireContext())
+                    .load(imageUri)
+                    .into(binding.imageViewAddContactContactAvatar)
+            }
         }
-    }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = DialogAddContactBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    /**
+     * Create dialog fragment.
+     */
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        // inflate binding of dialog fragment
+        _binding = DialogAddContactBinding.inflate(layoutInflater)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupButtons()
+        return activity?.let {
+
+            // create dialog
+            val builder = AlertDialog.Builder(it)
+
+            setupButtons()
+
+            // Set view and create dialog
+            builder.setView(binding.root).create()
+
+        } ?: throw IllegalStateException("Activity cannot be null")
+
     }
 
     private fun setupButtons() {
-        binding.buttonAddContactSave.setOnClickListener {
-            saveContact()
-        }
+        // binding.buttonAddContactSave.setOnClickListener {
+        //     saveContact()
+        // }
 
         binding.buttonAddContactBack.setOnClickListener {
             dismiss()

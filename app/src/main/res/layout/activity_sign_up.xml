@@ -5,8 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorFirstBackground"
-    tools:context=".auth.AuthActivity">
+    tools:context=".ui.auth.AuthActivity">
 
+<!--    <androidx.constraintlayout.helper.widget.Flow-->
+<!--        android:id="@+id/linearLayoutSignUpDataEntryBlock"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_marginTop="@dimen/largest_margin"-->
+<!--        android:layout_marginStart="@dimen/large_margin"-->
+<!--        android:layout_marginEnd="@dimen/large_margin"-->
+<!--        app:constraint_referenced_ids="textViewSignUpTitle"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/linearLayoutSignUpButtonsBlock"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        />-->
+
+    <!-- just use constraints -->
     <LinearLayout
         android:id="@+id/linearLayoutSignUpDataEntryBlock"
         android:layout_width="0dp"
@@ -39,6 +55,7 @@
             android:text="@string/subtitle_text"
             android:theme="@style/TextViewSubtitlesStyle" />
 
+        <!-- Why not hint? -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textViewSignUpEmail"
             android:layout_width="wrap_content"
@@ -66,6 +83,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Why not hint? -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textViewSignUpPassword"
             android:layout_width="wrap_content"
@@ -109,6 +127,7 @@
             tools:ignore="RtlSymmetry" />
     </LinearLayout>
 
+    <!-- just use constraints -->
     <LinearLayout
         android:id="@+id/linearLayoutSignUpButtonsBlock"
         android:layout_width="0dp"
@@ -122,9 +141,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayoutSignUpDataEntryBlock">
 
-        <com.example.myprofile.auth.GoogleButton
+        <com.example.myprofile.ui.auth.GoogleButton
             android:id="@+id/buttonSignUpGoogle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/button_google_height"
             android:textColor="?attr/colorGoogleButtonText"
             android:textSize="@dimen/text_medium_size"
@@ -160,6 +179,7 @@
             android:theme="@style/TextViewSubtitlesStyle" />
     </LinearLayout>
 
+    <!-- just use constraints -->
     <LinearLayout
         android:id="@+id/linearLayoutSingUpSignUpBlock"
         android:layout_width="wrap_content"
