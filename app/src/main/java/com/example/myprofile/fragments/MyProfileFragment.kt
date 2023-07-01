@@ -1,16 +1,17 @@
 package com.example.myprofile.fragments
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import com.example.myprofile.Constants
 import com.example.myprofile.R
 import com.example.myprofile.databinding.FragmentMyProfileBinding
-import com.example.myprofile.mycontacts.MyContactsActivity
+import com.example.myprofile.utils.navigateToFragment
 
 class MyProfileFragment : Fragment() {
     private var _binding: FragmentMyProfileBinding? = null
@@ -34,11 +35,7 @@ class MyProfileFragment : Fragment() {
 
     private fun setListeners() {
         binding.buttonMyProfileViewMyContacts.setOnClickListener {
-            Intent(requireContext(), MyContactsActivity::class.java).also {
-                startActivity(it)
-                requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                requireActivity().finish()
-            }
+            navigateToFragment(R.id.action_myProfileFragment_to_myContactsFragment)
         }
     }
 

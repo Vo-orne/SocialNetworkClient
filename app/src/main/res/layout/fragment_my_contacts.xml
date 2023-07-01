@@ -24,67 +24,65 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.16" />
 
-    <LinearLayout
-        android:id="@+id/linearLayoutMyContactsUpperTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageButton
+        android:id="@+id/imageButtonMyContactsBack"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:background="@null"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginStart="@dimen/large_margin"
+        android:contentDescription="@string/back_button"
+        android:src="@drawable/ic_back_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toStartOf="@id/textViewMyContactsContacts"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"/>
 
-        <ImageButton
-            android:id="@+id/buttonMyContactsBack"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_gravity="center"
-            android:background="@null"
-            android:src="@drawable/ic_back_button"
-            android:contentDescription="@string/back_button" />
+    <TextView
+        android:id="@+id/textViewMyContactsContacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:text="@string/contacts"
+        android:theme="@style/TextViewTitlesStyle"
+        app:layout_constraintStart_toEndOf="@id/imageButtonMyContactsBack"
+        app:layout_constraintEnd_toStartOf="@id/imageButtonMyContactsSearch"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/contacts"
-                android:theme="@style/TextViewTitlesStyle" />
-        </LinearLayout>
-
-        <ImageButton
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_gravity="center"
-            android:background="@null"
-            android:src="@drawable/ic_search_button"
-            android:contentDescription="@string/search_button" />
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/imageButtonMyContactsSearch"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:background="@null"
+        android:contentDescription="@string/search_button"
+        android:src="@drawable/ic_search_button"
+        app:layout_constraintStart_toEndOf="@id/textViewMyContactsContacts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/textViewMyContactsAddContacts"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/large_margin"
-        android:text="@string/add_contacts"
         android:fontFamily="@font/open_sans_medium"
-        android:textSize="@dimen/text_small_size"
+        android:text="@string/add_contacts"
         android:textColor="?attr/colorMainText"
+        android:textSize="@dimen/text_small_size"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineMyContactsContactFieldBoundary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayoutMyContactsUpperTitle"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineMyContactsContactFieldBoundary"/>
+        app:layout_constraintTop_toBottomOf="@id/textViewMyContactsContacts" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewContacts"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        tools:listitem="@layout/contact_item"
+        android:layout_marginTop="@dimen/medium_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guidelineMyContactsContactFieldBoundary"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/guidelineMyContactsContactFieldBoundary" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,6 @@
 package com.example.myprofile.fragments
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Patterns
@@ -10,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myprofile.Constants
-import com.example.myprofile.main.MainActivity
 import com.example.myprofile.R
 import com.example.myprofile.databinding.FragmentSignUpBinding
+import com.example.myprofile.utils.navigateToFragmentWithoutReturning
 import java.util.*
 
 class SignUpFragment : Fragment() {
@@ -37,20 +36,10 @@ class SignUpFragment : Fragment() {
     private fun accountAutoLogin() {
         val email = sharedPreferences.getString(Constants.EMAIL_KEY, "") ?: ""
         if (email.isNotEmpty()) {
-            autoLogin()
+            navigateToFragmentWithoutReturning(
+                R.id.action_signUpFragment_to_myProfileFragment, R.id.signUpFragment
+            )
         }
-    }
-
-    private fun autoLogin() {
-        Intent(requireContext(), MainActivity::class.java).also {
-            comeToNextActivity(it)
-        }
-    }
-
-    private fun comeToNextActivity(intent: Intent) {
-        startActivity(intent)
-        requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-        requireActivity().finish()
     }
 
     private fun parsEmail(email: String): String {
@@ -81,9 +70,9 @@ class SignUpFragment : Fragment() {
                     saveLoginData(newEmail, newPassword, editor)
                 }
                 saveUserName(newEmail, editor)
-                Intent(requireContext(), MainActivity::class.java).also {
-                    comeToNextActivity(it)
-                }
+                navigateToFragmentWithoutReturning(
+                    R.id.action_signUpFragment_to_myProfileFragment, R.id.signUpFragment
+                )
             }
         }
     }

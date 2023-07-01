@@ -42,45 +42,45 @@
         android:src="@drawable/my_user_photo"
         android:theme="@style/roundedCorner"
         app:layout_constraintBottom_toTopOf="@id/guidelineMyProfileMiddleLine"
-        app:layout_constraintEnd_toStartOf="@id/linearLayoutMyProfileUserInfoBlock"
+        app:layout_constraintEnd_toStartOf="@id/textViewMyProfileUserName"
         app:layout_constraintStart_toEndOf="@id/textViewMyProfileSettings"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayoutMyProfileUserInfoBlock"
+    <TextView
+        android:id="@+id/textViewMyProfileUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-
-        app:layout_constraintBottom_toBottomOf="@id/guidelineMyProfileMiddleLine"
+        android:layout_marginBottom="@dimen/smallest_margin"
+        android:text="@string/name_surname"
+        android:theme="@style/TextViewMainTextStyle"
+        app:layout_constraintBottom_toTopOf="@id/textViewMyProfileUserCareer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageViewMyProfileUserAvatar"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
-        <TextView
-            android:id="@+id/textViewMyProfileUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/smallest_margin"
-            android:text="@string/name_surname"
-            android:theme="@style/TextViewMainTextStyle" />
+    <TextView
+        android:id="@+id/textViewMyProfileUserCareer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/career"
+        android:theme="@style/TextViewSecondaryTextStyle"
+        app:layout_constraintBottom_toTopOf="@id/textViewMyProfileUserHomeAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewMyProfileUserAvatar"
+        app:layout_constraintTop_toBottomOf="@id/textViewMyProfileUserName" />
 
-        <TextView
-            android:id="@+id/textViewMyProfileUserCareer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/career"
-            android:theme="@style/TextViewSecondaryTextStyle" />
-
-        <TextView
-            android:id="@+id/textViewMyProfileUserHomeAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/large_margin"
-            android:text="@string/home_address"
-            android:theme="@style/TextViewSecondaryTextStyle" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/textViewMyProfileUserHomeAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large_margin"
+        android:text="@string/home_address"
+        android:theme="@style/TextViewSecondaryTextStyle"
+        app:layout_constraintBottom_toTopOf="@id/guidelineMyProfileMiddleLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewMyProfileUserAvatar"
+        app:layout_constraintTop_toBottomOf="@id/textViewMyProfileUserCareer" />
 
     <ImageView
         android:id="@+id/imageViewMyProfileIcFacebook"

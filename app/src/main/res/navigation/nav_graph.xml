@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_myContactsFragment_to_detailViewFragment"
             app:destination="@id/detailViewFragment" />
+        <action
+            android:id="@+id/action_myContactsFragment_to_myProfileFragment"
+            app:destination="@id/myProfileFragment" />
     </fragment>
     <dialog
         android:id="@+id/addContactDialogFragment"
@@ -41,5 +44,9 @@
     <fragment
         android:id="@+id/detailViewFragment"
         android:name="com.example.myprofile.fragments.DetailViewFragment"
-        android:label="DetailViewFragment" />
+        android:label="DetailViewFragment" >
+        <action
+            android:id="@+id/action_detailViewFragment_to_myContactsFragment"
+            app:destination="@id/myContactsFragment" />
+    </fragment>
 </navigation>

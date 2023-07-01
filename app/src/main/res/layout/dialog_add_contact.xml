@@ -26,33 +26,29 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.30" />
 
-        <LinearLayout
-            android:id="@+id/linearLayoutAddContactUpperTitle"
-            android:layout_width="0dp"
+        <ImageButton
+            android:id="@+id/buttonAddContactBack"
+            android:layout_width="@dimen/min_height_element"
+            android:layout_height="@dimen/min_height_element"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:background="@null"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/ic_back_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/min_height_element"
-            android:orientation="horizontal"
-            android:padding="16dp"
+            android:gravity="center"
+            android:text="@string/add_contact"
+            android:theme="@style/TextViewTitlesStyle"
+            app:layout_constraintBottom_toBottomOf="@id/buttonAddContactBack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageButton
-                android:id="@+id/buttonAddContactBack"
-                android:layout_width="@dimen/min_height_element"
-                android:layout_height="@dimen/min_height_element"
-                android:layout_gravity="center"
-                android:background="@null"
-                android:contentDescription="@string/back_button"
-                android:src="@drawable/ic_back_button" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/add_contact"
-                android:theme="@style/TextViewTitlesStyle" />
-        </LinearLayout>
+            app:layout_constraintTop_toTopOf="@id/buttonAddContactBack" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageViewAddContactContactAvatar"
@@ -64,7 +60,7 @@
             app:layout_constraintBottom_toBottomOf="@id/guidelineAddContactFirstBackgroundBorder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutAddContactUpperTitle" />
+            app:layout_constraintTop_toBottomOf="@id/buttonAddContactBack" />
 
         <ImageView
             android:id="@+id/imageViewAddContactAddPhoto"
@@ -72,203 +68,225 @@
             android:layout_height="@dimen/image_add_photo_size"
             android:contentDescription="@string/displays_the_add_photo_button"
             android:src="@drawable/ic_add_photo_button"
-            app:layout_constraintBottom_toBottomOf="@id/guidelineAddContactFirstBackgroundBorder"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewAddContactContactAvatar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/imageViewAddContactContactAvatar"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutAddContactUpperTitle" />
+            app:layout_constraintTop_toTopOf="@id/imageViewAddContactContactAvatar" />
 
-        <LinearLayout
-            android:id="@+id/linearLayoutAddContactContactInfoBlock"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewAddContactUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="@dimen/very_large_margin"
+            android:text="@string/username"
+            android:theme="@style/TextViewInputFieldTitleStyleForAddContact"
+            app:layout_constraintTop_toBottomOf="@id/guidelineAddContactFirstBackgroundBorder"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutAddContactUsername"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:boxBackgroundMode="none"
+            app:errorEnabled="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewAddContactUsername">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextAddContactUsername"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/open_sans_medium"
+                android:hint="@string/name_surname"
+                android:inputType="text"
+                android:minHeight="@dimen/min_height_element"
+                android:textColor="?attr/colorTextForAddContact"
+                android:textColorHint="?attr/colorHintTextForAddContact"
+                android:textSize="@dimen/text_large_size"
+                android:theme="@style/EditTextStyle" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewAddContactCareer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="@string/career"
+            android:theme="@style/TextViewInputFieldTitleStyleForAddContact"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutAddContactUsername"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutAddContactCareer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/medium_margin"
-            android:layout_marginEnd="@dimen/medium_margin"
-            android:layout_marginBottom="@dimen/large_margin"
-            android:orientation="vertical"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:boxBackgroundMode="none"
+            app:errorEnabled="true"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guidelineAddContactFirstBackgroundBorder">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewAddContactCareer">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewAddContactUsername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_margin"
-                android:layout_marginTop="@dimen/very_large_margin"
-                android:text="@string/username"
-                android:theme="@style/TextViewInputFieldTitleStyleForAddContact" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutAddContactUsername"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextAddContactCareer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxBackgroundMode="none"
-                app:errorEnabled="true">
+                android:layout_height="match_parent"
+                android:fontFamily="@font/open_sans_medium"
+                android:hint="@string/career"
+                android:inputType="text"
+                android:minHeight="@dimen/min_height_element"
+                android:textColor="?attr/colorTextForAddContact"
+                android:textColorHint="?attr/colorHintTextForAddContact"
+                android:textSize="@dimen/text_large_size"
+                android:theme="@style/EditTextStyle" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextAddContactUsername"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/open_sans_medium"
-                    android:hint="@string/name_surname"
-                    android:inputType="text"
-                    android:minHeight="@dimen/min_height_element"
-                    android:textColor="?attr/colorTextForAddContact"
-                    android:textColorHint="?attr/colorHintTextForAddContact"
-                    android:textSize="@dimen/text_large_size"
-                    android:theme="@style/EditTextStyle" />
-            </com.google.android.material.textfield.TextInputLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewAddContactEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="@string/e_mail"
+            android:theme="@style/TextViewInputFieldTitleStyleForAddContact"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutAddContactCareer"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewAddContactCareer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_margin"
-                android:text="@string/career"
-                android:theme="@style/TextViewInputFieldTitleStyleForAddContact" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutAddContactEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundMode="none"
+            app:errorEnabled="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewAddContactEmail">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutAddContactCareer"
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxBackgroundMode="none"
-                app:errorEnabled="true">
+                android:layout_height="match_parent"
+                android:fontFamily="@font/open_sans_medium"
+                android:hint="@string/example_email"
+                android:inputType="textEmailAddress"
+                android:minHeight="@dimen/min_height_element"
+                android:textColor="?attr/colorTextForAddContact"
+                android:textColorHint="?attr/colorHintTextForAddContact"
+                android:textSize="@dimen/text_large_size"
+                android:theme="@style/EditTextStyle" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextAddContactCareer"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/open_sans_medium"
-                    android:hint="@string/career"
-                    android:inputType="text"
-                    android:minHeight="@dimen/min_height_element"
-                    android:textColor="?attr/colorTextForAddContact"
-                    android:textColorHint="?attr/colorHintTextForAddContact"
-                    android:textSize="@dimen/text_large_size"
-                    android:theme="@style/EditTextStyle" />
-            </com.google.android.material.textfield.TextInputLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewAddContactPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="@string/phone"
+            android:theme="@style/TextViewInputFieldTitleStyleForAddContact"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutAddContactEmail"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewAddContactEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_margin"
-                android:text="@string/e_mail"
-                android:theme="@style/TextViewInputFieldTitleStyleForAddContact" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutAddContactPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundMode="none"
+            app:errorEnabled="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewAddContactPhone">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutAddContactEmail"
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxBackgroundMode="none"
-                app:errorEnabled="true">
+                android:layout_height="match_parent"
+                android:fontFamily="@font/open_sans_medium"
+                android:hint="@string/example_phone"
+                android:inputType="phone"
+                android:minHeight="@dimen/min_height_element"
+                android:textColor="?attr/colorTextForAddContact"
+                android:textColorHint="?attr/colorHintTextForAddContact"
+                android:textSize="@dimen/text_large_size"
+                android:theme="@style/EditTextStyle" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/open_sans_medium"
-                    android:hint="@string/example_email"
-                    android:inputType="textEmailAddress"
-                    android:minHeight="@dimen/min_height_element"
-                    android:textColor="?attr/colorTextForAddContact"
-                    android:textColorHint="?attr/colorHintTextForAddContact"
-                    android:textSize="@dimen/text_large_size"
-                    android:theme="@style/EditTextStyle" />
-            </com.google.android.material.textfield.TextInputLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewAddContactAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="@string/address"
+            android:theme="@style/TextViewInputFieldTitleStyleForAddContact"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutAddContactPhone"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewAddContactPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_margin"
-                android:text="@string/phone"
-                android:theme="@style/TextViewInputFieldTitleStyleForAddContact" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutAddContactAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundMode="none"
+            app:errorEnabled="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewAddContactAddress">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutAddContactPhone"
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxBackgroundMode="none"
-                app:errorEnabled="true">
+                android:layout_height="match_parent"
+                android:fontFamily="@font/open_sans_medium"
+                android:hint="@string/example_address"
+                android:inputType="text"
+                android:minHeight="@dimen/min_height_element"
+                android:textColor="?attr/colorTextForAddContact"
+                android:textColorHint="?attr/colorHintTextForAddContact"
+                android:textSize="@dimen/text_large_size"
+                android:theme="@style/EditTextStyle" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/open_sans_medium"
-                    android:hint="@string/example_phone"
-                    android:inputType="phone"
-                    android:minHeight="@dimen/min_height_element"
-                    android:textColor="?attr/colorTextForAddContact"
-                    android:textColorHint="?attr/colorHintTextForAddContact"
-                    android:textSize="@dimen/text_large_size"
-                    android:theme="@style/EditTextStyle" />
-            </com.google.android.material.textfield.TextInputLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewAddContactDateOfBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="@string/date_of_birth"
+            android:theme="@style/TextViewInputFieldTitleStyleForAddContact"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutAddContactAddress"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewAddContactAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_margin"
-                android:text="@string/address"
-                android:theme="@style/TextViewInputFieldTitleStyleForAddContact" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutAddContactDateOfBirth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundMode="none"
+            app:errorEnabled="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewAddContactDateOfBirth">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutAddContactAddress"
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxBackgroundMode="none"
-                app:errorEnabled="true">
+                android:layout_height="match_parent"
+                android:fontFamily="@font/open_sans_medium"
+                android:hint="@string/example_date_of_birth"
+                android:inputType="date"
+                android:minHeight="@dimen/min_height_element"
+                android:textColor="?attr/colorTextForAddContact"
+                android:textColorHint="?attr/colorHintTextForAddContact"
+                android:textSize="@dimen/text_large_size"
+                android:theme="@style/EditTextStyle" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/open_sans_medium"
-                    android:hint="@string/example_address"
-                    android:inputType="text"
-                    android:minHeight="@dimen/min_height_element"
-                    android:textColor="?attr/colorTextForAddContact"
-                    android:textColorHint="?attr/colorHintTextForAddContact"
-                    android:textSize="@dimen/text_large_size"
-                    android:theme="@style/EditTextStyle" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewAddContactDateOfBirth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_margin"
-                android:text="@string/date_of_birth"
-                android:theme="@style/TextViewInputFieldTitleStyleForAddContact" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutAddContactDateOfBirth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxBackgroundMode="none"
-                app:errorEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/open_sans_medium"
-                    android:hint="@string/example_date_of_birth"
-                    android:inputType="date"
-                    android:minHeight="@dimen/min_height_element"
-                    android:textColor="?attr/colorTextForAddContact"
-                    android:textColorHint="?attr/colorHintTextForAddContact"
-                    android:textSize="@dimen/text_large_size"
-                    android:theme="@style/EditTextStyle" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/buttonAddContactSave"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/button_view_my_contacts_height"
-                android:background="@drawable/frame_button_view_my_contacts"
-                android:text="@string/save"
-                android:theme="@style/ButtonViewMyContactsStyle" />
-        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonAddContactSave"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_view_my_contacts_height"
+            android:background="@drawable/frame_button_view_my_contacts"
+            android:text="@string/save"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_marginEnd="@dimen/large_margin"
+            android:layout_marginBottom="@dimen/large_margin"
+            android:theme="@style/ButtonViewMyContactsStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutAddContactDateOfBirth"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

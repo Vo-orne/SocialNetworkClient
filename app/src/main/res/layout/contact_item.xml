@@ -2,63 +2,65 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/frame_contacts_data"
+    android:layout_marginBottom="@dimen/medium_margin">
 
-    <LinearLayout
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageViewMyContactsUserAvatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:contentDescription="@string/content_description_user_avatar"
+        android:src="@drawable/default_user_photo"
+        android:theme="@style/roundedCorner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewMyContactsUserName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:layout_marginTop="@dimen/large_margin"
         android:layout_marginStart="@dimen/medium_margin"
-        android:layout_marginEnd="@dimen/medium_margin"
-        android:background="@drawable/frame_contacts_data"
+        android:fontFamily="@font/open_sans_medium"
+        android:text="@string/name_surname"
+        android:textColor="?attr/colorSecondMainText"
+        android:textSize="@dimen/text_large_size"
+        app:layout_constraintBottom_toTopOf="@id/textViewMyContactsUserCareer"
+        app:layout_constraintEnd_toStartOf="@id/buttonMyContactsDelete"
+        app:layout_constraintStart_toEndOf="@id/imageViewMyContactsUserAvatar"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/textViewMyContactsUserCareer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:fontFamily="@font/open_sans_medium"
+        android:text="@string/career"
+        android:textColor="?attr/colorSecondaryTextForContacts"
+        android:textSize="@dimen/text_smallest_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonMyContactsDelete"
+        app:layout_constraintStart_toEndOf="@id/imageViewMyContactsUserAvatar"
+        app:layout_constraintTop_toBottomOf="@id/textViewMyContactsUserName" />
+
+    <ImageButton
+        android:id="@+id/buttonMyContactsDelete"
+        android:layout_width="50dp"
+        android:layout_height="54dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:background="@null"
+        android:contentDescription="@string/delete_button"
+        android:src="@drawable/ic_delete_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageViewMyContactsUserAvatar"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:theme="@style/roundedCorner"
-            android:contentDescription="@string/content_description_user_avatar"
-            android:src="@drawable/default_user_photo" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textViewMyContactsUserName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_medium"
-                android:text="@string/name_surname"
-                android:textColor="?attr/colorSecondMainText"
-                android:textSize="@dimen/text_large_size" />
-
-            <TextView
-                android:id="@+id/textViewMyContactsUserCareer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_medium"
-                android:text="@string/career"
-                android:textColor="?attr/colorSecondaryTextForContacts"
-                android:textSize="@dimen/text_smallest_size" />
-
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/buttonMyContactsDelete"
-            android:layout_width="50dp"
-            android:layout_height="54dp"
-            android:layout_gravity="center"
-            android:background="@null"
-            android:src="@drawable/ic_delete_button"
-            android:contentDescription="@string/delete_button" />
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

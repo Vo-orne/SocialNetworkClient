@@ -2,7 +2,6 @@ package com.example.myprofile.fragments
 
 import android.Manifest.permission.READ_CONTACTS
 import android.content.ContentResolver
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
@@ -11,6 +10,7 @@ import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -21,12 +21,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myprofile.Constants
 import com.example.myprofile.R
 import com.example.myprofile.databinding.FragmentMyContactsBinding
-import com.example.myprofile.main.MainActivity
 import com.example.myprofile.mycontacts.*
+import com.example.myprofile.utils.navigateToFragment
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
-class MyContactsFragment: Fragment() {
+class MyContactsFragment : Fragment() {
     private var _binding: FragmentMyContactsBinding? = null
     private val binding get() = _binding!!
     private lateinit var contactsViewModel: ContactsViewModel
@@ -44,7 +44,7 @@ class MyContactsFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        EventBus.getDefault().register(this)
+        //EventBus.getDefault().register(this)
         contactsViewModel = ViewModelProvider(this)[ContactsViewModel::class.java]
 
         setupRecyclerView()
@@ -54,7 +54,7 @@ class MyContactsFragment: Fragment() {
             contactsAdapter.contacts = contactsList as MutableList<Contact> // Update adapter data
         }
 
-        requestContactsPermission()
+        //requestContactsPermission()
 
         setListeners()
     }
@@ -71,7 +71,8 @@ class MyContactsFragment: Fragment() {
     }
 
     private fun swipeToDelete() {
-        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+        val itemTouchHelperCallback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -94,99 +95,86 @@ class MyContactsFragment: Fragment() {
 
     private fun setListeners() {
         binding.buttonMyContactsBack.setOnClickListener {
-            Intent(requireContext(), MainActivity::class.java).also {
-                startActivity(it)
-                requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                requireActivity().finish()
-            }
+            navigateToFragment(R.id.action_myContactsFragment_to_myProfileFragment)
         }
         binding.textViewMyContactsAddContacts.setOnClickListener {
-            showAddContactDialog()
+            AddContactDialogFragment().show(childFragmentManager, "AddContactDialog")
         }
     }
 
-    @Subscribe
-    fun onContactEvent(event: ContactEvent) {
-        val contact = event.contact
-        addContact(contact)
-    }
+//    private fun requestContactsPermission() {
+//        if (ContextCompat.checkSelfPermission(
+//                requireContext(),
+//                READ_CONTACTS
+//            ) != PackageManager.PERMISSION_GRANTED
+//        ) {
+//            ActivityCompat.requestPermissions(
+//                requireActivity(),
+//                arrayOf(READ_CONTACTS),
+//                Constants.CONTACTS_PERMISSION_CODE
+//            )
+//        } else {
+//            contactsViewModel.loadContacts(getContactsPhoneBook())
+//        }
+//    }
+//
+//    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+//        if (isGranted) {
+//            contactsViewModel.loadContacts(getContactsPhoneBook())
+//        } else {
+//            navigateToFragment(R.id.action_myContactsFragment_to_myProfileFragment)
+//        }
+//    }
 
-    private fun showAddContactDialog() {
-        val addContactDialog = AddContactDialogFragment()
-        addContactDialog.show(childFragmentManager, "AddContactDialog")
-    }
 
-    private fun requestContactsPermission() {
-        if (ContextCompat.checkSelfPermission(requireContext(), READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(READ_CONTACTS),
-                Constants.CONTACTS_PERMISSION_CODE
-            )
-        } else {
-            contactsViewModel.loadContacts(getContactsPhoneBook())
-        }
-    }
+//    private fun getContactsPhoneBook(): MutableList<Contact> {
+//        val contentResolver: ContentResolver = requireContext().contentResolver
+//        val contactsUri: Uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
+//        val projection: Array<String> = arrayOf(
+//            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+//            ContactsContract.CommonDataKinds.Phone.PHOTO_URI
+//        )
+//
+//        val sortOrder = "${ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME} ASC"
+//
+//        val cursor: Cursor? = contentResolver.query(contactsUri, projection, null, null, sortOrder)
+//
+//        val result = mutableListOf<Contact>()
+//        cursor?.use {
+//            val nameColumnIndex: Int =
+//                it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+//            val photoColumnIndex: Int =
+//                it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI)
+//
+//            while (it.moveToNext()) {
+//                val name: String = it.getString(nameColumnIndex)
+//                val photoUriString: String? = it.getString(photoColumnIndex)
+//                val photoUri: Uri? = photoUriString?.let { uriString ->
+//                    Uri.parse(uriString)
+//                }
+//
+//                val contact = if (photoUri != null) {
+//                    Contact(photoUri.toString(), name, "")
+//                } else {
+//                    Contact("", name, "")
+//                }
+//                addContact(contact)
+//                result.add(contact)
+//            }
+//        }
+//        return result
+//    }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == Constants.CONTACTS_PERMISSION_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                contactsViewModel.loadContacts(getContactsPhoneBook())
-            } else {
-                Intent(requireContext(), MainActivity::class.java).also {
-                    startActivity(it)
-                    requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                    requireActivity().finish()
-                }
-            }
-        }
-    }
-
-    private fun getContactsPhoneBook(): MutableList<Contact> {
-        val contentResolver: ContentResolver = requireContext().contentResolver
-        val contactsUri: Uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
-        val projection: Array<String> = arrayOf(
-            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-            ContactsContract.CommonDataKinds.Phone.PHOTO_URI
-        )
-
-        val sortOrder = "${ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME} ASC"
-
-        val cursor: Cursor? = contentResolver.query(contactsUri, projection, null, null, sortOrder)
-
-        val result = mutableListOf<Contact>()
-        cursor?.use {
-            val nameColumnIndex: Int = it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
-            val photoColumnIndex: Int = it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI)
-
-            while (it.moveToNext()) {
-                val name: String = it.getString(nameColumnIndex)
-                val photoUriString: String? = it.getString(photoColumnIndex)
-                val photoUri: Uri? = photoUriString?.let { uriString ->
-                    Uri.parse(uriString)
-                }
-
-                val contact = if (photoUri != null) {
-                    Contact(photoUri.toString(), name, "")
-                } else {
-                    Contact("", name, "")
-                }
-                addContact(contact)
-                result.add(contact)
-            }
-        }
-        return result
-    }
-
-    private fun addContact(contact: Contact) {
-        contactsAdapter.contacts.add(contact)
-        contactsAdapter.notifyItemInserted(contactsAdapter.contacts.size - 1)
-    }
+//    @Subscribe
+//    fun onContactEvent(event: ContactEvent) {
+//        val contact = event.contact
+//        addContact(contact)
+//    }
+//
+//    private fun addContact(contact: Contact) {
+//        contactsAdapter.contacts.add(contact)
+//        contactsAdapter.notifyItemInserted(contactsAdapter.contacts.size - 1)
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
