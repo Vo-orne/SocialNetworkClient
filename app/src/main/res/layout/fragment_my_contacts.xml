@@ -80,7 +80,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         tools:listitem="@layout/contact_item"
-        android:layout_marginTop="@dimen/medium_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

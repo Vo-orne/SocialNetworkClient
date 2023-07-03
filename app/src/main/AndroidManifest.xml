@@ -16,6 +16,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyProfile"
+        android:name=".App"
         tools:targetApi="31">
         <activity
             android:name=".main.MainActivity"
@@ -27,5 +28,4 @@
         </intent-filter>
         </activity>
     </application>
-
 </manifest>

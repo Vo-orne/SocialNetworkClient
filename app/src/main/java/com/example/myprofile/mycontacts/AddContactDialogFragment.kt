@@ -58,12 +58,12 @@ class AddContactDialogFragment : DialogFragment() {
         val contactName = binding.textInputEditTextAddContactUsername.text.toString()
         val contactCareer = binding.textInputEditTextAddContactCareer.text.toString()
         val imagePath = imageUri?.let { getUriAsString(requireContext().contentResolver, it) }
-        val contact = Contact(imagePath.toString(), contactName, contactCareer)
-
-        // Publish an event with a contact
-        EventBus.getDefault().post(ContactEvent(contact))
-
-        dismiss()
+//        val contact = Contact(imagePath.toString(), contactName, contactCareer)
+//
+//        // Publish an event with a contact
+//        EventBus.getDefault().post(ContactEvent(contact))
+//
+//        dismiss()
     }
 
 
