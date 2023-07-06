@@ -50,7 +50,7 @@ class ContactsAdapter(
         }
 
     override fun onClick(v: View) {
-        Log.d("MyTag", v.tag.toString())
+        //Log.d("MyTag", v.tag.toString())
         val contact = v.tag as Contact
         when (v.id) {
             R.id.buttonMyContactsDelete -> {
@@ -81,6 +81,7 @@ class ContactsAdapter(
         val contact = contacts[position]
         with(holder.binding) {
             holder.itemView.tag = contact
+            buttonMyContactsDelete.tag = contact
 
             textViewMyContactsUserName.text = contact.name
             textViewMyContactsUserCareer.text = contact.career
