@@ -1,6 +1,5 @@
 package com.example.myprofile.mycontacts
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,7 +49,6 @@ class ContactsAdapter(
         }
 
     override fun onClick(v: View) {
-        //Log.d("MyTag", v.tag.toString())
         val contact = v.tag as Contact
         when (v.id) {
             R.id.buttonMyContactsDelete -> {

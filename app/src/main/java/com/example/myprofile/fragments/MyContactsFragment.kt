@@ -21,12 +21,6 @@ class MyContactsFragment : Fragment() {
 
     private val viewModel: ContactsViewModel by viewModels { factory() }
 
-//    private var _binding: FragmentMyContactsBinding? = null
-//    private val binding get() = _binding!!
-//    private lateinit var contactsViewModel: ContactsViewModel
-//    private lateinit var recyclerViewContacts: RecyclerView
-//    private lateinit var contactsAdapter: ContactsAdapter
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -7,9 +7,9 @@ import android.net.Uri
 import android.provider.ContactsContract
 
 class ContactsContentProvider : ContentProvider() {
-    // The URI declaration for the ContentProvider
+
     companion object {
-        val CONTENT_URI: Uri = Uri.parse("content://com.example.myapp.contacts")
+        val CONTENT_URI: Uri = ContactsContract.Contacts.CONTENT_URI
     }
 
     override fun onCreate(): Boolean {
@@ -18,13 +18,14 @@ class ContactsContentProvider : ContentProvider() {
 
     override fun query(
         uri: Uri,
-        projection: Array<String>?,
+        projection: Array<out String>?,
         selection: String?,
-        selectionArgs: Array<String>?,
+        selectionArgs: Array<out String>?,
         sortOrder: String?
     ): Cursor? {
-        // Get a list of contacts from the phone
-        return context?.contentResolver?.query(
+        val contentResolver = context?.contentResolver ?: return null
+        // Get contacts from phone using ContactsContract
+        return contentResolver.query(
             ContactsContract.Contacts.CONTENT_URI,
             null,
             null,
@@ -33,19 +34,24 @@ class ContactsContentProvider : ContentProvider() {
         )
     }
 
-    override fun getType(p0: Uri): String? {
-        TODO("Not yet implemented")
+    override fun getType(uri: Uri): String? {
+        return null
     }
 
-    override fun insert(p0: Uri, p1: ContentValues?): Uri? {
-        TODO("Not yet implemented")
+    override fun insert(uri: Uri, values: ContentValues?): Uri? {
+        return null
     }
 
-    override fun delete(p0: Uri, p1: String?, p2: Array<out String>?): Int {
-        TODO("Not yet implemented")
+    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
+        return 0
     }
 
-    override fun update(p0: Uri, p1: ContentValues?, p2: String?, p3: Array<out String>?): Int {
-        TODO("Not yet implemented")
+    override fun update(
+        uri: Uri,
+        values: ContentValues?,
+        selection: String?,
+        selectionArgs: Array<out String>?
+    ): Int {
+        return 0
     }
 }
