@@ -13,6 +13,9 @@ class ContactsRepository(private val context: Context) {
 
     private val listeners = mutableListOf<UsersListener>()
 
+    private lateinit var lastDeletedContact: Contact
+    private var positionLastDeletedContact = 0
+
     init {
         loadContacts()
     }
@@ -71,16 +74,25 @@ class ContactsRepository(private val context: Context) {
         ) }
     }
 
-    fun deleteUser(user: Contact) {
+    fun deleteUser(user: Contact, position: Int) {
         val indexToDelete = contacts.indexOfFirst {
             it.id == user.id
         }
         if (indexToDelete != -1) {
             contacts = ArrayList(contacts)
-            contacts.removeAt(indexToDelete)
+            contacts.removeAt(position)
+            lastDeletedContact = user
+            positionLastDeletedContact = position
             notifyChanges()
         }
     }
+
+
+    fun restoreLastDeletedContact() {
+        contacts.add(positionLastDeletedContact, lastDeletedContact)
+        notifyChanges()
+    }
+
 
     fun addListener(listener: UsersListener) {
         listeners.add(listener)

@@ -11,7 +11,7 @@ import com.example.myprofile.R
 
 
 interface ContactActionListener {
-    fun onContactDelete(contact: Contact)
+    fun onContactDelete(contact: Contact, position: Int)
     fun onDetailView(contact: Contact)
 }
 
@@ -50,9 +50,10 @@ class ContactsAdapter(
 
     override fun onClick(v: View) {
         val contact = v.tag as Contact
+        val position = contacts.indexOf(contact)
         when (v.id) {
             R.id.buttonMyContactsDelete -> {
-                actionListener.onContactDelete(contact)
+                actionListener.onContactDelete(contact, position)
             }
             else -> {
                 actionListener.onDetailView(contact)

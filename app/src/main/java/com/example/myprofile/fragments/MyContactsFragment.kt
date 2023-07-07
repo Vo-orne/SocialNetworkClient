@@ -2,6 +2,8 @@ package com.example.myprofile.fragments
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +17,7 @@ import com.example.myprofile.databinding.FragmentMyContactsBinding
 import com.example.myprofile.mycontacts.*
 import com.example.myprofile.utils.factory
 import com.example.myprofile.utils.navigateToFragment
+import com.google.android.material.snackbar.Snackbar
 
 class MyContactsFragment : Fragment() {
 
@@ -31,8 +34,9 @@ class MyContactsFragment : Fragment() {
         binding = FragmentMyContactsBinding.inflate(inflater, container, false)
         adapter = ContactsAdapter(object : ContactActionListener {
 
-            override fun onContactDelete(contact: Contact) {
-                viewModel.deleteUser(contact)
+            override fun onContactDelete(contact: Contact, position: Int) {
+                viewModel.deleteUser(contact, position)
+                showSnackbar()
             }
 
             override fun onDetailView(contact: Contact) {
@@ -53,7 +57,6 @@ class MyContactsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setListeners()
     }
 
@@ -81,12 +84,29 @@ class MyContactsFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.bindingAdapterPosition
                 val deletedContact = viewHolder.itemView.tag as Contact
-                viewModel.deleteUser(deletedContact)
-//                contactsAdapter.showUndoSnackbar(deletedContact, position)  //todo move to viewModel
+                viewModel.deleteUser(deletedContact, position)
+                showSnackbar()
             }
         }
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(binding.recyclerViewContacts)
+    }
+
+    fun showSnackbar() {
+        val snackbar = Snackbar.make(
+            binding.root,
+            R.string.contact_removed,
+            Snackbar.LENGTH_LONG
+        )
+        snackbar.setAction(R.string.cancel) {
+            viewModel.restoreLastDeletedContact()
+        }
+        snackbar.show()
+
+        // Automatically close the Snackbar after 5 seconds
+        Handler(Looper.getMainLooper()).postDelayed({
+            snackbar.dismiss()
+        }, 5000)
     }
 }
 //
