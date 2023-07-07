@@ -17,7 +17,12 @@ class ContactsViewModel(private val contactsRepository: ContactsRepository): Vie
         loadContacts()
     }
 
-    fun loadContacts() {
+    override fun onCleared() {
+        super.onCleared()
+        contactsRepository.removeListener(listener)
+    }
+
+    private fun loadContacts() {
         contactsRepository.addListener(listener)
     }
 

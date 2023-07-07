@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myprofile.databinding.ContactItemBinding
 import com.bumptech.glide.Glide
@@ -99,6 +100,27 @@ class ContactsAdapter(
     class ContactViewHolder(
         val binding: ContactItemBinding
     ) : RecyclerView.ViewHolder(binding.root)
+
+    private fun swipeToDelete() {
+        val itemTouchHelperCallback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                // There is no need to implement drag and drop, so we return false
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val contact = viewHolder.itemView.tag as Contact
+                actionListener.onContactDelete(contact)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+//        itemTouchHelper.attachToRecyclerView(recyclerViewContacts)
+    }
 }
 
 //        fun bind(contact: Contact) {

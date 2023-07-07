@@ -21,7 +21,6 @@ class ContactsRepository(private val context: Context) {
         val phoneContacts = getPhoneContacts()
         val randomContacts = generateRandomContacts()
         contacts = (phoneContacts + randomContacts).toMutableList()
-        notifyChanges()
     }
 
     private fun getPhoneContacts(): List<Contact> {
@@ -45,7 +44,7 @@ class ContactsRepository(private val context: Context) {
             val avatarColumnIndex = it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI)
 
             if (idColumnIndex == -1 || nameColumnIndex == -1 || careerColumnIndex == -1 || avatarColumnIndex == -1) {
-                // Якщо один зі стовпців не знайдений, ви можете виконати відповідні дії, наприклад, вивести повідомлення про помилку
+                // If one of the columns is not found, you can take appropriate actions, such as displaying an error message
                 return parsedContacts
             }
 
@@ -73,8 +72,11 @@ class ContactsRepository(private val context: Context) {
     }
 
     fun deleteUser(user: Contact) {
-        val indexToDelete = contacts.indexOfFirst { it.id == user.id }
+        val indexToDelete = contacts.indexOfFirst {
+            it.id == user.id
+        }
         if (indexToDelete != -1) {
+            contacts = ArrayList(contacts)
             contacts.removeAt(indexToDelete)
             notifyChanges()
         }
