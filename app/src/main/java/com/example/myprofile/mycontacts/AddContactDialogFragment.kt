@@ -1,17 +1,17 @@
 package com.example.myprofile.mycontacts
 
+import android.app.Dialog
 import android.content.ContentResolver
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.myprofile.databinding.DialogAddContactBinding
-import org.greenrobot.eventbus.EventBus
+import com.example.myprofile.utils.factory
 
 class AddContactDialogFragment : DialogFragment() {
 
@@ -19,8 +19,11 @@ class AddContactDialogFragment : DialogFragment() {
     private val binding get() = _binding!!
     private var imageUri: Uri? = null
 
+    private val viewModel: AddContactViewModel by viewModels { factory() }
 
-    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+
+    private val getContent =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let { imageUri ->
             this.imageUri = imageUri
             Glide.with(requireContext())
@@ -29,15 +32,17 @@ class AddContactDialogFragment : DialogFragment() {
         }
     }
 
+    /**
+     * Create dialog fragment.
+     */
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        _binding = DialogAddContactBinding.inflate(layoutInflater) // Inflate binding of dialog fragment
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = DialogAddContactBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupButtons()
+        return activity?.let {
+            val builder = AlertDialog.Builder(it) // Create dialog
+            setupButtons()
+            builder.setView(binding.root).create() // Set view and create dialog
+        } ?: throw IllegalStateException("Activity cannot be null")
     }
 
     private fun setupButtons() {
@@ -55,15 +60,14 @@ class AddContactDialogFragment : DialogFragment() {
     }
 
     private fun saveContact() {
+        val id = 0L
+        val imagePath = imageUri?.let { getUriAsString(requireContext().contentResolver, it) }
         val contactName = binding.textInputEditTextAddContactUsername.text.toString()
         val contactCareer = binding.textInputEditTextAddContactCareer.text.toString()
-        val imagePath = imageUri?.let { getUriAsString(requireContext().contentResolver, it) }
-//        val contact = Contact(imagePath.toString(), contactName, contactCareer)
-//
-//        // Publish an event with a contact
-//        EventBus.getDefault().post(ContactEvent(contact))
-//
-//        dismiss()
+        val contact = Contact(id, imagePath.toString(), contactName, contactCareer)
+
+        viewModel.addContact(contact)
+        dismiss()
     }
 
 
@@ -84,8 +88,7 @@ class AddContactDialogFragment : DialogFragment() {
                 }
             }
         }
-        // Return the initial Uri string if the URL string could not be retrieved
-        return uri.toString()
+        return uri.toString() // Return the initial Uri string if the URL string could not be retrieved
     }
 
     override fun onDestroyView() {

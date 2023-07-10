@@ -7,6 +7,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.myprofile.App
 import com.example.myprofile.R
+import com.example.myprofile.mycontacts.AddContactViewModel
 import com.example.myprofile.mycontacts.ContactsViewModel
 
 class ViewModelFactory(
@@ -17,6 +18,9 @@ class ViewModelFactory(
         val viewModel = when (modelClass) {
             ContactsViewModel::class.java -> {
                 ContactsViewModel(app.contactsRepository)
+            }
+            AddContactViewModel::class.java -> {
+                AddContactViewModel(app.contactsRepository)
             }
             else -> {
                 throw IllegalStateException("Unknown view model class")

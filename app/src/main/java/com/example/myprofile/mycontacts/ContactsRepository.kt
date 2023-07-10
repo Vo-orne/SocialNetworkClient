@@ -86,14 +86,14 @@ class ContactsRepository(private val context: Context) {
         return result
     }
 
-    fun deleteUser(user: Contact, position: Int) {
+    fun deleteContact(contact: Contact, position: Int) {
         val indexToDelete = contacts.indexOfFirst {
-            it.id == user.id
+            it.id == contact.id
         }
         if (indexToDelete != -1) {
             contacts = ArrayList(contacts)
             contacts.removeAt(position)
-            lastDeletedContact = user
+            lastDeletedContact = contact
             positionLastDeletedContact = position
             notifyChanges()
         }
@@ -106,6 +106,12 @@ class ContactsRepository(private val context: Context) {
         notifyChanges()
     }
 
+    fun addContact(contact: Contact) {
+        contacts = ArrayList(contacts)
+        val newContact = Contact(getId(), contact.avatar, contact.name, contact.career)
+        contacts.add(contacts.size, newContact)
+        notifyChanges()
+    }
 
     fun addListener(listener: UsersListener) {
         listeners.add(listener)

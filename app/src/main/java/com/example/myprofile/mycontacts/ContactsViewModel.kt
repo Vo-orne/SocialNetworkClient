@@ -27,7 +27,7 @@ class ContactsViewModel(private val contactsRepository: ContactsRepository): Vie
     }
 
     fun deleteUser(user: Contact, position: Int) {
-        contactsRepository.deleteUser(user, position)
+        contactsRepository.deleteContact(user, position)
     }
 
     fun restoreLastDeletedContact() {
