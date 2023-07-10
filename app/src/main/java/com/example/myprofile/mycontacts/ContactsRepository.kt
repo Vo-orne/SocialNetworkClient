@@ -16,6 +16,8 @@ class ContactsRepository(private val context: Context) {
     private lateinit var lastDeletedContact: Contact
     private var positionLastDeletedContact = 0
 
+    private var lastId: Long = 0L
+
     init {
         loadContacts()
     }
@@ -43,8 +45,10 @@ class ContactsRepository(private val context: Context) {
         cursor?.use {
             val idColumnIndex = it.getColumnIndex(ContactsContract.Contacts._ID)
             val nameColumnIndex = it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)
-            val careerColumnIndex = it.getColumnIndex(ContactsContract.CommonDataKinds.Organization.TITLE)
-            val avatarColumnIndex = it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI)
+            val careerColumnIndex =
+                it.getColumnIndex(ContactsContract.CommonDataKinds.Organization.TITLE)
+            val avatarColumnIndex =
+                it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI)
 
             if (idColumnIndex == -1 || nameColumnIndex == -1 || careerColumnIndex == -1 || avatarColumnIndex == -1) {
                 // If one of the columns is not found, you can take appropriate actions, such as displaying an error message
@@ -52,7 +56,7 @@ class ContactsRepository(private val context: Context) {
             }
 
             while (it.moveToNext()) {
-                val id = it.getString(idColumnIndex)?.toLongOrNull() ?: continue
+                val id = getId()
                 val name = it.getString(nameColumnIndex) ?: ""
                 val career = it.getString(careerColumnIndex) ?: ""
                 val avatar = it.getString(avatarColumnIndex) ?: ""
@@ -66,12 +70,20 @@ class ContactsRepository(private val context: Context) {
 
     private fun generateRandomContacts(): List<Contact> {
         val faker = Faker.instance()
-        return (1..NUM_RANDOM_CONTACTS).map { Contact(
-            id = it.toLong(),
-            name = faker.name().name(),
-            career = faker.job().field(),
-            avatar = AVATARS[it % AVATARS.size]
-        ) }
+        return (1..NUM_RANDOM_CONTACTS).map {
+            Contact(
+                id = getId(),
+                name = faker.name().name(),
+                career = faker.job().field(),
+                avatar = AVATARS[it % AVATARS.size]
+            )
+        }
+    }
+
+    private fun getId(): Long {
+        val result = lastId
+        lastId++
+        return result
     }
 
     fun deleteUser(user: Contact, position: Int) {
@@ -89,6 +101,7 @@ class ContactsRepository(private val context: Context) {
 
 
     fun restoreLastDeletedContact() {
+        contacts = ArrayList(contacts)
         contacts.add(positionLastDeletedContact, lastDeletedContact)
         notifyChanges()
     }
