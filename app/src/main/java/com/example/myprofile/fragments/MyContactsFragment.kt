@@ -40,7 +40,7 @@ class MyContactsFragment : Fragment() {
             }
 
             override fun onDetailView(contact: Contact) {
-                TODO("Not yet implemented")
+                navigateToFragment(R.id.action_myContactsFragment_to_detailViewFragment)
             }
         })
 
