@@ -9,42 +9,49 @@
         android:id="@+id/signUpFragment"
         android:name="com.example.myprofile.fragments.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
+        tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_signUpFragment_to_myProfileFragment"
             app:destination="@id/myProfileFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/myProfileFragment"
         android:name="com.example.myprofile.fragments.MyProfileFragment"
         android:label="fragment_my_profile"
-        tools:layout="@layout/fragment_my_profile" >
+        tools:layout="@layout/fragment_my_profile">
         <action
             android:id="@+id/action_myProfileFragment_to_myContactsFragment"
             app:destination="@id/myContactsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/myContactsFragment"
         android:name="com.example.myprofile.fragments.MyContactsFragment"
-        android:label="MyContactsFragment" >
+        android:label="MyContactsFragment">
         <action
             android:id="@+id/action_myContactsFragment_to_addContactDialogFragment"
             app:destination="@id/addContactDialogFragment" />
         <action
             android:id="@+id/action_myContactsFragment_to_detailViewFragment"
-            app:destination="@id/detailViewFragment" />
+            app:destination="@id/detailViewFragment"/>
         <action
             android:id="@+id/action_myContactsFragment_to_myProfileFragment"
             app:destination="@id/myProfileFragment" />
     </fragment>
+
     <dialog
         android:id="@+id/addContactDialogFragment"
         android:name="com.example.myprofile.mycontacts.AddContactDialogFragment"
         android:label="AddContactDialogFragment" />
+
     <fragment
         android:id="@+id/detailViewFragment"
         android:name="com.example.myprofile.fragments.DetailViewFragment"
-        android:label="DetailViewFragment" >
+        android:label="DetailViewFragment">
+        <argument
+            android:name="contact"
+            app:argType="com.example.myprofile.mycontacts.Contact" />
         <action
             android:id="@+id/action_detailViewFragment_to_myContactsFragment"
             app:destination="@id/myContactsFragment" />

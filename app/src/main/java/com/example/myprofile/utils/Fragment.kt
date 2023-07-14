@@ -3,6 +3,7 @@ package com.example.myprofile.utils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.myprofile.App
@@ -42,6 +43,18 @@ fun Fragment.navigateToFragment(idAction: Int){
             .build()
     )
 }
+
+fun Fragment.navigateToFragment(action: NavDirections) {
+    findNavController().navigate(
+        action,
+        NavOptions.Builder()
+            .setEnterAnim(R.anim.slide_in_right)
+            .setExitAnim(R.anim.slide_out_left)
+            .build()
+    )
+}
+
+
 
 fun Fragment.navigateToFragmentWithoutReturning(idAction: Int, idStartingFragment: Int){
     findNavController().navigate( // Responsible for the transition to the next fragment
