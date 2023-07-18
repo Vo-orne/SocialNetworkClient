@@ -1,13 +1,14 @@
 package com.example.myprofile.fragments
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavOptions
-import androidx.navigation.fragment.findNavController
 import com.example.myprofile.Constants
 import com.example.myprofile.R
 import com.example.myprofile.databinding.FragmentMyProfileBinding
@@ -34,8 +35,19 @@ class MyProfileFragment : Fragment() {
     }
 
     private fun setListeners() {
+        navigateToMyContacts()
+    }
+
+    private fun navigateToMyContacts() {
         binding.buttonMyProfileViewMyContacts.setOnClickListener {
-            navigateToFragment(R.id.action_myProfileFragment_to_myContactsFragment)
+            val permission = android.Manifest.permission.READ_CONTACTS
+            val requestCode = 1
+
+            if (ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(permission), requestCode)
+            } else {
+                navigateToFragment(R.id.action_myProfileFragment_to_myContactsFragment)
+            }
         }
     }
 
