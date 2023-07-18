@@ -8,6 +8,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.myprofile.App
 import com.example.myprofile.R
+import com.example.myprofile.main.MyProfileViewModel
 import com.example.myprofile.mycontacts.AddContactViewModel
 import com.example.myprofile.mycontacts.ContactsViewModel
 
@@ -22,6 +23,9 @@ class ViewModelFactory(
             }
             AddContactViewModel::class.java -> {
                 AddContactViewModel(app.contactsRepository)
+            }
+            MyProfileViewModel::class.java -> {
+                MyProfileViewModel(app.contactsRepository)
             }
             else -> {
                 throw IllegalStateException("Unknown view model class")

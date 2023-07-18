@@ -3,6 +3,7 @@ package com.example.myprofile.mycontacts
 import android.content.Context
 import android.database.Cursor
 import android.provider.ContactsContract
+import android.util.Log
 import com.github.javafaker.Faker
 
 typealias UsersListener = (users: List<Contact>) -> Unit
@@ -15,6 +16,7 @@ class ContactsRepository(private val context: Context) {
 
     private lateinit var lastDeletedContact: Contact
     private var positionLastDeletedContact = 0
+    private var isPhoneContactsAllowed = false
 
     private var lastId: Long = 0L
 
@@ -22,10 +24,20 @@ class ContactsRepository(private val context: Context) {
         loadContacts()
     }
 
+    fun allowPhoneContacts() {
+        isPhoneContactsAllowed = true
+        val contacts = (getPhoneContacts() + generateRandomContacts()).toMutableList()
+        this.contacts = ArrayList(contacts)
+        notifyChanges()
+    }
+
     private fun loadContacts() {
-        val phoneContacts = getPhoneContacts()
-        val randomContacts = generateRandomContacts()
-        contacts = (phoneContacts + randomContacts).toMutableList()
+        Log.d("Log", isPhoneContactsAllowed.toString())
+        contacts = if (isPhoneContactsAllowed) {
+            (getPhoneContacts() + generateRandomContacts()).toMutableList()
+        } else {
+            generateRandomContacts().toMutableList()
+        }
     }
 
     private fun getPhoneContacts(): List<Contact> {

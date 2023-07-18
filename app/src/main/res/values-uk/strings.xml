@@ -12,6 +12,7 @@
     <string name="content_description_facebook_icon">Відображає іконку Facebook</string>
     <string name="content_description_linkedin_icon">Відображає іконку Linkedin</string>
     <string name="content_description_instagram_icon">Відображає іконку Instagram</string>
+    <string name="access_is_denied">У доступі до контактів відмовлено</string>
 
     <!--    AuthActivity    -->
     <string name="titleText">Давай знайомитись</string>
@@ -48,7 +49,7 @@
     <string name="address">Адреса</string>
     <string name="date_of_birth">Дата народження</string>
     <string name="example_email">name@gmail.com</string>
-    <string name="example_phone">+38-(050)-000-0000</string>
+    <string name="example_phone">+38 (050) 000 0000</string>
     <string name="example_address">775 Westminster Avenue APT D5 Brooklyn, NY, 11230</string>
     <string name="example_date_of_birth">20/12/1998</string>
 

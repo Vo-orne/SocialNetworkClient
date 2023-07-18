@@ -1,24 +1,47 @@
 package com.example.myprofile.fragments
 
+import android.Manifest
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.myprofile.Constants
 import com.example.myprofile.R
 import com.example.myprofile.databinding.FragmentMyProfileBinding
+import com.example.myprofile.main.MyProfileViewModel
+import com.example.myprofile.utils.factory
 import com.example.myprofile.utils.navigateToFragment
 
 class MyProfileFragment : Fragment() {
     private var _binding: FragmentMyProfileBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    private val viewModel: MyProfileViewModel by viewModels { factory() }
+
+    private val requestContactsPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                viewModel.allowPhoneContacts()
+                navigateToFragment(R.id.action_myProfileFragment_to_myContactsFragment)
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    R.string.access_is_denied,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentMyProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -31,23 +54,12 @@ class MyProfileFragment : Fragment() {
         )
         val userName = sharedPreferences.getString(Constants.USER_NAME_KEY, "")
         binding.textViewMyProfileUserName.text = userName
-        setListeners()
-    }
-
-    private fun setListeners() {
         navigateToMyContacts()
     }
 
     private fun navigateToMyContacts() {
         binding.buttonMyProfileViewMyContacts.setOnClickListener {
-            val permission = android.Manifest.permission.READ_CONTACTS
-            val requestCode = 1
-
-            if (ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(requireActivity(), arrayOf(permission), requestCode)
-            } else {
-                navigateToFragment(R.id.action_myProfileFragment_to_myContactsFragment)
-            }
+            requestContactsPermission.launch(Manifest.permission.READ_CONTACTS)
         }
     }
 
