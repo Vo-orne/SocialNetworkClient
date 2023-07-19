@@ -48,10 +48,6 @@
     <string name="phone">Phone</string>
     <string name="address">Address</string>
     <string name="date_of_birth">Date of birth</string>
-    <string name="example_email">name@gmail.com</string>
-    <string name="example_phone">+38 (050) 000 0000</string>
-    <string name="example_address">775 Westminster Avenue APT D5 Brooklyn, NY, 11230</string>
-    <string name="example_date_of_birth">20/12/1998</string>
     <string name="profile">Profile</string>
     <string name="message">Message</string>
 
