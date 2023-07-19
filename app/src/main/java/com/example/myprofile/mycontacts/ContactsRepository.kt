@@ -45,7 +45,8 @@ class ContactsRepository(private val context: Context) {
                 id = getId(),
                 name = faker.name().name(),
                 career = faker.job().field(),
-                avatar = AVATARS[it % AVATARS.size]
+                avatar = AVATARS[it % AVATARS.size],
+                address = faker.address().fullAddress()
             )
         }
     }
@@ -78,7 +79,7 @@ class ContactsRepository(private val context: Context) {
 
     fun addContact(contact: Contact) {
         contacts = ArrayList(contacts)
-        val newContact = Contact(getId(), contact.avatar, contact.name, contact.career)
+        val newContact = Contact(getId(), contact.avatar, contact.name, contact.career, contact.address)
         contacts.add(contacts.size, newContact)
         notifyChanges()
     }

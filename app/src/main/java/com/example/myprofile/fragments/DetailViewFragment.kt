@@ -33,6 +33,7 @@ class DetailViewFragment : Fragment() {
         with(binding) {
             textViewDetailViewContactName.text = contact.name
             textViewDetailViewContactCareer.text = contact.career
+            textViewDetailViewContactHomeAddress.text = contact.address
             if (contact.avatar.isNotBlank()) {
                 Glide.with(imageViewDetailViewContactAvatar.context)
                     .load(contact.avatar)

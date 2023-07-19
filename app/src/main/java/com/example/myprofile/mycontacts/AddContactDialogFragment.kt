@@ -61,10 +61,12 @@ class AddContactDialogFragment : DialogFragment() {
 
     private fun saveContact() {
         val id = 0L
-        val imagePath = imageUri?.let { getUriAsString(requireContext().contentResolver, it) }
-        val contactName = binding.textInputEditTextAddContactUsername.text.toString()
-        val contactCareer = binding.textInputEditTextAddContactCareer.text.toString()
-        val contact = Contact(id, imagePath.toString(), contactName, contactCareer)
+        val image = imageUri?.let { getUriAsString(requireContext().contentResolver, it) }
+        val name = binding.textInputEditTextAddContactUsername.text.toString()
+        val career = binding.textInputEditTextAddContactCareer.text.toString()
+        val address = binding.textInputEditTextAddContactAddress.text.toString()
+
+        val contact = Contact(id, image.toString(), name, career, address)
 
         viewModel.addContact(contact)
         dismiss()

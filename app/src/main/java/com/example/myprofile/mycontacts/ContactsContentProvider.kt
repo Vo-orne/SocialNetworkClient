@@ -92,11 +92,12 @@ class ContactsContentProvider : ContentProvider() {
 
             while (it.moveToNext()) {
                 val id = it.getLong(idColumnIndex)
+                val avatar = getContactAvatar(id)
                 val name = it.getString(nameColumnIndex) ?: ""
                 val organization = getContactOrganization(id)
-                val avatar = getContactAvatar(id)
+                val address = getContactAddress(id)
 
-                val contact = Contact(id, avatar, name, organization)
+                val contact = Contact(id, avatar, name, organization, address)
                 parsedContacts.add(contact)
             }
         }
@@ -140,5 +141,25 @@ class ContactsContentProvider : ContentProvider() {
         }
         avatarCursor?.close()
         return avatar
+    }
+
+    private fun getContactAddress(contactId: Long): String {
+        val contentResolver = context?.get()?.contentResolver ?: return ""
+
+        val addressCursor = contentResolver.query(
+            ContactsContract.Data.CONTENT_URI,
+            arrayOf(ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS),
+            "${ContactsContract.Data.CONTACT_ID} = ? AND ${ContactsContract.Data.MIMETYPE} = ?",
+            arrayOf(contactId.toString(), ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE),
+            null
+        )
+        val addressColumnIndex = addressCursor?.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS)
+        val address = if (addressCursor?.moveToFirst() == true && addressColumnIndex != null) {
+            addressCursor.getString(addressColumnIndex) ?: ""
+        } else {
+            ""
+        }
+        addressCursor?.close()
+        return address
     }
 }
