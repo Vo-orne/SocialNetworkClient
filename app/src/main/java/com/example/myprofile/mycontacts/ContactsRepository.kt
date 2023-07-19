@@ -1,9 +1,6 @@
 package com.example.myprofile.mycontacts
 
 import android.content.Context
-import android.database.Cursor
-import android.provider.ContactsContract
-import android.util.Log
 import com.github.javafaker.Faker
 
 typealias UsersListener = (users: List<Contact>) -> Unit
@@ -24,60 +21,21 @@ class ContactsRepository(private val context: Context) {
         loadContacts()
     }
 
-    fun allowPhoneContacts() {
-        isPhoneContactsAllowed = true
-        val contacts = (getPhoneContacts() + generateRandomContacts()).toMutableList()
-        this.contacts = ArrayList(contacts)
-        notifyChanges()
-    }
-
     private fun loadContacts() {
-        Log.d("Log", isPhoneContactsAllowed.toString())
         contacts = if (isPhoneContactsAllowed) {
-            (getPhoneContacts() + generateRandomContacts()).toMutableList()
+            val contentProvider = ContactsContentProvider.getInstance(context)
+            (contentProvider.getPhoneContacts() + generateRandomContacts()).toMutableList()
         } else {
             generateRandomContacts().toMutableList()
         }
     }
 
-    private fun getPhoneContacts(): List<Contact> {
-        val contentResolver = context.contentResolver
-        val cursor = contentResolver.query(
-            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-            null,
-            null,
-            null,
-            null
-        )
-        return parseCursor(cursor)
-    }
-
-    private fun parseCursor(cursor: Cursor?): List<Contact> {
-        val parsedContacts = mutableListOf<Contact>()
-        cursor?.use {
-            val idColumnIndex = it.getColumnIndex(ContactsContract.Contacts._ID)
-            val nameColumnIndex = it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)
-            val careerColumnIndex =
-                it.getColumnIndex(ContactsContract.CommonDataKinds.Organization.TITLE)
-            val avatarColumnIndex =
-                it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI)
-
-            if (idColumnIndex == -1 || nameColumnIndex == -1 || careerColumnIndex == -1 || avatarColumnIndex == -1) {
-                // If one of the columns is not found, you can take appropriate actions, such as displaying an error message
-                return parsedContacts
-            }
-
-            while (it.moveToNext()) {
-                val id = getId()
-                val name = it.getString(nameColumnIndex) ?: ""
-                val career = it.getString(careerColumnIndex) ?: ""
-                val avatar = it.getString(avatarColumnIndex) ?: ""
-
-                val contact = Contact(id, avatar, name, career)
-                parsedContacts.add(contact)
-            }
-        }
-        return parsedContacts
+    fun allowPhoneContacts() {
+        isPhoneContactsAllowed = true
+        val contentProvider = ContactsContentProvider.getInstance(context)
+        val contacts = (contentProvider.getPhoneContacts() + generateRandomContacts()).toMutableList()
+        this.contacts = ArrayList(contacts)
+        notifyChanges()
     }
 
     private fun generateRandomContacts(): List<Contact> {
