@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myprofile.data.Contact
 import com.example.myprofile.data.ContactsRepository
-import com.example.myprofile.utils.UsersListener
+import com.example.myprofile.utils.ext.UsersListener
 
 class ContactsViewModel(private val contactsRepository: ContactsRepository): ViewModel() {
 

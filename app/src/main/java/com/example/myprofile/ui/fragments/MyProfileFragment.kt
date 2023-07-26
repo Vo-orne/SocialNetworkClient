@@ -3,23 +3,19 @@ package com.example.myprofile.ui.fragments
 import android.Manifest
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.myprofile.utils.Constants
 import com.example.myprofile.R
+import com.example.myprofile.base.BaseFragment
 import com.example.myprofile.databinding.FragmentMyProfileBinding
 import com.example.myprofile.viewmodel.MyProfileViewModel
-import com.example.myprofile.utils.factory
-import com.example.myprofile.utils.navigateToFragment
+import com.example.myprofile.utils.ext.factory
+import com.example.myprofile.utils.ext.navigateToFragment
 
-class MyProfileFragment : Fragment() {
-    private var _binding: FragmentMyProfileBinding? = null
-    private val binding get() = _binding!!
+class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfileBinding::inflate) {
 
     private val viewModel: MyProfileViewModel by viewModels { factory() }
 
@@ -37,15 +33,6 @@ class MyProfileFragment : Fragment() {
             }
         }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMyProfileBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -54,17 +41,12 @@ class MyProfileFragment : Fragment() {
         )
         val userName = sharedPreferences.getString(Constants.USER_NAME_KEY, "")
         binding.textViewMyProfileUserName.text = userName
-        navigateToMyContacts()
+        setListeners()
     }
 
-    private fun navigateToMyContacts() {
+    override fun setListeners() {
         binding.buttonMyProfileViewMyContacts.setOnClickListener {
             requestContactsPermission.launch(Manifest.permission.READ_CONTACTS)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

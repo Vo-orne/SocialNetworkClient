@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.myprofile.databinding.DialogAddContactBinding
 import com.example.myprofile.viewmodel.AddContactViewModel
 import com.example.myprofile.data.Contact
-import com.example.myprofile.utils.factory
+import com.example.myprofile.utils.ext.factory
 
 class AddContactDialogFragment : DialogFragment() {
 

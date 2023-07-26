@@ -18,8 +18,8 @@ import com.example.myprofile.databinding.FragmentMyContactsBinding
 import com.example.myprofile.ui.AddContactDialogFragment
 import com.example.myprofile.ui.ContactActionListener
 import com.example.myprofile.ui.ContactsAdapter
-import com.example.myprofile.utils.factory
-import com.example.myprofile.utils.navigateToFragment
+import com.example.myprofile.utils.ext.factory
+import com.example.myprofile.utils.ext.navigateToFragment
 import com.example.myprofile.viewmodel.ContactsViewModel
 import com.google.android.material.snackbar.Snackbar
 

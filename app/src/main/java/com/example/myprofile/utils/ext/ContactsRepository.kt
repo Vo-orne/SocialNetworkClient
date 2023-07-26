@@ -1,4 +1,4 @@
-package com.example.myprofile.utils
+package com.example.myprofile.utils.ext
 
 import com.example.myprofile.data.Contact
 

@@ -4,29 +4,16 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Patterns
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.myprofile.utils.Constants
 import com.example.myprofile.R
+import com.example.myprofile.base.BaseFragment
 import com.example.myprofile.databinding.FragmentSignUpBinding
-import com.example.myprofile.utils.navigateToFragmentWithoutReturning
+import com.example.myprofile.utils.ext.navigateToFragmentWithoutReturning
 import java.util.*
 
-class SignUpFragment : Fragment() {
-    private var _binding: FragmentSignUpBinding? = null
-    private val binding get() = _binding!!
+class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
     private lateinit var sharedPreferences: SharedPreferences
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSignUpBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,7 +54,7 @@ class SignUpFragment : Fragment() {
         return sb.substring(0, sb.length - 1).toString()
     }
 
-    private fun setListeners() {
+    override fun setListeners() {
         binding.buttonSignUpRegister.setOnClickListener {
             val newEmail = binding.textInputEditTextSignUpEmail.text.toString()
             val newPassword = binding.textInputEditTextSignUpPassword.text.toString()
@@ -137,10 +124,5 @@ class SignUpFragment : Fragment() {
         val userName: String = parsEmail(email)
         editor.putString(Constants.USER_NAME_KEY, userName)
         editor.apply()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

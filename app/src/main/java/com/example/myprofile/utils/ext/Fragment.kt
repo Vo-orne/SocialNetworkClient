@@ -1,4 +1,4 @@
-package com.example.myprofile.utils
+package com.example.myprofile.utils.ext
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel

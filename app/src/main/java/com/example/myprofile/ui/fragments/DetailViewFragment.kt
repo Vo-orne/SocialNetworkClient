@@ -1,31 +1,27 @@
 package com.example.myprofile.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.myprofile.R
+import com.example.myprofile.base.BaseFragment
 import com.example.myprofile.data.Contact
 import com.example.myprofile.databinding.FragmentDetailViewBinding
-import com.example.myprofile.utils.navigateToFragment
+import com.example.myprofile.utils.ext.navigateToFragment
 
-class DetailViewFragment : Fragment() {
-
-    private var _binding: FragmentDetailViewBinding? = null
-    private val binding get() = _binding!!
+class DetailViewFragment :
+    BaseFragment<FragmentDetailViewBinding>(FragmentDetailViewBinding::inflate) {
 
     private lateinit var contact: Contact
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentDetailViewBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        displayContactData()
+        setListeners()
+    }
+
+    private fun displayContactData() {
         arguments?.let {
             contact = DetailViewFragmentArgs.fromBundle(it).contact
         }
@@ -45,10 +41,9 @@ class DetailViewFragment : Fragment() {
                 imageViewDetailViewContactAvatar.setImageResource(R.drawable.default_user_photo)
             }
         }
-        setListeners()
     }
 
-    private fun setListeners() {
+    override fun setListeners() {
         binding.buttonDetailViewBack.setOnClickListener {
             navigateToFragment(R.id.action_detailViewFragment_to_myContactsFragment)
         }

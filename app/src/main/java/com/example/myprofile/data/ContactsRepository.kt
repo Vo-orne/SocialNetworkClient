@@ -2,7 +2,7 @@ package com.example.myprofile.data
 
 import android.content.Context
 import com.example.myprofile.utils.ContactsContentProvider
-import com.example.myprofile.utils.UsersListener
+import com.example.myprofile.utils.ext.UsersListener
 import com.github.javafaker.Faker
 
 class ContactsRepository(private val context: Context) {
