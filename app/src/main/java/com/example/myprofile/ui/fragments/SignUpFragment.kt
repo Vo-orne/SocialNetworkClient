@@ -56,7 +56,7 @@ class SignUpFragment : Fragment() {
         val sb = StringBuilder()
         splittedEmail.forEach { it ->
             val word =
-                it.replaceFirstChar { it ->
+                it.replaceFirstChar {
                     if (it.isLowerCase())
                         it.titlecase(Locale.ROOT)
                     else
