@@ -1,4 +1,4 @@
-package com.example.myprofile.mycontacts
+package com.example.myprofile.data
 
 import java.io.Serializable
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorFirstBackground"
-    tools:context=".fragments.SignUpFragment">
+    tools:context=".ui.fragments.SignUpFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSignUpTitle"
@@ -125,7 +125,7 @@
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpPassword"
         tools:ignore="RtlSymmetry" />
 
-    <com.example.myprofile.auth.GoogleButton
+    <com.example.myprofile.ui.GoogleButton
         android:id="@+id/buttonSignUpGoogle"
         android:layout_width="0dp"
         android:layout_height="@dimen/button_google_height"

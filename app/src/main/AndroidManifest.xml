@@ -18,7 +18,7 @@
         android:name=".App"
         tools:targetApi="31">
         <activity
-            android:name=".main.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
         </intent-filter>
         </activity>
         <provider
-            android:name="com.example.myprofile.mycontacts.ContactsContentProvider"
+            android:name="com.example.myprofile.utils.ContactsContentProvider"
             android:authorities="com.example.myprofile.mycontacts"
             android:exported="false" />
 

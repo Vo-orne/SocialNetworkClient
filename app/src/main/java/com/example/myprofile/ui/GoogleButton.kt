@@ -1,4 +1,4 @@
-package com.example.myprofile.auth
+package com.example.myprofile.ui
 
 import android.content.Context
 import android.content.res.TypedArray

@@ -8,9 +8,9 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.myprofile.App
 import com.example.myprofile.R
-import com.example.myprofile.main.MyProfileViewModel
-import com.example.myprofile.mycontacts.AddContactViewModel
-import com.example.myprofile.mycontacts.ContactsViewModel
+import com.example.myprofile.viewmodel.MyProfileViewModel
+import com.example.myprofile.viewmodel.AddContactViewModel
+import com.example.myprofile.viewmodel.ContactsViewModel
 
 class ViewModelFactory(
     private val app: App

@@ -1,4 +1,4 @@
-package com.example.myprofile.mycontacts
+package com.example.myprofile.utils
 
 import android.content.ContentProvider
 import android.content.ContentValues
@@ -6,6 +6,7 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.provider.ContactsContract
+import com.example.myprofile.data.Contact
 import java.lang.ref.WeakReference
 
 class ContactsContentProvider : ContentProvider() {

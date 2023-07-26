@@ -1,4 +1,4 @@
-package com.example.myprofile
+package com.example.myprofile.utils
 
 class Constants {
     companion object {
@@ -8,6 +8,5 @@ class Constants {
         const val USER_NAME_KEY = "userName"
         const val MAX_PASSWORD_SIZE = 8
         const val PASSWORD_IS_CORRECT = "Password correct."
-        const val CONTACTS_PERMISSION_CODE = 123
     }
 }

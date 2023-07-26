@@ -1,4 +1,4 @@
-package com.example.myprofile.fragments
+package com.example.myprofile.ui.fragments
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import android.os.Bundle
@@ -13,10 +13,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myprofile.R
+import com.example.myprofile.data.Contact
 import com.example.myprofile.databinding.FragmentMyContactsBinding
-import com.example.myprofile.mycontacts.*
+import com.example.myprofile.ui.AddContactDialogFragment
+import com.example.myprofile.ui.ContactActionListener
+import com.example.myprofile.ui.ContactsAdapter
 import com.example.myprofile.utils.factory
 import com.example.myprofile.utils.navigateToFragment
+import com.example.myprofile.viewmodel.ContactsViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class MyContactsFragment : Fragment() {
@@ -41,7 +45,9 @@ class MyContactsFragment : Fragment() {
 
             override fun onDetailView(contact: Contact) {
                 navigateToFragment(
-                    MyContactsFragmentDirections.actionMyContactsFragmentToDetailViewFragment(contact)
+                    MyContactsFragmentDirections.actionMyContactsFragmentToDetailViewFragment(
+                        contact
+                    )
                 )
             }
         })

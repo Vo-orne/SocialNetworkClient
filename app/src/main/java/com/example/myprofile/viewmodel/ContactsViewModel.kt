@@ -1,8 +1,11 @@
-package com.example.myprofile.mycontacts
+package com.example.myprofile.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myprofile.data.Contact
+import com.example.myprofile.data.ContactsRepository
+import com.example.myprofile.utils.UsersListener
 
 class ContactsViewModel(private val contactsRepository: ContactsRepository): ViewModel() {
 

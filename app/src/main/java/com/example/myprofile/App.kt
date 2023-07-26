@@ -1,7 +1,7 @@
 package com.example.myprofile
 
 import android.app.Application
-import com.example.myprofile.mycontacts.ContactsRepository
+import com.example.myprofile.data.ContactsRepository
 
 class App : Application() {
 

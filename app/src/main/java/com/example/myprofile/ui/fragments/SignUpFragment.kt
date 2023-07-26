@@ -1,4 +1,4 @@
-package com.example.myprofile.fragments
+package com.example.myprofile.ui.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.myprofile.Constants
+import com.example.myprofile.utils.Constants
 import com.example.myprofile.R
 import com.example.myprofile.databinding.FragmentSignUpBinding
 import com.example.myprofile.utils.navigateToFragmentWithoutReturning
@@ -19,7 +19,11 @@ class SignUpFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var sharedPreferences: SharedPreferences
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -50,8 +54,14 @@ class SignUpFragment : Fragment() {
             return splittedEmail[0]
         }
         val sb = StringBuilder()
-        splittedEmail.forEach {
-            val word = it.capitalize(Locale.ROOT)
+        splittedEmail.forEach { it ->
+            val word =
+                it.replaceFirstChar { it ->
+                    if (it.isLowerCase())
+                        it.titlecase(Locale.ROOT)
+                    else
+                        it.toString()
+                }
             sb.append("$word ")
         }
         return sb.substring(0, sb.length - 1).toString()

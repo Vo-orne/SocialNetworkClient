@@ -1,9 +1,9 @@
-package com.example.myprofile.mycontacts
+package com.example.myprofile.data
 
 import android.content.Context
+import com.example.myprofile.utils.ContactsContentProvider
+import com.example.myprofile.utils.UsersListener
 import com.github.javafaker.Faker
-
-typealias UsersListener = (users: List<Contact>) -> Unit
 
 class ContactsRepository(private val context: Context) {
 
@@ -79,7 +79,8 @@ class ContactsRepository(private val context: Context) {
 
     fun addContact(contact: Contact) {
         contacts = ArrayList(contacts)
-        val newContact = Contact(getId(), contact.avatar, contact.name, contact.career, contact.address)
+        val newContact =
+            Contact(getId(), contact.avatar, contact.name, contact.career, contact.address)
         contacts.add(contacts.size, newContact)
         notifyChanges()
     }

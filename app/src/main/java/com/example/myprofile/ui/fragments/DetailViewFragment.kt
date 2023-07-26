@@ -1,4 +1,4 @@
-package com.example.myprofile.fragments
+package com.example.myprofile.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.myprofile.R
+import com.example.myprofile.data.Contact
 import com.example.myprofile.databinding.FragmentDetailViewBinding
-import com.example.myprofile.mycontacts.Contact
 import com.example.myprofile.utils.navigateToFragment
 
 class DetailViewFragment : Fragment() {

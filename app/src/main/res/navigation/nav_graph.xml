@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.myprofile.fragments.SignUpFragment"
+        android:name="com.example.myprofile.ui.fragments.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/myProfileFragment"
-        android:name="com.example.myprofile.fragments.MyProfileFragment"
+        android:name="com.example.myprofile.ui.fragments.MyProfileFragment"
         android:label="fragment_my_profile"
         tools:layout="@layout/fragment_my_profile">
         <action
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/myContactsFragment"
-        android:name="com.example.myprofile.fragments.MyContactsFragment"
+        android:name="com.example.myprofile.ui.fragments.MyContactsFragment"
         android:label="MyContactsFragment">
         <action
             android:id="@+id/action_myContactsFragment_to_addContactDialogFragment"
@@ -42,16 +42,16 @@
 
     <dialog
         android:id="@+id/addContactDialogFragment"
-        android:name="com.example.myprofile.mycontacts.AddContactDialogFragment"
+        android:name="com.example.myprofile.ui.AddContactDialogFragment"
         android:label="AddContactDialogFragment" />
 
     <fragment
         android:id="@+id/detailViewFragment"
-        android:name="com.example.myprofile.fragments.DetailViewFragment"
+        android:name="com.example.myprofile.ui.fragments.DetailViewFragment"
         android:label="DetailViewFragment">
         <argument
             android:name="contact"
-            app:argType="com.example.myprofile.mycontacts.Contact" />
+            app:argType="com.example.myprofile.data.Contact" />
         <action
             android:id="@+id/action_detailViewFragment_to_myContactsFragment"
             app:destination="@id/myContactsFragment" />

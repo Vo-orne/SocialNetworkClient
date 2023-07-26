@@ -1,4 +1,4 @@
-package com.example.myprofile.fragments
+package com.example.myprofile.ui.fragments
 
 import android.Manifest
 import android.content.Context
@@ -10,10 +10,10 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.myprofile.Constants
+import com.example.myprofile.utils.Constants
 import com.example.myprofile.R
 import com.example.myprofile.databinding.FragmentMyProfileBinding
-import com.example.myprofile.main.MyProfileViewModel
+import com.example.myprofile.viewmodel.MyProfileViewModel
 import com.example.myprofile.utils.factory
 import com.example.myprofile.utils.navigateToFragment
 
