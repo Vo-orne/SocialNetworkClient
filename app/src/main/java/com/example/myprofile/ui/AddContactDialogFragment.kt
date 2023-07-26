@@ -15,71 +15,93 @@ import com.example.myprofile.viewmodel.AddContactViewModel
 import com.example.myprofile.data.Contact
 import com.example.myprofile.utils.ext.factory
 
+/**
+ * Dialog fragment for adding a new contact.
+ */
 class AddContactDialogFragment : DialogFragment() {
 
     private var _binding: DialogAddContactBinding? = null
     private val binding get() = _binding!!
     private var imageUri: Uri? = null
 
+    /**
+     * ViewModel for handling the addition of new contacts
+     */
     private val viewModel: AddContactViewModel by viewModels { factory() }
 
-
+    /**
+     * ActivityResultLauncher to get the content (image) URI
+     */
     private val getContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let { imageUri ->
-            this.imageUri = imageUri
-            Glide.with(requireContext())
-                .load(imageUri)
-                .into(binding.imageViewAddContactContactAvatar)
+            uri?.let { imageUri ->
+                this.imageUri = imageUri
+                // Load the selected image into the ImageView using Glide
+                Glide.with(requireContext())
+                    .load(imageUri)
+                    .into(binding.imageViewAddContactContactAvatar)
+            }
         }
-    }
 
     /**
      * Create dialog fragment.
      */
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        _binding = DialogAddContactBinding.inflate(layoutInflater) // Inflate binding of dialog fragment
+        _binding =
+            DialogAddContactBinding.inflate(layoutInflater) // Inflate the binding of the dialog fragment
 
         return activity?.let {
-            val builder = AlertDialog.Builder(it) // Create dialog
+            val builder = AlertDialog.Builder(it) // Create the dialog builder
             setupButtons()
-            builder.setView(binding.root).create() // Set view and create dialog
+            builder.setView(binding.root).create() // Set the view and create the dialog
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
+    /**
+     * Set up event listeners for buttons and ImageView
+     */
     private fun setupButtons() {
+        // Handle click on the "Save" button
         binding.buttonAddContactSave.setOnClickListener {
             saveContact()
         }
 
+        // Handle click on the "Back" button
         binding.buttonAddContactBack.setOnClickListener {
             dismiss()
         }
 
+        // Handle click on the ImageView to add a photo
         binding.imageViewAddContactAddPhoto.setOnClickListener {
+            // Launch the content (image) selection intent
             getContent.launch("image/*")
         }
     }
 
+    /**
+     * Method to save the newly added contact
+     */
     private fun saveContact() {
-        val id = 0L
+        val id = 0L // The ID for the new contact (not used in this code)
         val image = imageUri?.let { getUriAsString(requireContext().contentResolver, it) }
         val name = binding.textInputEditTextAddContactUsername.text.toString()
         val career = binding.textInputEditTextAddContactCareer.text.toString()
         val address = binding.textInputEditTextAddContactAddress.text.toString()
 
+        // Create a new Contact object with the entered data
         val contact = Contact(id, image.toString(), name, career, address)
 
+        // Add the new contact to the ViewModel
         viewModel.addContact(contact)
-        dismiss()
+        dismiss() // Close the dialog after saving the contact
     }
 
-
-    /*
-    This code uses ContentResolver and MediaStore to get the file path from the Uri.
-    If the path can be obtained, it can be returned as a URL string.
-    If the path fails, the initial Uri string is returned as a fallback value.
-    */
+    /**
+     * Method to get the file path from the Uri using ContentResolver and MediaStore.
+     * This code uses ContentResolver and MediaStore to get the file path from the Uri.
+     * If the path can be obtained, it can be returned as a URL string.
+     * If the path fails, the initial Uri string is returned as a fallback value.
+     */
     private fun getUriAsString(contentResolver: ContentResolver, uri: Uri): String {
         val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
         val cursor = contentResolver.query(uri, filePathColumn, null, null, null)
@@ -92,11 +114,14 @@ class AddContactDialogFragment : DialogFragment() {
                 }
             }
         }
-        return uri.toString() // Return the initial Uri string if the URL string could not be retrieved
+        return uri.toString() // Return the initial Uri string if the file path could not be retrieved
     }
 
+    /**
+     * Method called when the view of the dialog fragment is destroyed
+     */
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        _binding = null // Clean up the binding to avoid memory leaks
     }
 }

@@ -10,12 +10,17 @@ import com.bumptech.glide.Glide
 import com.example.myprofile.R
 import com.example.myprofile.data.Contact
 
-
+/**
+ * Interface for the listener of contact actions in the adapter.
+ */
 interface ContactActionListener {
     fun onContactDelete(contact: Contact, position: Int)
     fun onDetailView(contact: Contact)
 }
 
+/**
+ * The `UsersDiffCallback` class is used to calculate changes between two lists of contacts.
+ */
 class UsersDiffCallback(
     private val oldList: List<Contact>,
     private val newList: List<Contact>
@@ -37,6 +42,10 @@ class UsersDiffCallback(
     }
 }
 
+/**
+ * Adapter for the list of contacts.
+ * @property actionListener The listener for contact actions.
+ */
 class ContactsAdapter(
     private val actionListener: ContactActionListener
 ) : RecyclerView.Adapter<ContactsAdapter.ContactViewHolder>(), View.OnClickListener {
@@ -49,6 +58,9 @@ class ContactsAdapter(
             diffResult.dispatchUpdatesTo(this)
         }
 
+    /**
+     * Method called when an item in the list is clicked
+     */
     override fun onClick(v: View) {
         val contact = v.tag as Contact
         val position = contacts.indexOf(contact)
@@ -64,6 +76,9 @@ class ContactsAdapter(
 
     override fun getItemCount(): Int = contacts.size
 
+    /**
+     * Method that creates new ViewHolders and associates them with the layout structure from the layout file
+     */
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -77,6 +92,9 @@ class ContactsAdapter(
         return ContactViewHolder(binding)
     }
 
+    /**
+     * Method that binds data to the ViewHolder for a specific position in the RecyclerView
+     */
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val contact = contacts[position]
         with(holder.binding) {
@@ -98,6 +116,9 @@ class ContactsAdapter(
         }
     }
 
+    /**
+     * ViewHolder for the list of contacts
+     */
     class ContactViewHolder(
         val binding: ContactItemBinding
     ) : RecyclerView.ViewHolder(binding.root)

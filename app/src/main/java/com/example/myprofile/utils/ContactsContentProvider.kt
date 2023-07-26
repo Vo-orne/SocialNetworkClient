@@ -9,11 +9,23 @@ import android.provider.ContactsContract
 import com.example.myprofile.data.Contact
 import java.lang.ref.WeakReference
 
+/**
+ * The `ContactsContentProvider` is a content provider that allows retrieving contacts from the phone book.
+ * It provides methods to fetch contacts and their information such as avatar, name, organization, and address.
+ * This provider is implemented based on the Singleton pattern.
+ */
 class ContactsContentProvider : ContentProvider() {
 
     companion object {
         private var instance: ContactsContentProvider? = null
 
+        /**
+         * Creates and returns an instance of `ContactsContentProvider`.
+         * If the instance does not exist, it creates a new one, and if it exists, it returns the existing instance.
+         *
+         * @param context the application context needed for fetching contacts.
+         * @return the `ContactsContentProvider` instance.
+         */
         fun getInstance(context: Context): ContactsContentProvider {
             if (instance == null) {
                 instance = ContactsContentProvider()
@@ -38,7 +50,7 @@ class ContactsContentProvider : ContentProvider() {
     ): Cursor? {
         val contentResolver = context?.get()?.contentResolver ?: return null
 
-        // Get contacts from phone using ContactsContract
+        // Get contacts from the phone using ContactsContract
         return contentResolver.query(
             ContactsContract.Contacts.CONTENT_URI,
             null,
@@ -69,6 +81,11 @@ class ContactsContentProvider : ContentProvider() {
         return 0
     }
 
+    /**
+     * Retrieves the list of contacts from the phone book.
+     *
+     * @return the list of `Contact` objects containing contact information.
+     */
     fun getPhoneContacts(): List<Contact> {
         val contentResolver = context?.get()?.contentResolver ?: return emptyList()
         val cursor = contentResolver.query(
@@ -84,7 +101,12 @@ class ContactsContentProvider : ContentProvider() {
         return parseCursor(cursor)
     }
 
-
+    /**
+     * Parses the cursor obtained from the contacts database query and returns a list of contacts.
+     *
+     * @param cursor the cursor containing the result of the contacts database query.
+     * @return the list of `Contact` objects containing contact information.
+     */
     private fun parseCursor(cursor: Cursor?): List<Contact> {
         val parsedContacts = mutableListOf<Contact>()
         cursor?.use {
@@ -105,6 +127,12 @@ class ContactsContentProvider : ContentProvider() {
         return parsedContacts
     }
 
+    /**
+     * Retrieves the organization of the contact with the specified identifier.
+     *
+     * @param contactId the identifier of the contact.
+     * @return the organization of the contact or an empty string if the information is not found.
+     */
     private fun getContactOrganization(contactId: Long): String {
         val contentResolver = context?.get()?.contentResolver ?: return ""
         val organizationCursor = contentResolver.query(
@@ -124,6 +152,12 @@ class ContactsContentProvider : ContentProvider() {
         return organization
     }
 
+    /**
+     * Retrieves the avatar of the contact with the specified identifier.
+     *
+     * @param contactId the identifier of the contact.
+     * @return a string containing the path to the contact's avatar or an empty string if the information is not found.
+     */
     private fun getContactAvatar(contactId: Long): String {
         val contentResolver = context?.get()?.contentResolver ?: return ""
 
@@ -144,6 +178,12 @@ class ContactsContentProvider : ContentProvider() {
         return avatar
     }
 
+    /**
+     * Retrieves the address of the contact with the specified identifier.
+     *
+     * @param contactId the identifier of the contact.
+     * @return the address of the contact or an empty string if the information is not found.
+     */
     private fun getContactAddress(contactId: Long): String {
         val contentResolver = context?.get()?.contentResolver ?: return ""
 
