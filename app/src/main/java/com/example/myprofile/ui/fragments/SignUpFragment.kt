@@ -42,7 +42,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
         if (email.isNotEmpty()) {
             // Navigate to the "MyProfileFragment" without the ability to return back
             navigateToFragmentWithoutReturning(
-                R.id.action_signUpFragment_to_myProfileFragment, R.id.signUpFragment
+                R.id.action_signUpFragment_to_pagerFragment, R.id.signUpFragment
             )
         }
     }
@@ -70,7 +70,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
                 saveUserName(newEmail, editor)
                 // Navigate to the "MyProfileFragment" without the ability to return back
                 navigateToFragmentWithoutReturning(
-                    R.id.action_signUpFragment_to_myProfileFragment, R.id.signUpFragment
+                    R.id.action_signUpFragment_to_pagerFragment, R.id.signUpFragment
                 )
             }
         }

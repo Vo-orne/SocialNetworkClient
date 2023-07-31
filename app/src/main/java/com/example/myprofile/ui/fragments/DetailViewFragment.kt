@@ -68,7 +68,7 @@ class DetailViewFragment :
      */
     override fun setListeners() {
         binding.buttonDetailViewBack.setOnClickListener {
-            navigateToFragment(R.id.action_detailViewFragment_to_myContactsFragment)
+            navigateToFragment(R.id.action_detailViewFragment_to_pagerFragment)
         }
     }
 }

@@ -16,8 +16,8 @@ import com.example.myprofile.R
 import com.example.myprofile.data.Contact
 import com.example.myprofile.databinding.FragmentMyContactsBinding
 import com.example.myprofile.ui.AddContactDialogFragment
-import com.example.myprofile.ui.ContactActionListener
-import com.example.myprofile.ui.ContactsAdapter
+import com.example.myprofile.ui.adapters.ContactActionListener
+import com.example.myprofile.ui.adapters.ContactsAdapter
 import com.example.myprofile.utils.ext.factory
 import com.example.myprofile.utils.ext.navigateToFragment
 import com.example.myprofile.viewmodel.ContactsViewModel
@@ -58,11 +58,7 @@ class MyContactsFragment : Fragment() {
             // Event handler for viewing contact details
             override fun onDetailView(contact: Contact) {
                 // Navigate to the "DetailViewFragment" with the contact data
-                navigateToFragment(
-                    MyContactsFragmentDirections.actionMyContactsFragmentToDetailViewFragment(
-                        contact
-                    )
-                )
+                navigateToFragment(PagerFragmentDirections.actionPagerFragmentToDetailViewFragment(contact))
             }
         })
 

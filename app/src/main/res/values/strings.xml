@@ -51,4 +51,8 @@
     <string name="profile">Profile</string>
     <string name="message">Message</string>
 
+    <!--    PagerFragment    -->
+    <string name="tab1">My profile</string>
+    <string name="tab2">My contacts</string>
+
 </resources>

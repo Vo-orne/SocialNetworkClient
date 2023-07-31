@@ -11,8 +11,8 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up">
         <action
-            android:id="@+id/action_signUpFragment_to_myProfileFragment"
-            app:destination="@id/myProfileFragment" />
+            android:id="@+id/action_signUpFragment_to_pagerFragment"
+            app:destination="@id/pagerFragment" />
     </fragment>
 
     <fragment
@@ -28,13 +28,8 @@
     <fragment
         android:id="@+id/myContactsFragment"
         android:name="com.example.myprofile.ui.fragments.MyContactsFragment"
-        android:label="MyContactsFragment">
-        <action
-            android:id="@+id/action_myContactsFragment_to_addContactDialogFragment"
-            app:destination="@id/addContactDialogFragment" />
-        <action
-            android:id="@+id/action_myContactsFragment_to_detailViewFragment"
-            app:destination="@id/detailViewFragment"/>
+        android:label="MyContactsFragment"
+        tools:layout="@layout/fragment_my_contacts">
         <action
             android:id="@+id/action_myContactsFragment_to_myProfileFragment"
             app:destination="@id/myProfileFragment" />
@@ -43,17 +38,32 @@
     <dialog
         android:id="@+id/addContactDialogFragment"
         android:name="com.example.myprofile.ui.AddContactDialogFragment"
-        android:label="AddContactDialogFragment" />
+        android:label="AddContactDialogFragment"
+        tools:layout="@layout/dialog_add_contact"/>
 
     <fragment
         android:id="@+id/detailViewFragment"
         android:name="com.example.myprofile.ui.fragments.DetailViewFragment"
-        android:label="DetailViewFragment">
-        <argument
+        android:label="Detail View"
+        tools:layout="@layout/fragment_detail_view">
+    <argument
             android:name="contact"
             app:argType="com.example.myprofile.data.Contact" />
         <action
-            android:id="@+id/action_detailViewFragment_to_myContactsFragment"
-            app:destination="@id/myContactsFragment" />
+            android:id="@+id/action_detailViewFragment_to_pagerFragment"
+            app:destination="@id/pagerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pagerFragment"
+        android:name="com.example.myprofile.ui.fragments.PagerFragment"
+        android:label="PagerFragment"
+        tools:layout="@layout/fragment_pager">
+        <action
+            android:id="@+id/action_pagerFragment_to_addContactDialogFragment"
+            app:destination="@id/addContactDialogFragment" />
+        <action
+            android:id="@+id/action_pagerFragment_to_detailViewFragment"
+            app:destination="@id/detailViewFragment" />
     </fragment>
 </navigation>

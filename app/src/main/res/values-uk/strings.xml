@@ -48,9 +48,11 @@
     <string name="phone">Телефон</string>
     <string name="address">Адреса</string>
     <string name="date_of_birth">Дата народження</string>
-
-
     <string name="profile">Профіль</string>
     <string name="message">Повідомлення</string>
+
+    <!--    PagerFragment    -->
+    <string name="tab1">Мій профіль</string>
+    <string name="tab2">Мої контакти</string>
 
 </resources>

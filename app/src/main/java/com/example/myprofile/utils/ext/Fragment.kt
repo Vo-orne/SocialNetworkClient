@@ -58,8 +58,6 @@ fun Fragment.navigateToFragment(action: NavDirections) {
     )
 }
 
-
-
 fun Fragment.navigateToFragmentWithoutReturning(idAction: Int, idStartingFragment: Int){
     findNavController().navigate( // Responsible for the transition to the next fragment
         idAction, // id of the next fragment action, taken from nav_graph.xml
