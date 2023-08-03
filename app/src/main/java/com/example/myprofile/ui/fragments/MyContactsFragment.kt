@@ -88,8 +88,13 @@ class MyContactsFragment : Fragment() {
      * Private method to set event listeners
      */
     private fun setListeners() {
+        // Add a click listener for the button to switch to MyProfileFragment
         binding.imageButtonMyContactsBack.setOnClickListener {
-            navigateToFragment(R.id.action_myContactsFragment_to_myProfileFragment)
+            // Get the reference to ViewPager2 from PagerFragment
+            val viewPager = (parentFragment as PagerFragment).getViewPager()
+
+            // Switch to MyProfileFragment by setting the current item of the ViewPager2
+            viewPager.currentItem = 0 // Assuming MyContactsFragment is at index 1
         }
         binding.textViewMyContactsAddContacts.setOnClickListener {
             AddContactDialogFragment().show(childFragmentManager, "AddContactDialog")

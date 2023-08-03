@@ -39,14 +39,14 @@
         android:id="@+id/addContactDialogFragment"
         android:name="com.example.myprofile.ui.AddContactDialogFragment"
         android:label="AddContactDialogFragment"
-        tools:layout="@layout/dialog_add_contact"/>
+        tools:layout="@layout/dialog_add_contact" />
 
     <fragment
         android:id="@+id/detailViewFragment"
         android:name="com.example.myprofile.ui.fragments.DetailViewFragment"
         android:label="Detail View"
         tools:layout="@layout/fragment_detail_view">
-    <argument
+        <argument
             android:name="contact"
             app:argType="com.example.myprofile.data.Contact" />
         <action

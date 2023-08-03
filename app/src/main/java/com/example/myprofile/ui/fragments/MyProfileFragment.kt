@@ -13,7 +13,6 @@ import com.example.myprofile.base.BaseFragment
 import com.example.myprofile.databinding.FragmentMyProfileBinding
 import com.example.myprofile.viewmodel.MyProfileViewModel
 import com.example.myprofile.utils.ext.factory
-import com.example.myprofile.utils.ext.navigateToFragment
 
 /**
  * Fragment for displaying the user's profile.
@@ -33,7 +32,6 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfi
             if (isGranted) {
                 // If the permission is granted, allow access to phone contacts and navigate to the MyContactsFragment
                 viewModel.allowPhoneContacts()
-                navigateToFragment(R.id.action_myProfileFragment_to_myContactsFragment)
             } else {
                 // If the permission is denied, show a toast with a message about the access denial
                 Toast.makeText(
@@ -56,6 +54,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfi
         )
         val userName = sharedPreferences.getString(Constants.USER_NAME_KEY, "")
         binding.textViewMyProfileUserName.text = userName
+        requestContactsPermission.launch(Manifest.permission.READ_CONTACTS)
         setListeners()
     }
 
@@ -63,9 +62,13 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfi
      * Method to set event listeners
      */
     override fun setListeners() {
+        // Add a click listener for the button to switch to MyContactsFragment
         binding.buttonMyProfileViewMyContacts.setOnClickListener {
-            // Launch the contacts permission request
-            requestContactsPermission.launch(Manifest.permission.READ_CONTACTS)
+            // Get the reference to ViewPager2 from PagerFragment
+            val viewPager = (parentFragment as PagerFragment).getViewPager()
+
+            // Switch to MyContactsFragment by setting the current item of the ViewPager2
+            viewPager.currentItem = 1 // Assuming MyContactsFragment is at index 1
         }
     }
 }

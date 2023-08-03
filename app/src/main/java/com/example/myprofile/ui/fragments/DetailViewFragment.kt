@@ -2,12 +2,12 @@ package com.example.myprofile.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.myprofile.R
 import com.example.myprofile.base.BaseFragment
 import com.example.myprofile.data.Contact
 import com.example.myprofile.databinding.FragmentDetailViewBinding
-import com.example.myprofile.utils.ext.navigateToFragment
 
 /**
  * Fragment for displaying contact details
@@ -68,7 +68,8 @@ class DetailViewFragment :
      */
     override fun setListeners() {
         binding.buttonDetailViewBack.setOnClickListener {
-            navigateToFragment(R.id.action_detailViewFragment_to_pagerFragment)
+            // Navigate back to the previous page in the ViewPager2
+            findNavController().navigateUp()
         }
     }
 }
