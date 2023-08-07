@@ -7,32 +7,28 @@ import com.example.myprofile.R
 import com.example.myprofile.base.BaseFragment
 import com.example.myprofile.databinding.FragmentPagerBinding
 import com.example.myprofile.ui.adapters.ViewPagerAdapter
+import com.example.myprofile.ui.adapters.ViewPagerFragments
 import com.google.android.material.tabs.TabLayoutMediator
 
 
 class PagerFragment : BaseFragment<FragmentPagerBinding>(FragmentPagerBinding::inflate) {
+    // TODO: to simplify
 
-    private lateinit var viewPagerAdapter: ViewPagerAdapter
-    private lateinit var viewPager: ViewPager2
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewPagerAdapter = ViewPagerAdapter(this)
-        binding.viewPager.adapter = viewPagerAdapter
-        viewPager = binding.viewPager
+        binding.viewPager.adapter = ViewPagerAdapter(this)
+        binding.viewPager.offscreenPageLimit = 1
 
-        val tabLayout = binding.tabLayout
-
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            when (position) {
-                0 -> tab.text = getString(R.string.tab1)
-                else -> tab.text = getString(R.string.tab2)
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            when (ViewPagerFragments.values()[position]) {
+                ViewPagerFragments.PROFILE_FRAGMENT -> tab.text = getString(R.string.tab1)
+                ViewPagerFragments.CONTACTS_FRAGMENT -> tab.text = getString(R.string.tab2)
             }
         }.attach()
     }
 
-    fun getViewPager(): ViewPager2 {
-        return viewPager
-    }
+    fun getViewPager(): ViewPager2 = binding.viewPager
 
     override fun setListeners() {}
 }

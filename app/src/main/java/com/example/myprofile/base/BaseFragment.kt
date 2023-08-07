@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 
 /**
@@ -21,6 +23,8 @@ abstract class BaseFragment<VBinding : ViewBinding>(
     private var _binding: VBinding? = null
     val binding get() = requireNotNull(_binding)
 
+    val navController: NavController
+        get() = findNavController()
     /**
      * Called when the fragment's view is created.
      * Inflates the ViewBinding layout and returns the root view.

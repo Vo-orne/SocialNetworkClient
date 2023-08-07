@@ -21,23 +21,27 @@ class ViewModelFactory(
             ContactsViewModel::class.java -> {
                 ContactsViewModel(app.contactsRepository)
             }
+
             AddContactViewModel::class.java -> {
                 AddContactViewModel(app.contactsRepository)
             }
+
             MyProfileViewModel::class.java -> {
                 MyProfileViewModel(app.contactsRepository)
             }
+
             else -> {
                 throw IllegalStateException("Unknown view model class")
             }
         }
+
         return viewModel as T
     }
 }
 
 fun Fragment.factory() = ViewModelFactory(requireContext().applicationContext as App)
 
-fun Fragment.navigateToFragment(idAction: Int){
+fun Fragment.navigateToFragment(idAction: Int) {
     findNavController().navigate( // Responsible for the transition to the next fragment
         idAction, // id of the next fragment action, taken from nav_graph.xml
         null,
@@ -58,14 +62,17 @@ fun Fragment.navigateToFragment(action: NavDirections) {
     )
 }
 
-fun Fragment.navigateToFragmentWithoutReturning(idAction: Int, idStartingFragment: Int){
+fun Fragment.navigateToFragmentWithoutReturning(idAction: Int, idStartingFragment: Int) {
     findNavController().navigate( // Responsible for the transition to the next fragment
         idAction, // id of the next fragment action, taken from nav_graph.xml
         null,
         NavOptions.Builder()
             .setEnterAnim(R.anim.slide_in_right) // Responsible for setting the login animation
             .setExitAnim(R.anim.slide_out_left) // Responsible for setting the exit animation
-            .setPopUpTo(idStartingFragment, true) // Responsible for making it impossible to return to the signUpFragment
+            .setPopUpTo(
+                idStartingFragment,
+                true
+            ) // Responsible for making it impossible to return to the signUpFragment
             .build()
     )
 }

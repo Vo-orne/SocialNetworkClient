@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.example.myprofile.utils.Constants
 import com.example.myprofile.R
 import com.example.myprofile.base.BaseFragment
@@ -17,17 +18,19 @@ import java.util.*
  */
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
 
-    private lateinit var sharedPreferences: SharedPreferences
-
+    private val sharedPreferences: SharedPreferences by lazy {
+        requireContext().getSharedPreferences(
+            Constants.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE
+        )
+    }
+    private val viewModel: SignUpViewModel by viewModels()
+    // TODO: view model?
     /**
      * Method called when the fragment's view is created
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Get an instance of SharedPreferences for data storage
-        sharedPreferences = requireContext().getSharedPreferences(
-            Constants.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE
-        )
         // Check if previously saved user data exists for automatic login
         accountAutoLogin()
         // Set event listeners
@@ -38,8 +41,8 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
      * Private method for automatic login if user data is previously saved
      */
     private fun accountAutoLogin() {
-        val email = sharedPreferences.getString(Constants.EMAIL_KEY, "") ?: ""
-        if (email.isNotEmpty()) {
+
+        if (sharedPreferences.getString(Constants.EMAIL_KEY, "")?.isNotEmpty() == true) {
             // Navigate to the "MyProfileFragment" without the ability to return back
             navigateToFragmentWithoutReturning(
                 R.id.action_signUpFragment_to_pagerFragment, R.id.signUpFragment
@@ -51,28 +54,35 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
      * Method to set event listeners
      */
     override fun setListeners() {
-        binding.buttonSignUpRegister.setOnClickListener {
-            // Get the entered data: email and password
-            val newEmail = binding.textInputEditTextSignUpEmail.text.toString()
-            val newPassword = binding.textInputEditTextSignUpPassword.text.toString()
-            val editor = sharedPreferences.edit()
 
-            // Validate the entered data
-            if (validateInputs(newEmail, newPassword)) {
-                // If the "Remember Me" checkbox is checked, clear previously saved data
+        viewModel.registerLiveData.observe(viewLifecycleOwner) {
+            if (it) {
                 if (binding.checkBoxSignUpMemberInputDate.isChecked) {
-                    editor.clear()
-                    editor.apply()
+                    sharedPreferences.edit()
+                        .clear()
+                        .apply()
                     // Save the entered email and password
-                    saveLoginData(newEmail, newPassword, editor)
+                    //saveLoginData(newEmail, newPassword, editor)
                 }
-                // Save the user as a new user with the entered email
-                saveUserName(newEmail, editor)
-                // Navigate to the "MyProfileFragment" without the ability to return back
                 navigateToFragmentWithoutReturning(
                     R.id.action_signUpFragment_to_pagerFragment, R.id.signUpFragment
                 )
             }
+        }
+
+        binding.buttonSignUpRegister.setOnClickListener {
+            // Get the entered data: email and password
+            val newEmail = binding.textInputEditTextSignUpEmail.text.toString()
+            val newPassword = binding.textInputEditTextSignUpPassword.text.toString()
+
+            viewModel.validationInputs(newEmail, newPassword)
+            // Validate the entered data
+//            if (viewModel.validationInputs(newEmail, newPassword) == true) {
+//                // If the "Remember Me" checkbox is checked, clear previously saved data
+//                // Save the user as a new user with the entered email
+//                saveUserName(newEmail, editor)
+//                // Navigate to the "MyProfileFragment" without the ability to return back
+//            }
         }
     }
 

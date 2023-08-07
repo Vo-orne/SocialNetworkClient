@@ -120,7 +120,7 @@ class ContactsContentProvider : ContentProvider() {
                 val organization = getContactOrganization(id)
                 val address = getContactAddress(id)
 
-                val contact = Contact(id, avatar, name, organization, address)
+                val contact = Contact(avatar, name, organization, address)
                 parsedContacts.add(contact)
             }
         }

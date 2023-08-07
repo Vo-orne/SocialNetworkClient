@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/smallest_margin"
-        android:gravity="center"
         android:text="@string/titleText"
         android:theme="@style/TextViewTitlesStyle"
         app:layout_constraintBottom_toTopOf="@id/textViewSignUpSubtitle"
@@ -109,7 +108,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <CheckBox
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/checkBoxSignUpMemberInputDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -165,7 +164,7 @@
         app:layout_constraintBottom_toTopOf="@id/textViewSignUpNoticeAgreement"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
+    <!-- TODO: delete - its not need -->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSignUpNoticeAgreement"
         android:layout_width="wrap_content"

@@ -18,7 +18,7 @@ object Constants {
     const val USER_NAME_KEY = "userName"
 
     // Maximum length of a password.
-    const val MAX_PASSWORD_SIZE = 8
+    const val MAX_PASSWORD_SIZE = 8 // TODO: bad naming
 
     // String indicating that the password is correct.
     const val PASSWORD_IS_CORRECT = "Password correct."

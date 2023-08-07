@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- most often used size for text  -->
     <dimen name="text_largest_size">24sp</dimen>
     <dimen name="text_large_size">18sp</dimen>
     <dimen name="text_medium_size">16sp</dimen>
@@ -7,10 +8,13 @@
     <dimen name="text_smallest_size">12sp</dimen>
     <dimen name="very_smallest_margin">6dp</dimen>
     <dimen name="smallest_margin">8dp</dimen>
+
+    <!-- most often used size -->
     <dimen name="small_margin">10dp</dimen>
     <dimen name="medium_margin">12dp</dimen>
     <dimen name="large_margin">16dp</dimen>
     <dimen name="very_large_margin">24dp</dimen>
+
     <dimen name="largest_margin">60dp</dimen>
     <dimen name="min_height_element">48dp</dimen>
     <dimen name="icon_text_spacing">-100dp</dimen>
@@ -26,4 +30,5 @@
     <dimen name="button_view_my_contacts_height">58dp</dimen>
     <dimen name="button_land_edit_profile_height">58dp</dimen>
     <dimen name="button_land_view_my_contacts_height">58dp</dimen>
+    <dimen name="contact_photo_size">48dp</dimen>
 </resources>

@@ -61,7 +61,6 @@ class ContactsRepository(private val context: Context) {
         val faker = Faker.instance()
         return (1..NUM_RANDOM_CONTACTS).map {
             Contact(
-                id = getId(),
                 name = faker.name().name(),
                 career = faker.job().field(),
                 avatar = AVATARS[it % AVATARS.size],
@@ -85,9 +84,8 @@ class ContactsRepository(private val context: Context) {
      * @param position The position of the contact to be deleted in the list.
      */
     fun deleteContact(contact: Contact, position: Int) {
-        val indexToDelete = contacts.indexOfFirst {
-            it.id == contact.id
-        }
+        val indexToDelete = contacts.indexOfFirst { it.id == contact.id }
+
         if (indexToDelete != -1) {
             contacts = ArrayList(contacts)
             contacts.removeAt(position)
@@ -111,9 +109,8 @@ class ContactsRepository(private val context: Context) {
      */
     fun addContact(contact: Contact) {
         contacts = ArrayList(contacts)
-        val newContact =
-            Contact(getId(), contact.avatar, contact.name, contact.career, contact.address)
-        contacts.add(contacts.size, newContact)
+
+        contacts.add(contacts.size, contact)
         notifyChanges()
     }
     /**

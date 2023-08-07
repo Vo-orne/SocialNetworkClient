@@ -3,6 +3,7 @@ package com.example.myprofile.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.myprofile.R
 import com.example.myprofile.base.BaseFragment
@@ -17,8 +18,14 @@ class DetailViewFragment :
 
     /**
      * Object to hold the selected contact
+     *
      */
-    private lateinit var contact: Contact
+    private val args: DetailViewFragmentArgs by navArgs()
+    private val contact: Contact by lazy {
+        args.contact
+    }
+
+
 
     /**
      * Method called after the fragment's view is created
@@ -38,9 +45,8 @@ class DetailViewFragment :
      */
     private fun displayContactData() {
         // Get the selected contact from the passed arguments
-        arguments?.let {
-            contact = DetailViewFragmentArgs.fromBundle(it).contact
-        }
+
+
 
         // Populate the relevant fields with the received contact data
         with(binding) {
@@ -50,7 +56,7 @@ class DetailViewFragment :
 
             // Load the contact's avatar using Glide
             if (contact.avatar.isNotBlank()) {
-                Glide.with(imageViewDetailViewContactAvatar.context)
+                Glide.with(imageViewDetailViewContactAvatar.context)// TODO: change
                     .load(contact.avatar)
                     .circleCrop()
                     .placeholder(R.drawable.default_user_photo)
@@ -69,7 +75,7 @@ class DetailViewFragment :
     override fun setListeners() {
         binding.buttonDetailViewBack.setOnClickListener {
             // Navigate back to the previous page in the ViewPager2
-            findNavController().navigateUp()
+            navController.navigateUp()
         }
     }
 }

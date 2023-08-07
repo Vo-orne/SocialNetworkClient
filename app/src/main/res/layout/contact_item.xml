@@ -11,7 +11,7 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageViewMyContactsUserAvatar"
-        android:layout_width="48dp"
+        android:layout_width="@dimen/contact_photo_size"
         android:layout_height="48dp"
         android:layout_marginStart="@dimen/medium_margin"
         android:layout_marginTop="@dimen/medium_margin"
@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewMyContactsUserName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
         app:layout_constraintStart_toEndOf="@id/imageViewMyContactsUserAvatar"
         app:layout_constraintTop_toBottomOf="@id/textViewMyContactsUserName" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/buttonMyContactsDelete"
         android:layout_width="50dp"
         android:layout_height="54dp"

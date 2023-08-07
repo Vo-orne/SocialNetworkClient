@@ -37,7 +37,7 @@ class AddContactDialogFragment : DialogFragment() {
             uri?.let { imageUri ->
                 this.imageUri = imageUri
                 // Load the selected image into the ImageView using Glide
-                Glide.with(requireContext())
+                Glide.with(requireContext())// TODO: ext
                     .load(imageUri)
                     .into(binding.imageViewAddContactContactAvatar)
             }
@@ -52,7 +52,7 @@ class AddContactDialogFragment : DialogFragment() {
 
         return activity?.let {
             val builder = AlertDialog.Builder(it) // Create the dialog builder
-            setupButtons()
+            setListeners()
             builder.setView(binding.root).create() // Set the view and create the dialog
         } ?: throw IllegalStateException("Activity cannot be null")
     }
@@ -60,7 +60,7 @@ class AddContactDialogFragment : DialogFragment() {
     /**
      * Set up event listeners for buttons and ImageView
      */
-    private fun setupButtons() {
+    private fun setListeners() {
         // Handle click on the "Save" button
         binding.buttonAddContactSave.setOnClickListener {
             saveContact()
@@ -82,17 +82,15 @@ class AddContactDialogFragment : DialogFragment() {
      * Method to save the newly added contact
      */
     private fun saveContact() {
-        val id = 0L // The ID for the new contact (not used in this code)
         val image = imageUri?.let { getUriAsString(requireContext().contentResolver, it) }
         val name = binding.textInputEditTextAddContactUsername.text.toString()
         val career = binding.textInputEditTextAddContactCareer.text.toString()
         val address = binding.textInputEditTextAddContactAddress.text.toString()
 
         // Create a new Contact object with the entered data
-        val contact = Contact(id, image.toString(), name, career, address)
 
         // Add the new contact to the ViewModel
-        viewModel.addContact(contact)
+        viewModel.addContact(Contact(image.toString(), name, career, address))
         dismiss() // Close the dialog after saving the contact
     }
 

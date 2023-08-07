@@ -7,13 +7,12 @@ import com.example.myprofile.ui.fragments.MyProfileFragment
 
 class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
-    override fun getItemCount(): Int = 2 // Number of fragments
+    override fun getItemCount(): Int = ViewPagerFragments.values().size // Number of fragments // TODO: to constants
 
     override fun createFragment(position: Int): Fragment {
-        return when (position) {
-            0 -> MyProfileFragment()
-            1 -> MyContactsFragment()
-            else -> throw IllegalArgumentException("Invalid position")
+        return when (ViewPagerFragments.values()[position]) {
+            ViewPagerFragments.PROFILE_FRAGMENT -> MyProfileFragment()
+            ViewPagerFragments.CONTACTS_FRAGMENT -> MyContactsFragment()
         }
     }
 }
