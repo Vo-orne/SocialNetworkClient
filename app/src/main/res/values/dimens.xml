@@ -6,16 +6,18 @@
     <dimen name="text_medium_size">16sp</dimen>
     <dimen name="text_small_size">14sp</dimen>
     <dimen name="text_smallest_size">12sp</dimen>
-    <dimen name="very_smallest_margin">6dp</dimen>
-    <dimen name="smallest_margin">8dp</dimen>
 
     <!-- most often used size -->
+    <dimen name="very_smallest_margin">6dp</dimen>
+    <dimen name="smallest_margin">8dp</dimen>
     <dimen name="small_margin">10dp</dimen>
     <dimen name="medium_margin">12dp</dimen>
     <dimen name="large_margin">16dp</dimen>
     <dimen name="very_large_margin">24dp</dimen>
-
+    <dimen name="delete_select_mode_top_margin">32dp</dimen>
+    <dimen name="delete_select_mode_bottom_margin">44dp</dimen>
     <dimen name="largest_margin">60dp</dimen>
+
     <dimen name="min_height_element">48dp</dimen>
     <dimen name="icon_text_spacing">-100dp</dimen>
     <dimen name="icon_padding_left">60dp</dimen>
@@ -31,4 +33,5 @@
     <dimen name="button_land_edit_profile_height">58dp</dimen>
     <dimen name="button_land_view_my_contacts_height">58dp</dimen>
     <dimen name="contact_photo_size">48dp</dimen>
+    <dimen name="select_mode_size">20dp</dimen>
 </resources>

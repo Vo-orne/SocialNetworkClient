@@ -1,9 +1,6 @@
 package com.example.myprofile.ui.fragments
 
-import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,20 +32,33 @@ class MyContactsFragment : Fragment() { // TODO: BaseFragment?
 
             // Event handler for contact deletion
             override fun onContactDelete(contact: Contact, position: Int) {
-                // Delete the contact from ViewModel and adapter's list
-                viewModel.deleteUser(contact, position)
-                // Show a Snackbar with a message about the contact deletion
-                showSnackbar()
+                    // Delete the contact from ViewModel and adapter's list
+                    viewModel.deleteUser(contact, position)
+                    // Show a Snackbar with a message about the contact deletion
+                    showSnackbar()
             }
 
             // Event handler for viewing contact details
-            override fun onDetailView(contact: Contact) {
-                // Navigate to the "DetailViewFragment" with the contact data
-                navigateToFragment(
-                    PagerFragmentDirections.actionPagerFragmentToDetailViewFragment(
-                        contact
+            override fun onDetailView(contact: Contact, position: Int) {
+                if (viewModel.isMultiselect) {
+                    viewModel.addSelectedContact(contact, position)
+                } else {
+                    // Navigate to the "DetailViewFragment" with the contact data
+                    navigateToFragment(
+                        PagerFragmentDirections.actionPagerFragmentToDetailViewFragment(
+                            contact
+                        )
                     )
-                )
+                }
+            }
+
+            override fun onLongClick(contact: Contact, position: Int) {
+                viewModel.changeMultiselectMode()
+                if (viewModel.isMultiselect) {
+                    viewModel.addSelectedContact(contact, position)
+                    adapter.setMultiselectData(viewModel.isSelectItems as ArrayList<Pair<Boolean, Int>>)
+                    binding.imageViewMyContactsDeleteSelectMode!!.visibility = View.VISIBLE
+                }
             }
         })
     }
@@ -114,6 +124,10 @@ class MyContactsFragment : Fragment() { // TODO: BaseFragment?
                 childFragmentManager,
                 "AddContactDialog"
             ) // TODO: constants?
+        }
+        binding.imageViewMyContactsDeleteSelectMode?.setOnClickListener {
+            viewModel.deleteSelectedContacts()
+            showSnackbar()
         }
     }
 

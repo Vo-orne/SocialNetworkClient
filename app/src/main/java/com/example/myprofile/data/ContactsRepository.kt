@@ -1,6 +1,7 @@
 package com.example.myprofile.data
 
 import android.content.Context
+import android.util.Log
 import com.example.myprofile.utils.ContactsContentProvider
 import com.example.myprofile.utils.ext.UsersListener
 import com.github.javafaker.Faker
@@ -23,6 +24,8 @@ class ContactsRepository(private val context: Context) {
     private var positionLastDeletedContact = 0
     private var isPhoneContactsAllowed = false
 
+    private var _lastDeletedContacts = mutableListOf<Pair<Contact, Int>>()
+
     private var lastId: Long = 0L
 
     init {
@@ -42,6 +45,7 @@ class ContactsRepository(private val context: Context) {
             generateRandomContacts().toMutableList()
         }
     }
+
     /**
      * Allows access to phone contacts. It fetches the contacts from the ContactsContentProvider,
      * adding random contacts to them, and replaces the contacts list with the new list containing these contacts.
@@ -54,6 +58,7 @@ class ContactsRepository(private val context: Context) {
         this.contacts = ArrayList(contacts)
         notifyChanges()
     }
+
     /**
      * Generates random contacts using the Faker library and returns a list of contacts.
      */
@@ -68,6 +73,7 @@ class ContactsRepository(private val context: Context) {
             )
         }
     }
+
     /**
      * Returns a unique identifier for a contact.
      */
@@ -76,6 +82,7 @@ class ContactsRepository(private val context: Context) {
         lastId++
         return result
     }
+
     /**
      * Deletes a contact from the contacts list at a specific index. It stores the deleted contact
      * in lastDeletedContact and its position in positionLastDeletedContact.
@@ -84,25 +91,41 @@ class ContactsRepository(private val context: Context) {
      * @param position The position of the contact to be deleted in the list.
      */
     fun deleteContact(contact: Contact, position: Int) {
-        val indexToDelete = contacts.indexOfFirst { it.id == contact.id }
+        deleteItem(contact, position)
+    }
 
+    fun deleteSelectedContacts(selectedContacts: MutableList<Pair<Contact, Int>>) {
+        for (contact in selectedContacts) {
+            val x = selectedContacts.size.toString()
+            Log.d("myLog", "selectedContacts.size = $x")
+            deleteItem(contact.first, contact.second)
+        }
+    }
+
+    private fun deleteItem(contact: Contact, position: Int) {
+        val indexToDelete = contacts.indexOfFirst { it.id == contact.id }
         if (indexToDelete != -1) {
             contacts = ArrayList(contacts)
             contacts.removeAt(position)
-            lastDeletedContact = contact
-            positionLastDeletedContact = position
+            _lastDeletedContacts.add(Pair(contact, position))
             notifyChanges()
         }
     }
+
+
+
     /**
      * Restores the last deleted contact in the contacts list at position positionLastDeletedContact.
      * Then, it notifies listeners about the changes.
      */
     fun restoreLastDeletedContact() {
         contacts = ArrayList(contacts)
-        contacts.add(positionLastDeletedContact, lastDeletedContact)
-        notifyChanges()
+        for (contact in _lastDeletedContacts) {
+            contacts.add(contact.second, contact.first)
+            notifyChanges()
+        }
     }
+
     /**
      * Adds a new contact to the contacts list and notifies listeners about the changes.
      * @param contact The contact to be added.
@@ -113,6 +136,7 @@ class ContactsRepository(private val context: Context) {
         contacts.add(contacts.size, contact)
         notifyChanges()
     }
+
     /**
      * Adds a listener to the listeners list and notifies it about the current contacts list.
      * @param listener The listener to be added.
@@ -121,6 +145,7 @@ class ContactsRepository(private val context: Context) {
         listeners.add(listener)
         listener.invoke(contacts)
     }
+
     /**
      * Removes a listener from the listeners list.
      * @param listener The listener to be removed.
@@ -128,12 +153,14 @@ class ContactsRepository(private val context: Context) {
     fun removeListener(listener: UsersListener) {
         listeners.remove(listener)
     }
+
     /**
      * Notifies all listeners about the changes in the contacts list.
      */
     private fun notifyChanges() {
         listeners.forEach { it.invoke(contacts) }
     }
+
     companion object {
         private const val NUM_RANDOM_CONTACTS = 10
         private val AVATARS = mutableListOf(

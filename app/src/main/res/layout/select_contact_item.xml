@@ -3,41 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/frame_contacts_data"
-    android:layout_marginTop="@dimen/very_smallest_margin"
     android:layout_marginStart="@dimen/medium_margin"
+    android:layout_marginTop="@dimen/very_smallest_margin"
     android:layout_marginEnd="@dimen/medium_margin"
-    android:layout_marginBottom="@dimen/very_smallest_margin">
+    android:layout_marginBottom="@dimen/very_smallest_margin"
+    android:background="@drawable/frame_contacts_data">
 
     <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/imageViewContactItemSelectMode"
-        android:layout_width="@dimen/select_mode_size"
-        android:layout_height="@dimen/select_mode_size"
+        android:id="@+id/imageViewSelectContactItemNotSelected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/medium_margin"
         android:button="@drawable/frame_selected"
-        android:checked="false"
-        android:visibility="gone"
+        android:checked="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/imageViewContactItemUserAvatar"/>
+        app:layout_constraintEnd_toStartOf="@id/imageViewSelectContactItemUserAvatar"/>
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageViewContactItemUserAvatar"
+        android:id="@+id/imageViewSelectContactItemUserAvatar"
         android:layout_width="@dimen/contact_photo_size"
         android:layout_height="48dp"
-        android:layout_marginStart="@dimen/medium_margin"
         android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginBottom="@dimen/medium_margin"
         android:contentDescription="@string/content_description_user_avatar"
         android:src="@drawable/default_user_photo"
         android:theme="@style/roundedCorner"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imageViewContactItemSelectMode"
+        app:layout_constraintStart_toEndOf="@id/imageViewSelectContactItemNotSelected"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewContactItemUserName"
+        android:id="@+id/textViewSelectContactItemUserName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/medium_margin"
@@ -45,14 +43,14 @@
         android:text="@string/name_surname"
         android:textColor="?attr/colorSecondMainText"
         android:textSize="@dimen/text_large_size"
-        app:layout_constraintBottom_toTopOf="@id/textViewContactItemUserCareer"
-        app:layout_constraintEnd_toStartOf="@id/buttonContactItemDelete"
-        app:layout_constraintStart_toEndOf="@id/imageViewContactItemUserAvatar"
+        app:layout_constraintBottom_toTopOf="@id/textViewSelectContactItemUserCareer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewSelectContactItemUserAvatar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/textViewContactItemUserCareer"
+        android:id="@+id/textViewSelectContactItemUserCareer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/medium_margin"
@@ -61,23 +59,8 @@
         android:textColor="?attr/colorSecondaryTextForContacts"
         android:textSize="@dimen/text_smallest_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/buttonContactItemDelete"
-        app:layout_constraintStart_toEndOf="@id/imageViewContactItemUserAvatar"
-        app:layout_constraintTop_toBottomOf="@id/textViewContactItemUserName" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/buttonContactItemDelete"
-        android:layout_width="50dp"
-        android:layout_height="54dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/medium_margin"
-        android:layout_marginEnd="@dimen/medium_margin"
-        android:layout_marginBottom="@dimen/medium_margin"
-        android:visibility="visible"
-        android:background="@null"
-        android:contentDescription="@string/delete_button"
-        android:src="@drawable/ic_delete_button"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/imageViewSelectContactItemUserAvatar"
+        app:layout_constraintTop_toBottomOf="@id/textViewSelectContactItemUserName" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

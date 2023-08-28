@@ -108,7 +108,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.appcompat.widget.AppCompatCheckBox
+    <CheckBox
         android:id="@+id/checkBoxSignUpMemberInputDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

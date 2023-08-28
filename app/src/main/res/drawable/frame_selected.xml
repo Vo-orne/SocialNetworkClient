@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:state_checked="false">
+    <vector android:width="20dp"
+        android:height="20dp"
+        android:viewportWidth="20"
+        android:viewportHeight="20">
+      <path
+          android:pathData="M10,10m-9,0a9,9 0,1 1,18 0a9,9 0,1 1,-18 0"
+          android:strokeWidth="2"
+          android:fillColor="#00000000"
+          android:strokeColor="?attr/colorSecondaryText"/>
+    </vector>
+  </item>
+  <item android:state_checked="true">
+    <vector android:width="20dp"
+        android:height="20dp"
+        android:viewportWidth="20"
+        android:viewportHeight="20">
+      <path
+          android:pathData="M10,10m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"
+          android:fillColor="?attr/colorMainText"/>
+      <path
+          android:pathData="M14,7L8.4,13L6,10.75"
+          android:strokeWidth="2"
+          android:fillColor="#00000000"
+          android:strokeColor="?attr/colorAccentButtons"
+          android:strokeLineCap="square"/>
+    </vector>
+  </item>
+</selector>

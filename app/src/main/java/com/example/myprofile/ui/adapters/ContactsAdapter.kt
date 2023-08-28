@@ -1,6 +1,8 @@
 package com.example.myprofile.ui.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -16,7 +18,10 @@ import com.example.myprofile.utils.ext.loadImage
  */
 interface ContactActionListener {
     fun onContactDelete(contact: Contact, position: Int)
-    fun onDetailView(contact: Contact)
+
+    fun onDetailView(contact: Contact, position: Int)
+
+    fun onLongClick(contact: Contact, position: Int)
 }
 // TODO: optimize diff util and remove from this class
 /**
@@ -40,9 +45,7 @@ class ContactsAdapter(
     private val actionListener: ContactActionListener
 ) : ListAdapter<Contact, ContactsAdapter.ContactViewHolder>(UsersDiffCallback()) {
 
-    /**
-     * Method called when an item in the list is clicked
-     */
+    private var isSelectItems: ArrayList<Pair<Boolean, Int>> = ArrayList()
 
 
     /**
@@ -74,26 +77,51 @@ class ContactsAdapter(
         fun onBind(contact: Contact) {
             with(binding) {
                 itemView.tag = contact
-                buttonMyContactsDelete.tag = contact
+                buttonContactItemDelete.tag = contact
 
-                textViewMyContactsUserName.text = contact.name
-                textViewMyContactsUserCareer.text = contact.career
+                textViewContactItemUserName.text = contact.name
+                textViewContactItemUserCareer.text = contact.career
                 if (contact.avatar.isNotBlank()) {
-                    imageViewMyContactsUserAvatar.loadImage(contact.avatar)
+                    imageViewContactItemUserAvatar.loadImage(contact.avatar)
                 } else {
-                    imageViewMyContactsUserAvatar.setImageResource(R.drawable.default_user_photo)
+                    imageViewContactItemUserAvatar.setImageResource(R.drawable.default_user_photo)
                 }
             }
             setListener(contact)
         }
 
         private fun setListener(contact: Contact) {
-            binding.buttonMyContactsDelete.setOnClickListener {
-                actionListener.onContactDelete(contact, bindingAdapterPosition)
-            }
-            binding.root.setOnClickListener {
-                actionListener.onDetailView(contact)
+            if (isSelectItems.isNotEmpty()) setSelectList(contact)
+            with(binding) {
+                buttonContactItemDelete.setOnClickListener {
+                    actionListener.onContactDelete(contact, bindingAdapterPosition)
+                }
+                root.setOnClickListener {
+                    if (isSelectItems.isNotEmpty()) {
+                        imageViewContactItemSelectMode.isChecked = true
+                    }
+                    actionListener.onDetailView(contact, bindingAdapterPosition)
+                }
+                root.setOnLongClickListener {
+                    imageViewContactItemSelectMode.isChecked = true
+                    actionListener.onLongClick(contact, bindingAdapterPosition)
+                    true
+                }
             }
         }
+
+        private fun setSelectList(contact: Contact) {
+            with(binding) {
+                imageViewContactItemSelectMode.visibility = View.VISIBLE
+                buttonContactItemDelete.visibility = View.GONE
+                imageViewContactItemSelectMode.isChecked =
+                    isSelectItems.find { (contact.id.equals(it.second)) }?.first == true
+                actionListener.onDetailView(contact, bindingAdapterPosition)
+            }
+        }
+    }
+
+    fun setMultiselectData(isSelectItems: ArrayList<Pair<Boolean, Int>>) {
+        this.isSelectItems = isSelectItems
     }
 }
