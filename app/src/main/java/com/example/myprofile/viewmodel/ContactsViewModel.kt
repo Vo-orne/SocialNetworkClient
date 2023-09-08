@@ -13,14 +13,8 @@ class ContactsViewModel(private val contactsRepository: ContactsRepository): Vie
     private val _contacts = MutableLiveData<List<Contact>>() // Live data for saving the list of users
     val contacts: LiveData<List<Contact>> = _contacts // Public access to live data
 
-    private val _isMultiselect = false // Default contact list status (normal mode or selected contacts mode)
-    var isMultiselect = _isMultiselect // Public status of the contact list (normal mode or selected contacts mode)
-
     private val _selectedContacts = mutableListOf<Pair<Contact, Int>>()
     val selectedContacts: List<Pair<Contact, Int>> by lazy { _selectedContacts }
-
-    private val _isSelectItems = mutableListOf<Pair<Boolean, Int>>()
-    val isSelectItems: List<Pair<Boolean, Int>> by lazy { _isSelectItems }
 
     private val listener: UsersListener = {
         _contacts.value = it
@@ -35,19 +29,24 @@ class ContactsViewModel(private val contactsRepository: ContactsRepository): Vie
         contactsRepository.removeListener(listener)
     }
 
-    fun changeMultiselectMode() {
-        isMultiselect = !isMultiselect
+    fun addSelectedContact(contact: Contact, position: Int) {
+        _selectedContacts.add(Pair(contact, position))
+        val x = _selectedContacts.size.toString()
+        Log.d("myLog", "_selectedContacts.size in VM = $x")
     }
 
-    fun addSelectedContact(contact: Contact, position: Int) {
-        val x = selectedContacts.size.toString()
-        Log.d("myLog", "selectedContacts.size in VM = $x")
-        _selectedContacts.add(Pair(contact, position))
-        _isSelectItems.add(Pair(true, position))
+    fun removeSelectedContact(contact: Contact, position: Int) {
+        _selectedContacts.remove(Pair(contact, position))
+        val x = _selectedContacts.size.toString()
+        Log.d("myLog", "_selectedContacts.size in VM = $x")
     }
 
     private fun loadContacts() {
         contactsRepository.addListener(listener)
+    }
+
+    fun deleteSelectedContacts(selectedContacts: Set<Contact>) {
+        contactsRepository.deleteSelectedContacts(selectedContacts)
     }
 
     fun deleteSelectedContacts() {

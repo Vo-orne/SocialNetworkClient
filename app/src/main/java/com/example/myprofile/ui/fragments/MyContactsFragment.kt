@@ -1,6 +1,7 @@
 package com.example.myprofile.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,16 +33,16 @@ class MyContactsFragment : Fragment() { // TODO: BaseFragment?
 
             // Event handler for contact deletion
             override fun onContactDelete(contact: Contact, position: Int) {
-                    // Delete the contact from ViewModel and adapter's list
-                    viewModel.deleteUser(contact, position)
-                    // Show a Snackbar with a message about the contact deletion
-                    showSnackbar()
+                // Delete the contact from ViewModel and adapter's list
+                viewModel.deleteUser(contact, position)
+                // Show a Snackbar with a message about the contact deletion
+                showSnackbar()
             }
 
             // Event handler for viewing contact details
-            override fun onDetailView(contact: Contact, position: Int) {
-                if (viewModel.isMultiselect) {
-                    viewModel.addSelectedContact(contact, position)
+            override fun onClick(contact: Contact, position: Int) {
+                if (adapter.isSelectMode) {
+                    clickInSelectMode(contact, position)
                 } else {
                     // Navigate to the "DetailViewFragment" with the contact data
                     navigateToFragment(
@@ -53,14 +54,21 @@ class MyContactsFragment : Fragment() { // TODO: BaseFragment?
             }
 
             override fun onLongClick(contact: Contact, position: Int) {
-                viewModel.changeMultiselectMode()
-                if (viewModel.isMultiselect) {
-                    viewModel.addSelectedContact(contact, position)
-                    adapter.setMultiselectData(viewModel.isSelectItems as ArrayList<Pair<Boolean, Int>>)
-                    binding.imageViewMyContactsDeleteSelectMode!!.visibility = View.VISIBLE
-                }
+
+                clickInSelectMode(contact, position)
             }
         })
+    }
+
+    private fun clickInSelectMode(contact: Contact, position: Int) {
+        adapter.toggleSelection(contact)
+        val selectedItems = adapter.getSelectedItems()
+        Log.d("myLog", "selectedItems = $selectedItems")
+        binding.imageViewMyContactsDeleteSelectMode?.visibility = View.VISIBLE
+        if (selectedItems.isEmpty()) {
+            adapter.clearSelection()
+            binding.imageViewMyContactsDeleteSelectMode!!.visibility = View.GONE
+        }
     }
 
     /**
@@ -126,8 +134,11 @@ class MyContactsFragment : Fragment() { // TODO: BaseFragment?
             ) // TODO: constants?
         }
         binding.imageViewMyContactsDeleteSelectMode?.setOnClickListener {
-            viewModel.deleteSelectedContacts()
+            val selectedItems = adapter.getSelectedItems()
+            viewModel.deleteSelectedContacts(selectedItems)
             showSnackbar()
+            adapter.clearSelection()
+            binding.imageViewMyContactsDeleteSelectMode!!.visibility = View.GONE
         }
     }
 

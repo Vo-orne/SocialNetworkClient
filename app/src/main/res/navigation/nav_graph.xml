@@ -16,6 +16,19 @@
     </fragment>
 
     <fragment
+        android:id="@+id/pagerFragment"
+        android:name="com.example.myprofile.ui.fragments.PagerFragment"
+        android:label="PagerFragment"
+        tools:layout="@layout/fragment_pager">
+        <action
+            android:id="@+id/action_pagerFragment_to_addContactDialogFragment"
+            app:destination="@id/addContactDialogFragment" />
+        <action
+            android:id="@+id/action_pagerFragment_to_detailViewFragment"
+            app:destination="@id/detailViewFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/myProfileFragment"
         android:name="com.example.myprofile.ui.fragments.MyProfileFragment"
         android:label="fragment_my_profile"
@@ -52,18 +65,5 @@
         <action
             android:id="@+id/action_detailViewFragment_to_pagerFragment"
             app:destination="@id/pagerFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/pagerFragment"
-        android:name="com.example.myprofile.ui.fragments.PagerFragment"
-        android:label="PagerFragment"
-        tools:layout="@layout/fragment_pager">
-        <action
-            android:id="@+id/action_pagerFragment_to_addContactDialogFragment"
-            app:destination="@id/addContactDialogFragment" />
-        <action
-            android:id="@+id/action_pagerFragment_to_detailViewFragment"
-            app:destination="@id/detailViewFragment" />
     </fragment>
 </navigation>

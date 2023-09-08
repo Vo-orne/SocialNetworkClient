@@ -3,7 +3,6 @@ package com.example.myprofile.ui.fragments
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Patterns
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.myprofile.utils.Constants
@@ -41,12 +40,12 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
      * Private method for automatic login if user data is previously saved
      */
     private fun accountAutoLogin() {
-
-        if (sharedPreferences.getString(Constants.EMAIL_KEY, "")?.isNotEmpty() == true) {
-            // Navigate to the "MyProfileFragment" without the ability to return back
-            navigateToFragmentWithoutReturning(
-                R.id.action_signUpFragment_to_pagerFragment, R.id.signUpFragment
-            )
+        viewModel.registerLiveData.observe(viewLifecycleOwner) {
+            if (it) {
+                navigateToFragmentWithoutReturning(
+                    R.id.action_signUpFragment_to_pagerFragment, R.id.signUpFragment
+                )
+            }
         }
     }
 
@@ -55,92 +54,46 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
      */
     override fun setListeners() {
 
-        viewModel.registerLiveData.observe(viewLifecycleOwner) {
-            if (it) {
-                if (binding.checkBoxSignUpMemberInputDate.isChecked) {
-                    sharedPreferences.edit()
-                        .clear()
-                        .apply()
-                    // Save the entered email and password
-                    //saveLoginData(newEmail, newPassword, editor)
-                }
-                navigateToFragmentWithoutReturning(
-                    R.id.action_signUpFragment_to_pagerFragment, R.id.signUpFragment
-                )
-            }
-        }
-
         binding.buttonSignUpRegister.setOnClickListener {
             // Get the entered data: email and password
             val newEmail = binding.textInputEditTextSignUpEmail.text.toString()
             val newPassword = binding.textInputEditTextSignUpPassword.text.toString()
+            val editor = sharedPreferences.edit()
 
-            viewModel.validationInputs(newEmail, newPassword)
-            // Validate the entered data
-//            if (viewModel.validationInputs(newEmail, newPassword) == true) {
-//                // If the "Remember Me" checkbox is checked, clear previously saved data
-//                // Save the user as a new user with the entered email
-//                saveUserName(newEmail, editor)
-//                // Navigate to the "MyProfileFragment" without the ability to return back
-//            }
+            if (binding.checkBoxSignUpMemberInputDate.isChecked) {
+                viewModel.saveAutoLogin(newEmail, newPassword)
+                comeToNextFragment(
+                    viewModel.registerLiveData.value == true,
+                    newEmail,
+                    editor
+                )
+            } else {
+                comeToNextFragment(
+                    viewModel.validationInputs(newEmail, newPassword),
+                    newEmail,
+                    editor
+                )
+            }
         }
     }
 
-    /**
-     * Private method to validate the entered data
-     */
-    private fun validateInputs(emailInput: String, passwordInput: String): Boolean {
-        var isValid = true
-
-        // Validate the entered email
-        if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-            isValid = false
-            binding.textInputLayoutSignUpEmail.error = getString(R.string.error_on_email)
+    private fun comeToNextFragment(
+        condition: Boolean,
+        email: String,
+        editor: SharedPreferences.Editor
+    ) {
+        if (condition) {
+            saveUserName(email, editor)
+            navigateToFragmentWithoutReturning(
+                R.id.action_signUpFragment_to_pagerFragment, R.id.signUpFragment
+            )
         } else {
-            binding.textInputLayoutSignUpEmail.error = null
+            if (viewModel.emailError != null)
+                binding.textInputLayoutSignUpEmail.error = viewModel.emailError
+
+            if (viewModel.passwordError != null)
+                binding.textInputLayoutSignUpPassword.error = viewModel.passwordError
         }
-
-        // Validate the entered password
-        if (isValidPassword(passwordInput) == Constants.PASSWORD_IS_CORRECT) {
-            binding.textInputLayoutSignUpPassword.error = null
-        } else {
-            isValid = false
-            binding.textInputLayoutSignUpPassword.error = isValidPassword(passwordInput)
-        }
-
-        return isValid
-    }
-
-    /**
-     * Private method to validate the entered password
-     */
-    private fun isValidPassword(password: String): String {
-        var isHasEnoughLength = false
-        var isHasNumber = false
-        var isHasLetter = false
-
-        if (password.length >= Constants.MAX_PASSWORD_SIZE) {
-            isHasEnoughLength = true
-        }
-
-        if (password.contains(Regex("\\d+"))) isHasNumber = true
-        if (password.contains(Regex("[a-zA-Z]+"))) isHasLetter = true
-
-        return when {
-            !isHasEnoughLength -> getString(R.string.error_password_is_short)
-            !isHasNumber -> getString(R.string.error_password_without_numbers)
-            !isHasLetter -> getString(R.string.error_password_without_letters)
-            else -> Constants.PASSWORD_IS_CORRECT
-        }
-    }
-
-    /**
-     * Private method to save the entered user data (email and password)
-     */
-    private fun saveLoginData(email: String, password: String, editor: SharedPreferences.Editor) {
-        editor.putString(Constants.EMAIL_KEY, email)
-        editor.putString(Constants.PASSWORD_KEY, password)
-        editor.apply()
     }
 
     /**

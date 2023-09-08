@@ -91,14 +91,27 @@ class ContactsRepository(private val context: Context) {
      * @param position The position of the contact to be deleted in the list.
      */
     fun deleteContact(contact: Contact, position: Int) {
+        _lastDeletedContacts.clear()
         deleteItem(contact, position)
     }
 
     fun deleteSelectedContacts(selectedContacts: MutableList<Pair<Contact, Int>>) {
+        _lastDeletedContacts.clear()
         for (contact in selectedContacts) {
             val x = selectedContacts.size.toString()
             Log.d("myLog", "selectedContacts.size = $x")
             deleteItem(contact.first, contact.second)
+        }
+    }
+
+    fun deleteSelectedContacts(selectedContacts: Set<Contact>) {
+        for (contact in selectedContacts) {
+            val indexToDelete = contacts.indexOfFirst { it.id == contact.id }
+            if (indexToDelete != -1) {
+                contacts = ArrayList(contacts)
+                contacts.removeAt(indexToDelete)
+                notifyChanges()
+            }
         }
     }
 
