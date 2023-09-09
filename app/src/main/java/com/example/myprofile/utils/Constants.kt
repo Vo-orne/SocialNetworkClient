@@ -8,14 +8,11 @@ object Constants {
     // Key for storing login data in shared preferences.
     const val SHARED_PREFERENCES_KEY = "login_data"
 
-    // Key for storing the user's email in shared preferences.
-    const val EMAIL_KEY = "email"
-
-    // Key for storing the user's password in shared preferences.
-    const val PASSWORD_KEY = "password"
-
     // Key for storing the user's name in shared preferences.
     const val USER_NAME_KEY = "userName"
+
+    // Key for storing the autoLogin in shared preferences.
+    const val AUTO_LOGIN_KEY = "autoLogin"
 
     // Maximum length of a password.
     const val MAX_PASSWORD_SIZE = 8 // TODO: bad naming

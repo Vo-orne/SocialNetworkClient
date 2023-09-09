@@ -52,11 +52,6 @@ class ContactsAdapter(
         init {
             binding.root.setOnClickListener {
                 val contact = currentList[bindingAdapterPosition]
-//                if (isSelectMode) {
-//                    toggleSelection(contact)
-//                } else {
-//                    actionListener.onClick(contact, bindingAdapterPosition)
-//                }
                 actionListener.onClick(contact, bindingAdapterPosition)
             }
 
@@ -65,7 +60,6 @@ class ContactsAdapter(
                 if (!isSelectMode) {
                     isSelectMode = true
                     selectedItems.clear()
-//                    selectedItems.add(contact)
                     actionListener.onLongClick(contact, bindingAdapterPosition)
                     notifyDataSetChanged()
                 }

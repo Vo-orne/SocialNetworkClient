@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_pagerFragment_to_detailViewFragment"
             app:destination="@id/detailViewFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_pagerFragment"
+            app:destination="@id/pagerFragment" />
     </fragment>
 
     <fragment
