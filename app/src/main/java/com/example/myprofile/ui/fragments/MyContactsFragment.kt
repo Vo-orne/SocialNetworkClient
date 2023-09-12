@@ -1,7 +1,6 @@
 package com.example.myprofile.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,7 +61,6 @@ class MyContactsFragment : Fragment() { // TODO: BaseFragment?
     private fun clickInSelectMode(contact: Contact, position: Int) {
         adapter.toggleSelection(contact, position)
         val selectedItems = adapter.getSelectedItems()
-        Log.d("myLog", "selectedItems = $selectedItems")
         binding.imageViewMyContactsDeleteSelectMode?.visibility = View.VISIBLE
         if (selectedItems.isEmpty()) {
             adapter.clearSelection()

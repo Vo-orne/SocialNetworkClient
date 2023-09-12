@@ -83,15 +83,21 @@ class ContactsRepository(private val context: Context) {
 
     fun deleteSelectedContacts(selectedContacts: HashSet<Pair<Contact, Int>>) {
         _lastDeletedContacts.clear()
+        val deletedContacts = mutableListOf<Pair<Contact, Int>>()
+
+        // Sort selected Contacts in descending index order,
+        // to delete contacts with the current index
+        selectedContacts.sortedByDescending { it.second }
         for (contact in selectedContacts) {
             val indexToDelete = contacts.indexOfFirst { it.id == contact.first.id }
             if (indexToDelete != -1) {
                 contacts = ArrayList(contacts)
                 contacts.removeAt(indexToDelete)
-                _lastDeletedContacts.add(Pair(contact.first, indexToDelete))
-                notifyChanges()
+                deletedContacts.add(Pair(contact.first, contact.second))
             }
         }
+        _lastDeletedContacts.addAll(deletedContacts)
+        notifyChanges()
     }
 
     private fun deleteItem(contact: Contact, position: Int) {
@@ -111,11 +117,16 @@ class ContactsRepository(private val context: Context) {
      * Then, it notifies listeners about the changes.
      */
     fun restoreLastDeletedContact() {
+        // Sort _lastDeletedContacts in ascending index order,
+        // to restore contacts by the current index
+        _lastDeletedContacts.sortBy { it.second }
+
         contacts = ArrayList(contacts)
         for (contact in _lastDeletedContacts) {
             contacts.add(contact.second, contact.first)
-            notifyChanges()
         }
+        notifyChanges()
+        _lastDeletedContacts.clear()
     }
 
     /**
@@ -124,7 +135,6 @@ class ContactsRepository(private val context: Context) {
      */
     fun addContact(contact: Contact) {
         contacts = ArrayList(contacts)
-
         contacts.add(contacts.size, contact)
         notifyChanges()
     }
