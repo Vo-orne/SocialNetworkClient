@@ -54,14 +54,13 @@ class MyContactsFragment : Fragment() { // TODO: BaseFragment?
             }
 
             override fun onLongClick(contact: Contact, position: Int) {
-
                 clickInSelectMode(contact, position)
             }
         })
     }
 
     private fun clickInSelectMode(contact: Contact, position: Int) {
-        adapter.toggleSelection(contact)
+        adapter.toggleSelection(contact, position)
         val selectedItems = adapter.getSelectedItems()
         Log.d("myLog", "selectedItems = $selectedItems")
         binding.imageViewMyContactsDeleteSelectMode?.visibility = View.VISIBLE

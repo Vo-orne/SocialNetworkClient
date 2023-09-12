@@ -19,7 +19,7 @@ class ContactsAdapter(
     private val actionListener: ContactActionListener
 ) : ListAdapter<Contact, ContactsAdapter.ContactViewHolder>(UsersDiffCallback()) {
 
-    private val selectedItems = HashSet<Contact>()
+    private val selectedItems = HashSet<Pair<Contact, Int>>()
     var isSelectMode = false
 
 
@@ -82,18 +82,18 @@ class ContactsAdapter(
                 } else {
                     imageViewContactItemUserAvatar.setImageResource(R.drawable.default_user_photo)
                 }
-                imageViewContactItemSelectMode.isChecked = selectedItems.contains(contact)
+                imageViewContactItemSelectMode.isChecked = selectedItems.contains(Pair(contact, bindingAdapterPosition))
                 imageViewContactItemSelectMode.visibility = if (isSelectMode) View.VISIBLE else View.GONE
                 buttonContactItemDelete.visibility = if (isSelectMode) View.GONE else View.VISIBLE
             }
         }
     }
 
-    fun toggleSelection(contact: Contact) {
-        if (selectedItems.contains(contact)) {
-            selectedItems.remove(contact)
+    fun toggleSelection(contact: Contact, position: Int) {
+        if (selectedItems.contains(Pair(contact, position))) {
+            selectedItems.remove(Pair(contact, position))
         } else {
-            selectedItems.add(contact)
+            selectedItems.add(Pair(contact, position))
         }
         notifyItemChanged(currentList.indexOf(contact))
     }
@@ -104,7 +104,7 @@ class ContactsAdapter(
         notifyDataSetChanged()
     }
 
-    fun getSelectedItems(): Set<Contact> {
+    fun getSelectedItems(): HashSet<Pair<Contact, Int>> {
         return selectedItems
     }
 }

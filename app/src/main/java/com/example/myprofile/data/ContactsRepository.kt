@@ -1,7 +1,6 @@
 package com.example.myprofile.data
 
 import android.content.Context
-import android.util.Log
 import com.example.myprofile.utils.ContactsContentProvider
 import com.example.myprofile.utils.ext.UsersListener
 import com.github.javafaker.Faker
@@ -20,13 +19,9 @@ class ContactsRepository(private val context: Context) {
 
     private val listeners = mutableListOf<UsersListener>()
 
-    private lateinit var lastDeletedContact: Contact
-    private var positionLastDeletedContact = 0
     private var isPhoneContactsAllowed = false
 
     private var _lastDeletedContacts = mutableListOf<Pair<Contact, Int>>()
-
-    private var lastId: Long = 0L
 
     init {
         loadContacts()
@@ -75,15 +70,6 @@ class ContactsRepository(private val context: Context) {
     }
 
     /**
-     * Returns a unique identifier for a contact.
-     */
-    private fun getId(): Long {
-        val result = lastId
-        lastId++
-        return result
-    }
-
-    /**
      * Deletes a contact from the contacts list at a specific index. It stores the deleted contact
      * in lastDeletedContact and its position in positionLastDeletedContact.
      * Then, it notifies listeners about the changes.
@@ -95,21 +81,14 @@ class ContactsRepository(private val context: Context) {
         deleteItem(contact, position)
     }
 
-    fun deleteSelectedContacts(selectedContacts: MutableList<Pair<Contact, Int>>) {
+    fun deleteSelectedContacts(selectedContacts: HashSet<Pair<Contact, Int>>) {
         _lastDeletedContacts.clear()
         for (contact in selectedContacts) {
-            val x = selectedContacts.size.toString()
-            Log.d("myLog", "selectedContacts.size = $x")
-            deleteItem(contact.first, contact.second)
-        }
-    }
-
-    fun deleteSelectedContacts(selectedContacts: Set<Contact>) {
-        for (contact in selectedContacts) {
-            val indexToDelete = contacts.indexOfFirst { it.id == contact.id }
+            val indexToDelete = contacts.indexOfFirst { it.id == contact.first.id }
             if (indexToDelete != -1) {
                 contacts = ArrayList(contacts)
                 contacts.removeAt(indexToDelete)
+                _lastDeletedContacts.add(Pair(contact.first, indexToDelete))
                 notifyChanges()
             }
         }
@@ -120,7 +99,7 @@ class ContactsRepository(private val context: Context) {
         if (indexToDelete != -1) {
             contacts = ArrayList(contacts)
             contacts.removeAt(position)
-            _lastDeletedContacts.add(Pair(contact, position))
+            _lastDeletedContacts.add(Pair(contact, indexToDelete))
             notifyChanges()
         }
     }
