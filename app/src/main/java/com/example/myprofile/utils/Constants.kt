@@ -19,4 +19,7 @@ object Constants {
 
     // String indicating that the password is correct.
     const val PASSWORD_IS_CORRECT = "Password correct."
+
+    // String command to open the add contact dialog.
+    const val ADD_CONTACT_DIALOG = "AddContactDialog"
 }

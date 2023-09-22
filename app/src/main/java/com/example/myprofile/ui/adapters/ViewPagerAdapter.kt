@@ -7,7 +7,7 @@ import com.example.myprofile.ui.fragments.MyProfileFragment
 
 class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
-    override fun getItemCount(): Int = ViewPagerFragments.values().size // Number of fragments // TODO: to constants
+    override fun getItemCount(): Int = ViewPagerFragments.values().size // Number of fragments
 
     override fun createFragment(position: Int): Fragment {
         return when (ViewPagerFragments.values()[position]) {

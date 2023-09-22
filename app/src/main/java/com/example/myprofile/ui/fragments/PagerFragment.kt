@@ -12,9 +12,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 
 class PagerFragment : BaseFragment<FragmentPagerBinding>(FragmentPagerBinding::inflate) {
-    // TODO: to simplify
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.viewPager.adapter = ViewPagerAdapter(this)

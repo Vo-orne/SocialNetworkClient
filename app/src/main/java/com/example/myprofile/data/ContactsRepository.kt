@@ -15,12 +15,24 @@ import com.github.javafaker.Faker
  */
 class ContactsRepository(private val context: Context) {
 
+    /**
+     * List of contacts to be displayed.
+     */
     private var contacts = mutableListOf<Contact>()
 
+    /**
+     * List of listeners.
+     */
     private val listeners = mutableListOf<UsersListener>()
 
+    /**
+     * The user's response to the request to obtain permission to the phone's contact list.
+     */
     private var isPhoneContactsAllowed = false
 
+    /**
+     * A list of the last saved contacts that will be possible to return.
+     */
     private var _lastDeletedContacts = mutableListOf<Pair<Contact, Int>>()
 
     init {
@@ -81,7 +93,13 @@ class ContactsRepository(private val context: Context) {
         deleteItem(contact, position)
     }
 
+    /**
+     * Deletes all selected contacts in multiselect mode.
+     * @param selectedContacts List of selected contacts transferred View model.
+     */
     fun deleteSelectedContacts(selectedContacts: HashSet<Pair<Contact, Int>>) {
+        // Clears previously deleted contacts so that _lastDeletedContacts contains only
+        // the last deleted contacts.
         _lastDeletedContacts.clear()
         val deletedContacts = mutableListOf<Pair<Contact, Int>>()
 
@@ -100,6 +118,11 @@ class ContactsRepository(private val context: Context) {
         notifyChanges()
     }
 
+    /**
+     * Removes a specific contact from the contact list.
+     * @param contact Contact to be deleted.
+     * @param position The position of the contact in the contact list.
+     */
     private fun deleteItem(contact: Contact, position: Int) {
         val indexToDelete = contacts.indexOfFirst { it.id == contact.id }
         if (indexToDelete != -1) {

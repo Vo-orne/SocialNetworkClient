@@ -1,5 +1,6 @@
 package com.example.myprofile.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,14 @@ class ContactsAdapter(
     private val actionListener: ContactActionListener
 ) : ListAdapter<Contact, ContactsAdapter.ContactViewHolder>(UsersDiffCallback()) {
 
+    /**
+     * Selected contacts in multiselect mode.
+     */
     private val selectedItems = HashSet<Pair<Contact, Int>>()
+
+    /**
+     * Multiselect state.
+     */
     var isSelectMode = false
 
 
@@ -45,6 +53,7 @@ class ContactsAdapter(
     /**
      * ViewHolder for the list of contacts
      */
+    @SuppressLint("NotifyDataSetChanged")
     inner class ContactViewHolder(
         private val binding: ContactItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -72,6 +81,10 @@ class ContactsAdapter(
             }
         }
 
+        /**
+         * Displaying data in the contact.
+         * @param contact A specific contact whose data will be displayed.
+         */
         fun onBind(contact: Contact) {
             with(binding) {
                 itemView.tag = contact
@@ -89,6 +102,9 @@ class ContactsAdapter(
         }
     }
 
+    /**
+     * Switching the selection of a contact in multiselect mode.
+     */
     fun toggleSelection(contact: Contact, position: Int) {
         if (selectedItems.contains(Pair(contact, position))) {
             selectedItems.remove(Pair(contact, position))
@@ -98,12 +114,19 @@ class ContactsAdapter(
         notifyItemChanged(currentList.indexOf(contact))
     }
 
+    /**
+     * Completely clears the list of selected contacts in multiselect mode and exits it.
+     */
+    @SuppressLint("NotifyDataSetChanged")
     fun clearSelection() {
         selectedItems.clear()
         isSelectMode = false
         notifyDataSetChanged()
     }
 
+    /**
+     * Returns the list of selected contacts in multiselect mode.
+     */
     fun getSelectedItems(): HashSet<Pair<Contact, Int>> {
         return selectedItems
     }

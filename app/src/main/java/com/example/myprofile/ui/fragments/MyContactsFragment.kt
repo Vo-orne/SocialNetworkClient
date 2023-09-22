@@ -15,6 +15,7 @@ import com.example.myprofile.ui.AddContactDialogFragment
 import com.example.myprofile.ui.adapters.ContactActionListener
 import com.example.myprofile.ui.adapters.ContactsAdapter
 import com.example.myprofile.ui.adapters.ViewPagerFragments
+import com.example.myprofile.utils.Constants.ADD_CONTACT_DIALOG
 import com.example.myprofile.utils.ext.factory
 import com.example.myprofile.utils.ext.navigateToFragment
 import com.example.myprofile.utils.ext.swipeToDelete
@@ -52,12 +53,18 @@ class MyContactsFragment : Fragment() { // TODO: BaseFragment?
                 }
             }
 
+            // Event handler for long click.
             override fun onLongClick(contact: Contact, position: Int) {
                 clickInSelectMode(contact, position)
             }
         })
     }
 
+    /**
+     * Handles long-clicking on a contact while multiselect mode is enabled.
+     * @param contact The contact that was clicked.
+     * @param position The position of the contact that was clicked.
+     */
     private fun clickInSelectMode(contact: Contact, position: Int) {
         adapter.toggleSelection(contact, position)
         val selectedItems = adapter.getSelectedItems()
@@ -83,14 +90,10 @@ class MyContactsFragment : Fragment() { // TODO: BaseFragment?
     ): View {
         binding = FragmentMyContactsBinding.inflate(inflater, container, false)
 
-        // Observer for changes in the list of contacts in ViewModel
-
         // Set LayoutManager and adapter for the RecyclerView
         val layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewContacts.layoutManager = layoutManager
         binding.recyclerViewContacts.adapter = adapter
-        // Enable swipe-to-delete functionality for contacts
-
         return binding.root
     }
 
@@ -109,7 +112,6 @@ class MyContactsFragment : Fragment() { // TODO: BaseFragment?
     /**
      * Private method to set event listeners
      */
-
     private fun setListeners() {
         binding.recyclerViewContacts.swipeToDelete(
             deleteFunction = { contact, position -> viewModel.deleteUser(contact, position) },
@@ -119,16 +121,15 @@ class MyContactsFragment : Fragment() { // TODO: BaseFragment?
         binding.imageButtonMyContactsBack.setOnClickListener {
             // Get the reference to ViewPager2 from PagerFragment
             (parentFragment as PagerFragment).getViewPager().currentItem =
-                ViewPagerFragments.PROFILE_FRAGMENT.position // TODO: constants?
-
+                ViewPagerFragments.PROFILE_FRAGMENT.position
             // Switch to MyProfileFragment by setting the current item of the ViewPager2
             // Assuming MyContactsFragment is at index 1
         }
         binding.textViewMyContactsAddContacts.setOnClickListener {
             AddContactDialogFragment().show(
                 childFragmentManager,
-                "AddContactDialog"
-            ) // TODO: constants?
+                ADD_CONTACT_DIALOG
+            )
         }
         binding.imageViewMyContactsDeleteSelectMode?.setOnClickListener {
             val selectedItems = adapter.getSelectedItems()
@@ -143,7 +144,7 @@ class MyContactsFragment : Fragment() { // TODO: BaseFragment?
     /**
      * Method to show a Snackbar with a message about the contact deletion
      */
-    fun showSnackbar() { // TODO: to ext method
+    fun showSnackbar() {
         val snackbar = Snackbar.make(
             binding.root,
             R.string.contact_removed,
@@ -153,7 +154,6 @@ class MyContactsFragment : Fragment() { // TODO: BaseFragment?
             // Restore the last deleted contact in ViewModel
             viewModel.restoreLastDeletedContact()
         }
-        snackbar.show()
-        // Automatically close the Snackbar after 5 seconds
+        snackbar.show() // Automatically close the Snackbar after 5 seconds
     }
 }
