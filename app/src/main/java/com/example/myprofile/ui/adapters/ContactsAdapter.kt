@@ -6,18 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myprofile.R
-import com.example.myprofile.data.Contact
+import com.example.myprofile.data.model.Contact
 import com.example.myprofile.databinding.ContactItemBinding
 import com.example.myprofile.utils.ext.loadImage
+import com.example.myprofile.utils.ext.visibleIf
 
+// TODO: if multiselect - swipe to delete: isEnabled false
 
 /**
  * Adapter for the list of contacts.
- * @property actionListener The listener for contact actions.
+ * @property listener The listener for contact actions.
  */
 class ContactsAdapter(
-    private val actionListener: ContactActionListener
+    private val listener: ContactActionListener
 ) : ListAdapter<Contact, ContactsAdapter.ContactViewHolder>(UsersDiffCallback()) {
 
     /**
@@ -58,46 +59,40 @@ class ContactsAdapter(
         private val binding: ContactItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        init {
-            binding.root.setOnClickListener {
-                val contact = currentList[bindingAdapterPosition]
-                actionListener.onClick(contact, bindingAdapterPosition)
-            }
-
-            binding.root.setOnLongClickListener {
-                val contact = currentList[bindingAdapterPosition]
-                if (!isSelectMode) {
-                    isSelectMode = true
-                    selectedItems.clear()
-                    actionListener.onLongClick(contact, bindingAdapterPosition)
-                    notifyDataSetChanged()
-                }
-                true
-            }
-
-            binding.buttonContactItemDelete.setOnClickListener {
-                val contact = currentList[bindingAdapterPosition]
-                actionListener.onContactDelete(contact, bindingAdapterPosition)
-            }
-        }
-
         /**
          * Displaying data in the contact.
          * @param contact A specific contact whose data will be displayed.
          */
         fun onBind(contact: Contact) {
             with(binding) {
-                itemView.tag = contact
+//                itemView.tag = contact // TODO: what is this?
                 textViewContactItemUserName.text = contact.name
                 textViewContactItemUserCareer.text = contact.career
-                if (contact.avatar.isNotBlank()) {
-                    imageViewContactItemUserAvatar.loadImage(contact.avatar)
-                } else {
-                    imageViewContactItemUserAvatar.setImageResource(R.drawable.default_user_photo)
-                }
+                imageViewContactItemUserAvatar.loadImage(contact.avatar)
                 imageViewContactItemSelectMode.isChecked = selectedItems.contains(Pair(contact, bindingAdapterPosition))
-                imageViewContactItemSelectMode.visibility = if (isSelectMode) View.VISIBLE else View.GONE
+                imageViewContactItemSelectMode.visibleIf(isSelectMode)
                 buttonContactItemDelete.visibility = if (isSelectMode) View.GONE else View.VISIBLE
+            }
+            setListeners(contact)
+        }
+
+        private fun setListeners(contact: Contact) {
+            binding.root.setOnClickListener {
+                listener.onClick(contact, bindingAdapterPosition)
+            }
+
+            binding.root.setOnLongClickListener {
+                if (!isSelectMode) {
+                    isSelectMode = true
+                    selectedItems.clear()
+                    listener.onLongClick(contact, bindingAdapterPosition)
+                    notifyDataSetChanged()
+                }
+                true
+            }
+
+            binding.buttonContactItemDelete.setOnClickListener {
+                listener.onContactDelete(contact, bindingAdapterPosition)
             }
         }
     }

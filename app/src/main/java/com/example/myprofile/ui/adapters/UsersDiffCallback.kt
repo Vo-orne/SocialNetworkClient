@@ -1,7 +1,7 @@
 package com.example.myprofile.ui.adapters
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.myprofile.data.Contact
+import com.example.myprofile.data.model.Contact
 
 /**
  * The `UsersDiffCallback` class is used to calculate changes between two lists of contacts.

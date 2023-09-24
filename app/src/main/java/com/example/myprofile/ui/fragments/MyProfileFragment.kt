@@ -9,8 +9,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.example.myprofile.utils.Constants
 import com.example.myprofile.R
-import com.example.myprofile.base.BaseFragment
+import com.example.myprofile.ui.base.BaseFragment
 import com.example.myprofile.databinding.FragmentMyProfileBinding
+import com.example.myprofile.ui.adapters.ViewPagerFragments
 import com.example.myprofile.viewmodel.MyProfileViewModel
 import com.example.myprofile.utils.ext.factory
 
@@ -65,10 +66,9 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfi
         // Add a click listener for the button to switch to MyContactsFragment
         binding.buttonMyProfileViewMyContacts.setOnClickListener {
             // Get the reference to ViewPager2 from PagerFragment
-            val viewPager = (parentFragment as PagerFragment).getViewPager()
-
+            (parentFragment as PagerFragment).getViewPager().currentItem = ViewPagerFragments.CONTACTS_FRAGMENT.ordinal
             // Switch to MyContactsFragment by setting the current item of the ViewPager2
-            viewPager.currentItem = 1 // Assuming MyContactsFragment is at index 1
+             // Assuming MyContactsFragment is at index 1
         }
     }
 }

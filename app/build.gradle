@@ -4,6 +4,8 @@ plugins {
 
     // safe args
     id 'androidx.navigation.safeargs.kotlin'
+    // passing objects between fragments
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -48,6 +50,7 @@ dependencies {
     def nav_version = "2.6.0"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation 'androidx.navigation:navigation-dynamic-features-fragment:2.6.0'
 
     implementation("androidx.fragment:fragment-ktx:1.6.1")
     implementation 'com.google.android.material:material:1.9.0'

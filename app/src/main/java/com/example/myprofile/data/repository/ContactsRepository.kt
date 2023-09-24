@@ -1,6 +1,7 @@
-package com.example.myprofile.data
+package com.example.myprofile.data.repository
 
 import android.content.Context
+import com.example.myprofile.data.model.Contact
 import com.example.myprofile.utils.ContactsContentProvider
 import com.example.myprofile.utils.ext.UsersListener
 import com.github.javafaker.Faker
@@ -71,7 +72,7 @@ class ContactsRepository(private val context: Context) {
      */
     private fun generateRandomContacts(): List<Contact> {
         val faker = Faker.instance()
-        return (1..NUM_RANDOM_CONTACTS).map {
+        return (1..AVATARS.size).map {
             Contact(
                 name = faker.name().name(),
                 career = faker.job().field(),
@@ -187,8 +188,7 @@ class ContactsRepository(private val context: Context) {
     }
 
     companion object {
-        private const val NUM_RANDOM_CONTACTS = 10
-        private val AVATARS = mutableListOf(
+        private val AVATARS = listOf(
             "https://randomuser.me/api/portraits/women/44.jpg",
             "https://randomuser.me/api/portraits/men/46.jpg",
             "https://randomuser.me/api/portraits/men/97.jpg",

@@ -1,4 +1,4 @@
-package com.example.myprofile.base
+package com.example.myprofile.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

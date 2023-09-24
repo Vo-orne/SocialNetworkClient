@@ -1,4 +1,4 @@
-package com.example.myprofile.ui
+package com.example.myprofile.ui.fragments
 
 import android.app.Dialog
 import android.content.ContentResolver
@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.myprofile.databinding.DialogAddContactBinding
 import com.example.myprofile.viewmodel.AddContactViewModel
-import com.example.myprofile.data.Contact
+import com.example.myprofile.data.model.Contact
 import com.example.myprofile.utils.ext.factory
 
 /**

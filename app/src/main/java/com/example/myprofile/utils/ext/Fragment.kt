@@ -10,7 +10,7 @@ import com.example.myprofile.App
 import com.example.myprofile.R
 import com.example.myprofile.viewmodel.MyProfileViewModel
 import com.example.myprofile.viewmodel.AddContactViewModel
-import com.example.myprofile.viewmodel.ContactsViewModel
+import com.example.myprofile.ui.fragments.contacts.ContactsViewModel
 
 class ViewModelFactory(
     private val app: App

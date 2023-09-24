@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myprofile.R
-import com.example.myprofile.base.BaseFragment
+import com.example.myprofile.ui.base.BaseFragment
 import com.example.myprofile.databinding.FragmentPagerBinding
 import com.example.myprofile.ui.adapters.ViewPagerAdapter
 import com.example.myprofile.ui.adapters.ViewPagerFragments

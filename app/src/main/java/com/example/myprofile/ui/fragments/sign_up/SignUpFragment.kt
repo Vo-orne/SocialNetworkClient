@@ -1,4 +1,4 @@
-package com.example.myprofile.ui.fragments
+package com.example.myprofile.ui.fragments.sign_up
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,7 +7,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.myprofile.utils.Constants
 import com.example.myprofile.R
-import com.example.myprofile.base.BaseFragment
+import com.example.myprofile.ui.base.BaseFragment
 import com.example.myprofile.databinding.FragmentSignUpBinding
 import com.example.myprofile.utils.ext.navigateToFragmentWithoutReturning
 
@@ -65,7 +65,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
                 )
             } else {
                 comeToNextFragment(
-                    viewModel.validationInputs(newEmail, newPassword),
+                    viewModel.isValidEmail(newEmail) && viewModel.isValidPassword(newPassword) == null,
                     newEmail,
                     editor
                 )
@@ -84,11 +84,13 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
                 R.id.action_signUpFragment_to_pagerFragment, R.id.signUpFragment
             )
         } else {
-            if (viewModel.emailError != null)
-                binding.textInputLayoutSignUpEmail.error = viewModel.emailError
+            with(binding) {
+                textInputLayoutSignUpEmail.error =
+                    if (viewModel.isValidEmail(textInputEditTextSignUpEmail.text.toString())) getString(R.string.error_on_email) else null
 
-            if (viewModel.passwordError != null)
-                binding.textInputLayoutSignUpPassword.error = viewModel.passwordError
+                textInputLayoutSignUpPassword.error =
+                    viewModel.isValidPassword(textInputEditTextSignUpPassword.text.toString())
+            }
         }
     }
 }

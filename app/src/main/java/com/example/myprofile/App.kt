@@ -1,7 +1,7 @@
 package com.example.myprofile
 
 import android.app.Application
-import com.example.myprofile.data.ContactsRepository
+import com.example.myprofile.data.repository.ContactsRepository
 
 /**
  * The App class represents the custom application class for the MyProfile app.

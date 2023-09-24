@@ -2,13 +2,11 @@ package com.example.myprofile.ui.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
-import com.example.myprofile.R
-import com.example.myprofile.base.BaseFragment
-import com.example.myprofile.data.Contact
+import com.example.myprofile.ui.base.BaseFragment
+import com.example.myprofile.data.model.Contact
 import com.example.myprofile.databinding.FragmentDetailViewBinding
+import com.example.myprofile.utils.ext.loadImage
 
 /**
  * Fragment for displaying contact details
@@ -55,17 +53,18 @@ class DetailViewFragment :
             textViewDetailViewContactHomeAddress.text = contact.address
 
             // Load the contact's avatar using Glide
-            if (contact.avatar.isNotBlank()) {
-                Glide.with(imageViewDetailViewContactAvatar.context)// TODO: change
-                    .load(contact.avatar)
-                    .circleCrop()
-                    .placeholder(R.drawable.default_user_photo)
-                    .error(R.drawable.default_user_photo)
-                    .into(imageViewDetailViewContactAvatar)
-            } else {
-                // Set the app's default icon if the avatar is absent
-                imageViewDetailViewContactAvatar.setImageResource(R.drawable.default_user_photo)
-            }
+            imageViewDetailViewContactAvatar.loadImage(contact.avatar)
+//            if (.isNotBlank()) {
+//                Glide.with(.context) // TODO: ext?
+//                    .load(contact.avatar)
+//                    .circleCrop()
+//                    .placeholder(R.drawable.default_user_photo)
+//                    .error(R.drawable.default_user_photo)
+//                    .into(imageViewDetailViewContactAvatar)
+//            } else {
+//                // Set the app's default icon if the avatar is absent
+//                imageViewDetailViewContactAvatar.setImageResource(R.drawable.default_user_photo)
+//            }
         }
     }
 
