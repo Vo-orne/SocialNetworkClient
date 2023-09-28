@@ -15,7 +15,7 @@ object Constants {
     const val AUTO_LOGIN_KEY = "autoLogin"
 
     // Maximum length of a password.
-    const val MAX_PASSWORD_SIZE = 8 // TODO: bad naming
+    const val MIN_PASSWORD_SIZE = 8
 
     // String indicating that the password is correct.
     const val PASSWORD_IS_CORRECT = "Password correct."

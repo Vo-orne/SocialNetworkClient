@@ -9,11 +9,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
 import com.example.myprofile.databinding.DialogAddContactBinding
 import com.example.myprofile.viewmodel.AddContactViewModel
 import com.example.myprofile.data.model.Contact
 import com.example.myprofile.utils.ext.factory
+import com.example.myprofile.utils.ext.loadImage
 
 /**
  * Dialog fragment for adding a new contact.
@@ -37,9 +37,7 @@ class AddContactDialogFragment : DialogFragment() {
             uri?.let { imageUri ->
                 this.imageUri = imageUri
                 // Load the selected image into the ImageView using Glide
-                Glide.with(requireContext())// TODO: ext
-                    .load(imageUri)
-                    .into(binding.imageViewAddContactContactAvatar)
+                binding.imageViewAddContactContactAvatar.loadImage(imageUri)
             }
         }
 

@@ -164,7 +164,7 @@
         app:layout_constraintBottom_toTopOf="@id/textViewSignUpNoticeAgreement"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-    <!-- TODO: delete - its not need -->
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSignUpNoticeAgreement"
         android:layout_width="wrap_content"

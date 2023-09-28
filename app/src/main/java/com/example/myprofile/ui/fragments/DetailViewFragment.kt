@@ -51,20 +51,8 @@ class DetailViewFragment :
             textViewDetailViewContactName.text = contact.name
             textViewDetailViewContactCareer.text = contact.career
             textViewDetailViewContactHomeAddress.text = contact.address
-
             // Load the contact's avatar using Glide
             imageViewDetailViewContactAvatar.loadImage(contact.avatar)
-//            if (.isNotBlank()) {
-//                Glide.with(.context) // TODO: ext?
-//                    .load(contact.avatar)
-//                    .circleCrop()
-//                    .placeholder(R.drawable.default_user_photo)
-//                    .error(R.drawable.default_user_photo)
-//                    .into(imageViewDetailViewContactAvatar)
-//            } else {
-//                // Set the app's default icon if the avatar is absent
-//                imageViewDetailViewContactAvatar.setImageResource(R.drawable.default_user_photo)
-//            }
         }
     }
 

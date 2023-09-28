@@ -22,7 +22,6 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
         )
     }
     private val viewModel: SignUpViewModel by viewModels()
-    // TODO: view model?
     /**
      * Method called when the fragment's view is created
      */

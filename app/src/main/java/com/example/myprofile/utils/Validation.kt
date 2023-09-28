@@ -10,7 +10,7 @@ object Validation {
         var isHasNumber = false
         var isHasLetter = false
 
-        if (password.length >= Constants.MAX_PASSWORD_SIZE) {
+        if (password.length >= Constants.MIN_PASSWORD_SIZE) {
             isHasEnoughLength = true
         }
 

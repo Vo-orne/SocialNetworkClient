@@ -64,7 +64,7 @@
         tools:layout="@layout/fragment_detail_view">
         <argument
             android:name="contact"
-            app:argType="com.example.myprofile.data.Contact" />
+            app:argType="com.example.myprofile.data.model.Contact" />
         <action
             android:id="@+id/action_detailViewFragment_to_pagerFragment"
             app:destination="@id/pagerFragment" />

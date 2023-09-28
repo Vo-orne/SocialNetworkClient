@@ -65,7 +65,6 @@ class ContactsAdapter(
          */
         fun onBind(contact: Contact) {
             with(binding) {
-//                itemView.tag = contact // TODO: what is this?
                 textViewContactItemUserName.text = contact.name
                 textViewContactItemUserCareer.text = contact.career
                 imageViewContactItemUserAvatar.loadImage(contact.avatar)

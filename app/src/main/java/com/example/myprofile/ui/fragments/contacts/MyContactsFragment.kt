@@ -26,7 +26,7 @@ import com.google.android.material.snackbar.Snackbar
  * Fragment for displaying the list of contacts
  */
 class MyContactsFragment :
-    BaseFragment<FragmentMyContactsBinding>(FragmentMyContactsBinding::inflate) { // TODO: BaseFragment?
+    BaseFragment<FragmentMyContactsBinding>(FragmentMyContactsBinding::inflate) {
 
     /**
      * ViewModel for managing the list of contacts
