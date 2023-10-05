@@ -86,17 +86,15 @@ class MyContactsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setListeners()
         setRecyclerView()
+        setListeners()
         setObservers()
     }
 
     private fun setRecyclerView() {
         val layoutManager = LinearLayoutManager(requireContext())
-        with(binding.recyclerViewContacts) {
-            this.layoutManager = layoutManager
-            adapter = adapter
-        }
+        binding.recyclerViewContacts.layoutManager = layoutManager
+        binding.recyclerViewContacts.adapter = adapter
     }
 
     private fun setObservers() {
