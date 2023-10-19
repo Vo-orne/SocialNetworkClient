@@ -54,4 +54,11 @@
     <!--    PagerFragment    -->
     <string name="tab1">My profile</string>
     <string name="tab2">My contacts</string>
+
+    <!--    SignUpExtended    -->
+    <string name="forward">Forward</string>
+    <string name="your_profile_data">Your profile data</string>
+    <string name="user_name">User name</string>
+    <string name="mobile_phone">Mobile phone</string>
+    <string name="open_gallery">Open gallery</string>
 </resources>

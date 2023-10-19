@@ -32,6 +32,6 @@
         <item name="colorAccentButtons">@color/orange</item>
         <item name="colorGoogleButton">@color/white</item>
         <item name="colorGoogleButtonText">@color/grey_text</item>
-
+        <item name="colorDialogLoadPhoto">@color/grey_blue</item>
     </style>
 </resources>

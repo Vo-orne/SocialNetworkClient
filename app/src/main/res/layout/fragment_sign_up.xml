@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorFirstBackground"
-    tools:context=".ui.fragments.sign_up.SignUpFragment">
+    tools:context=".presentation.ui.fragments.sign_up.SignUpFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSignUpTitle"
@@ -105,7 +105,6 @@
             android:textColor="?attr/colorMainText"
             android:textSize="@dimen/text_large_size"
             android:theme="@style/EditTextStyle" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
@@ -124,7 +123,7 @@
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpPassword"
         tools:ignore="RtlSymmetry" />
 
-    <com.example.myprofile.utils.GoogleButton
+    <com.example.myprofile.presentation.utils.GoogleButton
         android:id="@+id/buttonSignUpGoogle"
         android:layout_width="0dp"
         android:layout_height="@dimen/button_google_height"

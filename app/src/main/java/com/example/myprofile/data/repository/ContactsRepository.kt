@@ -2,8 +2,8 @@ package com.example.myprofile.data.repository
 
 import android.content.Context
 import com.example.myprofile.data.model.Contact
-import com.example.myprofile.utils.ContactsContentProvider
-import com.example.myprofile.utils.ext.UsersListener
+import com.example.myprofile.presentation.utils.ContactsContentProvider
+import com.example.myprofile.presentation.utils.utils.ext.UsersListener
 import com.github.javafaker.Faker
 
 /**

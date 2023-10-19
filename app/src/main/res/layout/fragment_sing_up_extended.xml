@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorFirstBackground">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageViewSignUpExtendedContactAvatar"
+        android:layout_marginTop="70dp"
+        android:layout_width="@dimen/image_user_avatar_size"
+        android:layout_height="@dimen/image_user_avatar_size"
+        android:contentDescription="@string/content_description_user_avatar"
+        android:src="@drawable/picture"
+        android:theme="@style/roundedCorner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewSignUpExtendedContactAvatar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description_user_avatar"
+        android:src="@drawable/vector"
+        app:layout_constraintBottom_toBottomOf="@id/imageViewSignUpExtendedContactAvatar"
+        app:layout_constraintEnd_toEndOf="@id/imageViewSignUpExtendedContactAvatar"
+        app:layout_constraintStart_toStartOf="@id/imageViewSignUpExtendedContactAvatar"
+        app:layout_constraintTop_toTopOf="@id/imageViewSignUpExtendedContactAvatar" />
+
+    <ImageView
+        android:id="@+id/imageViewSignUpExtendedAddPhoto"
+        android:layout_width="@dimen/image_add_photo_size"
+        android:layout_height="@dimen/image_add_photo_size"
+        android:contentDescription="@string/displays_the_add_photo_button"
+        android:src="@drawable/ic_add_photo_button"
+        android:layout_marginStart="@dimen/large_margin"
+        app:layout_constraintBottom_toBottomOf="@id/imageViewSignUpExtendedContactAvatar"
+        app:layout_constraintStart_toEndOf="@id/imageViewSignUpExtendedContactAvatar"
+        app:layout_constraintTop_toTopOf="@id/imageViewSignUpExtendedContactAvatar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewSignUpExtendedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_large_margin"
+        android:text="@string/your_profile_data"
+        android:theme="@style/TextViewTitlesStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewSignUpExtendedContactAvatar"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewSignUpExtendedSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/smallest_margin"
+        android:gravity="center"
+        android:text="@string/subtitle_text"
+        android:theme="@style/TextViewSubtitlesStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSignUpExtendedTitle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewSignUpExtendedName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_large_margin"
+        android:layout_marginStart="@dimen/very_large_margin"
+        android:text="@string/user_name"
+        android:theme="@style/TextViewInputFieldTitleStyle"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@id/textInputLayoutSignUpExtendedName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSignUpExtendedSubtitle" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutSignUpExtendedName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        app:boxBackgroundMode="none"
+        app:errorEnabled="true"
+        app:layout_constraintBottom_toTopOf="@id/textViewSignUpExtendedPhone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSignUpExtendedName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextSignUpExtendedName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_medium"
+            android:inputType="text"
+            android:textColor="?attr/colorMainText"
+            android:textSize="@dimen/text_large_size"
+            android:theme="@style/EditTextStyle" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewSignUpExtendedPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/very_large_margin"
+        android:layout_marginTop="@dimen/very_large_margin"
+        android:text="@string/mobile_phone"
+        android:theme="@style/TextViewInputFieldTitleStyle"
+        app:layout_constraintBottom_toTopOf="@id/textInputLayoutSignUpExtendedPhone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpExtendedName" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutSignUpExtendedPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        app:boxBackgroundMode="none"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSignUpExtendedPhone">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextSignUpExtendedPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_medium"
+            android:inputType="phone"
+            android:textColor="?attr/colorMainText"
+            android:textSize="@dimen/text_large_size"
+            android:theme="@style/EditTextStyle" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonSignUpExtendedCancel"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_edit_profile_height"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_marginBottom="@dimen/large_margin"
+        android:background="@drawable/frame_button_cancel"
+        android:theme="@style/ButtonSignUpExtendedCancel"
+        app:layout_constraintBottom_toTopOf="@id/buttonSignUpExtendedForward"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonSignUpExtendedForward"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_register_height"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_marginBottom="@dimen/large_margin"
+        android:background="@drawable/frame_button_view_my_contacts"
+        android:text="@string/forward"
+        android:theme="@style/ButtonViewMyContactsStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

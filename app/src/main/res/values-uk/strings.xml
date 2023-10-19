@@ -14,7 +14,7 @@
     <string name="content_description_instagram_icon">Відображає іконку Instagram</string>
     <string name="access_is_denied">У доступі до контактів відмовлено</string>
 
-    <!--    AuthActivity    -->
+    <!--    SignUp    -->
     <string name="titleText">Давай знайомитись</string>
     <string name="subtitle_text">Заповніть профіль і переходьте до застосунку!</string>
     <string name="e_mail">Електронна пошта</string>
@@ -38,7 +38,7 @@
     <string name="back_button">Відображає кнопку повернення.</string>
     <string name="delete_button">Відображає кнопку видалення.</string>
     <string name="contact_removed">Контакт видалено.</string>
-    <string name="cancel">ВІДМІНИТИ</string>
+    <string name="cancel">Відмінити</string>
 
     <!--    AddContactDialog    -->
     <string name="add_contact">Додати контакт</string>
@@ -54,5 +54,12 @@
     <!--    PagerFragment    -->
     <string name="tab1">Мій профіль</string>
     <string name="tab2">Мої контакти</string>
+
+    <!--    SignUpExtended    -->
+    <string name="forward">Вперед</string>
+    <string name="your_profile_data">Дані вашого профілю</string>
+    <string name="user_name">Ім\'я користувача</string>
+    <string name="mobile_phone">Мобільний телефон</string>
+    <string name="open_gallery">Відкрити галерею</string>
 
 </resources>

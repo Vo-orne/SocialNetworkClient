@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.myprofile.ui.fragments.sign_up.SignUpFragment"
+        android:name="com.example.myprofile.presentation.ui.fragments.sign_up.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/pagerFragment"
-        android:name="com.example.myprofile.ui.fragments.PagerFragment"
+        android:name="com.example.myprofile.presentation.ui.fragments.pager.PagerFragment"
         android:label="PagerFragment"
         tools:layout="@layout/fragment_pager">
         <action
@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/myProfileFragment"
-        android:name="com.example.myprofile.ui.fragments.MyProfileFragment"
+        android:name="com.example.myprofile.presentation.ui.fragments.my_profile.MyProfileFragment"
         android:label="fragment_my_profile"
         tools:layout="@layout/fragment_my_profile">
         <action
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/myContactsFragment"
-        android:name="com.example.myprofile.ui.fragments.contacts.MyContactsFragment"
+        android:name="com.example.myprofile.presentation.ui.fragments.contacts.MyContactsFragment"
         android:label="MyContactsFragment"
         tools:layout="@layout/fragment_my_contacts">
         <action
@@ -53,13 +53,13 @@
 
     <dialog
         android:id="@+id/addContactDialogFragment"
-        android:name="com.example.myprofile.ui.fragments.AddContactDialogFragment"
+        android:name="com.example.myprofile.presentation.ui.fragments.add_contact.AddContactDialogFragment"
         android:label="AddContactDialogFragment"
         tools:layout="@layout/dialog_add_contact" />
 
     <fragment
         android:id="@+id/detailViewFragment"
-        android:name="com.example.myprofile.ui.fragments.DetailViewFragment"
+        android:name="com.example.myprofile.presentation.ui.fragments.detail_view.DetailViewFragment"
         android:label="Detail View"
         tools:layout="@layout/fragment_detail_view">
         <argument

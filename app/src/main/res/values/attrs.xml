@@ -13,6 +13,7 @@
     <attr name="colorAccentButtons" format="color"/>
     <attr name="colorGoogleButton" format="color"/>
     <attr name="colorGoogleButtonText" format="color"/>
+    <attr name="colorDialogLoadPhoto" format="color"/>
 
     <declare-styleable name="GoogleButton">
         <attr name="icon" format="reference" />
