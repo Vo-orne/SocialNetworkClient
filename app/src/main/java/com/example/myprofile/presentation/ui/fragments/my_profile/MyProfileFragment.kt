@@ -13,17 +13,18 @@ import com.example.myprofile.databinding.FragmentMyProfileBinding
 import com.example.myprofile.presentation.ui.fragments.pager.adapter.utils.ViewPagerFragments
 import com.example.myprofile.presentation.ui.fragments.pager.PagerFragment
 import com.example.myprofile.presentation.utils.Constants
-import com.example.myprofile.presentation.utils.utils.ext.factory
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Fragment for displaying the user's profile.
  */
+@AndroidEntryPoint
 class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfileBinding::inflate) {
 
     /**
      * ViewModel for managing the user's profile data
      */
-    private val viewModel: MyProfileViewModel by viewModels { factory() }
+    private val viewModel: MyProfileViewModel by viewModels()
 
     /**
      * ActivityResultLauncher to request contacts permission

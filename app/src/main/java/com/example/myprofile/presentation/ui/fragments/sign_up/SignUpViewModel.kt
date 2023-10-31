@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.example.myprofile.presentation.utils.Constants
 import com.example.myprofile.presentation.utils.Parser
 import com.example.myprofile.presentation.utils.Validation
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SignUpViewModel : ViewModel() {
+@HiltViewModel
+class SignUpViewModel @Inject constructor() : ViewModel() {
     private val _registerLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val registerLiveData: MutableLiveData<Boolean> = _registerLiveData
 

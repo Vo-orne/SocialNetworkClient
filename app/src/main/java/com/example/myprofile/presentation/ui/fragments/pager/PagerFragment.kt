@@ -9,8 +9,9 @@ import com.example.myprofile.databinding.FragmentPagerBinding
 import com.example.myprofile.presentation.ui.fragments.pager.adapter.ViewPagerAdapter
 import com.example.myprofile.presentation.ui.fragments.pager.adapter.utils.ViewPagerFragments
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class PagerFragment : BaseFragment<FragmentPagerBinding>(FragmentPagerBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

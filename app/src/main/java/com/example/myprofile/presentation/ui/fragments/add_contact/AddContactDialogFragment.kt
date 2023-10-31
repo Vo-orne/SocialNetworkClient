@@ -11,7 +11,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.example.myprofile.databinding.DialogAddContactBinding
 import com.example.myprofile.data.model.Contact
-import com.example.myprofile.presentation.utils.utils.ext.factory
 import com.example.myprofile.presentation.utils.utils.ext.loadImage
 
 /**
@@ -26,7 +25,7 @@ class AddContactDialogFragment : DialogFragment() {
     /**
      * ViewModel for handling the addition of new contacts
      */
-    private val viewModel: AddContactViewModel by viewModels { factory() }
+    private val viewModel: AddContactViewModel by viewModels()
 
     /**
      * ActivityResultLauncher to get the content (image) URI

@@ -1,45 +1,11 @@
-package com.example.myprofile.presentation.utils.utils.ext
+package com.example.myprofile.presentation.utils.ext
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.example.myprofile.App
 import com.example.myprofile.R
-import com.example.myprofile.presentation.ui.fragments.my_profile.MyProfileViewModel
-import com.example.myprofile.presentation.ui.fragments.add_contact.AddContactViewModel
-import com.example.myprofile.presentation.ui.fragments.contacts.ContactsViewModel
 
-class ViewModelFactory(
-    private val app: App
-) : ViewModelProvider.Factory {
-
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        val viewModel = when (modelClass) {
-            ContactsViewModel::class.java -> {
-                ContactsViewModel(app.contactsRepository)
-            }
-
-            AddContactViewModel::class.java -> {
-                AddContactViewModel(app.contactsRepository)
-            }
-
-            MyProfileViewModel::class.java -> {
-                MyProfileViewModel(app.contactsRepository)
-            }
-
-            else -> {
-                throw IllegalStateException("Unknown view model class")
-            }
-        }
-
-        return viewModel as T
-    }
-}
-
-fun Fragment.factory() = ViewModelFactory(requireContext().applicationContext as App)
 
 fun Fragment.navigateToFragment(idAction: Int) {
     findNavController().navigate( // Responsible for the transition to the next fragment

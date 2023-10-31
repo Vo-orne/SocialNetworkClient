@@ -6,32 +6,34 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myprofile.R
-import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.data.model.Contact
 import com.example.myprofile.databinding.FragmentMyContactsBinding
-import com.example.myprofile.presentation.ui.fragments.contacts.adapter.interfaces.ContactActionListener
-import com.example.myprofile.presentation.ui.fragments.contacts.adapter.ContactsAdapter
-import com.example.myprofile.presentation.ui.fragments.pager.adapter.utils.ViewPagerFragments
+import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.presentation.ui.fragments.add_contact.AddContactDialogFragment
+import com.example.myprofile.presentation.ui.fragments.contacts.adapter.ContactsAdapter
+import com.example.myprofile.presentation.ui.fragments.contacts.adapter.interfaces.ContactActionListener
 import com.example.myprofile.presentation.ui.fragments.pager.PagerFragment
 import com.example.myprofile.presentation.ui.fragments.pager.PagerFragmentDirections
+import com.example.myprofile.presentation.ui.fragments.pager.adapter.utils.ViewPagerFragments
 import com.example.myprofile.presentation.utils.Constants.ADD_CONTACT_DIALOG
-import com.example.myprofile.presentation.utils.utils.ext.factory
-import com.example.myprofile.presentation.utils.utils.ext.navigateToFragment
-import com.example.myprofile.presentation.utils.utils.ext.swipeToDelete
+import com.example.myprofile.presentation.utils.ext.navigateToFragment
+import com.example.myprofile.presentation.utils.ext.swipeToDelete
+import com.example.myprofile.presentation.utils.ext.log
 import com.example.myprofile.presentation.utils.utils.ext.visible
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Fragment for displaying the list of contacts
  */
+@AndroidEntryPoint
 class MyContactsFragment :
     BaseFragment<FragmentMyContactsBinding>(FragmentMyContactsBinding::inflate) {
 
     /**
      * ViewModel for managing the list of contacts
      */
-    private val viewModel: ContactsViewModel by viewModels { factory() }
+    private val viewModel: ContactsViewModel by viewModels()
 
     private val adapter: ContactsAdapter by lazy {
         ContactsAdapter(object : ContactActionListener {
@@ -115,9 +117,16 @@ class MyContactsFragment :
      */
     override fun setListeners() {
         binding.recyclerViewContacts.swipeToDelete(
-            deleteFunction = { contact, position -> viewModel.deleteUser(contact, position) },
-            showSnackbar = { showSnackbar() },
-            isEnabled = viewModel.isMultiselect.value ?: true
+            deleteFunction = { position ->
+                viewModel.deleteUser(viewModel.contacts.value?.get(position)!!, position)
+            },
+            showSnackbar = {
+                showSnackbar()
+            },
+            isEnabled = {
+                log("isEnabled ${viewModel.isMultiselect.value}")
+                viewModel.isMultiselect.value == false
+            }
         )
         // Add a click listener for the button to switch to MyProfileFragment
         binding.imageButtonMyContactsBack.setOnClickListener {

@@ -6,8 +6,14 @@ import androidx.lifecycle.ViewModel
 import com.example.myprofile.data.model.Contact
 import com.example.myprofile.data.repository.ContactsRepository
 import com.example.myprofile.presentation.utils.utils.ext.UsersListener
+import com.example.myprofile.presentation.utils.ext.log
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ContactsViewModel(private val contactsRepository: ContactsRepository): ViewModel() {
+@HiltViewModel
+class ContactsViewModel @Inject constructor(
+    private val contactsRepository: ContactsRepository
+    ): ViewModel() {
 
     private val _contacts = MutableLiveData<List<Contact>>() // Live data for saving the list of users
     val contacts: LiveData<List<Contact>> = _contacts // Public access to live data
@@ -64,5 +70,6 @@ class ContactsViewModel(private val contactsRepository: ContactsRepository): Vie
 
     fun setMultiselect() {
         _isMultiselect.value = !_isMultiselect.value!!
+        log("setMultiselect() ${isMultiselect.value}")
     }
 }

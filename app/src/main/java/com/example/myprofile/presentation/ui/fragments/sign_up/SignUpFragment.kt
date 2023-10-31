@@ -9,11 +9,13 @@ import com.example.myprofile.R
 import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.databinding.FragmentSignUpBinding
 import com.example.myprofile.presentation.utils.Constants
-import com.example.myprofile.presentation.utils.utils.ext.navigateToFragmentWithoutReturning
+import com.example.myprofile.presentation.utils.ext.navigateToFragmentWithoutReturning
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Fragment for registering a new user.
  */
+@AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
 
     private val sharedPreferences: SharedPreferences by lazy {

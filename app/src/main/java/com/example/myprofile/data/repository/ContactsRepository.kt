@@ -5,6 +5,8 @@ import com.example.myprofile.data.model.Contact
 import com.example.myprofile.presentation.utils.ContactsContentProvider
 import com.example.myprofile.presentation.utils.utils.ext.UsersListener
 import com.github.javafaker.Faker
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
 /**
  * The ContactsRepository class represents the data repository responsible for managing
@@ -14,7 +16,10 @@ import com.github.javafaker.Faker
  * Contact objects to store the contact data.
  * @param context The application context required to access resources and the content provider.
  */
-class ContactsRepository(private val context: Context) {
+
+class ContactsRepository @Inject constructor(
+    @ApplicationContext private val context: Context
+) {
 
     /**
      * List of contacts to be displayed.
@@ -62,7 +67,8 @@ class ContactsRepository(private val context: Context) {
     fun allowPhoneContacts() {
         isPhoneContactsAllowed = true
         val contentProvider = ContactsContentProvider.getInstance(context)
-        val contacts = (contentProvider.getPhoneContacts() + generateRandomContacts()).toMutableList()
+        val contacts =
+            (contentProvider.getPhoneContacts() + generateRandomContacts()).toMutableList()
         this.contacts = ArrayList(contacts)
         notifyChanges()
     }
@@ -133,7 +139,6 @@ class ContactsRepository(private val context: Context) {
             notifyChanges()
         }
     }
-
 
 
     /**

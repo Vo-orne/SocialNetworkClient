@@ -7,10 +7,12 @@ import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.data.model.Contact
 import com.example.myprofile.databinding.FragmentDetailViewBinding
 import com.example.myprofile.presentation.utils.utils.ext.loadImage
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Fragment for displaying contact details
  */
+@AndroidEntryPoint
 class DetailViewFragment :
     BaseFragment<FragmentDetailViewBinding>(FragmentDetailViewBinding::inflate) {
 
