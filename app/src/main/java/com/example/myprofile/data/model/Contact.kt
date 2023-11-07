@@ -1,7 +1,6 @@
 package com.example.myprofile.data.model
 
 import java.io.Serializable
-import java.util.UUID
 
 /**
  * The Contact data class represents a single contact with its details.
@@ -14,10 +13,10 @@ import java.util.UUID
  * between different components or activities.
  */
 data class Contact(
-    val avatar: String,
-    val name: String,
-    val career: String,
-    val address: String,
-    val id: UUID = UUID.randomUUID()
+    val avatar: String?,
+    val name: String?,
+    val career: String?,
+    val address: String?,
+    val id: Long = 0
 ): Serializable
 

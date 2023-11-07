@@ -22,4 +22,7 @@ object Constants {
 
     // String command to open the add contact dialog.
     const val ADD_CONTACT_DIALOG = "AddContactDialog"
+
+    // The base URL of the server
+    const val BASE_URL = "http://178.63.9.114:7777/api/"
 }
