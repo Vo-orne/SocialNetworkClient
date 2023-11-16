@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myprofile.presentation.utils.Constants
-import com.example.myprofile.presentation.utils.Parser
 import com.example.myprofile.presentation.utils.Validation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -21,20 +20,30 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
      */
     fun isValidPassword(password: String): String? = Validation.isValidPassword(password)
 
-    fun saveAutoLogin(email: String, password: String, editor: SharedPreferences.Editor) {
-        _registerLiveData.value = isValidEmail(email) && isValidPassword(password) == null
-        if(_registerLiveData.value == true) {
-            editor.putBoolean(Constants.AUTO_LOGIN_KEY, _registerLiveData.value!!)
-            editor.apply()
-        }
-    }
+//    fun saveAutoLogin(email: String, password: String, editor: SharedPreferences.Editor) {
+//        _registerLiveData.value = isValidEmail(email) && isValidPassword(password) == null
+//        if(_registerLiveData.value == true) {
+//            editor.putBoolean(Constants.AUTO_LOGIN_KEY, _registerLiveData.value!!)
+//            editor.apply()
+//        }
+//    }
+
+//    /**
+//     * Method to save the user's name from the entered email
+//     */
+//    fun saveUserName(email: String, editor: SharedPreferences.Editor) {
+//        val userName: String = Parser.parsEmail(email)
+//        editor.putString(Constants.USER_NAME_KEY, userName)
+//        editor.apply()
+//    }
+
 
     /**
-     * Method to save the user's name from the entered email
+     * Method to save registration data
      */
-    fun saveUserName(email: String, editor: SharedPreferences.Editor) {
-        val userName: String = Parser.parsEmail(email)
-        editor.putString(Constants.USER_NAME_KEY, userName)
+    fun saveRegistrationData(email: String, password: String, editor: SharedPreferences.Editor) {
+        editor.putString(Constants.REGISTRATION_EMAIL, email)
+        editor.putString(Constants.REGISTRATION_PASSWORD, password)
         editor.apply()
     }
 }

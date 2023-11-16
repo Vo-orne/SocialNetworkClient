@@ -13,10 +13,10 @@ import java.io.Serializable
  * between different components or activities.
  */
 data class Contact(
-    val avatar: String?,
-    val name: String?,
-    val career: String?,
-    val address: String?,
+    val avatar: String? = null,
+    val name: String? = null,
+    val career: String? = null,
+    val address: String? = null,
     val id: Long = 0
 ): Serializable
 

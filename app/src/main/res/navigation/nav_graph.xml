@@ -11,8 +11,21 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up">
         <action
-            android:id="@+id/action_signUpFragment_to_pagerFragment"
+            android:id="@+id/action_signUpFragment_to_signUpExtendedFragment"
+            app:destination="@id/signUpExtendedFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpExtendedFragment"
+        android:name="com.example.myprofile.presentation.ui.fragments.sign_up_extended.SignUpExtendedFragment"
+        android:label="SignUpExtendedFragment"
+        tools:layout="@layout/fragment_sing_up_extended">
+        <action
+            android:id="@+id/action_signUpExtendedFragment_to_pagerFragment"
             app:destination="@id/pagerFragment" />
+        <action
+            android:id="@+id/action_signUpExtendedFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
     </fragment>
 
     <fragment

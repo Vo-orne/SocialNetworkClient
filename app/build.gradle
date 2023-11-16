@@ -1,10 +1,10 @@
 plugins {
-
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 
     // safe args
     id 'androidx.navigation.safeargs.kotlin'
+
     // passing objects between fragments
     id 'kotlin-parcelize'
 
@@ -85,7 +85,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 }
 
-// Allow references to generated code
-kapt {
-    correctErrorTypes true
-}
+//// Allow references to generated code
+//kapt {
+//    correctErrorTypes true
+//}

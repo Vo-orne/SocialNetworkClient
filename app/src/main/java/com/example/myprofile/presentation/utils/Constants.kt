@@ -25,4 +25,16 @@ object Constants {
 
     // The base URL of the server
     const val BASE_URL = "http://178.63.9.114:7777/api/"
+
+    // Key for storing the email in shared preferences
+    const val REGISTRATION_EMAIL = "registrationEmail"
+
+    // Key for storing the password in shared preferences
+    const val REGISTRATION_PASSWORD = "registrationPassword"
+
+    // Key for storing the accessToken in shared preferences
+    const val ACCESS_TOKEN = "accessToken"
+
+    // Key for storing the refreshToken in shared preferences
+    const val REFRESH_TOKEN = "refreshToken"
 }
