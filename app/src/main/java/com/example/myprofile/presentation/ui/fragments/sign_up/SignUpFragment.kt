@@ -53,7 +53,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
      * Method to set event listeners
      */
     override fun setListeners() {
-        binding.buttonSignUpRegister.setOnClickListener {
+        binding.buttonSignUpRegister?.setOnClickListener {
             // Get the entered data: email and password
             val newEmail = binding.textInputEditTextSignUpEmail.text.toString()
             val newPassword = binding.textInputEditTextSignUpPassword.text.toString()

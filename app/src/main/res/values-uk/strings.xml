@@ -62,4 +62,12 @@
     <string name="mobile_phone">Мобільний телефон</string>
     <string name="open_gallery">Відкрити галерею</string>
 
+    <!--    LogIn    -->
+    <string name="hello">Привіт!</string>
+    <string name="enter_your_email_and_password_below">Введіть свою адресу електронної пошти та пароль нижче</string>
+    <string name="login">Вхід</string>
+    <string name="sign_up">Зареєструватися</string>
+    <string name="don_t_have_account">Немає облікового запису?</string>
+    <string name="forgot_your_password">Забули свій пароль?</string>
+
 </resources>

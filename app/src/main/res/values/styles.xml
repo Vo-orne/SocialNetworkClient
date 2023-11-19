@@ -68,6 +68,13 @@
         <item name="textAllCaps">true</item>
     </style>
 
+    <style name="ButtonLoginStyle">
+        <item name="android:text">@string/login</item>
+        <item name="android:textColor">?attr/colorMainText</item>
+        <item name="android:textSize">@dimen/text_medium_size</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
     <style name="ButtonEditProfileStyle">
         <item name="android:text">@string/edit_profile</item>
         <item name="android:textColor">?attr/colorSecondMainText</item>

@@ -76,7 +76,7 @@
             android:text="@string/user_name"
             android:theme="@style/TextViewInputFieldTitleStyle"
             app:layout_constraintBottom_toTopOf="@id/textInputLayoutSignUpExtendedName"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textInputLayoutSignUpExtendedName"
             app:layout_constraintTop_toBottomOf="@id/textViewSignUpExtendedSubtitle"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -88,6 +88,7 @@
             android:layout_marginEnd="@dimen/large_margin"
             app:boxBackgroundMode="none"
             app:errorEnabled="true"
+            app:layout_constraintWidth_percent="0.50"
             app:layout_constraintBottom_toTopOf="@id/textViewSignUpExtendedPhone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +114,7 @@
             android:text="@string/mobile_phone"
             android:theme="@style/TextViewInputFieldTitleStyle"
             app:layout_constraintBottom_toTopOf="@id/textInputLayoutSignUpExtendedPhone"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textInputLayoutSignUpExtendedPhone"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpExtendedName" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -124,6 +125,7 @@
             android:layout_marginEnd="@dimen/large_margin"
             app:boxBackgroundMode="none"
             app:errorEnabled="true"
+            app:layout_constraintWidth_percent="0.50"
             app:layout_constraintBottom_toTopOf="@id/buttonSignUpExtendedCancel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -144,27 +146,23 @@
             android:id="@+id/buttonSignUpExtendedCancel"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_register_height"
-            android:layout_marginStart="@dimen/large_margin"
-            android:layout_marginEnd="@dimen/large_margin"
             android:layout_marginBottom="@dimen/large_margin"
             android:background="@drawable/frame_button_cancel"
             android:theme="@style/ButtonSignUpExtendedCancel"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/buttonSignUpExtendedForward"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/buttonSignUpExtendedForward"
+            app:layout_constraintEnd_toEndOf="@id/textInputLayoutSignUpExtendedPhone"
+            app:layout_constraintStart_toStartOf="@id/textInputLayoutSignUpExtendedPhone" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonSignUpExtendedForward"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_register_height"
-            android:layout_marginStart="@dimen/large_margin"
-            android:layout_marginEnd="@dimen/large_margin"
             android:layout_marginBottom="@dimen/large_margin"
             android:background="@drawable/frame_button_view_my_contacts"
             android:text="@string/forward"
             android:theme="@style/ButtonViewMyContactsStyle"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/buttonSignUpExtendedCancel" />
+            app:layout_constraintEnd_toEndOf="@id/buttonSignUpExtendedCancel"
+            app:layout_constraintStart_toStartOf="@id/buttonSignUpExtendedCancel" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

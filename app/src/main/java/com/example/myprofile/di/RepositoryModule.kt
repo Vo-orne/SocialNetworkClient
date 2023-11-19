@@ -34,5 +34,4 @@ object RepositoryModule {
     fun providesOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder().build()
     }
-
 }
