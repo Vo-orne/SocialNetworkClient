@@ -13,4 +13,10 @@ interface ApiService {
         @Query("name") name: String?,
         @Query("phone") phone: String?
     ): UserResponse
+
+    @POST("login")
+    suspend fun loginUser(
+        @Query("email") email: String,
+        @Query("password") password: String
+    ): UserResponse
 }

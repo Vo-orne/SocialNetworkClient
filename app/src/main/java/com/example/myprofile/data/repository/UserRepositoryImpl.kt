@@ -21,4 +21,18 @@ class UserRepositoryImpl @Inject constructor(private val apiService: ApiService)
             ApiState.Error("ApiState.Error = ${e.message.toString()}")
         }
     }
+
+    suspend fun loginUser(
+        email: String,
+        password: String
+    ): ApiState {
+        return try {
+            val response = apiService.loginUser(email, password)
+            response.data?.let {
+                ApiState.Success(it)
+            } ?: ApiState.Error(response.message.toString())
+        } catch (e: Exception) {
+            ApiState.Error("ApiState.Error = ${e.message.toString()}")
+        }
+    }
 }

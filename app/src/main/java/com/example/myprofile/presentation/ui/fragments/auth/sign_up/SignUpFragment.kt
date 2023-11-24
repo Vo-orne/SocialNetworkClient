@@ -1,14 +1,11 @@
-package com.example.myprofile.presentation.ui.fragments.sign_up
+package com.example.myprofile.presentation.ui.fragments.auth.sign_up
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.myprofile.R
 import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.databinding.FragmentSignUpBinding
-import com.example.myprofile.presentation.utils.Constants
 import com.example.myprofile.presentation.utils.ext.navigateToFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,12 +14,6 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
-
-    private val sharedPreferences: SharedPreferences by lazy {
-        requireContext().getSharedPreferences(
-            Constants.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE
-        )
-    }
 
     private val viewModel: SignUpViewModel by viewModels()
 
@@ -55,46 +46,34 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
     override fun setListeners() {
         binding.buttonSignUpRegister?.setOnClickListener {
             // Get the entered data: email and password
-            val newEmail = binding.textInputEditTextSignUpEmail.text.toString()
-            val newPassword = binding.textInputEditTextSignUpPassword.text.toString()
-            val editor = sharedPreferences.edit()
+            viewModel.email.value = binding.textInputEditTextSignUpEmail.text.toString()
+            viewModel.password.value = binding.textInputEditTextSignUpPassword.text.toString()
 
             if (binding.checkBoxSignUpMemberInputDate.isChecked) {
                 //viewModel.saveAutoLogin(newEmail, newPassword, editor)
                 comeToNextFragment(
-                    viewModel.registerLiveData.value == true,
-                    newEmail,
-                    newPassword,
-                    editor
+                    viewModel.registerLiveData.value == true
                 )
             } else {
                 comeToNextFragment(
-                    viewModel.isValidEmail(newEmail) && viewModel.isValidPassword(newPassword) == null,
-                    newEmail,
-                    newPassword,
-                    editor
+                    viewModel.isValidEmail() && viewModel.isValidPassword() == null
                 )
             }
         }
     }
 
     private fun comeToNextFragment(
-        condition: Boolean,
-        email: String,
-        password: String,
-        editor: SharedPreferences.Editor
+        condition: Boolean
     ) {
         if (condition) {
-            //viewModel.saveUserName(email, editor)
-            viewModel.saveRegistrationData(email, password, editor)
             navigateToFragment(R.id.action_signUpFragment_to_signUpExtendedFragment)
         } else {
             with(binding) {
                 textInputLayoutSignUpEmail.error =
-                    if (viewModel.isValidEmail(textInputEditTextSignUpEmail.text.toString())) getString(R.string.error_on_email) else null
+                    if (viewModel.isValidEmail()) getString(R.string.error_on_email) else null
 
                 textInputLayoutSignUpPassword.error =
-                    viewModel.isValidPassword(textInputEditTextSignUpPassword.text.toString())
+                    viewModel.isValidPassword()
             }
         }
     }

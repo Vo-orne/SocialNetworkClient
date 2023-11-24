@@ -1,18 +1,16 @@
 package com.example.myprofile.presentation.ui.fragments.my_profile
 
 import android.Manifest
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.example.myprofile.R
-import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.databinding.FragmentMyProfileBinding
-import com.example.myprofile.presentation.ui.fragments.pager.adapter.utils.ViewPagerFragments
+import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.presentation.ui.fragments.pager.PagerFragment
-import com.example.myprofile.presentation.utils.Constants
+import com.example.myprofile.presentation.ui.fragments.pager.adapter.utils.ViewPagerFragments
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -49,13 +47,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfi
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Get the SharedPreferences instance to retrieve the user's name
-        val sharedPreferences = requireContext().getSharedPreferences(
-            Constants.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE
-        )
-        val userName = sharedPreferences.getString(Constants.USER_NAME_KEY, "")
-        binding.textViewMyProfileUserName.text = userName
+        binding.textViewMyProfileUserName.text = viewModel.getUserName()
         requestContactsPermission.launch(Manifest.permission.READ_CONTACTS)
         setListeners()
     }
