@@ -33,5 +33,6 @@
         <item name="colorGoogleButton">@color/white</item>
         <item name="colorGoogleButtonText">@color/grey_text</item>
         <item name="colorDialogLoadPhoto">@color/grey_blue</item>
+        <item name="colorSelectedToAddButton">@color/blue</item>
     </style>
 </resources>

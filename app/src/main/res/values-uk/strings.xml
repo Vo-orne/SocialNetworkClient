@@ -70,4 +70,7 @@
     <string name="don_t_have_account">Немає облікового запису?</string>
     <string name="forgot_your_password">Забули свій пароль?</string>
 
+    <!--    UserItem    -->
+    <string name="add">Додати</string>
+
 </resources>

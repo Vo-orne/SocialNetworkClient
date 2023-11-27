@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorFirstBackground">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/colorSecondBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guidelineAddContactContactFieldBoundary" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineAddContactContactFieldBoundary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.16" />
+
+    <ImageButton
+        android:id="@+id/imageButtonAddContactBack"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:background="@null"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginStart="@dimen/large_margin"
+        android:contentDescription="@string/back_button"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textViewAddContactUsers"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+    <TextView
+        android:id="@+id/textViewAddContactUsers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:text="@string/contacts"
+        android:theme="@style/TextViewTitlesStyle"
+        app:layout_constraintStart_toEndOf="@id/imageButtonAddContactBack"
+        app:layout_constraintEnd_toStartOf="@id/imageButtonAddContactSearch"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/imageButtonAddContactSearch"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:background="@null"
+        android:contentDescription="@string/search_button"
+        android:src="@drawable/ic_search_button"
+        app:layout_constraintStart_toEndOf="@id/textViewAddContactUsers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAddContactUsers"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guidelineAddContactContactFieldBoundary"
+        tools:listitem="@layout/user_item" />
+</androidx.constraintlayout.widget.ConstraintLayout>

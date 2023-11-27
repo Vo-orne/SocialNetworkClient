@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/frame_contacts_data"
+    android:layout_marginTop="@dimen/very_smallest_margin"
+    android:layout_marginStart="@dimen/medium_margin"
+    android:layout_marginEnd="@dimen/medium_margin"
+    android:layout_marginBottom="@dimen/very_smallest_margin">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageViewUserItemUserAvatar"
+        android:layout_width="@dimen/contact_photo_size"
+        android:layout_height="48dp"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:contentDescription="@string/content_description_user_avatar"
+        android:src="@drawable/default_user_photo"
+        android:theme="@style/roundedCorner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewUserItemUserName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:fontFamily="@font/open_sans_medium"
+        android:text="@string/name_surname"
+        android:textColor="?attr/colorSecondMainText"
+        android:textSize="@dimen/text_large_size"
+        app:layout_constraintBottom_toTopOf="@id/textViewUserItemUserCareer"
+        app:layout_constraintEnd_toStartOf="@id/textViewUserItemUserAdd"
+        app:layout_constraintStart_toEndOf="@id/imageViewUserItemUserAvatar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewUserItemUserCareer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:fontFamily="@font/open_sans_medium"
+        android:text="@string/career"
+        android:textColor="?attr/colorSecondaryTextForContacts"
+        android:textSize="@dimen/text_smallest_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textViewUserItemUserAdd"
+        app:layout_constraintStart_toEndOf="@id/imageViewUserItemUserAvatar"
+        app:layout_constraintTop_toBottomOf="@id/textViewUserItemUserName" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewUserItemUserAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:text="@string/add"
+        android:textSize="@dimen/text_large_size"
+        android:textColor="?attr/colorAccentButtons"
+        android:fontFamily="@font/open_sans_medium"
+        android:layout_marginEnd="@dimen/smallest_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/imageViewUserItemPlus"
+        app:layout_constraintStart_toEndOf="@id/textViewUserItemUserName"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewUserItemPlus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:src="@drawable/frame_button_plus"
+        android:layout_marginEnd="@dimen/medium_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textViewUserItemUserAdd"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewUserItemSelected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:src="@drawable/frame_selected_to_add"
+        android:layout_marginEnd="@dimen/medium_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewUserItemPlus"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
