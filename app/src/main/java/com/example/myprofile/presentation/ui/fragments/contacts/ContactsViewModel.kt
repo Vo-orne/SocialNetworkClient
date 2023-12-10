@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myprofile.data.model.Contact
 import com.example.myprofile.data.repository.ContactsRepository
-import com.example.myprofile.presentation.utils.utils.ext.UsersListener
+import com.example.myprofile.presentation.utils.ext.UsersListener
 import com.example.myprofile.presentation.utils.ext.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

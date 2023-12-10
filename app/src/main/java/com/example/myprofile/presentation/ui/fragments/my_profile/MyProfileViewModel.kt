@@ -8,13 +8,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyProfileViewModel @Inject constructor(
-    private val userDataRepository: UserDataRepository,
-    private val contactsRepository: ContactsRepository
+    private val userDataRepository: UserDataRepository
 ) : ViewModel() {
-
-    fun allowPhoneContacts() {
-        contactsRepository.allowPhoneContacts()
-    }
 
     fun getUserName(): String {
         return userDataRepository.currentUser?.name.toString()

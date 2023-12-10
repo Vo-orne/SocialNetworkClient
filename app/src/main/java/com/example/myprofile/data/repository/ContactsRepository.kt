@@ -2,9 +2,8 @@ package com.example.myprofile.data.repository
 
 import android.content.Context
 import com.example.myprofile.data.model.Contact
-import com.example.myprofile.presentation.utils.ContactsContentProvider
-import com.example.myprofile.presentation.utils.utils.ext.UsersListener
-import com.github.javafaker.Faker
+import com.example.myprofile.presentation.utils.ext.UsersListener
+import com.example.myprofile.presentation.utils.ext.log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -31,62 +30,62 @@ class ContactsRepository @Inject constructor(
      */
     private val listeners = mutableListOf<UsersListener>()
 
-    /**
-     * The user's response to the request to obtain permission to the phone's contact list.
-     */
-    private var isPhoneContactsAllowed = false
+//    /**
+//     * The user's response to the request to obtain permission to the phone's contact list.
+//     */
+//    private var isPhoneContactsAllowed = false
 
     /**
      * A list of the last saved contacts that will be possible to return.
      */
     private var _lastDeletedContacts = mutableListOf<Pair<Contact, Int>>()
 
-    init {
-        loadContacts()
-    }
+//    init {
+//        loadContacts()
+//    }
+//
+//    /**
+//     * Loads the contacts. If access to phone contacts is allowed, it fetches the contacts
+//     * from the ContactsContentProvider, adding random contacts to them, and stores in the contacts list.
+//     * Otherwise, it simply generates random contacts and stores them in the contacts list.
+//     */
+//    private fun loadContacts() {
+//        contacts = if (isPhoneContactsAllowed) {
+//            val contentProvider = ContactsContentProvider.getInstance(context)
+//            (contentProvider.getPhoneContacts() + generateRandomContacts()).toMutableList()
+//        } else {
+//            generateRandomContacts().toMutableList()
+//        }
+//    }
 
-    /**
-     * Loads the contacts. If access to phone contacts is allowed, it fetches the contacts
-     * from the ContactsContentProvider, adding random contacts to them, and stores in the contacts list.
-     * Otherwise, it simply generates random contacts and stores them in the contacts list.
-     */
-    private fun loadContacts() {
-        contacts = if (isPhoneContactsAllowed) {
-            val contentProvider = ContactsContentProvider.getInstance(context)
-            (contentProvider.getPhoneContacts() + generateRandomContacts()).toMutableList()
-        } else {
-            generateRandomContacts().toMutableList()
-        }
-    }
+//    /**
+//     * Allows access to phone contacts. It fetches the contacts from the ContactsContentProvider,
+//     * adding random contacts to them, and replaces the contacts list with the new list containing these contacts.
+//     * It also notifies listeners about the changes.
+//     */
+//    fun allowPhoneContacts() {
+//        isPhoneContactsAllowed = true
+//        val contentProvider = ContactsContentProvider.getInstance(context)
+//        val contacts =
+//            (contentProvider.getPhoneContacts() + generateRandomContacts()).toMutableList()
+//        this.contacts = ArrayList(contacts)
+//        notifyChanges()
+//    }
 
-    /**
-     * Allows access to phone contacts. It fetches the contacts from the ContactsContentProvider,
-     * adding random contacts to them, and replaces the contacts list with the new list containing these contacts.
-     * It also notifies listeners about the changes.
-     */
-    fun allowPhoneContacts() {
-        isPhoneContactsAllowed = true
-        val contentProvider = ContactsContentProvider.getInstance(context)
-        val contacts =
-            (contentProvider.getPhoneContacts() + generateRandomContacts()).toMutableList()
-        this.contacts = ArrayList(contacts)
-        notifyChanges()
-    }
-
-    /**
-     * Generates random contacts using the Faker library and returns a list of contacts.
-     */
-    private fun generateRandomContacts(): List<Contact> {
-        val faker = Faker.instance()
-        return (1..AVATARS.size).map {
-            Contact(
-                name = faker.name().name(),
-                career = faker.job().field(),
-                avatar = AVATARS[it % AVATARS.size],
-                address = faker.address().fullAddress()
-            )
-        }
-    }
+//    /**
+//     * Generates random contacts using the Faker library and returns a list of contacts.
+//     */
+//    private fun generateRandomContacts(): List<Contact> {
+//        val faker = Faker.instance()
+//        return (1..AVATARS.size).map {
+//            Contact(
+//                name = faker.name().name(),
+//                career = faker.job().field(),
+//                avatar = AVATARS[it % AVATARS.size],
+//                address = faker.address().fullAddress()
+//            )
+//        }
+//    }
 
     /**
      * Deletes a contact from the contacts list at a specific index. It stores the deleted contact
@@ -165,6 +164,7 @@ class ContactsRepository @Inject constructor(
     fun addContact(contact: Contact) {
         contacts = ArrayList(contacts)
         contacts.add(contacts.size, contact)
+        log("contacts.size = ${contacts.size}, contact = $contact")
         notifyChanges()
     }
 
@@ -192,18 +192,18 @@ class ContactsRepository @Inject constructor(
         listeners.forEach { it.invoke(contacts) }
     }
 
-    companion object {
-        private val AVATARS = listOf(
-            "https://randomuser.me/api/portraits/women/44.jpg",
-            "https://randomuser.me/api/portraits/men/46.jpg",
-            "https://randomuser.me/api/portraits/men/97.jpg",
-            "https://randomuser.me/api/portraits/men/84.jpg",
-            "https://randomuser.me/api/portraits/women/63.jpg",
-            "https://randomuser.me/api/portraits/men/86.jpg",
-            "https://randomuser.me/api/portraits/women/95.jpg",
-            "https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg",
-            "https://randomuser.me/api/portraits/women/30.jpg",
-            "https://images.pexels.com/photos/449977/pexels-photo-449977.jpeg?h=350&auto=compress&cs=tinysrgb"
-        )
-    }
+//    companion object {
+//        private val AVATARS = listOf(
+//            "https://randomuser.me/api/portraits/women/44.jpg",
+//            "https://randomuser.me/api/portraits/men/46.jpg",
+//            "https://randomuser.me/api/portraits/men/97.jpg",
+//            "https://randomuser.me/api/portraits/men/84.jpg",
+//            "https://randomuser.me/api/portraits/women/63.jpg",
+//            "https://randomuser.me/api/portraits/men/86.jpg",
+//            "https://randomuser.me/api/portraits/women/95.jpg",
+//            "https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg",
+//            "https://randomuser.me/api/portraits/women/30.jpg",
+//            "https://images.pexels.com/photos/449977/pexels-photo-449977.jpeg?h=350&auto=compress&cs=tinysrgb"
+//        )
+//    }
 }

@@ -33,7 +33,6 @@
         android:textColor="?attr/colorSecondMainText"
         android:textSize="@dimen/text_large_size"
         app:layout_constraintBottom_toTopOf="@id/textViewUserItemUserCareer"
-        app:layout_constraintEnd_toStartOf="@id/textViewUserItemUserAdd"
         app:layout_constraintStart_toEndOf="@id/imageViewUserItemUserAvatar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
@@ -48,7 +47,6 @@
         android:textColor="?attr/colorSecondaryTextForContacts"
         android:textSize="@dimen/text_smallest_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/textViewUserItemUserAdd"
         app:layout_constraintStart_toEndOf="@id/imageViewUserItemUserAvatar"
         app:layout_constraintTop_toBottomOf="@id/textViewUserItemUserName" />
 
@@ -64,8 +62,7 @@
         android:layout_marginEnd="@dimen/smallest_margin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/imageViewUserItemPlus"
-        app:layout_constraintStart_toEndOf="@id/textViewUserItemUserName"/>
+        app:layout_constraintEnd_toStartOf="@id/imageViewUserItemPlus"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageViewUserItemPlus"
@@ -76,7 +73,6 @@
         android:layout_marginEnd="@dimen/medium_margin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textViewUserItemUserAdd"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -88,6 +84,5 @@
         android:layout_marginEnd="@dimen/medium_margin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imageViewUserItemPlus"
         app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

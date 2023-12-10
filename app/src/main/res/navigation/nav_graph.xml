@@ -47,13 +47,33 @@
         android:label="PagerFragment"
         tools:layout="@layout/fragment_pager">
         <action
-            android:id="@+id/action_pagerFragment_to_addContactDialogFragment"
-            app:destination="@id/addContactDialogFragment" />
-        <action
             android:id="@+id/action_pagerFragment_to_detailViewFragment"
             app:destination="@id/detailViewFragment" />
         <action
-            android:id="@+id/action_signUpFragment_to_pagerFragment"
+            android:id="@+id/action_pagerFragment_to_addContactFragment"
+            app:destination="@id/addContactFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addContactFragment"
+        android:name="com.example.myprofile.presentation.ui.fragments.add_contact.AddContactFragment"
+        android:label="AddContactFragment"
+        tools:layout="@layout/fragment_add_contact">
+        <action
+            android:id="@+id/action_addContactFragment_to_pagerFragment"
+            app:destination="@id/pagerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailViewFragment"
+        android:name="com.example.myprofile.presentation.ui.fragments.detail_view.DetailViewFragment"
+        android:label="Detail View"
+        tools:layout="@layout/fragment_detail_view">
+        <argument
+            android:name="contact"
+            app:argType="com.example.myprofile.data.model.Contact" />
+        <action
+            android:id="@+id/action_detailViewFragment_to_pagerFragment"
             app:destination="@id/pagerFragment" />
     </fragment>
 
@@ -75,24 +95,5 @@
         <action
             android:id="@+id/action_myContactsFragment_to_myProfileFragment"
             app:destination="@id/myProfileFragment" />
-    </fragment>
-
-    <dialog
-        android:id="@+id/addContactDialogFragment"
-        android:name="com.example.myprofile.presentation.ui.fragments.add_contact.AddContactDialogFragment"
-        android:label="AddContactDialogFragment"
-        tools:layout="@layout/dialog_add_contact" />
-
-    <fragment
-        android:id="@+id/detailViewFragment"
-        android:name="com.example.myprofile.presentation.ui.fragments.detail_view.DetailViewFragment"
-        android:label="Detail View"
-        tools:layout="@layout/fragment_detail_view">
-        <argument
-            android:name="contact"
-            app:argType="com.example.myprofile.data.model.Contact" />
-        <action
-            android:id="@+id/action_detailViewFragment_to_pagerFragment"
-            app:destination="@id/pagerFragment" />
     </fragment>
 </navigation>

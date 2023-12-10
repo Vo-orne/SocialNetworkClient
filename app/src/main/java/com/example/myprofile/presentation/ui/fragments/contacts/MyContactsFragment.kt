@@ -9,17 +9,15 @@ import com.example.myprofile.R
 import com.example.myprofile.data.model.Contact
 import com.example.myprofile.databinding.FragmentMyContactsBinding
 import com.example.myprofile.presentation.ui.base.BaseFragment
-import com.example.myprofile.presentation.ui.fragments.add_contact.AddContactDialogFragment
 import com.example.myprofile.presentation.ui.fragments.contacts.adapter.ContactsAdapter
 import com.example.myprofile.presentation.ui.fragments.contacts.adapter.interfaces.ContactActionListener
 import com.example.myprofile.presentation.ui.fragments.pager.PagerFragment
 import com.example.myprofile.presentation.ui.fragments.pager.PagerFragmentDirections
 import com.example.myprofile.presentation.ui.fragments.pager.adapter.utils.ViewPagerFragments
-import com.example.myprofile.presentation.utils.Constants.ADD_CONTACT_DIALOG
 import com.example.myprofile.presentation.utils.ext.navigateToFragment
 import com.example.myprofile.presentation.utils.ext.swipeToDelete
 import com.example.myprofile.presentation.utils.ext.log
-import com.example.myprofile.presentation.utils.utils.ext.visible
+import com.example.myprofile.presentation.utils.ext.visible
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -104,6 +102,7 @@ class MyContactsFragment :
 
     private fun setObservers() {
         viewModel.contacts.observe(viewLifecycleOwner, Observer {
+            log("viewModel.contacts.value!!.size = ${viewModel.contacts.value!!.size}")
             adapter.submitList(it)
         })
         viewModel.isMultiselect.observe(viewLifecycleOwner, Observer { // TODO: set
@@ -124,7 +123,6 @@ class MyContactsFragment :
                 showSnackbar()
             },
             isEnabled = {
-                log("isEnabled ${viewModel.isMultiselect.value}")
                 viewModel.isMultiselect.value == false
             }
         )
@@ -137,10 +135,7 @@ class MyContactsFragment :
             // Assuming MyContactsFragment is at index 1
         }
         binding.textViewMyContactsAddContacts.setOnClickListener {
-            AddContactDialogFragment().show(
-                childFragmentManager,
-                ADD_CONTACT_DIALOG
-            )
+            navigateToFragment(R.id.action_pagerFragment_to_addContactFragment)
         }
         binding.imageViewMyContactsDeleteSelectMode?.setOnClickListener {
             val selectedItems = adapter.getSelectedItems()

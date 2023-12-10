@@ -1,12 +1,8 @@
 package com.example.myprofile.presentation.ui.fragments.my_profile
 
-import android.Manifest
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import com.example.myprofile.R
 import com.example.myprofile.databinding.FragmentMyProfileBinding
 import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.presentation.ui.fragments.pager.PagerFragment
@@ -24,23 +20,23 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfi
      */
     private val viewModel: MyProfileViewModel by viewModels()
 
-    /**
-     * ActivityResultLauncher to request contacts permission
-     */
-    private val requestContactsPermission =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            if (isGranted) {
-                // If the permission is granted, allow access to phone contacts and navigate to the MyContactsFragment
-                viewModel.allowPhoneContacts()
-            } else {
-                // If the permission is denied, show a toast with a message about the access denial
-                Toast.makeText(
-                    requireContext(),
-                    R.string.access_is_denied,
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
+//    /**
+//     * ActivityResultLauncher to request contacts permission
+//     */
+//    private val requestContactsPermission =
+//        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+//            if (isGranted) {
+//                // If the permission is granted, allow access to phone contacts and navigate to the MyContactsFragment
+//                viewModel.allowPhoneContacts()
+//            } else {
+//                // If the permission is denied, show a toast with a message about the access denial
+//                Toast.makeText(
+//                    requireContext(),
+//                    R.string.access_is_denied,
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
+//        }
 
     /**
      * Method called when the fragment's view is created
@@ -48,7 +44,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.textViewMyProfileUserName.text = viewModel.getUserName()
-        requestContactsPermission.launch(Manifest.permission.READ_CONTACTS)
+//        requestContactsPermission.launch(Manifest.permission.READ_CONTACTS)
         setListeners()
     }
 
