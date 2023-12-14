@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myprofile.data.model.Contact
+import com.example.myprofile.data.model.ContactsResponse
 import com.example.myprofile.data.model.UserDataRepository
 import com.example.myprofile.data.model.UsersResponse
 import com.example.myprofile.data.repository.ContactsRepository
 import com.example.myprofile.data.repository.UsersRepositoryImpl
 import com.example.myprofile.domain.ApiState
-import com.example.myprofile.presentation.utils.ext.UsersListener
 import com.example.myprofile.presentation.utils.ext.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -29,17 +29,14 @@ class AddContactViewModel @Inject constructor(
     private var _contactsToAdd = MutableLiveData<List<Contact>>()
     val contactsToAdd: LiveData<List<Contact>> = _contactsToAdd
 
-    private val selectedContacts = mutableListOf<Contact>()
+    private val _allUsersStateFlow = MutableStateFlow<ApiState>(ApiState.Initial)
+    val allUsersStateFlow: StateFlow<ApiState> = _allUsersStateFlow
 
-    private val listener: UsersListener = {
-        _contactsToAdd.value = it
-    }
-
-    private val _getAllUsersStateFlow = MutableStateFlow<ApiState>(ApiState.Initial)
-    val getAllUsersStateFlow: StateFlow<ApiState> = _getAllUsersStateFlow
+    private val _contactStateFlow = MutableStateFlow<ApiState>(ApiState.Initial)
+    val contactStateFlow: StateFlow<ApiState> = _contactStateFlow
 
     fun getAllUsers() = viewModelScope.launch(Dispatchers.IO) {
-        _getAllUsersStateFlow.value = ApiState.Loading
+        _allUsersStateFlow.value = ApiState.Loading
 
         // Calls the repository to get the data
         val response = usersRepositoryImpl.getAllUsers(
@@ -49,7 +46,7 @@ class AddContactViewModel @Inject constructor(
         saveUsers(response)
 
         // Passes registration status to LiveData
-        _getAllUsersStateFlow.value = response
+        _allUsersStateFlow.value = response
     }
 
     /**
@@ -63,15 +60,24 @@ class AddContactViewModel @Inject constructor(
         }
     }
 
-    fun selectContact(contact: Contact) {
-        selectedContacts.add(contact)
+    fun addContact(contact: Contact) = viewModelScope.launch(Dispatchers.IO) {
+        _contactStateFlow.value = ApiState.Loading
+
+        val response = usersRepositoryImpl.addContact(
+            userDataRepository.currentUser!!.id,
+            contact,
+            userDataRepository.accessToken!!
+        )
+        log("response = $response")
+        addContactToRepository(response)
+        _contactStateFlow.value = response
     }
 
-    fun addContacts() {
-        if (selectedContacts.isNotEmpty()) {
-            for(contact in selectedContacts) {
-                contactsRepository.addContact(contact)
-            }
+    private fun addContactToRepository(response: ApiState) {
+        if (response is ApiState.Success<*>) {
+            val data = response.data as ContactsResponse.Data
+            val contact = data.contacts!!.map { it.toContact() }
+            contactsRepository.addContact(contact.first())
         }
     }
 }

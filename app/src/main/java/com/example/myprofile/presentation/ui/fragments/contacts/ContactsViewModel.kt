@@ -3,16 +3,28 @@ package com.example.myprofile.presentation.ui.fragments.contacts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.myprofile.data.model.Contact
+import com.example.myprofile.data.model.ContactsResponse
+import com.example.myprofile.data.model.UserDataRepository
 import com.example.myprofile.data.repository.ContactsRepository
+import com.example.myprofile.data.repository.UsersRepositoryImpl
+import com.example.myprofile.domain.ApiState
 import com.example.myprofile.presentation.utils.ext.UsersListener
 import com.example.myprofile.presentation.utils.ext.log
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class ContactsViewModel @Inject constructor(
-    private val contactsRepository: ContactsRepository
+    private val contactsRepository: ContactsRepository,
+    private val usersRepositoryImpl: UsersRepositoryImpl,
+    private val userDataRepository: UserDataRepository
     ): ViewModel() {
 
     private val _contacts = MutableLiveData<List<Contact>>() // Live data for saving the list of users
@@ -20,6 +32,9 @@ class ContactsViewModel @Inject constructor(
 
     private val _isMultiselect = MutableLiveData(false) // Live data for saving the list of users
     val isMultiselect: LiveData<Boolean> = _isMultiselect // Public access to live data
+
+    private val _contactsStateFlow = MutableStateFlow<ApiState>(ApiState.Initial)
+    val contactsStateFlow: StateFlow<ApiState> = _contactsStateFlow
 
     private val listener: UsersListener = {
         _contacts.value = it
@@ -41,7 +56,34 @@ class ContactsViewModel @Inject constructor(
      * Getting a list of contacts.
      */
     private fun loadContacts() {
+        getUserContacts()
         contactsRepository.addListener(listener)
+    }
+
+    private fun getUserContacts() = viewModelScope.launch(Dispatchers.IO) {
+        _contactsStateFlow.value = ApiState.Loading
+
+        // Calls the repository to get the data
+        val response = usersRepositoryImpl.getUserContacts(
+            userDataRepository.currentUser!!.id,
+            userDataRepository.accessToken!!
+        )
+
+        withContext(Dispatchers.Main) {
+            saveUsers(response)
+            _contactsStateFlow.value = response
+        }
+    }
+
+
+    private fun saveUsers(response: ApiState) {
+        if (response is ApiState.Success<*>) {
+            val data = response.data as ContactsResponse.Data
+            val contacts = data.contacts!!.map { it.toContact() }
+            for (contact in contacts) {
+                contactsRepository.addContact(contact)
+            }
+        }
     }
 
     /**

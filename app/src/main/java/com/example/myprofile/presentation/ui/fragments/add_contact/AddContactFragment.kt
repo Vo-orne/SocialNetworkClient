@@ -25,7 +25,7 @@ class AddContactFragment : BaseFragment<FragmentAddContactBinding>(FragmentAddCo
         AddContactsAdapter(listener = object : AddContactActionListener {
 
             override fun onClickAddButton(contact: Contact, position: Int) {
-                viewModel.selectContact(contact)
+                viewModel.addContact(contact)
             }
 
 //            override fun onClickContact(
@@ -69,7 +69,6 @@ class AddContactFragment : BaseFragment<FragmentAddContactBinding>(FragmentAddCo
     override fun setListeners() {
         with(binding) {
             imageButtonAddContactBack.setOnClickListener {
-                viewModel.addContacts()
                 navigateToFragment(R.id.action_addContactFragment_to_pagerFragment)
             }
 //            imageSearchView.setOnClickListener {

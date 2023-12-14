@@ -15,7 +15,6 @@ import javax.inject.Inject
  * Contact objects to store the contact data.
  * @param context The application context required to access resources and the content provider.
  */
-
 class ContactsRepository @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
@@ -164,7 +163,7 @@ class ContactsRepository @Inject constructor(
     fun addContact(contact: Contact) {
         contacts = ArrayList(contacts)
         contacts.add(contacts.size, contact)
-        log("contacts.size = ${contacts.size}, contact = $contact")
+        log("contacts.size = ${contacts.size} and contact = $contact")
         notifyChanges()
     }
 
@@ -191,19 +190,4 @@ class ContactsRepository @Inject constructor(
     private fun notifyChanges() {
         listeners.forEach { it.invoke(contacts) }
     }
-
-//    companion object {
-//        private val AVATARS = listOf(
-//            "https://randomuser.me/api/portraits/women/44.jpg",
-//            "https://randomuser.me/api/portraits/men/46.jpg",
-//            "https://randomuser.me/api/portraits/men/97.jpg",
-//            "https://randomuser.me/api/portraits/men/84.jpg",
-//            "https://randomuser.me/api/portraits/women/63.jpg",
-//            "https://randomuser.me/api/portraits/men/86.jpg",
-//            "https://randomuser.me/api/portraits/women/95.jpg",
-//            "https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg",
-//            "https://randomuser.me/api/portraits/women/30.jpg",
-//            "https://images.pexels.com/photos/449977/pexels-photo-449977.jpeg?h=350&auto=compress&cs=tinysrgb"
-//        )
-//    }
 }
