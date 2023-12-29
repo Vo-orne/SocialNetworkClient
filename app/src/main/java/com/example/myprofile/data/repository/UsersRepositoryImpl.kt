@@ -53,4 +53,20 @@ class UsersRepositoryImpl @Inject constructor(private val apiService: UsersApiSe
             ApiState.Error("ApiState.Error = ${e.message.toString()}")
         }
     }
+
+    suspend fun deleteUserContact(userId: Long, contactId: Long, accessToken: String): ApiState {
+        return try {
+            val response =
+                apiService.deleteUserContact(
+                    userId,
+                    contactId,
+                    "${Constants.AUTHORIZATION_PREFIX} $accessToken"
+                )
+            response.data.let {
+                ApiState.Success(it)
+            }
+        } catch (e: Exception) {
+            ApiState.Error("ApiState.Error = ${e.message.toString()}")
+        }
+    }
 }

@@ -41,6 +41,7 @@ class MyContactsFragment :
                 viewModel.deleteUser(contact, position)
                 // Show a Snackbar with a message about the contact deletion
                 showSnackbar()
+                viewModel.deleteUserContact(contact)
             }
 
             // Event handler for viewing contact details
@@ -139,6 +140,7 @@ class MyContactsFragment :
             val selectedItems = adapter.getSelectedItems()
             viewModel.deleteSelectedContacts(selectedItems)
             showSnackbar()
+            viewModel.deleteSelectedUserContacts(selectedItems)
             viewModel.setMultiselect()
             binding.imageViewMyContactsDeleteSelectMode!!.visibility = View.GONE
         }

@@ -28,62 +28,11 @@ class ContactsRepository @Inject constructor(
      */
     private val listeners = mutableListOf<UsersListener>()
 
-//    /**
-//     * The user's response to the request to obtain permission to the phone's contact list.
-//     */
-//    private var isPhoneContactsAllowed = false
-
     /**
      * A list of the last saved contacts that will be possible to return.
      */
     private var _lastDeletedContacts = mutableListOf<Pair<Contact, Int>>()
 
-//    init {
-//        loadContacts()
-//    }
-//
-//    /**
-//     * Loads the contacts. If access to phone contacts is allowed, it fetches the contacts
-//     * from the ContactsContentProvider, adding random contacts to them, and stores in the contacts list.
-//     * Otherwise, it simply generates random contacts and stores them in the contacts list.
-//     */
-//    private fun loadContacts() {
-//        contacts = if (isPhoneContactsAllowed) {
-//            val contentProvider = ContactsContentProvider.getInstance(context)
-//            (contentProvider.getPhoneContacts() + generateRandomContacts()).toMutableList()
-//        } else {
-//            generateRandomContacts().toMutableList()
-//        }
-//    }
-
-//    /**
-//     * Allows access to phone contacts. It fetches the contacts from the ContactsContentProvider,
-//     * adding random contacts to them, and replaces the contacts list with the new list containing these contacts.
-//     * It also notifies listeners about the changes.
-//     */
-//    fun allowPhoneContacts() {
-//        isPhoneContactsAllowed = true
-//        val contentProvider = ContactsContentProvider.getInstance(context)
-//        val contacts =
-//            (contentProvider.getPhoneContacts() + generateRandomContacts()).toMutableList()
-//        this.contacts = ArrayList(contacts)
-//        notifyChanges()
-//    }
-
-//    /**
-//     * Generates random contacts using the Faker library and returns a list of contacts.
-//     */
-//    private fun generateRandomContacts(): List<Contact> {
-//        val faker = Faker.instance()
-//        return (1..AVATARS.size).map {
-//            Contact(
-//                name = faker.name().name(),
-//                career = faker.job().field(),
-//                avatar = AVATARS[it % AVATARS.size],
-//                address = faker.address().fullAddress()
-//            )
-//        }
-//    }
 
     /**
      * Deletes a contact from the contacts list at a specific index. It stores the deleted contact

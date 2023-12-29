@@ -103,6 +103,24 @@ class ContactsViewModel @Inject constructor(
         contactsRepository.deleteContact(user, position)
     }
 
+    fun deleteSelectedUserContacts(selectedContacts: HashSet<Pair<Contact, Int>>) {
+        for (contact in selectedContacts) {
+            deleteUserContact(contact.first)
+        }
+    }
+
+    fun deleteUserContact(contact: Contact) = viewModelScope.launch(Dispatchers.IO) {
+        _contactsStateFlow.value = ApiState.Loading
+
+        val response = usersRepositoryImpl.deleteUserContact(
+            userDataRepository.currentUser!!.id,
+            contact.id,
+            userDataRepository.accessToken!!
+        )
+        log("response = $response")
+        _contactsStateFlow.value = response
+    }
+
     /**
      * Returns the last deleted contacts that were deleted from the contact list back.
      */
@@ -112,6 +130,5 @@ class ContactsViewModel @Inject constructor(
 
     fun setMultiselect() {
         _isMultiselect.value = !_isMultiselect.value!!
-        log("setMultiselect() ${isMultiselect.value}")
     }
 }
