@@ -22,42 +22,30 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Get an instance of SharedPreferences for data storage
-        // Check if previously saved user data exists for automatic login
-        //accountAutoLogin()
-        // Set event listeners
         setListeners()
     }
-
-//    /**
-//     * Private method for automatic login if user data is previously saved
-//     */
-//    private fun accountAutoLogin() {
-//        if (sharedPreferences.getBoolean(Constants.AUTO_LOGIN_KEY, false)) {
-//            navigateToFragmentWithoutReturning(
-//                R.id.action_signUpFragment_to_pagerFragment, R.id.signUpFragment
-//            )
-//        }
-//    }
 
     /**
      * Method to set event listeners
      */
     override fun setListeners() {
         binding.buttonSignUpRegister?.setOnClickListener {
-            // Get the entered data: email and password
-            viewModel.email.value = binding.textInputEditTextSignUpEmail.text.toString()
-            viewModel.password.value = binding.textInputEditTextSignUpPassword.text.toString()
+            with(viewModel) {
+                // Get the entered data: email and password
+                email.value = binding.textInputEditTextSignUpEmail.text.toString()
+                password.value = binding.textInputEditTextSignUpPassword.text.toString()
 
-            if (binding.checkBoxSignUpMemberInputDate.isChecked) {
-                //viewModel.saveAutoLogin(newEmail, newPassword, editor)
-                comeToNextFragment(
-                    viewModel.registerLiveData.value == true
-                )
-            } else {
-                comeToNextFragment(
-                    viewModel.isValidEmail() && viewModel.isValidPassword() == null
-                )
+                if (binding.checkBoxSignUpMemberInputDate.isChecked) {
+                    //viewModel.saveAutoLogin(newEmail, newPassword, editor)
+                    isCheckBoxChecked = true
+                    comeToNextFragment(
+                        isValidEmail() && isValidPassword() == null
+                    )
+                } else {
+                    comeToNextFragment(
+                        isValidEmail() && isValidPassword() == null
+                    )
+                }
             }
         }
     }

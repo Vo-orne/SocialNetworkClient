@@ -1,5 +1,6 @@
 package com.example.myprofile.presentation.ui.fragments.auth.sign_up_extended
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -57,11 +58,15 @@ class SignUpExtendedFragment :
     }
 
     override fun setListeners() {
-        binding.buttonSignUpExtendedForward.setOnClickListener {
-            registerUser()
-        }
-        binding.buttonSignUpExtendedCancel.setOnClickListener {
-            navigateToFragment(R.id.action_signUpExtendedFragment_to_signUpFragment)
+        with(binding) {
+            buttonSignUpExtendedForward.setOnClickListener {
+                if (viewModel.isCheckBoxChecked)
+                    viewModel.saveAutoLoginData()
+                registerUser()
+            }
+            buttonSignUpExtendedCancel.setOnClickListener {
+                navigateToFragment(R.id.action_signUpExtendedFragment_to_signUpFragment)
+            }
         }
     }
 

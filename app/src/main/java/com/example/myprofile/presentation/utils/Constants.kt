@@ -6,6 +6,10 @@ package com.example.myprofile.presentation.utils
  */
 object Constants {
 
+    const val SHARED_PREFERENCES_KEY = "login_data"
+    const val EMAIL_KEY = "email"
+    const val PASSWORD_KEY = "password"
+
     // Maximum length of a password.
     const val MIN_PASSWORD_SIZE = 8
 

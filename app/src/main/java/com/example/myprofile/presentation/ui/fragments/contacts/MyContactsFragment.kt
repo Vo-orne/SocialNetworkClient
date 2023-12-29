@@ -16,7 +16,6 @@ import com.example.myprofile.presentation.ui.fragments.pager.PagerFragmentDirect
 import com.example.myprofile.presentation.ui.fragments.pager.adapter.utils.ViewPagerFragments
 import com.example.myprofile.presentation.utils.ext.navigateToFragment
 import com.example.myprofile.presentation.utils.ext.swipeToDelete
-import com.example.myprofile.presentation.utils.ext.log
 import com.example.myprofile.presentation.utils.ext.visible
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -102,7 +101,6 @@ class MyContactsFragment :
 
     private fun setObservers() {
         viewModel.contacts.observe(viewLifecycleOwner, Observer {
-            log("viewModel.contacts.value!!.size = ${viewModel.contacts.value!!.size}")
             adapter.submitList(it)
         })
         viewModel.isMultiselect.observe(viewLifecycleOwner, Observer { // TODO: set

@@ -3,7 +3,6 @@ package com.example.myprofile.data.repository
 import android.content.Context
 import com.example.myprofile.data.model.Contact
 import com.example.myprofile.presentation.utils.ext.UsersListener
-import com.example.myprofile.presentation.utils.ext.log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -163,7 +162,6 @@ class ContactsRepository @Inject constructor(
     fun addContact(contact: Contact) {
         contacts = ArrayList(contacts)
         contacts.add(contacts.size, contact)
-        log("contacts.size = ${contacts.size} and contact = $contact")
         notifyChanges()
     }
 

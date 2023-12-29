@@ -16,12 +16,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LogInFragment : BaseFragment<FragmentLogInBinding>(FragmentLogInBinding::inflate) {
+class LogInFragment: BaseFragment<FragmentLogInBinding>(FragmentLogInBinding::inflate) {
 
     private val viewModel: LogInViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.autoLogin()
+
         setListeners()
         setObservers()
     }
@@ -36,6 +39,7 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(FragmentLogInBinding::i
                             0
                         )
                     }
+
                     is ApiState.Loading -> {
                         log("Loading")
                     }
@@ -67,6 +71,8 @@ class LogInFragment : BaseFragment<FragmentLogInBinding>(FragmentLogInBinding::i
         with(viewModel) {
             email.value = binding.textInputEditTextLogInEmail.text.toString()
             password.value = binding.textInputEditTextLogInPassword.text.toString()
+            if (binding.checkBoxLogInMemberInputDate.isChecked)
+                saveAutoLoginData()
             loginUser()
         }
     }
