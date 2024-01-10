@@ -11,7 +11,6 @@ import com.example.myprofile.data.model.UsersResponse
 import com.example.myprofile.data.repository.ContactsRepository
 import com.example.myprofile.data.repository.UsersRepositoryImpl
 import com.example.myprofile.domain.ApiState
-import com.example.myprofile.presentation.utils.ext.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -68,7 +67,6 @@ class AddContactViewModel @Inject constructor(
             contact,
             userDataRepository.accessToken!!
         )
-        log("response = $response")
         addContactToRepository(response)
         _contactStateFlow.value = response
     }

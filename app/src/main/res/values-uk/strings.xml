@@ -40,8 +40,8 @@
     <string name="contact_removed">Контакт видалено.</string>
     <string name="cancel">Відмінити</string>
 
-    <!--    AddContactDialog    -->
-    <string name="add_contact">Додати контакт</string>
+    <!--    EditProfileDialog    -->
+    <string name="edit_user">Редагувати користувача</string>
     <string name="username">Ім\'я користувача</string>
     <string name="save">Зберегти</string>
     <string name="displays_the_add_photo_button">Відображає кнопку додавання фото.</string>

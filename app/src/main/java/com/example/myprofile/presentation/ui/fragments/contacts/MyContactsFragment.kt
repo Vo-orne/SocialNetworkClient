@@ -104,7 +104,7 @@ class MyContactsFragment :
         viewModel.contacts.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
-        viewModel.isMultiselect.observe(viewLifecycleOwner, Observer { // TODO: set
+        viewModel.isMultiselect.observe(viewLifecycleOwner, Observer {
             adapter.setMultiselect(it)
         })
     }

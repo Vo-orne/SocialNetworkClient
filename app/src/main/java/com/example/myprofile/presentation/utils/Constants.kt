@@ -21,4 +21,11 @@ object Constants {
 
     // Authorization prefix.
     const val AUTHORIZATION_PREFIX = "Bearer"
+
+    // String command to open the add contact dialog.
+    const val EDIT_USER_DIALOG = "EditProfileDialog"
+
+    // The dates formats
+    const val DATE_FORMAT = "dd/MM/yyyy"
+    const val INPUT_DATE_FORMAT = "EEE MMM dd HH:mm:ss zzz yyyy"
 }

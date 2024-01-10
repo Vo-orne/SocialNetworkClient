@@ -52,6 +52,19 @@
         <action
             android:id="@+id/action_pagerFragment_to_addContactFragment"
             app:destination="@id/addContactFragment" />
+        <action
+            android:id="@+id/action_pagerFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.myprofile.presentation.ui.fragments.edit_profile.EditProfileFragment"
+        android:label="EditProfileFragment"
+        tools:layout="@layout/fragment_edit_user">
+        <action
+            android:id="@+id/action_editProfileFragment_to_pagerFragment"
+            app:destination="@id/pagerFragment" />
     </fragment>
 
     <fragment

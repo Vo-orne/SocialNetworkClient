@@ -14,9 +14,9 @@ import java.io.Serializable
  */
 data class Contact(
     val avatar: String? = null,
-    val name: String? = null,
-    val career: String? = null,
-    val address: String? = null,
+    var name: String? = null,
+    var career: String? = null,
+    var address: String? = null,
     val id: Long = 0
 ): Serializable
 

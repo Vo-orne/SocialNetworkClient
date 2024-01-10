@@ -40,8 +40,8 @@
     <string name="contact_removed">Contact has been removed.</string>
     <string name="cancel">Cancel</string>
 
-    <!--    AddContactDialog    -->
-    <string name="add_contact">Add contact</string>
+    <!--    EditProfileDialog    -->
+    <string name="edit_user">Edit user</string>
     <string name="username">Username</string>
     <string name="save">Save</string>
     <string name="displays_the_add_photo_button">Displays the add photo button.</string>

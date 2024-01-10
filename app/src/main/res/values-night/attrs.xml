@@ -8,8 +8,8 @@
     <attr name="colorSecondaryTextForContacts" format="color"/>
     <attr name="colorOfDataEntryFields" format="color"/>
     <attr name="colorOfDataEntryFieldsForAddContact" format="color"/>
-    <attr name="colorTextForAddContact" format="color"/>
-    <attr name="colorHintTextForAddContact" format="color"/>
+    <attr name="colorTextForEditUser" format="color"/>
+    <attr name="colorHintTextForEditUser" format="color"/>
     <attr name="colorAccentButtons" format="color"/>
     <attr name="colorGoogleButton" format="color"/>
     <attr name="colorGoogleButtonText" format="color"/>
