@@ -1,7 +1,10 @@
 package com.example.myprofile.presentation.ui.fragments.edit_profile
 
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.view.View
+import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -13,8 +16,10 @@ import com.example.myprofile.presentation.ui.fragments.edit_profile.dialog.Calen
 import com.example.myprofile.presentation.ui.fragments.edit_profile.interfaces.DialogCalendarListener
 import com.example.myprofile.presentation.utils.Constants
 import com.example.myprofile.presentation.utils.Parser
+import com.example.myprofile.presentation.utils.ext.invisible
 import com.example.myprofile.presentation.utils.ext.log
 import com.example.myprofile.presentation.utils.ext.navigateToFragment
+import com.example.myprofile.presentation.utils.ext.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -22,15 +27,22 @@ import kotlinx.coroutines.launch
  * Dialog fragment for adding a new contact.
  */
 @AndroidEntryPoint
-class EditProfileFragment : BaseFragment<FragmentEditUserBinding>(FragmentEditUserBinding::inflate) {
+class EditProfileFragment() : BaseFragment<FragmentEditUserBinding>(FragmentEditUserBinding::inflate),
+    Parcelable {
 
     /**
      * ViewModel for handling the addition of new contacts
      */
     private val viewModel: EditProfileViewModel by viewModels()
+    private lateinit var progressBar: ProgressBar
+
+    constructor(parcel: Parcel) : this() {
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progressBar = binding.progressBar
         setListeners()
         setObservers()
         setCalendar()
@@ -57,16 +69,20 @@ class EditProfileFragment : BaseFragment<FragmentEditUserBinding>(FragmentEditUs
             viewModel.userStateFlow.observe(viewLifecycleOwner, Observer { apiState ->
                 when (apiState) {
                     is ApiState.Success<*> -> {
+                        progressBar.invisible()
                         viewModel.setUserData()
                         navigateToFragment(R.id.action_editProfileFragment_to_pagerFragment)
                     }
                     is ApiState.Error -> {
+                        progressBar.invisible()
                         log(apiState.error)
                     }
                     is ApiState.Initial -> {
+                        progressBar.invisible()
                         log(apiState)
                     }
                     is ApiState.Loading -> {
+                        progressBar.visible()
                         log(apiState)
                     }
                 }
@@ -100,6 +116,24 @@ class EditProfileFragment : BaseFragment<FragmentEditUserBinding>(FragmentEditUs
                 })
                 dialog.show(parentFragmentManager, Constants.EDIT_USER_DIALOG)
             }
+        }
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<EditProfileFragment> {
+        override fun createFromParcel(parcel: Parcel): EditProfileFragment {
+            return EditProfileFragment(parcel)
+        }
+
+        override fun newArray(size: Int): Array<EditProfileFragment?> {
+            return arrayOfNulls(size)
         }
     }
 }

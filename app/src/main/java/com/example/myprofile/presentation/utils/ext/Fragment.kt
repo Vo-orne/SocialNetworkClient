@@ -1,10 +1,12 @@
 package com.example.myprofile.presentation.utils.ext
 
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.myprofile.R
+import com.google.android.material.snackbar.Snackbar
 
 
 fun Fragment.navigateToFragment(idAction: Int) {
@@ -41,4 +43,24 @@ fun Fragment.navigateToFragmentWithoutReturning(idAction: Int, idStartingFragmen
             ) // Responsible for making it impossible to return to the signUpFragment
             .build()
     )
+}
+
+/**
+ * Extension function to show a Snackbar with a message, an action, and a callback for the action.
+ * @param messageResId Resource ID of the message text.
+ * @param actionTextResId Resource ID of the action button text.
+ * @param callback Callback to be executed when the action button is clicked.
+ */
+fun Fragment.showSnackbarWithAction(
+    @StringRes messageResId: Int,
+    @StringRes actionTextResId: Int,
+    callback: () -> Unit?
+) {
+    Snackbar.make(
+        requireView(),
+        messageResId,
+        Snackbar.LENGTH_LONG
+    ).setAction(actionTextResId) {
+        callback.invoke()
+    }.show() // Automatically close the Snackbar after 5 seconds
 }

@@ -14,8 +14,6 @@ import com.example.myprofile.presentation.utils.ext.UsersListener
 import com.example.myprofile.presentation.utils.ext.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -33,8 +31,14 @@ class ContactsViewModel @Inject constructor(
     private val _isMultiselect = MutableLiveData(false) // Live data for saving the list of users
     val isMultiselect: LiveData<Boolean> = _isMultiselect // Public access to live data
 
-    private val _contactsStateFlow = MutableStateFlow<ApiState>(ApiState.Initial)
-    val contactsStateFlow: StateFlow<ApiState> = _contactsStateFlow
+    private val _contactsLiveData = MutableLiveData<ApiState>(ApiState.Initial)
+    val contactsLiveData: LiveData<ApiState> = _contactsLiveData
+
+    private val _deletionLiveData = MutableLiveData<ApiState>(ApiState.Initial)
+    val deletionLiveData = _deletionLiveData
+
+    private val _restoreContactLiveData = MutableLiveData<ApiState>(ApiState.Initial)
+    val restoreContactLiveData = _restoreContactLiveData
 
     private val listener: UsersListener = {
         _contacts.value = it
@@ -56,12 +60,13 @@ class ContactsViewModel @Inject constructor(
      * Getting a list of contacts.
      */
     private fun loadContacts() {
+        log("I using getUserContacts()")
         getUserContacts()
         contactsRepository.addListener(listener)
     }
 
-    private fun getUserContacts() = viewModelScope.launch(Dispatchers.IO) {
-        _contactsStateFlow.value = ApiState.Loading
+    private fun getUserContacts() = viewModelScope.launch(Dispatchers.Main) {
+        _contactsLiveData.value = ApiState.Loading
 
         // Calls the repository to get the data
         val response = usersRepositoryImpl.getUserContacts(
@@ -71,7 +76,7 @@ class ContactsViewModel @Inject constructor(
 
         withContext(Dispatchers.Main) {
             saveUsers(response)
-            _contactsStateFlow.value = response
+            _contactsLiveData.value = response
         }
     }
 
@@ -86,13 +91,13 @@ class ContactsViewModel @Inject constructor(
         }
     }
 
-    /**
-     * Deletes all selected contacts in multiselect mode.
-     * @param selectedContacts List of selected contacts transferred fragment.
-     */
-    fun deleteSelectedContacts(selectedContacts: HashSet<Pair<Contact, Int>>) {
-        contactsRepository.deleteSelectedContacts(selectedContacts)
-    }
+//    /**
+//     * Deletes all selected contacts in multiselect mode.
+//     * @param selectedContacts List of selected contacts transferred fragment.
+//     */
+//    fun deleteSelectedContacts(selectedContacts: HashSet<Pair<Contact, Int>>) {
+//        contactsRepository.deleteSelectedContacts(selectedContacts)
+//    }
 
     /**
      * Removes a specific contact from the contact list.
@@ -100,6 +105,7 @@ class ContactsViewModel @Inject constructor(
      * @param position The position of the contact to be removed from the contact list.
      */
     fun deleteUser(user: Contact, position: Int) {
+        contactsRepository.clearLastDeletedContact()
         contactsRepository.deleteContact(user, position)
     }
 
@@ -109,8 +115,8 @@ class ContactsViewModel @Inject constructor(
         }
     }
 
-    fun deleteUserContact(contact: Contact) = viewModelScope.launch(Dispatchers.IO) {
-        _contactsStateFlow.value = ApiState.Loading
+    fun deleteUserContact(contact: Contact) = viewModelScope.launch(Dispatchers.Main) {
+        _deletionLiveData.value = ApiState.Loading
 
         val response = usersRepositoryImpl.deleteUserContact(
             userDataRepository.currentUser!!.id,
@@ -118,14 +124,32 @@ class ContactsViewModel @Inject constructor(
             userDataRepository.accessToken!!
         )
         log("response = $response")
-        _contactsStateFlow.value = response
+        _deletionLiveData.value = response
     }
 
     /**
      * Returns the last deleted contacts that were deleted from the contact list back.
      */
     fun restoreLastDeletedContact() {
-        contactsRepository.restoreLastDeletedContact()
+        val lastDeletedContacts = contactsRepository.lastDeletedContacts
+
+        for (contact in lastDeletedContacts) {
+            restoreContact(contact)
+        }
+        contactsRepository.clearLastDeletedContact()
+    }
+
+    private fun restoreContact(contact: Contact) = viewModelScope.launch(Dispatchers.Main) {
+        _restoreContactLiveData.value = ApiState.Loading
+
+        val response = usersRepositoryImpl.addContact(
+            userDataRepository.currentUser!!.id,
+            contact,
+            userDataRepository.accessToken!!
+        )
+        contactsRepository.addContact(contact)
+        log("addContact = $response")
+        _restoreContactLiveData.value = response
     }
 
     fun setMultiselect() {

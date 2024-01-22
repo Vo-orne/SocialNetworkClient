@@ -2,6 +2,7 @@ package com.example.myprofile.presentation.ui.fragments.add_contact.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myprofile.data.model.Contact
@@ -11,6 +12,7 @@ import com.example.myprofile.presentation.ui.fragments.add_contact.adapter.inter
 import com.example.myprofile.presentation.ui.fragments.contacts.adapter.utils.UsersDiffCallback
 import com.example.myprofile.presentation.utils.ext.gone
 import com.example.myprofile.presentation.utils.ext.invisible
+import com.example.myprofile.presentation.utils.ext.log
 import com.example.myprofile.presentation.utils.ext.visible
 import com.example.myprofile.presentation.utils.utils.ext.loadImage
 
@@ -19,6 +21,7 @@ class AddContactsAdapter(
 ) : ListAdapter<Contact, AddContactsAdapter.UsersViewHolder>(UsersDiffCallback()) {
 
     private var states: ArrayList<Pair<Long, ApiState>> = ArrayList()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -26,6 +29,7 @@ class AddContactsAdapter(
     ): UsersViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = UserItemBinding.inflate(inflater, parent, false)
+        progressBar = binding.progressBar
         return UsersViewHolder(binding)
     }
 
@@ -44,7 +48,7 @@ class AddContactsAdapter(
                 textViewUserItemUserCareer.text = contact.career
                 imageViewUserItemUserAvatar.loadImage(contact.avatar)
             }
-            //setState(state)
+            setState(state)
             setListeners(contact)
         }
 
@@ -54,25 +58,23 @@ class AddContactsAdapter(
                     is ApiState.Success<*> -> {
                         textViewUserItemUserAdd.gone()
                         imageViewUserItemPlus.gone()
-//                        progressBar.gone()
+                        progressBar.gone()
                         imageViewUserItemSelected.visible()
                     }
-
                     is ApiState.Initial -> {
+                        textViewUserItemUserAdd.visible()
+                        imageViewUserItemPlus.visible()
+                        progressBar.invisible()
+                    }
+                    is ApiState.Loading -> {
                         textViewUserItemUserAdd.invisible()
                         imageViewUserItemPlus.invisible()
-//                        progressBar.gone()
-                    }
-
-                    is ApiState.Loading -> {
-                        textViewUserItemUserAdd.gone()
-                        imageViewUserItemPlus.gone()
-//                        progressBar.visible()
+                        progressBar.visible()
                         imageViewUserItemSelected.invisible()
                     }
-
                     is ApiState.Error -> {
-
+                        progressBar.invisible()
+                        log(state)
                     }
                 }
             }
@@ -109,21 +111,21 @@ class AddContactsAdapter(
             with(binding) {
                 textViewUserItemUserAdd.setOnClickListener {
                     listener.onClickAddButton(contact, bindingAdapterPosition)
-                    textViewUserItemUserAdd.gone()
-                    imageViewUserItemPlus.gone()
-                    imageViewUserItemSelected.visible()
+//                    textViewUserItemUserAdd.gone()
+//                    imageViewUserItemPlus.gone()
+//                    imageViewUserItemSelected.visible()
                 }
                 imageViewUserItemPlus.setOnClickListener {
                     listener.onClickAddButton(contact, bindingAdapterPosition)
-                    textViewUserItemUserAdd.gone()
-                    imageViewUserItemPlus.gone()
-                    imageViewUserItemSelected.visible()
+//                    textViewUserItemUserAdd.gone()
+//                    imageViewUserItemPlus.gone()
+//                    imageViewUserItemSelected.visible()
                 }
-                imageViewUserItemSelected.setOnClickListener {
-                    imageViewUserItemSelected.gone()
-                    textViewUserItemUserAdd.visible()
-                    imageViewUserItemPlus.visible()
-                }
+//                imageViewUserItemSelected.setOnClickListener {
+//                    imageViewUserItemSelected.gone()
+//                    textViewUserItemUserAdd.visible()
+//                    imageViewUserItemPlus.visible()
+//                }
             }
         }
 

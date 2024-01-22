@@ -2,23 +2,31 @@ package com.example.myprofile.presentation.ui.fragments.contacts
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myprofile.R
 import com.example.myprofile.data.model.Contact
 import com.example.myprofile.databinding.FragmentMyContactsBinding
+import com.example.myprofile.domain.ApiState
 import com.example.myprofile.presentation.ui.base.BaseFragment
+import com.example.myprofile.presentation.ui.fragments.add_contact.AddContactViewModel
 import com.example.myprofile.presentation.ui.fragments.contacts.adapter.ContactsAdapter
 import com.example.myprofile.presentation.ui.fragments.contacts.adapter.interfaces.ContactActionListener
 import com.example.myprofile.presentation.ui.fragments.pager.PagerFragment
 import com.example.myprofile.presentation.ui.fragments.pager.PagerFragmentDirections
 import com.example.myprofile.presentation.ui.fragments.pager.adapter.utils.ViewPagerFragments
+import com.example.myprofile.presentation.utils.ext.invisible
+import com.example.myprofile.presentation.utils.ext.log
 import com.example.myprofile.presentation.utils.ext.navigateToFragment
+import com.example.myprofile.presentation.utils.ext.showSnackbarWithAction
 import com.example.myprofile.presentation.utils.ext.swipeToDelete
 import com.example.myprofile.presentation.utils.ext.visible
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 /**
  * Fragment for displaying the list of contacts
@@ -31,6 +39,8 @@ class MyContactsFragment :
      * ViewModel for managing the list of contacts
      */
     private val viewModel: ContactsViewModel by viewModels()
+    private val viewModelAddContact: AddContactViewModel by viewModels()
+    private lateinit var progressBar: ProgressBar
 
     private val adapter: ContactsAdapter by lazy {
         ContactsAdapter(object : ContactActionListener {
@@ -38,10 +48,11 @@ class MyContactsFragment :
             // Event handler for contact deletion
             override fun onContactDelete(contact: Contact, position: Int) {
                 // Delete the contact from ViewModel and adapter's list
-                viewModel.deleteUser(contact, position)
+//                viewModel.deleteUser(contact, position)
                 // Show a Snackbar with a message about the contact deletion
                 showSnackbar()
                 viewModel.deleteUserContact(contact)
+                viewModel.deleteUser(contact, position)
             }
 
             // Event handler for viewing contact details
@@ -88,7 +99,7 @@ class MyContactsFragment :
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        progressBar = binding.progressBar
         setRecyclerView()
         setListeners()
         setObservers()
@@ -107,6 +118,28 @@ class MyContactsFragment :
         viewModel.isMultiselect.observe(viewLifecycleOwner, Observer {
             adapter.setMultiselect(it)
         })
+        lifecycleScope.launch {
+            viewModel.contactsLiveData.observe(viewLifecycleOwner, Observer {apiState ->
+                when (apiState) {
+                    is ApiState.Success<*> -> {
+                        progressBar.invisible()
+                    }
+                    is ApiState.Error -> {
+                        progressBar.invisible()
+                        log(apiState.error)
+                    }
+                    is ApiState.Initial -> {
+                        progressBar.invisible()
+                        log(apiState)
+                    }
+                    is ApiState.Loading -> {
+                        progressBar.visible()
+                        log(apiState)
+                    }
+                }
+            })
+        }
+
     }
 
 
@@ -114,17 +147,17 @@ class MyContactsFragment :
      * Private method to set event listeners
      */
     override fun setListeners() {
-        binding.recyclerViewContacts.swipeToDelete(
-            deleteFunction = { position ->
-                viewModel.deleteUser(viewModel.contacts.value?.get(position)!!, position)
-            },
-            showSnackbar = {
-                showSnackbar()
-            },
-            isEnabled = {
-                viewModel.isMultiselect.value == false
-            }
-        )
+//        binding.recyclerViewContacts.swipeToDelete(
+//            deleteFunction = { position ->
+//                viewModel.deleteUserContact(contact)
+//            },
+//            showSnackbar = {
+//                showSnackbar()
+//            },
+//            isEnabled = {
+//                viewModel.isMultiselect.value == false
+//            }
+//        )
         // Add a click listener for the button to switch to MyProfileFragment
         binding.imageButtonMyContactsBack.setOnClickListener {
             // Get the reference to ViewPager2 from PagerFragment
@@ -138,7 +171,7 @@ class MyContactsFragment :
         }
         binding.imageViewMyContactsDeleteSelectMode?.setOnClickListener {
             val selectedItems = adapter.getSelectedItems()
-            viewModel.deleteSelectedContacts(selectedItems)
+//            viewModel.deleteSelectedContacts(selectedItems)
             showSnackbar()
             viewModel.deleteSelectedUserContacts(selectedItems)
             viewModel.setMultiselect()
@@ -151,13 +184,8 @@ class MyContactsFragment :
      * Method to show a Snackbar with a message about the contact deletion
      */
     fun showSnackbar() {
-        Snackbar.make(
-            binding.root,
-            R.string.contact_removed,
-            Snackbar.LENGTH_LONG
-        ).setAction(R.string.cancel) {
-            // Restore the last deleted contact in ViewModel
+        showSnackbarWithAction(R.string.contact_removed, R.string.cancel) {
             viewModel.restoreLastDeletedContact()
-        }.show() // Automatically close the Snackbar after 5 seconds
+        }
     }
 }

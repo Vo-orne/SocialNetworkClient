@@ -2,6 +2,7 @@ package com.example.myprofile.data.repository
 
 import android.content.Context
 import com.example.myprofile.data.model.Contact
+import com.example.myprofile.domain.ApiState
 import com.example.myprofile.presentation.utils.ext.UsersListener
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -31,7 +32,8 @@ class ContactsRepository @Inject constructor(
     /**
      * A list of the last saved contacts that will be possible to return.
      */
-    private var _lastDeletedContacts = mutableListOf<Pair<Contact, Int>>()
+    private var _lastDeletedContacts = mutableListOf<Contact>()
+    var lastDeletedContacts = _lastDeletedContacts
 
 
     /**
@@ -47,31 +49,6 @@ class ContactsRepository @Inject constructor(
     }
 
     /**
-     * Deletes all selected contacts in multiselect mode.
-     * @param selectedContacts List of selected contacts transferred View model.
-     */
-    fun deleteSelectedContacts(selectedContacts: HashSet<Pair<Contact, Int>>) {
-        // Clears previously deleted contacts so that _lastDeletedContacts contains only
-        // the last deleted contacts.
-        _lastDeletedContacts.clear()
-        val deletedContacts = mutableListOf<Pair<Contact, Int>>()
-
-        // Sort selected Contacts in descending index order,
-        // to delete contacts with the current index
-        selectedContacts.sortedByDescending { it.second }
-        for (contact in selectedContacts) {
-            val indexToDelete = contacts.indexOfFirst { it.id == contact.first.id }
-            if (indexToDelete != -1) {
-                contacts = ArrayList(contacts)
-                contacts.removeAt(indexToDelete)
-                deletedContacts.add(Pair(contact.first, contact.second))
-            }
-        }
-        _lastDeletedContacts.addAll(deletedContacts)
-        notifyChanges()
-    }
-
-    /**
      * Removes a specific contact from the contact list.
      * @param contact Contact to be deleted.
      * @param position The position of the contact in the contact list.
@@ -81,26 +58,59 @@ class ContactsRepository @Inject constructor(
         if (indexToDelete != -1) {
             contacts = ArrayList(contacts)
             contacts.removeAt(position)
-            _lastDeletedContacts.add(Pair(contact, indexToDelete))
+            _lastDeletedContacts.add(contact)
             notifyChanges()
         }
     }
 
+//    /**
+//     * Deletes all selected contacts in multiselect mode.
+//     * @param selectedContacts List of selected contacts transferred View model.
+//     */
+//    fun deleteSelectedContacts(selectedContacts: HashSet<Pair<Contact, Int>>) {
+//        // Clears previously deleted contacts so that _lastDeletedContacts contains only
+//        // the last deleted contacts.
+//        _lastDeletedContacts.clear()
+//        val deletedContacts = mutableListOf<Pair<Contact, Int>>()
+//
+//        // Sort selected Contacts in descending index order,
+//        // to delete contacts with the current index
+//        selectedContacts.sortedByDescending { it.second }
+//        for (contact in selectedContacts) {
+//            val indexToDelete = contacts.indexOfFirst { it.id == contact.first.id }
+//            if (indexToDelete != -1) {
+//                contacts = ArrayList(contacts)
+//                contacts.removeAt(indexToDelete)
+//                deletedContacts.add(Pair(contact.first, contact.second))
+//            }
+//        }
+//        _lastDeletedContacts.addAll(deletedContacts)
+//        notifyChanges()
+//    }
 
-    /**
-     * Restores the last deleted contact in the contacts list at position positionLastDeletedContact.
-     * Then, it notifies listeners about the changes.
-     */
-    fun restoreLastDeletedContact() {
-        // Sort _lastDeletedContacts in ascending index order,
-        // to restore contacts by the current index
-        _lastDeletedContacts.sortBy { it.second }
+    fun addLastDeletedContacts(contact: Contact) {
+        _lastDeletedContacts.add(contact)
+    }
 
-        contacts = ArrayList(contacts)
-        for (contact in _lastDeletedContacts) {
-            contacts.add(contact.second, contact.first)
-        }
-        notifyChanges()
+
+//    /**
+//     * Restores the last deleted contact in the contacts list at position positionLastDeletedContact.
+//     * Then, it notifies listeners about the changes.
+//     */
+//    fun restoreLastDeletedContact() {
+//        // Sort _lastDeletedContacts in ascending index order,
+//        // to restore contacts by the current index
+//        _lastDeletedContacts.sortBy { it.second }
+//
+//        contacts = ArrayList(contacts)
+//        for (contact in _lastDeletedContacts) {
+//            contacts.add(contact.second, contact.first)
+//        }
+//        notifyChanges()
+//        _lastDeletedContacts.clear()
+//    }
+
+    fun clearLastDeletedContact() {
         _lastDeletedContacts.clear()
     }
 
