@@ -21,6 +21,7 @@ import com.example.myprofile.presentation.utils.ext.invisible
 import com.example.myprofile.presentation.utils.ext.log
 import com.example.myprofile.presentation.utils.ext.navigateToFragment
 import com.example.myprofile.presentation.utils.ext.showSnackbarWithAction
+import com.example.myprofile.presentation.utils.ext.swipeToDelete
 import com.example.myprofile.presentation.utils.ext.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -143,17 +144,18 @@ class MyContactsFragment :
      * Private method to set event listeners
      */
     override fun setListeners() {
-//        binding.recyclerViewContacts.swipeToDelete(
-//            deleteFunction = { position ->
-//                viewModel.deleteUserContact(contact)
-//            },
-//            showSnackbar = {
-//                showSnackbar()
-//            },
-//            isEnabled = {
-//                viewModel.isMultiselect.value == false
-//            }
-//        )
+        binding.recyclerViewContacts.swipeToDelete(
+            deleteFunction = { contact, position ->
+                viewModel.deleteUser(contact, position)
+                viewModel.deleteUserContact(contact)
+            },
+            showSnackbar = {
+                showSnackbar()
+            },
+            isEnabled = {
+                viewModel.isMultiselect.value == false
+            }
+        )
         // Add a click listener for the button to switch to MyProfileFragment
         binding.imageButtonMyContactsBack.setOnClickListener {
             // Get the reference to ViewPager2 from PagerFragment
