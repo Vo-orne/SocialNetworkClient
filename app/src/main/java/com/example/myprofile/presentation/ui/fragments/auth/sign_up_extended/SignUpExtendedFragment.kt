@@ -1,6 +1,5 @@
 package com.example.myprofile.presentation.ui.fragments.auth.sign_up_extended
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar

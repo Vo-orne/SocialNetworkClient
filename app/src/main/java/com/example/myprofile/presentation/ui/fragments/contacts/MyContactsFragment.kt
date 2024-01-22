@@ -12,7 +12,6 @@ import com.example.myprofile.data.model.Contact
 import com.example.myprofile.databinding.FragmentMyContactsBinding
 import com.example.myprofile.domain.ApiState
 import com.example.myprofile.presentation.ui.base.BaseFragment
-import com.example.myprofile.presentation.ui.fragments.add_contact.AddContactViewModel
 import com.example.myprofile.presentation.ui.fragments.contacts.adapter.ContactsAdapter
 import com.example.myprofile.presentation.ui.fragments.contacts.adapter.interfaces.ContactActionListener
 import com.example.myprofile.presentation.ui.fragments.pager.PagerFragment
@@ -22,9 +21,7 @@ import com.example.myprofile.presentation.utils.ext.invisible
 import com.example.myprofile.presentation.utils.ext.log
 import com.example.myprofile.presentation.utils.ext.navigateToFragment
 import com.example.myprofile.presentation.utils.ext.showSnackbarWithAction
-import com.example.myprofile.presentation.utils.ext.swipeToDelete
 import com.example.myprofile.presentation.utils.ext.visible
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -39,7 +36,6 @@ class MyContactsFragment :
      * ViewModel for managing the list of contacts
      */
     private val viewModel: ContactsViewModel by viewModels()
-    private val viewModelAddContact: AddContactViewModel by viewModels()
     private lateinit var progressBar: ProgressBar
 
     private val adapter: ContactsAdapter by lazy {
