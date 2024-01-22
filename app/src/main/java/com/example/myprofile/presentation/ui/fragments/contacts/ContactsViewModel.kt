@@ -91,14 +91,6 @@ class ContactsViewModel @Inject constructor(
         }
     }
 
-//    /**
-//     * Deletes all selected contacts in multiselect mode.
-//     * @param selectedContacts List of selected contacts transferred fragment.
-//     */
-//    fun deleteSelectedContacts(selectedContacts: HashSet<Pair<Contact, Int>>) {
-//        contactsRepository.deleteSelectedContacts(selectedContacts)
-//    }
-
     /**
      * Removes a specific contact from the contact list.
      * @param user The contact to be deleted from the contact list.
@@ -113,6 +105,7 @@ class ContactsViewModel @Inject constructor(
         for (contact in selectedContacts) {
             deleteUserContact(contact.first)
         }
+        contactsRepository.deleteSelectedContacts(selectedContacts)
     }
 
     fun deleteUserContact(contact: Contact) = viewModelScope.launch(Dispatchers.Main) {
