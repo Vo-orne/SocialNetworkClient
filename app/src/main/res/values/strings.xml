@@ -13,6 +13,7 @@
     <string name="content_description_linkedin_icon">Displays the Linkedin icon</string>
     <string name="content_description_instagram_icon">Displays the Instagram icon</string>
     <string name="access_is_denied">Access to contacts is denied</string>
+    <string name="log_out">Log out</string>
 
     <!--    AuthActivity    -->
     <string name="titleText">Let\'s get acquainted</string>

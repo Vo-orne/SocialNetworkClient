@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_pagerFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_pagerFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
     </fragment>
 
     <fragment

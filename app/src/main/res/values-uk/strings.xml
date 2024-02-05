@@ -13,6 +13,7 @@
     <string name="content_description_linkedin_icon">Відображає іконку Linkedin</string>
     <string name="content_description_instagram_icon">Відображає іконку Instagram</string>
     <string name="access_is_denied">У доступі до контактів відмовлено</string>
+    <string name="log_out">Вийти</string>
 
     <!--    SignUp    -->
     <string name="titleText">Давай знайомитись</string>

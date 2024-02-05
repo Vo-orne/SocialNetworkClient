@@ -43,15 +43,21 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfi
      * Method to set event listeners
      */
     override fun setListeners() {
-        // Add a click listener for the button to switch to MyContactsFragment
-        binding.buttonMyProfileViewMyContacts.setOnClickListener {
-            // Get the reference to ViewPager2 from PagerFragment
-            (parentFragment as PagerFragment).getViewPager().currentItem = ViewPagerFragments.CONTACTS_FRAGMENT.ordinal
-            // Switch to MyContactsFragment by setting the current item of the ViewPager2
-             // Assuming MyContactsFragment is at index 1
-        }
-        binding.buttonMyProfileEditProfile.setOnClickListener {
-            navigateToFragment(R.id.action_pagerFragment_to_editProfileFragment)
+        with(binding) {
+            buttonMyProfileViewMyContacts.setOnClickListener {
+                // Get the reference to ViewPager2 from PagerFragment
+                (parentFragment as PagerFragment).getViewPager().currentItem =
+                    ViewPagerFragments.CONTACTS_FRAGMENT.ordinal
+                // Switch to MyContactsFragment by setting the current item of the ViewPager2
+                // Assuming MyContactsFragment is at index 1
+            }
+            buttonMyProfileEditProfile.setOnClickListener {
+                navigateToFragment(R.id.action_pagerFragment_to_editProfileFragment)
+            }
+            buttonMyProfileLogOut.setOnClickListener {
+                viewModel.clearUserData()
+                navigateToFragment(R.id.action_pagerFragment_to_logInFragment)
+            }
         }
     }
 }

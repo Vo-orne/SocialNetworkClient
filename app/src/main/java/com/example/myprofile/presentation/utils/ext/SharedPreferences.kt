@@ -26,3 +26,17 @@ fun SharedPreferences.Editor.saveAutoLoginData(email: String?, password: String?
         apply()
     }
 }
+
+fun SharedPreferences.Editor.removeUserEmail() {
+    remove(Constants.EMAIL_KEY)
+}
+
+fun SharedPreferences.Editor.removeUserPassword() {
+    remove(Constants.PASSWORD_KEY)
+}
+
+fun SharedPreferences.Editor.removeAutoLoginData() {
+    removeUserEmail()
+    removeUserPassword()
+    apply()
+}
