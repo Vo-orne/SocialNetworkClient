@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.myprofile.presentation.ui.fragments.sign_up.SignUpFragment"
+        android:name="com.example.myprofile.presentation.ui.fragments.auth.sign_up.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up">
         <action
@@ -30,9 +30,15 @@
 
     <fragment
         android:id="@+id/signUpExtendedFragment"
-        android:name="com.example.myprofile.presentation.ui.fragments.sign_up_extended.SignUpExtendedFragment"
+        android:name="com.example.myprofile.presentation.ui.fragments.auth.sign_up_extended.SignUpExtendedFragment"
         android:label="SignUpExtendedFragment"
         tools:layout="@layout/fragment_sing_up_extended">
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
         <action
             android:id="@+id/action_signUpExtendedFragment_to_pagerFragment"
             app:destination="@id/pagerFragment" />

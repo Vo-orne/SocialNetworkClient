@@ -6,7 +6,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.data.model.Contact
 import com.example.myprofile.databinding.FragmentDetailViewBinding
-import com.example.myprofile.presentation.utils.utils.ext.loadImage
+import com.example.myprofile.presentation.utils.ext.loadImage
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

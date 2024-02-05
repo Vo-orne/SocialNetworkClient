@@ -3,9 +3,12 @@ package com.example.myprofile.presentation.ui.fragments.auth.sign_up_extended
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.myprofile.R
 import com.example.myprofile.databinding.FragmentSingUpExtendedBinding
 import com.example.myprofile.domain.ApiState
@@ -17,11 +20,34 @@ import com.example.myprofile.presentation.utils.ext.navigateToFragment
 import com.example.myprofile.presentation.utils.ext.navigateToFragmentWithoutReturning
 import com.example.myprofile.presentation.utils.ext.visible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class SignUpExtendedFragment :
     BaseFragment<FragmentSingUpExtendedBinding>(FragmentSingUpExtendedBinding::inflate) {
+
+    private val getContent =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            uri?.let {
+                lifecycleScope.launch {
+                    val imageBitmap = withContext(Dispatchers.IO) {
+                        Glide.with(requireContext())
+                            .asBitmap()
+                            .load(it)
+                            .submit()
+                            .get()
+                    }
+                    binding.imageViewSignUpExtendedContactAvatar2.invisible()
+                    Glide.with(requireContext())
+                        .load(imageBitmap)
+                        .into(binding.imageViewSignUpExtendedContactAvatar)
+                }
+            }
+        }
+
+    private val args: SignUpExtendedFragmentArgs by navArgs()
 
     private val viewModel: SignUpViewModel by viewModels()
     private lateinit var progressBar: ProgressBar
@@ -75,14 +101,23 @@ class SignUpExtendedFragment :
             buttonSignUpExtendedCancel.setOnClickListener {
                 navigateToFragment(R.id.action_signUpExtendedFragment_to_signUpFragment)
             }
+            imageViewSignUpExtendedAddPhoto.setOnClickListener {
+                openGallery()
+            }
         }
     }
 
     private fun registerUser() {
         with(viewModel) {
+            email.value = args.email
+            password.value = args.password
             name.value = binding.textInputEditTextSignUpExtendedName.text.toString()
             phone.value = binding.textInputEditTextSignUpExtendedPhone.text.toString()
             registerUser()
         }
+    }
+
+    private fun openGallery() {
+        getContent.launch("image/*")
     }
 }

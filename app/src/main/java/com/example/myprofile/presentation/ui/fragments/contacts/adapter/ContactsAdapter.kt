@@ -10,7 +10,7 @@ import com.example.myprofile.data.model.Contact
 import com.example.myprofile.databinding.ContactItemBinding
 import com.example.myprofile.presentation.ui.fragments.contacts.adapter.interfaces.ContactActionListener
 import com.example.myprofile.presentation.ui.fragments.contacts.adapter.utils.UsersDiffCallback
-import com.example.myprofile.presentation.utils.utils.ext.loadImage
+import com.example.myprofile.presentation.utils.ext.loadImage
 import com.example.myprofile.presentation.utils.ext.visibleIf
 
 // TODO: if multiselect - swipe to delete: isEnabled false

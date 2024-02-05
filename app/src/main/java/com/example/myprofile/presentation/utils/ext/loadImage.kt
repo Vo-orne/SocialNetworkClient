@@ -1,4 +1,4 @@
-package com.example.myprofile.presentation.utils.utils.ext
+package com.example.myprofile.presentation.utils.ext
 
 import android.net.Uri
 import android.widget.ImageView

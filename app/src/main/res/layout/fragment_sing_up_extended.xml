@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/content_description_user_avatar"
         android:src="@drawable/vector"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@id/imageViewSignUpExtendedContactAvatar"
         app:layout_constraintEnd_toEndOf="@id/imageViewSignUpExtendedContactAvatar"
         app:layout_constraintStart_toStartOf="@id/imageViewSignUpExtendedContactAvatar"

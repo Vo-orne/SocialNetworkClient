@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorFirstBackground"
-    tools:context=".presentation.ui.fragments.sign_up.SignUpFragment">
+    tools:context=".presentation.ui.fragments.auth.sign_up.SignUpFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSignUpTitle"
@@ -147,12 +147,12 @@
         android:layout_marginTop="@dimen/smallest_margin"
         android:text="@string/or"
         android:theme="@style/TextViewMainTextStyle"
-        app:layout_constraintBottom_toTopOf="@id/buttonSignUpLogin"
+        app:layout_constraintBottom_toTopOf="@id/buttonSignUpRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonSignUpLogin"
+        android:id="@+id/buttonSignUpRegister"
         android:layout_width="0dp"
         android:layout_height="@dimen/button_register_height"
         android:layout_marginStart="@dimen/large_margin"

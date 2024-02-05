@@ -14,7 +14,7 @@ import com.example.myprofile.presentation.utils.ext.gone
 import com.example.myprofile.presentation.utils.ext.invisible
 import com.example.myprofile.presentation.utils.ext.log
 import com.example.myprofile.presentation.utils.ext.visible
-import com.example.myprofile.presentation.utils.utils.ext.loadImage
+import com.example.myprofile.presentation.utils.ext.loadImage
 
 class AddContactsAdapter(
     private val listener: AddContactActionListener,

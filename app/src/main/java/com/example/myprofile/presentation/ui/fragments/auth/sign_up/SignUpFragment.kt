@@ -29,14 +29,13 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
      * Method to set event listeners
      */
     override fun setListeners() {
-        binding.buttonSignUpRegister?.setOnClickListener {
+        binding.buttonSignUpRegister.setOnClickListener {
             with(viewModel) {
                 // Get the entered data: email and password
                 email.value = binding.textInputEditTextSignUpEmail.text.toString()
                 password.value = binding.textInputEditTextSignUpPassword.text.toString()
 
                 if (binding.checkBoxSignUpMemberInputDate.isChecked) {
-                    //viewModel.saveAutoLogin(newEmail, newPassword, editor)
                     isCheckBoxChecked = true
                     comeToNextFragment(
                         isValidEmail() && isValidPassword() == null
@@ -54,7 +53,11 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
         condition: Boolean
     ) {
         if (condition) {
-            navigateToFragment(R.id.action_signUpFragment_to_signUpExtendedFragment)
+            val action = SignUpFragmentDirections.actionSignUpFragmentToSignUpExtendedFragment(
+                email = binding.textInputEditTextSignUpEmail.text.toString(),
+                password = binding.textInputEditTextSignUpPassword.text.toString()
+            )
+            navigateToFragment(action)
         } else {
             with(binding) {
                 textInputLayoutSignUpEmail.error =
