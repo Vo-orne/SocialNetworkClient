@@ -1,8 +1,6 @@
 package com.example.myprofile.presentation.ui.fragments.edit_profile
 
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import android.view.View
 import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
@@ -27,18 +25,14 @@ import kotlinx.coroutines.launch
  * Dialog fragment for adding a new contact.
  */
 @AndroidEntryPoint
-class EditProfileFragment() : BaseFragment<FragmentEditUserBinding>(FragmentEditUserBinding::inflate),
-    Parcelable {
+class EditProfileFragment :
+    BaseFragment<FragmentEditUserBinding>(FragmentEditUserBinding::inflate) {
 
     /**
      * ViewModel for handling the addition of new contacts
      */
     private val viewModel: EditProfileViewModel by viewModels()
     private lateinit var progressBar: ProgressBar
-
-    constructor(parcel: Parcel) : this() {
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -73,14 +67,17 @@ class EditProfileFragment() : BaseFragment<FragmentEditUserBinding>(FragmentEdit
                         viewModel.setUserData()
                         navigateToFragment(R.id.action_editProfileFragment_to_pagerFragment)
                     }
+
                     is ApiState.Error -> {
                         progressBar.invisible()
                         log(apiState.error)
                     }
+
                     is ApiState.Initial -> {
                         progressBar.invisible()
                         log(apiState)
                     }
+
                     is ApiState.Loading -> {
                         progressBar.visible()
                         log(apiState)
@@ -116,24 +113,6 @@ class EditProfileFragment() : BaseFragment<FragmentEditUserBinding>(FragmentEdit
                 })
                 dialog.show(parentFragmentManager, Constants.EDIT_USER_DIALOG)
             }
-        }
-    }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<EditProfileFragment> {
-        override fun createFromParcel(parcel: Parcel): EditProfileFragment {
-            return EditProfileFragment(parcel)
-        }
-
-        override fun newArray(size: Int): Array<EditProfileFragment?> {
-            return arrayOfNulls(size)
         }
     }
 }
