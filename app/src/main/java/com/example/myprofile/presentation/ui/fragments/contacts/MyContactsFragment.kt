@@ -175,6 +175,9 @@ class MyContactsFragment :
             viewModel.setMultiselect()
             binding.imageViewMyContactsDeleteSelectMode!!.visibility = View.GONE
         }
+        binding.imageButtonMyContactsSearch.setOnClickListener {
+            viewModel.notificationSearch(requireContext())
+        }
     }
 
 

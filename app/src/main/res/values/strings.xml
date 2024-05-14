@@ -73,4 +73,7 @@
 
     <!--    UserItem    -->
     <string name="add">Add</string>
+
+    <!--    Notifications    -->
+    <string name="notification">Click on the notification to search</string>
 </resources>

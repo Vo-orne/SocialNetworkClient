@@ -28,4 +28,8 @@ object Constants {
     // The dates formats
     const val DATE_FORMAT = "dd/MM/yyyy"
     const val INPUT_DATE_FORMAT = "EEE MMM dd HH:mm:ss zzz yyyy"
+
+    // Data for creating push notifications
+    const val CHANNEL_ID = "0"
+    const val CHANNEL_NAME = "Channel name"
 }

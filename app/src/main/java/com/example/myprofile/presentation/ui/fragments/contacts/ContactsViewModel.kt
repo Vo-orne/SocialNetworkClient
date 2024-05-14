@@ -1,5 +1,10 @@
 package com.example.myprofile.presentation.ui.fragments.contacts
 
+import android.content.Context
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,10 +27,13 @@ import javax.inject.Inject
 class ContactsViewModel @Inject constructor(
     private val contactsRepository: ContactsRepository,
     private val usersRepositoryImpl: UsersRepositoryImpl,
-    private val userDataRepository: UserDataRepository
-    ): ViewModel() {
+    private val userDataRepository: UserDataRepository,
+    private val notificationBuilder: NotificationCompat.Builder,
+    private val notificationManager: NotificationManagerCompat
+) : ViewModel() {
 
-    private val _contacts = MutableLiveData<List<Contact>>() // Live data for saving the list of users
+    private val _contacts =
+        MutableLiveData<List<Contact>>() // Live data for saving the list of users
     val contacts: LiveData<List<Contact>> = _contacts // Public access to live data
 
     private val _isMultiselect = MutableLiveData(false) // Live data for saving the list of users
@@ -147,5 +155,18 @@ class ContactsViewModel @Inject constructor(
 
     fun setMultiselect() {
         _isMultiselect.value = !_isMultiselect.value!!
+    }
+
+    fun notificationSearch(context: Context) {
+        with(NotificationManagerCompat.from(context)) {
+            if (ActivityCompat.checkSelfPermission(
+                    context,
+                    android.Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return@with
+            }
+            notificationManager.notify(0, notificationBuilder.build())
+        }
     }
 }

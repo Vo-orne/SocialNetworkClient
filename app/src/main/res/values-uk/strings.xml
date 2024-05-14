@@ -74,4 +74,6 @@
     <!--    UserItem    -->
     <string name="add">Додати</string>
 
+    <!--    Notifications    -->
+    <string name="notification">Натисніть на сповіщення для пошуку</string>
 </resources>
