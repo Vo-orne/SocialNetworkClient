@@ -76,4 +76,5 @@
 
     <!--    Notifications    -->
     <string name="notification">Click on the notification to search</string>
+    <string name="search">Search</string>
 </resources>

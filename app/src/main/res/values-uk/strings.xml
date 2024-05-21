@@ -76,4 +76,5 @@
 
     <!--    Notifications    -->
     <string name="notification">Натисніть на сповіщення для пошуку</string>
+    <string name="search">Пошук</string>
 </resources>
