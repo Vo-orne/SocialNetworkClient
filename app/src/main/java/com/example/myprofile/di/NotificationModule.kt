@@ -28,22 +28,6 @@ class NotificationModule {
     fun createNotificationBuilder(
         @ApplicationContext context: Context
     ): NotificationCompat.Builder {
-//        val ACTION_SNOOZE = "snooze"
-//
-//        val snoozeIntent = Intent(this, MyBroadcastReceiver::class.java).apply {
-//            action = ACTION_SNOOZE
-//            putExtra(EXTRA_NOTIFICATION_ID, 0)
-//        }
-//        val snoozePendingIntent: PendingIntent =
-//            PendingIntent.getBroadcast(this, 0, snoozeIntent, 0)
-//        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-//            .setSmallIcon(R.drawable.notification_icon)
-//            .setContentTitle("My notification")
-//            .setContentText("Hello World!")
-//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//            .setContentIntent(pendingIntent)
-//            .addAction(R.drawable.ic_snooze, getString(R.string.snooze),
-//                snoozePendingIntent)
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
