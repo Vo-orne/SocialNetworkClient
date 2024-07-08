@@ -22,10 +22,10 @@
         tools:targetApi="31">
         <activity
             android:name=".presentation.ui.activity.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
-
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
@@ -33,6 +33,5 @@
             android:name="com.example.myprofile.presentation.utils.ContactsContentProvider"
             android:authorities="com.example.myprofile.mycontacts"
             android:exported="false" />
-
     </application>
 </manifest>

@@ -117,5 +117,14 @@
         <action
             android:id="@+id/action_myContactsFragment_to_myProfileFragment"
             app:destination="@id/myProfileFragment" />
+        <action
+            android:id="@+id/action_myContactsFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.myprofile.presentation.ui.fragments.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search"/>
 </navigation>
