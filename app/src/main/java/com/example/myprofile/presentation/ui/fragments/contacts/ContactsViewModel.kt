@@ -68,7 +68,6 @@ class ContactsViewModel @Inject constructor(
      * Getting a list of contacts.
      */
     private fun loadContacts() {
-        log("I using getUserContacts()")
         getUserContacts()
         contactsRepository.addListener(listener)
     }
