@@ -11,6 +11,7 @@ import com.example.myprofile.data.repository.ContactsRepository
 import com.example.myprofile.data.repository.UsersRepositoryImpl
 import com.example.myprofile.domain.ApiState
 import com.example.myprofile.presentation.utils.ext.UsersListener
+import com.example.myprofile.presentation.utils.ext.filterContacts
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,10 +28,14 @@ class SearchViewModel @Inject constructor(
     private val _contacts = MutableLiveData<List<Contact>>() // Live data for saving the list of users
     val contacts: LiveData<List<Contact>> = _contacts // Public access to live data
 
+    private val _allContacts = mutableListOf<Contact>() // To store the original list of contacts
+
     private val _contactsLiveData = MutableLiveData<ApiState>(ApiState.Initial)
     val contactsLiveData: LiveData<ApiState> = _contactsLiveData
 
     private val listener: UsersListener = {
+        _allContacts.clear()
+        _allContacts.addAll(it)
         _contacts.value = it
     }
 
@@ -79,7 +84,8 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    fun searchContacts(query: Any) {
-        // TODO!!!
+    fun searchContacts(query: String) {
+        val filteredContacts = _allContacts.filterContacts(query)
+        _contacts.value = filteredContacts
     }
 }
