@@ -35,6 +35,7 @@ class SearchAdapter(private val listener: SearchActionListener) :
                 imageViewContactItemUserAvatar.loadImage(contact.avatar)
                 buttonContactItemDelete.gone()
             }
+            setListeners(contact)
         }
 
         fun setListeners(contact: Contact) {

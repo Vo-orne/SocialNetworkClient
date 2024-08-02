@@ -5,12 +5,14 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myprofile.data.model.Contact
 import com.example.myprofile.databinding.FragmentSearchBinding
 import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.presentation.ui.fragments.search.adapter.SearchAdapter
 import com.example.myprofile.presentation.ui.fragments.search.adapter.interfaces.SearchActionListener
+import com.example.myprofile.presentation.utils.ext.log
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +24,9 @@ class SearchFragment :
         SearchAdapter(object : SearchActionListener {
             // Event handler for viewing contact details
             override fun onClick(contact: Contact, position: Int) {
+                log("\"Contact clicked: $contact\"")
+                val action = SearchFragmentDirections.actionSearchFragmentToDetailViewFragment(contact)
+                findNavController().navigate(action)
             }
         })
     }
