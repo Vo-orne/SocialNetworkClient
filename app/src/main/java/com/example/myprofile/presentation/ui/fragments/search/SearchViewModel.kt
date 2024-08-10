@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myprofile.data.model.Contact
+import com.example.myprofile.data.database.Contact
 import com.example.myprofile.data.model.ContactsResponse
 import com.example.myprofile.data.model.UserDataRepository
 import com.example.myprofile.data.repository.ContactsRepository

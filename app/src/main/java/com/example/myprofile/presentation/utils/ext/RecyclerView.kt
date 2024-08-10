@@ -2,7 +2,7 @@ package com.example.myprofile.presentation.utils.ext
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myprofile.data.model.Contact
+import com.example.myprofile.data.database.Contact
 import com.example.myprofile.presentation.ui.fragments.contacts.adapter.ContactsAdapter
 
 fun RecyclerView.swipeToDelete(

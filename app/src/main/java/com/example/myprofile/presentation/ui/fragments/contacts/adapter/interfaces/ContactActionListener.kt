@@ -1,6 +1,6 @@
 package com.example.myprofile.presentation.ui.fragments.contacts.adapter.interfaces
 
-import com.example.myprofile.data.model.Contact
+import com.example.myprofile.data.database.Contact
 
 /**
  * Interface for the listener of contact actions in the adapter.

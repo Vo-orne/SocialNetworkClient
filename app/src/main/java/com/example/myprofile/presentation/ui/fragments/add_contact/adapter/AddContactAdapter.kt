@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myprofile.data.model.Contact
+import com.example.myprofile.data.database.Contact
 import com.example.myprofile.databinding.UserItemBinding
 import com.example.myprofile.domain.ApiState
 import com.example.myprofile.presentation.ui.fragments.add_contact.adapter.interfaces.AddContactActionListener

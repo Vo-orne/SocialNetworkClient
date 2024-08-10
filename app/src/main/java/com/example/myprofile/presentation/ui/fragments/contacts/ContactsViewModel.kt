@@ -9,7 +9,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myprofile.data.model.Contact
+import com.example.myprofile.data.database.Contact
+import com.example.myprofile.data.database.ContactDao
 import com.example.myprofile.data.model.ContactsResponse
 import com.example.myprofile.data.model.UserDataRepository
 import com.example.myprofile.data.repository.ContactsRepository
@@ -28,6 +29,7 @@ class ContactsViewModel @Inject constructor(
     private val contactsRepository: ContactsRepository,
     private val usersRepositoryImpl: UsersRepositoryImpl,
     private val userDataRepository: UserDataRepository,
+    private val contactDao: ContactDao,
     private val notificationBuilder: NotificationCompat.Builder,
     private val notificationManager: NotificationManagerCompat
 ) : ViewModel() {
@@ -65,36 +67,47 @@ class ContactsViewModel @Inject constructor(
     }
 
     /**
-     * Getting a list of contacts.
+     * Receive a list of contacts from the local database (Room) or from the server,
+     * if there is no data in the database.
      */
     private fun loadContacts() {
-        getUserContacts()
+        viewModelScope.launch(Dispatchers.IO) {
+            val localContacts = contactDao.getAllContacts()  // Receive contacts from Room
+            if (localContacts.isEmpty()) {
+                getUserContacts()  // If the database is empty, download from the server
+            } else {
+                _contacts.postValue(localContacts)  // Send data from the database to the UI
+            }
+        }
         contactsRepository.addListener(listener)
     }
 
-    private fun getUserContacts() = viewModelScope.launch(Dispatchers.Main) {
-        _contactsLiveData.value = ApiState.Loading
+    private fun getUserContacts() = viewModelScope.launch(Dispatchers.IO) {
+        _contactsLiveData.postValue(ApiState.Loading)
 
-        // Calls the repository to get the data
         val response = usersRepositoryImpl.getUserContacts(
             userDataRepository.currentUser!!.id,
             userDataRepository.accessToken!!
         )
 
         withContext(Dispatchers.Main) {
-            saveUsers(response)
+            saveUsers(response)  // Save the data to the database
             _contactsLiveData.value = response
         }
     }
 
 
-    private fun saveUsers(response: ApiState) {
+    /**
+     * Method for saving received users in the database.
+     */
+    private fun saveUsers(response: ApiState) = viewModelScope.launch(Dispatchers.IO) {
         if (response is ApiState.Success<*>) {
             val data = response.data as ContactsResponse.Data
             val contacts = data.contacts!!.map { it.toContact() }
             for (contact in contacts) {
-                contactsRepository.addContact(contact)
+                contactDao.insertContact(contact)  // Save the contact in the database
             }
+            _contacts.postValue(contacts)  // Update live data
         }
     }
 
@@ -115,16 +128,20 @@ class ContactsViewModel @Inject constructor(
         contactsRepository.deleteSelectedContacts(selectedContacts)
     }
 
-    fun deleteUserContact(contact: Contact) = viewModelScope.launch(Dispatchers.Main) {
-        _deletionLiveData.value = ApiState.Loading
+    fun deleteUserContact(contact: Contact) = viewModelScope.launch(Dispatchers.IO) {
+        _deletionLiveData.postValue(ApiState.Loading)
 
         val response = usersRepositoryImpl.deleteUserContact(
             userDataRepository.currentUser!!.id,
             contact.id,
             userDataRepository.accessToken!!
         )
-        log("response = $response")
-        _deletionLiveData.value = response
+
+        if (response is ApiState.Success<*>) {
+            contactDao.deleteContact(contact)  // Delete the contact from the database
+        }
+
+        _deletionLiveData.postValue(response)
     }
 
     /**

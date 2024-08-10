@@ -1,6 +1,6 @@
 package com.example.myprofile.presentation.ui.fragments.add_contact.adapter.interfaces
 
-import com.example.myprofile.data.model.Contact
+import com.example.myprofile.data.database.Contact
 
 interface AddContactActionListener {
 

@@ -3,8 +3,8 @@ package com.example.myprofile.presentation.ui.fragments.detail_view
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
+import com.example.myprofile.data.database.Contact
 import com.example.myprofile.presentation.ui.base.BaseFragment
-import com.example.myprofile.data.model.Contact
 import com.example.myprofile.databinding.FragmentDetailViewBinding
 import com.example.myprofile.presentation.utils.ext.loadImage
 import dagger.hilt.android.AndroidEntryPoint

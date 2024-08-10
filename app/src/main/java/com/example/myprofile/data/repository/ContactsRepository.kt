@@ -1,7 +1,7 @@
 package com.example.myprofile.data.repository
 
 import android.content.Context
-import com.example.myprofile.data.model.Contact
+import com.example.myprofile.data.database.Contact
 import com.example.myprofile.presentation.utils.ext.UsersListener
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject

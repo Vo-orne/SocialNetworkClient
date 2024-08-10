@@ -1,5 +1,6 @@
 package com.example.myprofile.data.model
 
+import com.example.myprofile.data.database.Contact
 import javax.inject.Inject
 import javax.inject.Singleton
 

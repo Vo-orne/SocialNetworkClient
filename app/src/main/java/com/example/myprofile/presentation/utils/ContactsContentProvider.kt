@@ -6,7 +6,7 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.provider.ContactsContract
-import com.example.myprofile.data.model.Contact
+import com.example.myprofile.data.database.Contact
 import java.lang.ref.WeakReference
 
 /**

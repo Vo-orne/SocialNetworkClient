@@ -1,6 +1,6 @@
 package com.example.myprofile.data.repository
 
-import com.example.myprofile.data.model.Contact
+import com.example.myprofile.data.database.Contact
 import com.example.myprofile.domain.ApiState
 import com.example.myprofile.domain.UsersApiService
 import com.example.myprofile.presentation.utils.Constants
