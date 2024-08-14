@@ -6,7 +6,7 @@ import com.example.myprofile.data.database.Contact
 import com.example.myprofile.presentation.ui.fragments.contacts.adapter.ContactsAdapter
 
 fun RecyclerView.swipeToDelete(
-    deleteFunction: (contact: Contact, position: Int) -> Unit,
+    deleteFunction: (contact: Contact) -> Unit,
     showSnackbar: () -> Unit,
     isEnabled: () -> Boolean
 ) {
@@ -26,7 +26,7 @@ fun RecyclerView.swipeToDelete(
                 // Check if contact and position are valid before proceeding
                 if (contact != null && position != RecyclerView.NO_POSITION) {
                     // Delete the contact from ViewModel and adapter's list
-                    deleteFunction(contact, position)
+                    deleteFunction(contact)
                     // Show a Snackbar with a message about the contact deletion
                     showSnackbar()
                 }

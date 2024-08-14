@@ -49,7 +49,7 @@ class MyContactsFragment :
                 // Show a Snackbar with a message about the contact deletion
                 showSnackbar()
                 viewModel.deleteUserContact(contact)
-                viewModel.deleteUser(contact, position)
+                viewModel.deleteUser(contact)
             }
 
             // Event handler for viewing contact details
@@ -145,17 +145,16 @@ class MyContactsFragment :
      */
     override fun setListeners() {
         binding.recyclerViewContacts.swipeToDelete(
-            deleteFunction = { contact, position ->
-                viewModel.deleteUser(contact, position)
+            deleteFunction = { contact ->
+                viewModel.deleteUser(contact)
                 viewModel.deleteUserContact(contact)
             },
             showSnackbar = {
                 showSnackbar()
-            },
-            isEnabled = {
-                viewModel.isMultiselect.value == false
             }
-        )
+        ) {
+            viewModel.isMultiselect.value == false
+        }
         // Add a click listener for the button to switch to MyProfileFragment
         binding.imageButtonMyContactsBack.setOnClickListener {
             // Get the reference to ViewPager2 from PagerFragment
@@ -169,7 +168,6 @@ class MyContactsFragment :
         }
         binding.imageViewMyContactsDeleteSelectMode?.setOnClickListener {
             val selectedItems = adapter.getSelectedItems()
-//            viewModel.deleteSelectedContacts(selectedItems)
             showSnackbar()
             viewModel.deleteSelectedUserContacts(selectedItems)
             viewModel.setMultiselect()

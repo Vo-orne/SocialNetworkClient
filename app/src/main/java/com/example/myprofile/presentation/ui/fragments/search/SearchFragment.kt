@@ -24,7 +24,6 @@ class SearchFragment :
         SearchAdapter(object : SearchActionListener {
             // Event handler for viewing contact details
             override fun onClick(contact: Contact, position: Int) {
-                log("\"Contact clicked: $contact\"")
                 val action = SearchFragmentDirections.actionSearchFragmentToDetailViewFragment(contact)
                 findNavController().navigate(action)
             }

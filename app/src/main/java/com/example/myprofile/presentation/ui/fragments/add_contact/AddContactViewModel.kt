@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myprofile.data.database.Contact
+import com.example.myprofile.data.database.ContactDao
 import com.example.myprofile.data.model.ContactsResponse
 import com.example.myprofile.data.model.UserDataRepository
 import com.example.myprofile.data.model.UsersResponse
@@ -19,8 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddContactViewModel @Inject constructor(
-    private val contactsRepository: ContactsRepository,
     private val usersRepositoryImpl: UsersRepositoryImpl,
+    private val contactDao: ContactDao,
     private val userDataRepository: UserDataRepository
 ) : ViewModel() {
 
@@ -76,11 +77,11 @@ class AddContactViewModel @Inject constructor(
         _states.value = arrayListOf(Pair(contact.id, response))
     }
 
-    private fun addContactToRepository(response: ApiState) {
+    private fun addContactToRepository(response: ApiState) = viewModelScope.launch(Dispatchers.IO) {
         if (response is ApiState.Success<*>) {
             val data = response.data as ContactsResponse.Data
             val contact = data.contacts!!.map { it.toContact() }
-            contactsRepository.addContact(contact.first())
+            contactDao.insertContact(contact.first())  // Save the contact in the database
         }
     }
 }

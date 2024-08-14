@@ -17,8 +17,10 @@ import com.example.myprofile.data.repository.ContactsRepository
 import com.example.myprofile.data.repository.UsersRepositoryImpl
 import com.example.myprofile.domain.ApiState
 import com.example.myprofile.presentation.utils.ext.UsersListener
+import com.example.myprofile.presentation.utils.ext.isInternetAvailable
 import com.example.myprofile.presentation.utils.ext.log
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -26,12 +28,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ContactsViewModel @Inject constructor(
-    private val contactsRepository: ContactsRepository,
     private val usersRepositoryImpl: UsersRepositoryImpl,
     private val userDataRepository: UserDataRepository,
     private val contactDao: ContactDao,
     private val notificationBuilder: NotificationCompat.Builder,
-    private val notificationManager: NotificationManagerCompat
+    private val notificationManager: NotificationManagerCompat,
+    @ApplicationContext private val context: Context
 ) : ViewModel() {
 
     private val _contacts =
@@ -50,6 +52,12 @@ class ContactsViewModel @Inject constructor(
     private val _restoreContactLiveData = MutableLiveData<ApiState>(ApiState.Initial)
     val restoreContactLiveData = _restoreContactLiveData
 
+    /**
+     * A list of the last saved contacts that will be possible to return.
+     */
+    private var _lastDeletedContacts = mutableListOf<Contact>()
+    var lastDeletedContacts = _lastDeletedContacts
+
     private val listener: UsersListener = {
         _contacts.value = it
     }
@@ -63,7 +71,7 @@ class ContactsViewModel @Inject constructor(
      */
     override fun onCleared() {
         super.onCleared()
-        contactsRepository.removeListener(listener)
+        //contactsRepository.removeListener(listener)
     }
 
     /**
@@ -72,15 +80,22 @@ class ContactsViewModel @Inject constructor(
      */
     private fun loadContacts() {
         viewModelScope.launch(Dispatchers.IO) {
-            val localContacts = contactDao.getAllContacts()  // Receive contacts from Room
-            if (localContacts.isEmpty()) {
-                getUserContacts()  // If the database is empty, download from the server
+            if (context.isInternetAvailable()) {  // Check if internet is available
+                log("Internet is available, fetching contacts from server")
+                getUserContacts()  // Fetch contacts from the server
             } else {
-                _contacts.postValue(localContacts)  // Send data from the database to the UI
+                log("No internet connection, fetching contacts from local database")
+                val localContacts = contactDao.getAllContacts()  // Fetch contacts from Room
+                log(localContacts)
+                if (localContacts.isEmpty()) {
+                    _contactsLiveData.postValue(ApiState.Error("No internet connection and local contacts database is empty"))
+                } else {
+                    _contacts.postValue(localContacts)  // Post contacts to UI
+                }
             }
         }
-        contactsRepository.addListener(listener)
     }
+
 
     private fun getUserContacts() = viewModelScope.launch(Dispatchers.IO) {
         _contactsLiveData.postValue(ApiState.Loading)
@@ -104,6 +119,8 @@ class ContactsViewModel @Inject constructor(
         if (response is ApiState.Success<*>) {
             val data = response.data as ContactsResponse.Data
             val contacts = data.contacts!!.map { it.toContact() }
+
+            contactDao.deleteAllContacts()
             for (contact in contacts) {
                 contactDao.insertContact(contact)  // Save the contact in the database
             }
@@ -116,20 +133,22 @@ class ContactsViewModel @Inject constructor(
      * @param user The contact to be deleted from the contact list.
      * @param position The position of the contact to be removed from the contact list.
      */
-    fun deleteUser(user: Contact, position: Int) {
-        contactsRepository.clearLastDeletedContact()
-        contactsRepository.deleteContact(user, position)
+    fun deleteUser(user: Contact) {
+        _lastDeletedContacts.clear()
+        _lastDeletedContacts.add(user)
     }
 
     fun deleteSelectedUserContacts(selectedContacts: HashSet<Pair<Contact, Int>>) {
+        _lastDeletedContacts.clear()
         for (contact in selectedContacts) {
             deleteUserContact(contact.first)
         }
-        contactsRepository.deleteSelectedContacts(selectedContacts)
+        loadContacts()
     }
 
-    fun deleteUserContact(contact: Contact) = viewModelScope.launch(Dispatchers.IO) {
+    fun deleteUserContact(contact: Contact) = viewModelScope.launch(Dispatchers.Main) {
         _deletionLiveData.postValue(ApiState.Loading)
+        _lastDeletedContacts.add(contact)
 
         val response = usersRepositoryImpl.deleteUserContact(
             userDataRepository.currentUser!!.id,
@@ -141,6 +160,7 @@ class ContactsViewModel @Inject constructor(
             contactDao.deleteContact(contact)  // Delete the contact from the database
         }
 
+        loadContacts()
         _deletionLiveData.postValue(response)
     }
 
@@ -148,12 +168,10 @@ class ContactsViewModel @Inject constructor(
      * Returns the last deleted contacts that were deleted from the contact list back.
      */
     fun restoreLastDeletedContact() {
-        val lastDeletedContacts = contactsRepository.lastDeletedContacts
-
-        for (contact in lastDeletedContacts) {
+        for (contact in _lastDeletedContacts) {
             restoreContact(contact)
         }
-        contactsRepository.clearLastDeletedContact()
+        _lastDeletedContacts.clear()
     }
 
     private fun restoreContact(contact: Contact) = viewModelScope.launch(Dispatchers.Main) {
@@ -164,8 +182,7 @@ class ContactsViewModel @Inject constructor(
             contact,
             userDataRepository.accessToken!!
         )
-        contactsRepository.addContact(contact)
-        log("addContact = $response")
+        loadContacts()
         _restoreContactLiveData.value = response
     }
 
