@@ -9,10 +9,9 @@ import com.example.myprofile.data.database.Contact
 import com.example.myprofile.data.database.ContactDao
 import com.example.myprofile.data.model.ContactsResponse
 import com.example.myprofile.data.model.UserDataRepository
-import com.example.myprofile.data.repository.ContactsRepository
 import com.example.myprofile.data.repository.UsersRepositoryImpl
 import com.example.myprofile.domain.ApiState
-import com.example.myprofile.presentation.utils.ext.UsersListener
+import com.example.myprofile.presentation.utils.Constants
 import com.example.myprofile.presentation.utils.ext.filterContacts
 import com.example.myprofile.presentation.utils.ext.isInternetAvailable
 import com.example.myprofile.presentation.utils.ext.log
@@ -25,7 +24,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val contactsRepository: ContactsRepository,
     private val usersRepositoryImpl: UsersRepositoryImpl,
     private val contactDao: ContactDao,
     private val userDataRepository: UserDataRepository,
@@ -40,22 +38,8 @@ class SearchViewModel @Inject constructor(
     private val _contactsLiveData = MutableLiveData<ApiState>(ApiState.Initial)
     val contactsLiveData: LiveData<ApiState> = _contactsLiveData
 
-    private val listener: UsersListener = {
-        _allContacts.clear()
-        _allContacts.addAll(it)
-        _contacts.value = it
-    }
-
     init {
         loadContacts()
-    }
-
-    /**
-     * Removes all listeners after the program is finished.
-     */
-    override fun onCleared() {
-        super.onCleared()
-        contactsRepository.removeListener(listener)
     }
 
     /**
@@ -64,15 +48,17 @@ class SearchViewModel @Inject constructor(
     private fun loadContacts() {
         viewModelScope.launch(Dispatchers.IO) {
             if (context.isInternetAvailable()) {  // Check if internet is available
-                log("Internet is available, fetching contacts from server")
+                log(Constants.INTERNET)
                 getUserContacts()  // Fetch contacts from the server
             } else {
-                log("No internet connection, fetching contacts from local database")
+                log(Constants.NO_INTERNET)
                 val localContacts = contactDao.getAllContacts()  // Fetch contacts from Room
-                log(localContacts)
+
                 if (localContacts.isEmpty()) {
-                    _contactsLiveData.postValue(ApiState.Error("No internet connection and local contacts database is empty"))
+                    _contactsLiveData.postValue(ApiState.Error(Constants.BD_EMPTY))
                 } else {
+                    _allContacts.clear()
+                    _allContacts.addAll(localContacts)
                     _contacts.postValue(localContacts)  // Post contacts to UI
                 }
             }
@@ -98,12 +84,18 @@ class SearchViewModel @Inject constructor(
         if (response is ApiState.Success<*>) {
             val data = response.data as ContactsResponse.Data
             val contacts = data.contacts!!.map { it.toContact() }
+
+            // Updating _allContacts
+            _allContacts.clear()
+            _allContacts.addAll(contacts)
+
             for (contact in contacts) {
-                contactDao.insertContact(contact)  // Save the contact in the database
+                contactDao.insertContact(contact)  // Store contacts in the database
             }
-            _contacts.postValue(contacts)  // Update live data
+            _contacts.postValue(contacts)  // Updating live data for the UI
         }
     }
+
 
     fun searchContacts(query: String) {
         val filteredContacts = _allContacts.filterContacts(query)

@@ -32,4 +32,9 @@ object Constants {
     // Data for creating push notifications
     const val CHANNEL_ID = "0"
     const val CHANNEL_NAME = "Channel name"
+
+    // Logs
+    const val INTERNET = "Internet is available, fetching contacts from server"
+    const val NO_INTERNET = "No internet connection, fetching contacts from local database"
+    const val BD_EMPTY = "No internet connection and local contacts database is empty"
 }

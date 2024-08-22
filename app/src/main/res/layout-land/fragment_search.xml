@@ -24,6 +24,34 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.30" />
 
+    <TextView
+        android:id="@+id/textViewSearchNoResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_medium"
+        android:text="@string/no_results_found"
+        android:textColor="?attr/colorSecondMainText"
+        android:textSize="@dimen/text_largest_size"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/large_margin"
+        app:layout_constraintTop_toTopOf="@id/guidelineSearchContactFieldBoundary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/textViewSearchSeeMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_medium"
+        android:text="@string/you_can_see_more_contacts_in_the_recommendation"
+        android:textColor="?attr/colorSecondMainText"
+        android:textSize="@dimen/text_smallest_size"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/smallest_margin"
+        app:layout_constraintTop_toBottomOf="@id/textViewSearchNoResults"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutSearch"
         android:layout_width="0dp"

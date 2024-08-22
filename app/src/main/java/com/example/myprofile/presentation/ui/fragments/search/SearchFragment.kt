@@ -12,7 +12,8 @@ import com.example.myprofile.databinding.FragmentSearchBinding
 import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.presentation.ui.fragments.search.adapter.SearchAdapter
 import com.example.myprofile.presentation.ui.fragments.search.adapter.interfaces.SearchActionListener
-import com.example.myprofile.presentation.utils.ext.log
+import com.example.myprofile.presentation.utils.ext.gone
+import com.example.myprofile.presentation.utils.ext.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,11 +52,21 @@ class SearchFragment :
             val query = it.toString()
             viewModel.searchContacts(query)
         }
+        binding.imageButtonSearchErase.setOnClickListener {
+            navController.navigateUp()
+        }
     }
 
     private fun setObservers() {
         viewModel.contacts.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
+            if (viewModel.contacts.value?.isEmpty() == true) {
+                binding.textViewSearchNoResults.visible()
+                binding.textViewSearchSeeMore.visible()
+            } else {
+                binding.textViewSearchNoResults.gone()
+                binding.textViewSearchSeeMore.gone()
+            }
         })
     }
 }

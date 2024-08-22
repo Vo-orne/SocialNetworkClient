@@ -130,5 +130,8 @@
         <action
             android:id="@+id/action_searchFragment_to_detailViewFragment"
             app:destination="@id/detailViewFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_pagerFragment"
+            app:destination="@id/pagerFragment" />
     </fragment>
 </navigation>

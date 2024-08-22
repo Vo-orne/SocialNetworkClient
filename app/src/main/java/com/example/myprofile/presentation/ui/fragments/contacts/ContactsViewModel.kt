@@ -13,10 +13,8 @@ import com.example.myprofile.data.database.Contact
 import com.example.myprofile.data.database.ContactDao
 import com.example.myprofile.data.model.ContactsResponse
 import com.example.myprofile.data.model.UserDataRepository
-import com.example.myprofile.data.repository.ContactsRepository
 import com.example.myprofile.data.repository.UsersRepositoryImpl
 import com.example.myprofile.domain.ApiState
-import com.example.myprofile.presentation.utils.ext.UsersListener
 import com.example.myprofile.presentation.utils.ext.isInternetAvailable
 import com.example.myprofile.presentation.utils.ext.log
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -58,20 +56,8 @@ class ContactsViewModel @Inject constructor(
     private var _lastDeletedContacts = mutableListOf<Contact>()
     var lastDeletedContacts = _lastDeletedContacts
 
-    private val listener: UsersListener = {
-        _contacts.value = it
-    }
-
     init {
         loadContacts()
-    }
-
-    /**
-     * Removes all listeners after the program is finished.
-     */
-    override fun onCleared() {
-        super.onCleared()
-        //contactsRepository.removeListener(listener)
     }
 
     /**
@@ -105,6 +91,8 @@ class ContactsViewModel @Inject constructor(
             userDataRepository.accessToken!!
         )
 
+        //log("Server response: $response")
+
         withContext(Dispatchers.Main) {
             saveUsers(response)  // Save the data to the database
             _contactsLiveData.value = response
@@ -118,20 +106,25 @@ class ContactsViewModel @Inject constructor(
     private fun saveUsers(response: ApiState) = viewModelScope.launch(Dispatchers.IO) {
         if (response is ApiState.Success<*>) {
             val data = response.data as ContactsResponse.Data
-            val contacts = data.contacts!!.map { it.toContact() }
+            val contacts = data.contacts!!.map {
+                it.toContact().also { contact -> log(contact) }
+            }
 
             contactDao.deleteAllContacts()
             for (contact in contacts) {
-                contactDao.insertContact(contact)  // Save the contact in the database
+                contactDao.insertContact(contact)
             }
-            _contacts.postValue(contacts)  // Update live data
+            _contacts.postValue(contacts)
+            //log("size all contacts from server == ${contacts.size}" +
+            //        "\nall contacts from server == $contacts")
         }
     }
+
+
 
     /**
      * Removes a specific contact from the contact list.
      * @param user The contact to be deleted from the contact list.
-     * @param position The position of the contact to be removed from the contact list.
      */
     fun deleteUser(user: Contact) {
         _lastDeletedContacts.clear()
