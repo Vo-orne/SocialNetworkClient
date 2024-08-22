@@ -79,4 +79,8 @@
     <string name="search">Search</string>
     <string name="no_results_found">No results found</string>
     <string name="you_can_see_more_contacts_in_the_recommendation">You can see more contacts in the recommendation</string>
+
+    <!--    AddContact    -->
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="try_to_find_an_internet_access_point">Try to find an Internet access point and visit the page again</string>
 </resources>

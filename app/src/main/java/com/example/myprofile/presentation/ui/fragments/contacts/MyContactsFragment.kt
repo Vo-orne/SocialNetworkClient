@@ -44,8 +44,6 @@ class MyContactsFragment :
 
             // Event handler for contact deletion
             override fun onContactDelete(contact: Contact, position: Int) {
-                // Delete the contact from ViewModel and adapter's list
-//                viewModel.deleteUser(contact, position)
                 // Show a Snackbar with a message about the contact deletion
                 showSnackbar()
                 viewModel.deleteUserContact(contact)

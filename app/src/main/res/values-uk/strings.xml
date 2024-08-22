@@ -79,4 +79,8 @@
     <string name="search">Пошук</string>
     <string name="no_results_found">Результати не знайдені</string>
     <string name="you_can_see_more_contacts_in_the_recommendation">Більше контактів в рекомендованих</string>
+
+    <!--    AddContact    -->
+    <string name="no_internet_connection">Відсутнє Інтернет-з\'єднання</string>
+    <string name="try_to_find_an_internet_access_point">Спробуйте знайти точку доступу до Інтернету і відвідати сторінку повторно</string>
 </resources>

@@ -14,7 +14,9 @@ import com.example.myprofile.domain.ApiState
 import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.presentation.ui.fragments.add_contact.adapter.AddContactsAdapter
 import com.example.myprofile.presentation.ui.fragments.add_contact.adapter.interfaces.AddContactActionListener
+import com.example.myprofile.presentation.utils.ext.gone
 import com.example.myprofile.presentation.utils.ext.invisible
+import com.example.myprofile.presentation.utils.ext.isInternetAvailable
 import com.example.myprofile.presentation.utils.ext.log
 import com.example.myprofile.presentation.utils.ext.navigateToFragment
 import com.example.myprofile.presentation.utils.ext.visible
@@ -22,7 +24,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AddContactFragment : BaseFragment<FragmentAddContactBinding>(FragmentAddContactBinding::inflate) {
+class AddContactFragment :
+    BaseFragment<FragmentAddContactBinding>(FragmentAddContactBinding::inflate) {
 
     private val viewModel: AddContactViewModel by viewModels()
     private lateinit var progressBar: ProgressBar
@@ -45,10 +48,20 @@ class AddContactFragment : BaseFragment<FragmentAddContactBinding>(FragmentAddCo
     }
 
     private fun setRecyclerView() {
-        viewModel.getAllUsers()
-        val layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerViewAddContactUsers.layoutManager = layoutManager
-        binding.recyclerViewAddContactUsers.adapter = adapter
+        with(binding) {
+            if (requireContext().isInternetAvailable()) {
+                textViewAddContactNoInternet.gone()
+                textViewAddContactFindInternet.gone()
+                viewModel.getAllUsers()
+                val layoutManager = LinearLayoutManager(requireContext())
+                recyclerViewAddContactUsers.layoutManager = layoutManager
+                recyclerViewAddContactUsers.adapter = adapter
+
+            } else {
+                textViewAddContactNoInternet.visible()
+                textViewAddContactFindInternet.visible()
+            }
+        }
     }
 
 
@@ -59,19 +72,22 @@ class AddContactFragment : BaseFragment<FragmentAddContactBinding>(FragmentAddCo
             })
         }
         lifecycleScope.launch {
-            viewModel.allUsersLiveData.observe(viewLifecycleOwner, Observer {apiState ->
+            viewModel.allUsersLiveData.observe(viewLifecycleOwner, Observer { apiState ->
                 when (apiState) {
                     is ApiState.Success<*> -> {
                         progressBar.invisible()
                     }
+
                     is ApiState.Error -> {
                         progressBar.invisible()
                         log(apiState.error)
                     }
+
                     is ApiState.Initial -> {
                         progressBar.invisible()
                         log(apiState)
                     }
+
                     is ApiState.Loading -> {
                         progressBar.visible()
                         log(apiState)

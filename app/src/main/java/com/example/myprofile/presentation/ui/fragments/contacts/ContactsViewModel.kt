@@ -15,6 +15,7 @@ import com.example.myprofile.data.model.ContactsResponse
 import com.example.myprofile.data.model.UserDataRepository
 import com.example.myprofile.data.repository.UsersRepositoryImpl
 import com.example.myprofile.domain.ApiState
+import com.example.myprofile.presentation.utils.Constants
 import com.example.myprofile.presentation.utils.ext.isInternetAvailable
 import com.example.myprofile.presentation.utils.ext.log
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -67,14 +68,13 @@ class ContactsViewModel @Inject constructor(
     private fun loadContacts() {
         viewModelScope.launch(Dispatchers.IO) {
             if (context.isInternetAvailable()) {  // Check if internet is available
-                log("Internet is available, fetching contacts from server")
+                log(Constants.INTERNET)
                 getUserContacts()  // Fetch contacts from the server
             } else {
-                log("No internet connection, fetching contacts from local database")
+                log(Constants.NO_INTERNET)
                 val localContacts = contactDao.getAllContacts()  // Fetch contacts from Room
-                log(localContacts)
                 if (localContacts.isEmpty()) {
-                    _contactsLiveData.postValue(ApiState.Error("No internet connection and local contacts database is empty"))
+                    _contactsLiveData.postValue(ApiState.Error(Constants.BD_EMPTY))
                 } else {
                     _contacts.postValue(localContacts)  // Post contacts to UI
                 }
@@ -90,8 +90,6 @@ class ContactsViewModel @Inject constructor(
             userDataRepository.currentUser!!.id,
             userDataRepository.accessToken!!
         )
-
-        //log("Server response: $response")
 
         withContext(Dispatchers.Main) {
             saveUsers(response)  // Save the data to the database
@@ -115,8 +113,6 @@ class ContactsViewModel @Inject constructor(
                 contactDao.insertContact(contact)
             }
             _contacts.postValue(contacts)
-            //log("size all contacts from server == ${contacts.size}" +
-            //        "\nall contacts from server == $contacts")
         }
     }
 

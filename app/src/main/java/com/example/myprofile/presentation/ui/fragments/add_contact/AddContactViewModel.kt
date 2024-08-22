@@ -9,7 +9,6 @@ import com.example.myprofile.data.database.ContactDao
 import com.example.myprofile.data.model.ContactsResponse
 import com.example.myprofile.data.model.UserDataRepository
 import com.example.myprofile.data.model.UsersResponse
-import com.example.myprofile.data.repository.ContactsRepository
 import com.example.myprofile.data.repository.UsersRepositoryImpl
 import com.example.myprofile.domain.ApiState
 import com.example.myprofile.presentation.utils.ext.log
@@ -57,8 +56,11 @@ class AddContactViewModel @Inject constructor(
     private fun saveUsers(response: ApiState) {
         if (response is ApiState.Success<*>) {
             val data = response.data as UsersResponse.Data
+
             // Uses postValue to update LiveData asynchronously
             _contactsToAdd.postValue(data.users?.map { it.toContact() } ?: emptyList())
+        } else {
+            log("Failed to get users: $response")
         }
     }
 
@@ -72,7 +74,6 @@ class AddContactViewModel @Inject constructor(
             userDataRepository.accessToken!!
         )
         addContactToRepository(response)
-        log("addContact = $response")
         _contactLiveData.value = response
         _states.value = arrayListOf(Pair(contact.id, response))
     }
