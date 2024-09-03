@@ -25,8 +25,6 @@ class DetailViewFragment :
         args.contact
     }
 
-
-
     /**
      * Method called after the fragment's view is created
      */
@@ -45,8 +43,6 @@ class DetailViewFragment :
      */
     private fun displayContactData() {
         // Get the selected contact from the passed arguments
-
-
 
         // Populate the relevant fields with the received contact data
         with(binding) {

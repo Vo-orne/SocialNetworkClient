@@ -13,9 +13,6 @@ object Constants {
     // Maximum length of a password.
     const val MIN_PASSWORD_SIZE = 8
 
-    // String indicating that the password is correct.
-    const val PASSWORD_IS_CORRECT = "Password correct."
-
     // The base URL of the server
     const val BASE_URL = "http://178.63.9.114:7777/api/"
 

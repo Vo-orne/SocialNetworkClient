@@ -35,27 +35,4 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             navController.navigate(R.id.searchFragment)
         }
     }
-
-//    private fun handleDeepLink(intent: Intent) {
-//        val action = intent.action
-//        val data: Uri? = intent.data
-//
-//        if (Intent.ACTION_VIEW == action && data != null) {
-//            val path = data.pathSegments
-//
-//            if (path.isNotEmpty()) {
-//                when (path[0]) {
-//                    "home" -> navigateToFragment(MyProfileFragment())
-//                    "profile" -> navigateToFragment(MyContactsFragment())
-//                }
-//            }
-//        }
-//    }
-//
-//    private fun navigateToFragment(fragment: Fragment) {
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.fragmentContainer, fragment)
-//            .addToBackStack(null)
-//            .commit()
-//    }
 }

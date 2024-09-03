@@ -46,16 +46,13 @@ class ContactsViewModel @Inject constructor(
     val contactsLiveData: LiveData<ApiState> = _contactsLiveData
 
     private val _deletionLiveData = MutableLiveData<ApiState>(ApiState.Initial)
-    val deletionLiveData = _deletionLiveData
 
     private val _restoreContactLiveData = MutableLiveData<ApiState>(ApiState.Initial)
-    val restoreContactLiveData = _restoreContactLiveData
 
     /**
      * A list of the last saved contacts that will be possible to return.
      */
     private var _lastDeletedContacts = mutableListOf<Contact>()
-    var lastDeletedContacts = _lastDeletedContacts
 
     init {
         loadContacts()

@@ -36,7 +36,6 @@ class SearchViewModel @Inject constructor(
     private val _allContacts = mutableListOf<Contact>() // To store the original list of contacts
 
     private val _contactsLiveData = MutableLiveData<ApiState>(ApiState.Initial)
-    val contactsLiveData: LiveData<ApiState> = _contactsLiveData
 
     init {
         loadContacts()

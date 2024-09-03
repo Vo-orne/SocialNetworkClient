@@ -31,7 +31,6 @@ class AddContactViewModel @Inject constructor(
     val allUsersLiveData: LiveData<ApiState> = _allUsersLiveData
 
     private val _contactLiveData = MutableLiveData<ApiState>(ApiState.Initial)
-    val contactLiveData: LiveData<ApiState> = _contactLiveData
 
     private val _states: MutableLiveData<ArrayList<Pair<Long, ApiState>>> = MutableLiveData(ArrayList())
     val states: LiveData<ArrayList<Pair<Long, ApiState>>> = _states
