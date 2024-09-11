@@ -28,7 +28,6 @@ class LogInFragment: BaseFragment<FragmentLogInBinding>(FragmentLogInBinding::in
         super.onViewCreated(view, savedInstanceState)
         progressBar = binding.progressBar
         viewModel.autoLogin()
-
         setListeners()
         setObservers()
     }

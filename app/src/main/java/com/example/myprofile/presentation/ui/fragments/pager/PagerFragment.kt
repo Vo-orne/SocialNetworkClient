@@ -19,7 +19,7 @@ class PagerFragment : BaseFragment<FragmentPagerBinding>(FragmentPagerBinding::i
         binding.viewPager.offscreenPageLimit = 1
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            when (ViewPagerFragments.values()[position]) {
+            when (ViewPagerFragments.entries[position]) {
                 ViewPagerFragments.PROFILE_FRAGMENT -> tab.text = getString(R.string.tab1)
                 ViewPagerFragments.CONTACTS_FRAGMENT -> tab.text = getString(R.string.tab2)
             }

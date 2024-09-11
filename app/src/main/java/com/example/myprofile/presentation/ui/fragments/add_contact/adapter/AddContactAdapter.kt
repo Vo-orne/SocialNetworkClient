@@ -82,57 +82,19 @@ class AddContactsAdapter(
 
         private fun setListeners(contact: Contact) {
             addContact(contact)
-//            detailView(contact)
         }
 
-//        private fun detailView(contact: Contact) {
-//            with(binding) {
-//                root.setOnClickListener {
-//                    listener.onClickContact(
-//                        contact, arrayOf(
-//                            setTransitionName(
-//                                imageViewUserItemUserAvatar,
-//                                Constants.TRANSITION_NAME_IMAGE + contact.id
-//                            ),
-//                            setTransitionName(
-//                                textViewUserItemUserName,
-//                                Constants.TRANSITION_NAME_CONTACT_NAME + contact.id
-//                            ), setTransitionName(
-//                                textViewUserItemUserCareer,
-//                                Constants.TRANSITION_NAME_CAREER + contact.id
-//                            )
-//                        )
-//                    )
-//                }
-//            }
-//        }
 
         private fun addContact(contact: Contact) {
             with(binding) {
                 textViewUserItemUserAdd.setOnClickListener {
                     listener.onClickAddButton(contact, bindingAdapterPosition)
-//                    textViewUserItemUserAdd.gone()
-//                    imageViewUserItemPlus.gone()
-//                    imageViewUserItemSelected.visible()
                 }
                 imageViewUserItemPlus.setOnClickListener {
                     listener.onClickAddButton(contact, bindingAdapterPosition)
-//                    textViewUserItemUserAdd.gone()
-//                    imageViewUserItemPlus.gone()
-//                    imageViewUserItemSelected.visible()
                 }
-//                imageViewUserItemSelected.setOnClickListener {
-//                    imageViewUserItemSelected.gone()
-//                    textViewUserItemUserAdd.visible()
-//                    imageViewUserItemPlus.visible()
-//                }
             }
         }
-
-//        private fun setTransitionName(view: View, name: String): Pair<View, String> {
-//            view.transitionName = name
-//            return view to name
-//        }
     }
 
     fun setStates(states: ArrayList<Pair<Long, ApiState>>) {

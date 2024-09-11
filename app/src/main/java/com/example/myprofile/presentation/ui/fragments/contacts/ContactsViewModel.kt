@@ -65,10 +65,8 @@ class ContactsViewModel @Inject constructor(
     private fun loadContacts() {
         viewModelScope.launch(Dispatchers.IO) {
             if (context.isInternetAvailable()) {  // Check if internet is available
-                log(Constants.INTERNET)
                 getUserContacts()  // Fetch contacts from the server
             } else {
-                log(Constants.NO_INTERNET)
                 val localContacts = contactDao.getAllContacts()  // Fetch contacts from Room
                 if (localContacts.isEmpty()) {
                     _contactsLiveData.postValue(ApiState.Error(Constants.BD_EMPTY))
@@ -78,7 +76,6 @@ class ContactsViewModel @Inject constructor(
             }
         }
     }
-
 
     private fun getUserContacts() = viewModelScope.launch(Dispatchers.IO) {
         _contactsLiveData.postValue(ApiState.Loading)

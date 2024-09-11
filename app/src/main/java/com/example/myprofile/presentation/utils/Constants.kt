@@ -34,4 +34,11 @@ object Constants {
     const val INTERNET = "Internet is available, fetching contacts from server"
     const val NO_INTERNET = "No internet connection, fetching contacts from local database"
     const val BD_EMPTY = "No internet connection and local contacts database is empty"
+
+    // Error of UserRepositoryImpl
+    const val API_ERROR = "ApiState.Error = "
+
+    // Constants for DatabaseModule
+    const val CONTACTS_DB = "contacts_database"
+    const val USERS_DB = "users_database"
 }

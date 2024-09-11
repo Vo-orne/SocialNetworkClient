@@ -9,7 +9,6 @@ import com.example.myprofile.data.model.UserResponse
 import com.example.myprofile.data.repository.UserRepositoryImpl
 import com.example.myprofile.domain.ApiState
 import com.example.myprofile.presentation.utils.Validation
-import com.example.myprofile.presentation.utils.ext.log
 import com.example.myprofile.presentation.utils.ext.saveAutoLoginData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -71,11 +70,6 @@ class SignUpViewModel @Inject constructor(
             userDataRepository.currentUser = data.user
             userDataRepository.accessToken = data.accessToken
             userDataRepository.refreshToken = data.refreshToken
-            log("" +
-                    "currentUser = ${userDataRepository.currentUser}, " +
-                    "accessToken = ${userDataRepository.accessToken}, " +
-                    "refreshToken = $userDataRepository.refreshToken"
-            )
         }
     }
 

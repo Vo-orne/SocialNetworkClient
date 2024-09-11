@@ -38,15 +38,12 @@ class AddContactViewModel @Inject constructor(
     fun getAllUsers() = viewModelScope.launch(Dispatchers.Main) {
         _allUsersLiveData.value = ApiState.Loading
 
-        // Calls the repository to get the data
-        val response = usersRepositoryImpl.getAllUsers(
+        val response = usersRepositoryImpl.getAllUsers( // Calls the repository to get the data
             userDataRepository.accessToken!!
         )
 
         saveUsers(response)
-
-        // Passes registration status to LiveData
-        _allUsersLiveData.value = response
+        _allUsersLiveData.value = response // Passes registration status to LiveData
     }
 
     /**

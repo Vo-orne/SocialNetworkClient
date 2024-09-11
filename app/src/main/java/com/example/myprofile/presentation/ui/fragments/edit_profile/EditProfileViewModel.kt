@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.myprofile.data.model.UserDataRepository
 import com.example.myprofile.data.repository.UserRepositoryImpl
 import com.example.myprofile.domain.ApiState
-import com.example.myprofile.presentation.utils.ext.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,7 +42,6 @@ class EditProfileViewModel @Inject constructor(
             address, career,
             birthday
         )
-        log("response = $response")
         userName = name
         userAddress = address
         userCareer = career
