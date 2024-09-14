@@ -4,9 +4,9 @@ import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myprofile.data.model.UserDataRepository
+import com.example.myprofile.data.repository.UserDataRepository
 import com.example.myprofile.data.model.UserResponse
-import com.example.myprofile.data.repository.UserRepositoryImpl
+import com.example.myprofile.data.repository.repository_impl.UserRepositoryImpl
 import com.example.myprofile.domain.states.ApiState
 import com.example.myprofile.presentation.utils.ext.getUserEmail
 import com.example.myprofile.presentation.utils.ext.getUserPassword

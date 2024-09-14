@@ -1,4 +1,4 @@
-package com.example.myprofile.data.repository
+package com.example.myprofile.data.repository.repository_impl
 
 import com.example.myprofile.data.model.Contact
 import com.example.myprofile.domain.states.ApiState

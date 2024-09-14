@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myprofile.data.model.UserDataRepository
-import com.example.myprofile.data.repository.UserRepositoryImpl
+import com.example.myprofile.data.repository.UserDataRepository
+import com.example.myprofile.data.repository.repository_impl.UserRepositoryImpl
 import com.example.myprofile.domain.states.ApiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

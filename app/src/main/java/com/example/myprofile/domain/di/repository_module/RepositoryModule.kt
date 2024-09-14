@@ -1,7 +1,7 @@
 package com.example.myprofile.domain.di.repository_module
 
-import com.example.myprofile.data.repository.UserRepositoryImpl
-import com.example.myprofile.data.repository.UsersRepositoryImpl
+import com.example.myprofile.data.repository.repository_impl.UserRepositoryImpl
+import com.example.myprofile.data.repository.repository_impl.UsersRepositoryImpl
 import com.example.myprofile.domain.network.ApiService
 import com.example.myprofile.domain.network.UsersApiService
 import dagger.Module

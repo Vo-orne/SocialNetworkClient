@@ -8,8 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.myprofile.data.model.Contact
 import com.example.myprofile.data.database.interfaces.ContactDao
 import com.example.myprofile.data.model.ContactsResponse
-import com.example.myprofile.data.model.UserDataRepository
-import com.example.myprofile.data.repository.UsersRepositoryImpl
+import com.example.myprofile.data.repository.UserDataRepository
+import com.example.myprofile.data.repository.repository_impl.UsersRepositoryImpl
 import com.example.myprofile.domain.states.ApiState
 import com.example.myprofile.presentation.utils.Constants
 import com.example.myprofile.presentation.utils.ext.filterContacts

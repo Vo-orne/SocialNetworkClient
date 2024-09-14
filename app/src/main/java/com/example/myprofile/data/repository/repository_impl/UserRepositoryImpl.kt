@@ -1,9 +1,8 @@
-package com.example.myprofile.data.repository
+package com.example.myprofile.data.repository.repository_impl
 
 import com.example.myprofile.domain.network.ApiService
 import com.example.myprofile.domain.states.ApiState
-import com.example.myprofile.presentation.utils.Constants.API_ERROR
-import com.example.myprofile.presentation.utils.Constants.AUTHORIZATION_PREFIX
+import com.example.myprofile.presentation.utils.Constants
 import java.util.Date
 import javax.inject.Inject
 
@@ -21,7 +20,7 @@ class UserRepositoryImpl @Inject constructor(private val apiService: ApiService)
                 ApiState.Success(it)
             } ?: ApiState.Error(response.message.toString())
         } catch (e: Exception) {
-            ApiState.Error("$API_ERROR ${e.message.toString()}")
+            ApiState.Error("${Constants.API_ERROR} ${e.message.toString()}")
         }
     }
 
@@ -35,7 +34,7 @@ class UserRepositoryImpl @Inject constructor(private val apiService: ApiService)
                 ApiState.Success(it)
             } ?: ApiState.Error(response.message.toString())
         } catch (e: Exception) {
-            ApiState.Error("$API_ERROR ${e.message.toString()}")
+            ApiState.Error("${Constants.API_ERROR} ${e.message.toString()}")
         }
     }
 
@@ -48,7 +47,7 @@ class UserRepositoryImpl @Inject constructor(private val apiService: ApiService)
         return try {
             val response = apiService.editUser(
                 id,
-                "$AUTHORIZATION_PREFIX $accessToken",
+                "${Constants.AUTHORIZATION_PREFIX} $accessToken",
                 name, phone,
                 address, career,
                 birthday
@@ -57,7 +56,7 @@ class UserRepositoryImpl @Inject constructor(private val apiService: ApiService)
                 ApiState.Success(it)
             } ?: ApiState.Error(response.message.toString())
         } catch (e: Exception) {
-            ApiState.Error("$API_ERROR ${e.message.toString()}")
+            ApiState.Error("${Constants.API_ERROR} ${e.message.toString()}")
         }
     }
 }

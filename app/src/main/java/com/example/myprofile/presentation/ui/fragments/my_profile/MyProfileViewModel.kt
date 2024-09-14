@@ -2,7 +2,7 @@ package com.example.myprofile.presentation.ui.fragments.my_profile
 
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
-import com.example.myprofile.data.model.UserDataRepository
+import com.example.myprofile.data.repository.UserDataRepository
 import com.example.myprofile.presentation.utils.ext.removeAutoLoginData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
