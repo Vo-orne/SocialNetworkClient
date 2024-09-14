@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.myprofile.R
 import com.example.myprofile.databinding.FragmentSingUpExtendedBinding
-import com.example.myprofile.domain.ApiState
+import com.example.myprofile.domain.states.ApiState
 import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.presentation.ui.fragments.auth.sign_up.SignUpViewModel
 import com.example.myprofile.presentation.utils.ext.invisible

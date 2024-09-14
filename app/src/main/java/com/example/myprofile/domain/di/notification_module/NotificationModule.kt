@@ -1,4 +1,4 @@
-package com.example.myprofile.di
+package com.example.myprofile.domain.di.notification_module
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -9,7 +9,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat.getString
+import androidx.core.content.ContextCompat
 import com.example.myprofile.R
 import com.example.myprofile.presentation.ui.activity.MainActivity
 import com.example.myprofile.presentation.utils.Constants
@@ -22,7 +22,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NotificationModule {
+object NotificationModule {
 
     @Singleton
     @Provides
@@ -39,10 +39,10 @@ class NotificationModule {
 
         return NotificationCompat.Builder(context, Constants.CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(getString(context, R.string.app_name))
-            .setContentText(getString(context, R.string.notification))
+            .setContentTitle(ContextCompat.getString(context, R.string.app_name))
+            .setContentText(ContextCompat.getString(context, R.string.notification))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .addAction(0, getString(context, R.string.search), pendingIntent)
+            .addAction(0, ContextCompat.getString(context, R.string.search), pendingIntent)
             .setContentIntent(pendingIntent)
     }
 
@@ -53,7 +53,11 @@ class NotificationModule {
     ): NotificationManagerCompat {
         val notificationManager = NotificationManagerCompat.from(context)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(Constants.CHANNEL_ID, Constants.CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
+            val channel = NotificationChannel(
+                Constants.CHANNEL_ID,
+                Constants.CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
             // Register the channel with the system.
             notificationManager.createNotificationChannel(channel)
         }

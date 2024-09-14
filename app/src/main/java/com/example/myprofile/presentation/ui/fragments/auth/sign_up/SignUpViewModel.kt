@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myprofile.data.model.UserDataRepository
 import com.example.myprofile.data.model.UserResponse
 import com.example.myprofile.data.repository.UserRepositoryImpl
-import com.example.myprofile.domain.ApiState
+import com.example.myprofile.domain.states.ApiState
 import com.example.myprofile.presentation.utils.Validation
 import com.example.myprofile.presentation.utils.ext.saveAutoLoginData
 import dagger.hilt.android.lifecycle.HiltViewModel

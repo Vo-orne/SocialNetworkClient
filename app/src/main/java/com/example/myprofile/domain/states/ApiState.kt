@@ -1,4 +1,4 @@
-package com.example.myprofile.domain
+package com.example.myprofile.domain.states
 
 sealed class ApiState {
     data object Initial : ApiState()

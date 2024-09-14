@@ -1,13 +1,12 @@
-package com.example.myprofile.data.model
+package com.example.myprofile.domain.di.db_module
 
 import android.content.Context
 import androidx.room.Room
-import com.example.myprofile.data.database.ContactDao
 import com.example.myprofile.data.database.ContactsDatabase
-import com.example.myprofile.data.database.UserDao
 import com.example.myprofile.data.database.UsersDatabase
-import com.example.myprofile.presentation.utils.Constants.CONTACTS_DB
-import com.example.myprofile.presentation.utils.Constants.USERS_DB
+import com.example.myprofile.data.database.interfaces.ContactDao
+import com.example.myprofile.data.database.interfaces.UserDao
+import com.example.myprofile.presentation.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +24,7 @@ object DatabaseModule {
         return Room.databaseBuilder(
             context.applicationContext,
             ContactsDatabase::class.java,
-            CONTACTS_DB
+            Constants.CONTACTS_DB
         ).build()
     }
 
@@ -41,7 +40,7 @@ object DatabaseModule {
         return Room.databaseBuilder(
             context.applicationContext,
             UsersDatabase::class.java,
-            USERS_DB
+            Constants.USERS_DB
         ).build()
     }
 

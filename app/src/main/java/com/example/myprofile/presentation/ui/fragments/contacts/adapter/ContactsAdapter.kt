@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myprofile.data.database.Contact
+import com.example.myprofile.data.model.Contact
 import com.example.myprofile.databinding.ContactItemBinding
 import com.example.myprofile.presentation.ui.fragments.contacts.adapter.interfaces.ContactActionListener
 import com.example.myprofile.presentation.ui.fragments.contacts.adapter.utils.UsersDiffCallback

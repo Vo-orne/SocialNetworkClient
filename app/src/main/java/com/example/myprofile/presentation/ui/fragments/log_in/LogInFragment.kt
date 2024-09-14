@@ -8,7 +8,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.example.myprofile.R
 import com.example.myprofile.databinding.FragmentLogInBinding
-import com.example.myprofile.domain.ApiState
+import com.example.myprofile.domain.states.ApiState
 import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.presentation.utils.ext.invisible
 import com.example.myprofile.presentation.utils.ext.log

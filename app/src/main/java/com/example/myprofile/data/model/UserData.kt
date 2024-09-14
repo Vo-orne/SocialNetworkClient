@@ -1,6 +1,5 @@
 package com.example.myprofile.data.model
 
-import com.example.myprofile.data.database.Contact
 import java.util.Date
 
 data class UserData(

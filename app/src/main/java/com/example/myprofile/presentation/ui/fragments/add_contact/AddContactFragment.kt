@@ -8,9 +8,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myprofile.R
-import com.example.myprofile.data.database.Contact
+import com.example.myprofile.data.model.Contact
 import com.example.myprofile.databinding.FragmentAddContactBinding
-import com.example.myprofile.domain.ApiState
+import com.example.myprofile.domain.states.ApiState
 import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.presentation.ui.fragments.add_contact.adapter.AddContactsAdapter
 import com.example.myprofile.presentation.ui.fragments.add_contact.adapter.interfaces.AddContactActionListener

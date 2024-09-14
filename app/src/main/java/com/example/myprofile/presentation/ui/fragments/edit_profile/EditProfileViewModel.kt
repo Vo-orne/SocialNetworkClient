@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myprofile.data.model.UserDataRepository
 import com.example.myprofile.data.repository.UserRepositoryImpl
-import com.example.myprofile.domain.ApiState
+import com.example.myprofile.domain.states.ApiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

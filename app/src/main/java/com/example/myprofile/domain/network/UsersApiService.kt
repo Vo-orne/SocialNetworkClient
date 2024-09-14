@@ -1,4 +1,4 @@
-package com.example.myprofile.domain
+package com.example.myprofile.domain.network
 
 import com.example.myprofile.data.model.ContactsResponse
 import com.example.myprofile.data.model.UsersResponse

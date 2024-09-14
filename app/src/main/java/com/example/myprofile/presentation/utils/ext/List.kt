@@ -1,6 +1,6 @@
 package com.example.myprofile.presentation.utils.ext
 
-import com.example.myprofile.data.database.Contact
+import com.example.myprofile.data.model.Contact
 
 fun List<Contact>.filterContacts(query: String): List<Contact> {
     return this.filter { contact ->

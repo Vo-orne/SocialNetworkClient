@@ -1,10 +1,11 @@
-package com.example.myprofile.data.database
+package com.example.myprofile.data.database.interfaces
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.myprofile.data.model.Contact
 
 @Dao
 interface UserDao {

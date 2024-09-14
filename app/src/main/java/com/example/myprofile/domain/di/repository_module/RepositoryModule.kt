@@ -1,9 +1,9 @@
-package com.example.myprofile.di
+package com.example.myprofile.domain.di.repository_module
 
 import com.example.myprofile.data.repository.UserRepositoryImpl
 import com.example.myprofile.data.repository.UsersRepositoryImpl
-import com.example.myprofile.domain.ApiService
-import com.example.myprofile.domain.UsersApiService
+import com.example.myprofile.domain.network.ApiService
+import com.example.myprofile.domain.network.UsersApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

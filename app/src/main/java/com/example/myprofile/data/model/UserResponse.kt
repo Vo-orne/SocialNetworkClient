@@ -1,7 +1,5 @@
 package com.example.myprofile.data.model
 
-import com.example.myprofile.data.database.Contact
-
 
 data class UserResponse(
     val status: String = "",

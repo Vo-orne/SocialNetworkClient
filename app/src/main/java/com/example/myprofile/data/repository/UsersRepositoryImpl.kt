@@ -1,8 +1,8 @@
 package com.example.myprofile.data.repository
 
-import com.example.myprofile.data.database.Contact
-import com.example.myprofile.domain.ApiState
-import com.example.myprofile.domain.UsersApiService
+import com.example.myprofile.data.model.Contact
+import com.example.myprofile.domain.states.ApiState
+import com.example.myprofile.domain.network.UsersApiService
 import com.example.myprofile.presentation.utils.Constants.API_ERROR
 import com.example.myprofile.presentation.utils.Constants.AUTHORIZATION_PREFIX
 import javax.inject.Inject

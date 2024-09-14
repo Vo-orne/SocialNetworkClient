@@ -1,4 +1,4 @@
-package com.example.myprofile.di
+package com.example.myprofile.domain.di.sp_module
 
 import android.content.Context
 import android.content.SharedPreferences

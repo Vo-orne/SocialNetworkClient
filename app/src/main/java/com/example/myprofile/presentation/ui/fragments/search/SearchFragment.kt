@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myprofile.data.database.Contact
+import com.example.myprofile.data.model.Contact
 import com.example.myprofile.databinding.FragmentSearchBinding
 import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.presentation.ui.fragments.search.adapter.SearchAdapter

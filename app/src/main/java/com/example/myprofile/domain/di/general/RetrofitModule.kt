@@ -1,4 +1,4 @@
-package com.example.myprofile.di
+package com.example.myprofile.domain.di.general
 
 import com.example.myprofile.presentation.utils.Constants
 import dagger.Module

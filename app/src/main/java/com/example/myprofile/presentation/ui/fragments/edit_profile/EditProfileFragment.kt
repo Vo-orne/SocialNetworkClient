@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.myprofile.R
 import com.example.myprofile.databinding.FragmentEditUserBinding
-import com.example.myprofile.domain.ApiState
+import com.example.myprofile.domain.states.ApiState
 import com.example.myprofile.presentation.ui.base.BaseFragment
 import com.example.myprofile.presentation.ui.fragments.edit_profile.dialog.CalendarDialogFragment
 import com.example.myprofile.presentation.ui.fragments.edit_profile.interfaces.DialogCalendarListener
