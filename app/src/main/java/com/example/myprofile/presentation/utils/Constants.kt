@@ -27,7 +27,6 @@ object Constants {
 
     // Date formats used in the application.
     const val DATE_FORMAT = "dd/MM/yyyy"
-    const val INPUT_DATE_FORMAT = "EEE MMM dd HH:mm:ss zzz yyyy"
 
     // Channel details for push notifications.
     const val CHANNEL_ID = "0"
