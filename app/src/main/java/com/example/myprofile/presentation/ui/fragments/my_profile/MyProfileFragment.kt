@@ -23,7 +23,8 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfi
     private val viewModel: MyProfileViewModel by viewModels()
 
     /**
-     * Method called when the fragment's view is created
+     * Called after the fragment view is created.
+     * Methods are called here to display user data and set event listeners.
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,6 +32,9 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfi
         setListeners()
     }
 
+    /**
+     * Populates text fields with user data obtained from the ViewModel.
+     */
     private fun setUserData() {
         with(binding) {
             textViewMyProfileUserName.text = viewModel.getUserName()
@@ -40,16 +44,21 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(FragmentMyProfi
     }
 
     /**
-     * Method to set event listeners
+     * Sets event listeners for buttons:
+     *
+     * buttonMyProfileViewMyContacts: When clicked, changes the current ViewPager2 element
+     * to a contact fragment.
+     * MyContactsFragment is assumed to be at index 1 in ViewPager2.
+     *
+     * buttonMyProfileEditProfile: Navigate to the edit profile snippet.
+     *
+     * buttonMyProfileLogOut: Clear user data on logout and navigate to the login screen.
      */
     override fun setListeners() {
         with(binding) {
             buttonMyProfileViewMyContacts.setOnClickListener {
-                // Get the reference to ViewPager2 from PagerFragment
                 (parentFragment as PagerFragment).getViewPager().currentItem =
                     ViewPagerFragments.CONTACTS_FRAGMENT.ordinal
-                // Switch to MyContactsFragment by setting the current item of the ViewPager2
-                // Assuming MyContactsFragment is at index 1
             }
             buttonMyProfileEditProfile.setOnClickListener {
                 navigateToFragment(R.id.action_pagerFragment_to_editProfileFragment)

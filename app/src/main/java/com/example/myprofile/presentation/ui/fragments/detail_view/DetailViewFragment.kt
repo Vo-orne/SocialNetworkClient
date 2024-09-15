@@ -10,56 +10,55 @@ import com.example.myprofile.presentation.utils.ext.loadImage
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- * Fragment for displaying contact details
+ * Responsible for displaying contact details.
+ * It uses the data passed through the navigation arguments to populate the user interface.
  */
 @AndroidEntryPoint
 class DetailViewFragment :
     BaseFragment<FragmentDetailViewBinding>(FragmentDetailViewBinding::inflate) {
 
     /**
-     * Object to hold the selected contact
-     *
+     * An object to receive the passed fragment arguments. The selected contact is stored here.
      */
     private val args: DetailViewFragmentArgs by navArgs()
+
+    /**
+     * A local variable that is initialized with the contact data from the arguments.
+     */
     private val contact: Contact by lazy {
         args.contact
     }
 
     /**
-     * Method called after the fragment's view is created
+     * It is called after creating a fragment view.
+     * This is where contact data is displayed and event handlers are set.
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Display the data of the selected contact
         displayContactData()
-
-        // Set event listeners
         setListeners()
     }
 
     /**
-     * Private method to display contact data on the screen
+     * Fills the appropriate fields on the screen with contact data.
+     * Loads a contact's avatar using the loadImage utility.
      */
     private fun displayContactData() {
-        // Get the selected contact from the passed arguments
-
-        // Populate the relevant fields with the received contact data
         with(binding) {
             textViewDetailViewContactName.text = contact.name
             textViewDetailViewContactCareer.text = contact.career
             textViewDetailViewContactHomeAddress.text = contact.address
-            // Load the contact's avatar using Glide
             imageViewDetailViewContactAvatar.loadImage(contact.avatar)
         }
     }
 
     /**
-     * Overridden method to set event listeners
+     * Sets event handlers for interface elements.
+     * In this case, an event handler for the back button
+     * that returns the user to the previous page in ViewPager2.
      */
     override fun setListeners() {
         binding.buttonDetailViewBack.setOnClickListener {
-            // Navigate back to the previous page in the ViewPager2
             navController.navigateUp()
         }
     }

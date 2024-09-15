@@ -5,6 +5,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myprofile.data.model.Contact
 import com.example.myprofile.presentation.ui.fragments.contacts.adapter.ContactsAdapter
 
+/**
+ * Extension function to enable swipe-to-delete functionality in a RecyclerView.
+ * @param deleteFunction Function to be called to delete the contact. It takes a [Contact] as a parameter.
+ * @param showSnackbar Function to be called to show a Snackbar message after a contact is deleted.
+ * @param isEnabled Function to check if swipe-to-delete functionality is enabled.
+ */
 fun RecyclerView.swipeToDelete(
     deleteFunction: (contact: Contact) -> Unit,
     showSnackbar: () -> Unit,
@@ -17,7 +23,7 @@ fun RecyclerView.swipeToDelete(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
-            ) = false
+            ) = false // This method is not used in swipe-to-delete functionality
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 // Get the position of the contact to delete and the contact itself

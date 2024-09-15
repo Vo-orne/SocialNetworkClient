@@ -22,18 +22,28 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 /**
- * Dialog fragment for adding a new contact.
+ * Responsible for editing the user profile.
+ * It provides an interface for entering and saving user data
+ * and integrates with a date selection dialog.
  */
 @AndroidEntryPoint
 class EditProfileFragment :
     BaseFragment<FragmentEditUserBinding>(FragmentEditUserBinding::inflate) {
 
     /**
-     * ViewModel for handling the addition of new contacts
+     * ViewModel to manage the data used in this fragment.
      */
     private val viewModel: EditProfileViewModel by viewModels()
+
+    /**
+     * Progress bar to display the download process.
+     */
     private lateinit var progressBar: ProgressBar
 
+    /**
+     * Called after creating a fragment view.
+     * Configures the progress bar, events and watchers, and the calendar.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         progressBar = binding.progressBar
@@ -43,21 +53,26 @@ class EditProfileFragment :
     }
 
     /**
-     * Set up event listeners for buttons and ImageView
+     * Configures event handlers for buttons in the fragment:
+     *
+     * "Save" button: Saves user profile data.
+     * "Back" button: Returns to the previous fragment (PagerFragment).
      */
     override fun setListeners() {
-        // Handle click on the "Save" button
         with(binding) {
             buttonEditUserSave.setOnClickListener {
                 saveContact()
             }
-            // Handle click on the "Back" button
             buttonEditUserBack.setOnClickListener {
                 navigateToFragment(R.id.action_editProfileFragment_to_pagerFragment)
             }
         }
     }
 
+    /**
+     * Configures observers for ViewModel state,
+     * handling various API states (Loading, Success, Error, Initial).
+     */
     private fun setObservers() {
         lifecycleScope.launch {
             viewModel.userStateFlow.observe(viewLifecycleOwner, Observer { apiState ->
@@ -67,17 +82,14 @@ class EditProfileFragment :
                         viewModel.setUserData()
                         navigateToFragment(R.id.action_editProfileFragment_to_pagerFragment)
                     }
-
                     is ApiState.Error -> {
                         progressBar.invisible()
                         log(apiState.error)
                     }
-
                     is ApiState.Initial -> {
                         progressBar.invisible()
                         log(apiState)
                     }
-
                     is ApiState.Loading -> {
                         progressBar.visible()
                         log(apiState)
@@ -88,7 +100,7 @@ class EditProfileFragment :
     }
 
     /**
-     * Method to save the newly added contact
+     * Collects data from input fields and calls a ViewModel method to save changes.
      */
     private fun saveContact() {
         with(binding) {
@@ -96,17 +108,20 @@ class EditProfileFragment :
             val phone = textInputEditTextEditUserPhone.text.toString()
             val address = textInputEditTextEditUserAddress.text.toString()
             val career = textInputEditTextEditUserCareer.text.toString()
-            val birthday =
-                Parser.getDataFromString(textInputEditTextEditUserDateOfBirth.text.toString())
+            val birthday = Parser.getDataFromString(textInputEditTextEditUserDateOfBirth.text.toString())
             viewModel.editUser(name, phone, address, career, birthday)
         }
     }
 
+    /**
+     * Configures the date selection dialog.
+     * When selecting a date, it updates the input field with the date.
+     */
     private fun setCalendar() {
         with(binding) {
             textInputEditTextEditUserDateOfBirth.setOnClickListener {
                 val dialog = CalendarDialogFragment()
-                dialog.setListener(listener = object : DialogCalendarListener {
+                dialog.setListener(object : DialogCalendarListener {
                     override fun onDateSelected(date: String) {
                         textInputEditTextEditUserDateOfBirth.setText(date)
                     }

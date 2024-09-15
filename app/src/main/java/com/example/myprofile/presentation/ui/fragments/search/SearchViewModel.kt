@@ -22,6 +22,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/**
+ * ViewModel of the SearchFragment class, for managing search operations and fetching contacts.
+ */
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val usersRepositoryImpl: UsersRepositoryImpl,
@@ -30,19 +33,34 @@ class SearchViewModel @Inject constructor(
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
-    private val _contacts = MutableLiveData<List<Contact>>() // Live data for saving the list of users
-    val contacts: LiveData<List<Contact>> = _contacts // Public access to live data
+    /**
+     * Private LiveData for saving and observing the list of contacts.
+     */
+    private val _contacts = MutableLiveData<List<Contact>>()
+    /**
+     * LiveData for saving and observing the list of contacts.
+     */
+    val contacts: LiveData<List<Contact>> = _contacts
 
-    private val _allContacts = mutableListOf<Contact>() // To store the original list of contacts
+    /**
+     * Private list to save the original list of contacts for filtering.
+     */
+    private val _allContacts = mutableListOf<Contact>()
 
+    /**
+     * Private LiveData to save API request state.
+     */
     private val _contactsLiveData = MutableLiveData<ApiState>(ApiState.Initial)
 
+    /**
+     * Initializes the loading of contacts when the ViewModel is created.
+     */
     init {
         loadContacts()
     }
 
     /**
-     * Getting a list of contacts.
+     * Loads contacts either from the server or local database.
      */
     private fun loadContacts() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -64,6 +82,9 @@ class SearchViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Fetches user contacts from the server.
+     */
     private fun getUserContacts() = viewModelScope.launch(Dispatchers.IO) {
         _contactsLiveData.postValue(ApiState.Loading)
 
@@ -79,6 +100,9 @@ class SearchViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Saves fetched user contacts into the local database and updates LiveData.
+     */
     private fun saveUsers(response: ApiState) = viewModelScope.launch(Dispatchers.IO) {
         if (response is ApiState.Success<*>) {
             val data = response.data as ContactsResponse.Data
@@ -95,7 +119,9 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-
+    /**
+     * Searches contacts based on the query string.
+     */
     fun searchContacts(query: String) {
         val filteredContacts = _allContacts.filterContacts(query)
         _contacts.value = filteredContacts

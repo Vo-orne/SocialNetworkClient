@@ -24,14 +24,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * ViewModel of the SignUpFragment and SignUpFragment classes.
+ * Responsible for managing the user registration logic in the application.
+ * Uses LiveData and StateFlow to monitor data and registration status.
+ */
 @AndroidEntryPoint
 class SignUpExtendedFragment :
     BaseFragment<FragmentSingUpExtendedBinding>(FragmentSingUpExtendedBinding::inflate) {
 
+    /**
+     * Register for activity result to pick an image from the gallery
+     */
     private val getContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             uri?.let {
                 lifecycleScope.launch {
+                    // Load the image bitmap from the URI
                     val imageBitmap = withContext(Dispatchers.IO) {
                         Glide.with(requireContext())
                             .asBitmap()
@@ -39,6 +48,7 @@ class SignUpExtendedFragment :
                             .submit()
                             .get()
                     }
+                    // Hide placeholder and set the selected image
                     binding.imageViewSignUpExtendedContactAvatar2.invisible()
                     Glide.with(requireContext())
                         .load(imageBitmap)
@@ -47,9 +57,19 @@ class SignUpExtendedFragment :
             }
         }
 
+    /**
+     * Retrieve arguments passed to this fragment
+     */
     private val args: SignUpExtendedFragmentArgs by navArgs()
 
+    /**
+     * ViewModel to manage the data used in this fragment.
+     */
     private val viewModel: SignUpViewModel by viewModels()
+
+    /**
+     * Progress bar to display the download process.
+     */
     private lateinit var progressBar: ProgressBar
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,6 +79,10 @@ class SignUpExtendedFragment :
         setObservers()
     }
 
+    /**
+     * Method to set observers for StateFlow.
+     * This method updates the UI based on the registration state.
+     */
     private fun setObservers() {
         lifecycleScope.launch {
             viewModel.registerState.flowWithLifecycle(viewLifecycleOwner.lifecycle).collect {
@@ -91,6 +115,10 @@ class SignUpExtendedFragment :
         }
     }
 
+    /**
+     * Method to set event listeners for the UI components.
+     * This includes setting click listeners for buttons and image view.
+     */
     override fun setListeners() {
         with(binding) {
             buttonSignUpExtendedForward.setOnClickListener {
@@ -107,6 +135,9 @@ class SignUpExtendedFragment :
         }
     }
 
+    /**
+     * Method to register a user by sending data to the ViewModel.
+     */
     private fun registerUser() {
         with(viewModel) {
             email.value = args.email
@@ -117,6 +148,9 @@ class SignUpExtendedFragment :
         }
     }
 
+    /**
+     * Method to open the gallery to pick an image.
+     */
     private fun openGallery() {
         getContent.launch("image/*")
     }

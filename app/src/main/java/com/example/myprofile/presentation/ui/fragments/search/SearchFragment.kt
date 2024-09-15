@@ -16,14 +16,24 @@ import com.example.myprofile.presentation.utils.ext.gone
 import com.example.myprofile.presentation.utils.ext.visible
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Fragment for searching and displaying contacts.
+ */
 @AndroidEntryPoint
 class SearchFragment :
     BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
 
+    /**
+     * ViewModel for managing search operations.
+     */
     private val viewModel: SearchViewModel by viewModels()
+
+    /**
+     * Adapter for displaying search results.
+     * Uses a [SearchActionListener] to handle clicks on a contact.
+     */
     private val adapter: SearchAdapter by lazy {
         SearchAdapter(object : SearchActionListener {
-            // Event handler for viewing contact details
             override fun onClick(contact: Contact, position: Int) {
                 val action = SearchFragmentDirections.actionSearchFragmentToDetailViewFragment(contact)
                 findNavController().navigate(action)
@@ -32,7 +42,8 @@ class SearchFragment :
     }
 
     /**
-     * Method called after the fragment's view is created
+     * A method that is called after the fragment view is created.
+     * Configures the RecyclerView, listeners, and observers.
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,26 +52,38 @@ class SearchFragment :
         setObservers()
     }
 
+    /**
+     * Configures a RecyclerView with a LinearLayoutManager and adapter.
+     */
     private fun setRecyclerView() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewContacts.layoutManager = layoutManager
         binding.recyclerViewContacts.adapter = adapter
     }
 
+    /**
+     * Configures event listeners for the search text field and the delete button.
+     * Starts a search when text is entered
+     * and returns to the previous screen when the delete button is pressed.
+     */
     override fun setListeners() {
         binding.textInputLayoutSearch.editText?.addTextChangedListener {
             val query = it.toString()
             viewModel.searchContacts(query)
         }
         binding.imageButtonSearchErase.setOnClickListener {
-            navController.navigateUp()
+            findNavController().navigateUp()
         }
     }
 
+    /**
+     * Configures watchers for search results.
+     * Updates the adapter and shows or hides the message about no results.
+     */
     private fun setObservers() {
-        viewModel.contacts.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
-            if (viewModel.contacts.value?.isEmpty() == true) {
+        viewModel.contacts.observe(viewLifecycleOwner, Observer { contacts ->
+            adapter.submitList(contacts)
+            if (contacts.isEmpty()) {
                 binding.textViewSearchNoResults.visible()
                 binding.textViewSearchSeeMore.visible()
             } else {

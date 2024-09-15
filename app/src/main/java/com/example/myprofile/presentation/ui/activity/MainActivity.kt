@@ -9,6 +9,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * The MainActivity class represents the main activity of the application.
+ * It handles deep link processing and sets up navigation using NavHostFragment.
+ *
  * @constructor Creates an instance of MainActivity.
  */
 @AndroidEntryPoint
@@ -28,10 +30,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         handleDeepLink(intent)
     }
 
+    /**
+     * Handles deep links by navigating to the appropriate fragment if a valid deep link is detected.
+     *
+     * @param intent The intent containing the deep link data.
+     */
     private fun handleDeepLink(intent: Intent?) {
         if (intent?.data != null) {
+            // Obtain the NavController from the NavHostFragment
             val navController =
                 (supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment).navController
+            // Navigate to the SearchFragment
             navController.navigate(R.id.searchFragment)
         }
     }

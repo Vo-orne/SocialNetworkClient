@@ -13,29 +13,29 @@ import com.example.myprofile.presentation.ui.fragments.contacts.adapter.utils.Us
 import com.example.myprofile.presentation.utils.ext.loadImage
 import com.example.myprofile.presentation.utils.ext.visibleIf
 
-// TODO: if multiselect - swipe to delete: isEnabled false
-
 /**
- * Adapter for the list of contacts.
- * @property listener The listener for contact actions.
+ * Adapter for displaying a list of contacts in a RecyclerView.
+ * @property listener The listener for handling contact actions (click, long click, delete).
  */
 class ContactsAdapter(
     private val listener: ContactActionListener
 ) : ListAdapter<Contact, ContactsAdapter.ContactViewHolder>(UsersDiffCallback()) {
 
     /**
-     * Selected contacts in multiselect mode.
+     * Set of selected contacts in multi-select mode.
      */
     private val selectedItems = HashSet<Pair<Contact, Int>>()
 
     /**
-     * Multiselect state.
+     * Flag indicating whether multi-select mode is enabled.
      */
     var isSelectMode = false
 
-
     /**
-     * Method that creates new ViewHolders and associates them with the layout structure from the layout file
+     * Creates a new ViewHolder and associates it with the layout structure from the layout file.
+     * @param parent The parent view group.
+     * @param viewType The type of view to create.
+     * @return A new instance of ContactViewHolder.
      */
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -47,14 +47,16 @@ class ContactsAdapter(
     }
 
     /**
-     * Method that binds data to the ViewHolder for a specific position in the RecyclerView
+     * Binds data to the ViewHolder for a specific position in the RecyclerView.
+     * @param holder The ViewHolder to bind data to.
+     * @param position The position of the item in the list.
      */
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         holder.onBind(currentList[position])
     }
 
     /**
-     * ViewHolder for the list of contacts
+     * ViewHolder for displaying a contact item in the RecyclerView.
      */
     @SuppressLint("NotifyDataSetChanged")
     inner class ContactViewHolder(
@@ -62,8 +64,8 @@ class ContactsAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         /**
-         * Displaying data in the contact.
-         * @param contact A specific contact whose data will be displayed.
+         * Binds the contact data to the ViewHolder.
+         * @param contact The contact to display.
          */
         fun onBind(contact: Contact) {
             with(binding) {
@@ -77,6 +79,10 @@ class ContactsAdapter(
             setListeners(contact)
         }
 
+        /**
+         * Sets up listeners for contact item actions.
+         * @param contact The contact associated with the item.
+         */
         private fun setListeners(contact: Contact) {
             binding.root.setOnClickListener {
                 listener.onClick(contact, bindingAdapterPosition)
@@ -96,7 +102,9 @@ class ContactsAdapter(
     }
 
     /**
-     * Switching the selection of a contact in multiselect mode.
+     * Toggles the selection of a contact in multi-select mode.
+     * @param contact The contact to toggle.
+     * @param position The position of the contact in the list.
      */
     fun toggleSelection(contact: Contact, position: Int) {
         if (selectedItems.contains(Pair(contact, position))) {
@@ -108,7 +116,7 @@ class ContactsAdapter(
     }
 
     /**
-     * Completely clears the list of selected contacts in multiselect mode and exits it.
+     * Clears the list of selected contacts and exits multi-select mode.
      */
     @SuppressLint("NotifyDataSetChanged")
     private fun clearSelection() {
@@ -118,12 +126,17 @@ class ContactsAdapter(
     }
 
     /**
-     * Returns the list of selected contacts in multiselect mode.
+     * Returns the set of selected contacts in multi-select mode.
+     * @return The set of selected contacts.
      */
     fun getSelectedItems(): HashSet<Pair<Contact, Int>> {
         return selectedItems
     }
 
+    /**
+     * Sets the multi-select mode state.
+     * @param it Boolean indicating whether to enable or disable multi-select mode.
+     */
     fun setMultiselect(it: Boolean?) {
         if (it == true) {
             isSelectMode = true

@@ -27,35 +27,39 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 /**
- * Fragment for displaying the list of contacts
+ * Fragment for displaying the list of contacts.
  */
 @AndroidEntryPoint
 class MyContactsFragment :
     BaseFragment<FragmentMyContactsBinding>(FragmentMyContactsBinding::inflate) {
 
     /**
-     * ViewModel for managing the list of contacts
+     * ViewModel to manage the data used in this fragment.
      */
     private val viewModel: ContactsViewModel by viewModels()
+
+    /**
+     * Progress bar to display the download process.
+     */
     private lateinit var progressBar: ProgressBar
 
     private val adapter: ContactsAdapter by lazy {
         ContactsAdapter(object : ContactActionListener {
 
-            // Event handler for contact deletion
+            // Event handler for contact deletion.
             override fun onContactDelete(contact: Contact, position: Int) {
-                // Show a Snackbar with a message about the contact deletion
+                // Show a Snackbar with a message about the contact deletion.
                 showSnackbar()
                 viewModel.deleteUserContact(contact)
-                viewModel.deleteUser(contact)
+                viewModel.updateLastDeletedUser(contact)
             }
 
-            // Event handler for viewing contact details
+            // Event handler for viewing contact details.
             override fun onClick(contact: Contact, position: Int) {
                 if (adapter.isSelectMode) {
                     clickInSelectMode(contact, position)
                 } else {
-                    // Navigate to the "DetailViewFragment" with the contact data
+                    // Navigate to the "DetailViewFragment" with the contact data.
                     navigateToFragment(
                         PagerFragmentDirections.actionPagerFragmentToDetailViewFragment(
                             contact
@@ -90,7 +94,7 @@ class MyContactsFragment :
     }
 
     /**
-     * Method called after the fragment's view is created
+     * Method called after the fragment's view is created.
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -100,12 +104,18 @@ class MyContactsFragment :
         setObservers()
     }
 
+    /**
+     * Sets up the RecyclerView with a LinearLayoutManager and the ContactsAdapter.
+     */
     private fun setRecyclerView() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewContacts.layoutManager = layoutManager
         binding.recyclerViewContacts.adapter = adapter
     }
 
+    /**
+     * Sets up observers for the ViewModel's LiveData.
+     */
     private fun setObservers() {
         viewModel.contacts.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
@@ -114,7 +124,7 @@ class MyContactsFragment :
             adapter.setMultiselect(it)
         })
         lifecycleScope.launch {
-            viewModel.contactsLiveData.observe(viewLifecycleOwner, Observer {apiState ->
+            viewModel.contactsLiveData.observe(viewLifecycleOwner, Observer { apiState ->
                 when (apiState) {
                     is ApiState.Success<*> -> {
                         progressBar.invisible()
@@ -134,17 +144,15 @@ class MyContactsFragment :
                 }
             })
         }
-
     }
 
-
     /**
-     * Private method to set event listeners
+     * Method to set event listeners for UI elements.
      */
     override fun setListeners() {
         binding.recyclerViewContacts.swipeToDelete(
             deleteFunction = { contact ->
-                viewModel.deleteUser(contact)
+                viewModel.updateLastDeletedUser(contact)
                 viewModel.deleteUserContact(contact)
             },
             showSnackbar = {
@@ -153,13 +161,13 @@ class MyContactsFragment :
         ) {
             viewModel.isMultiselect.value == false
         }
-        // Add a click listener for the button to switch to MyProfileFragment
+        // Add a click listener for the button to switch to MyProfileFragment.
         binding.imageButtonMyContactsBack.setOnClickListener {
-            // Get the reference to ViewPager2 from PagerFragment
+            // Get the reference to ViewPager2 from PagerFragment.
             (parentFragment as PagerFragment).getViewPager().currentItem =
                 ViewPagerFragments.PROFILE_FRAGMENT.ordinal
-            // Switch to MyProfileFragment by setting the current item of the ViewPager2
-            // Assuming MyContactsFragment is at index 1
+            // Switch to MyProfileFragment by setting the current item of the ViewPager2.
+            // Assuming MyContactsFragment is at index 1.
         }
         binding.textViewMyContactsAddContacts.setOnClickListener {
             navigateToFragment(R.id.action_pagerFragment_to_addContactFragment)
@@ -176,9 +184,8 @@ class MyContactsFragment :
         }
     }
 
-
     /**
-     * Method to show a Snackbar with a message about the contact deletion
+     * Method to show a Snackbar with a message about the contact deletion.
      */
     fun showSnackbar() {
         showSnackbarWithAction(R.string.contact_removed, R.string.cancel) {
