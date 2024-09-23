@@ -166,7 +166,6 @@ class ContactsViewModel @Inject constructor(
      */
     fun deleteUserContact(contact: Contact) = viewModelScope.launch(Dispatchers.Main) {
         _deletionLiveData.postValue(ApiState.Loading)
-        _lastDeletedContacts.add(contact)
 
         val response = usersRepositoryImpl.deleteUserContact(
             userDataRepository.currentUser!!.id,
@@ -185,7 +184,7 @@ class ContactsViewModel @Inject constructor(
     /**
      * Restore the last deleted contacts to the contact list.
      */
-    fun restoreLastDeletedContact() {
+    fun restoreLastDeletedContacts() {
         for (contact in _lastDeletedContacts) {
             restoreContact(contact)
         }

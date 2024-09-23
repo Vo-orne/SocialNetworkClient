@@ -189,7 +189,7 @@ class MyContactsFragment :
      */
     fun showSnackbar() {
         showSnackbarWithAction(R.string.contact_removed, R.string.cancel) {
-            viewModel.restoreLastDeletedContact()
+            viewModel.restoreLastDeletedContacts()
         }
     }
 }
