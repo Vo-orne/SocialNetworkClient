@@ -13,6 +13,7 @@
     <string name="content_description_linkedin_icon">Displays the Linkedin icon</string>
     <string name="content_description_instagram_icon">Displays the Instagram icon</string>
     <string name="access_is_denied">Access to contacts is denied</string>
+    <string name="log_out">Log out</string>
 
     <!--    AuthActivity    -->
     <string name="titleText">Let\'s get acquainted</string>
@@ -40,8 +41,8 @@
     <string name="contact_removed">Contact has been removed.</string>
     <string name="cancel">Cancel</string>
 
-    <!--    AddContactDialog    -->
-    <string name="add_contact">Add contact</string>
+    <!--    EditProfileDialog    -->
+    <string name="edit_user">Edit user</string>
     <string name="username">Username</string>
     <string name="save">Save</string>
     <string name="displays_the_add_photo_button">Displays the add photo button.</string>
@@ -54,4 +55,32 @@
     <!--    PagerFragment    -->
     <string name="tab1">My profile</string>
     <string name="tab2">My contacts</string>
+
+    <!--    SignUpExtended    -->
+    <string name="forward">Forward</string>
+    <string name="your_profile_data">Your profile data</string>
+    <string name="user_name">User name</string>
+    <string name="mobile_phone">Mobile phone</string>
+    <string name="open_gallery">Open gallery</string>
+
+    <!--    LogIn    -->
+    <string name="hello">Hello!</string>
+    <string name="enter_your_email_and_password_below">Enter your email and password below</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="don_t_have_account">Don\'t have account?</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+
+    <!--    UserItem    -->
+    <string name="add">Add</string>
+
+    <!--    Search    -->
+    <string name="notification">Click on the notification to search</string>
+    <string name="search">Search</string>
+    <string name="no_results_found">No results found</string>
+    <string name="you_can_see_more_contacts_in_the_recommendation">You can see more contacts in the recommendation</string>
+
+    <!--    AddContact    -->
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="try_to_find_an_internet_access_point">Try to find an Internet access point and visit the page again</string>
 </resources>

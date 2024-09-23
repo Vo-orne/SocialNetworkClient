@@ -13,8 +13,9 @@
     <string name="content_description_linkedin_icon">Відображає іконку Linkedin</string>
     <string name="content_description_instagram_icon">Відображає іконку Instagram</string>
     <string name="access_is_denied">У доступі до контактів відмовлено</string>
+    <string name="log_out">Вийти</string>
 
-    <!--    AuthActivity    -->
+    <!--    SignUp    -->
     <string name="titleText">Давай знайомитись</string>
     <string name="subtitle_text">Заповніть профіль і переходьте до застосунку!</string>
     <string name="e_mail">Електронна пошта</string>
@@ -38,10 +39,10 @@
     <string name="back_button">Відображає кнопку повернення.</string>
     <string name="delete_button">Відображає кнопку видалення.</string>
     <string name="contact_removed">Контакт видалено.</string>
-    <string name="cancel">ВІДМІНИТИ</string>
+    <string name="cancel">Відмінити</string>
 
-    <!--    AddContactDialog    -->
-    <string name="add_contact">Додати контакт</string>
+    <!--    EditProfileDialog    -->
+    <string name="edit_user">Редагувати користувача</string>
     <string name="username">Ім\'я користувача</string>
     <string name="save">Зберегти</string>
     <string name="displays_the_add_photo_button">Відображає кнопку додавання фото.</string>
@@ -55,4 +56,31 @@
     <string name="tab1">Мій профіль</string>
     <string name="tab2">Мої контакти</string>
 
+    <!--    SignUpExtended    -->
+    <string name="forward">Вперед</string>
+    <string name="your_profile_data">Дані вашого профілю</string>
+    <string name="user_name">Ім\'я користувача</string>
+    <string name="mobile_phone">Мобільний телефон</string>
+    <string name="open_gallery">Відкрити галерею</string>
+
+    <!--    LogIn    -->
+    <string name="hello">Привіт!</string>
+    <string name="enter_your_email_and_password_below">Введіть свою адресу електронної пошти та пароль нижче</string>
+    <string name="login">Вхід</string>
+    <string name="sign_up">Зареєструватися</string>
+    <string name="don_t_have_account">Немає облікового запису?</string>
+    <string name="forgot_your_password">Забули свій пароль?</string>
+
+    <!--    UserItem    -->
+    <string name="add">Додати</string>
+
+    <!--    Search    -->
+    <string name="notification">Натисніть на сповіщення для пошуку</string>
+    <string name="search">Пошук</string>
+    <string name="no_results_found">Результати не знайдені</string>
+    <string name="you_can_see_more_contacts_in_the_recommendation">Більше контактів в рекомендованих</string>
+
+    <!--    AddContact    -->
+    <string name="no_internet_connection">Відсутнє Інтернет-з\'єднання</string>
+    <string name="try_to_find_an_internet_access_point">Спробуйте знайти точку доступу до Інтернету і відвідати сторінку повторно</string>
 </resources>

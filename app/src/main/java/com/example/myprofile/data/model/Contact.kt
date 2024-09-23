@@ -1,26 +1,26 @@
 package com.example.myprofile.data.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
-import java.util.UUID
 
 /**
- * The Contact data class represents a single contact with its details.
- * @param id The unique identifier for the contact.
- * @param avatar The URL of the contact's avatar or profile picture.
+ * Data class representing a contact.
+ * This class defines the structure of the "contacts" table in the Room database.
+ *
+ * @Entity annotation marks this class as a table in the database.
+ *
+ * @param avatar URL or path to the contact's avatar image.
  * @param name The name of the contact.
- * @param career The career or job field of the contact.
+ * @param career The career or job title of the contact.
  * @param address The address of the contact.
- * Implements Serializable to allow instances of Contact to be serialized and passed
- * between different components or activities.
+ * @param id The unique ID of the contact, used as the primary key in the database.
  */
-@Parcelize
-data class Contact( // TODO: you can set default values
-    val avatar: String,
-    val name: String,
-    val career: String,
-    val address: String,
-    val id: UUID = UUID.randomUUID()
-): Parcelable
-
+@Entity(tableName = "contacts")
+data class Contact(
+    val avatar: String? = null,
+    var name: String? = null,
+    var career: String? = null,
+    var address: String? = null,
+    @PrimaryKey val id: Long = 0
+) : Serializable

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorFirstBackground"
-    tools:context=".ui.fragments.MyProfileFragment">
+    tools:context=".presentation.ui.fragments.my_profile.MyProfileFragment">
 
     <View
         android:layout_width="0dp"
@@ -33,6 +33,17 @@
         android:theme="@style/TextViewTitlesStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonMyProfileLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_marginTop="@dimen/smallest_margin"
+        android:background="@drawable/frame_button_log_out"
+        android:theme="@style/ButtonLogOutStyle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageViewMyProfileUserAvatar"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorFirstBackground"
-    tools:context=".ui.fragments.sign_up.SignUpFragment">
+    tools:context=".presentation.ui.fragments.auth.sign_up.SignUpFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/smallest_margin"
+            android:layout_marginTop="@dimen/large_margin"
             android:gravity="center"
             android:text="@string/titleText"
             android:theme="@style/TextViewTitlesStyle"
@@ -47,7 +48,7 @@
             android:text="@string/e_mail"
             android:theme="@style/TextViewInputFieldTitleStyle"
             app:layout_constraintBottom_toTopOf="@id/textInputLayoutSignUpEmail"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textInputLayoutSignUpEmail"
             app:layout_constraintTop_toBottomOf="@id/textViewSignUpSubtitle" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -58,6 +59,7 @@
             android:layout_marginEnd="@dimen/large_margin"
             app:boxBackgroundMode="none"
             app:errorEnabled="true"
+            app:layout_constraintWidth_percent="0.50"
             app:layout_constraintBottom_toTopOf="@id/textViewSignUpPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +85,7 @@
             android:text="@string/password"
             android:theme="@style/TextViewInputFieldTitleStyle"
             app:layout_constraintBottom_toTopOf="@id/textInputLayoutSignUpPassword"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textInputLayoutSignUpPassword"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpEmail" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -96,6 +98,7 @@
             app:endIconMode="password_toggle"
             app:endIconTint="?attr/colorOfDataEntryFields"
             app:errorEnabled="true"
+            app:layout_constraintWidth_percent="0.50"
             app:layout_constraintBottom_toTopOf="@id/checkBoxSignUpMemberInputDate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -110,14 +113,12 @@
                 android:textColor="?attr/colorMainText"
                 android:textSize="@dimen/text_large_size"
                 android:theme="@style/EditTextStyle" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
             android:id="@+id/checkBoxSignUpMemberInputDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/very_large_margin"
             android:layout_marginBottom="@dimen/medium_margin"
             android:button="@drawable/frame_checkbox"
             android:buttonTint="?attr/colorMainText"
@@ -126,11 +127,11 @@
             android:textColor="?attr/colorSecondaryText"
             android:theme="@style/CheckBoxStyle"
             app:layout_constraintBottom_toTopOf="@id/buttonSignUpGoogle"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textInputLayoutSignUpPassword"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutSignUpPassword"
             tools:ignore="RtlSymmetry" />
 
-        <com.example.myprofile.utils.GoogleButton
+        <com.example.myprofile.presentation.utils.GoogleButton
             android:id="@+id/buttonSignUpGoogle"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_google_height"
@@ -142,9 +143,10 @@
             app:icon="@drawable/ic_google"
             app:iconPaddingLeft="@dimen/icon_padding_left"
             app:iconTextSpacing="@dimen/icon_text_spacing"
-            app:layout_constraintBottom_toTopOf="@id/textViewSignUpNoticeAgreement"
-            app:layout_constraintEnd_toStartOf="@id/textViewSignUpOr"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkBoxSignUpMemberInputDate"
+            app:layout_constraintBottom_toTopOf="@id/textViewSignUpOr"
+            app:layout_constraintEnd_toEndOf="@id/textInputLayoutSignUpPassword"
+            app:layout_constraintStart_toStartOf="@id/textInputLayoutSignUpPassword"
             app:text="@string/google"
             app:textFontFamily="@font/open_sans_medium" />
 
@@ -155,24 +157,23 @@
             android:layout_marginTop="@dimen/smallest_margin"
             android:text="@string/or"
             android:theme="@style/TextViewMainTextStyle"
-            app:layout_constraintBottom_toBottomOf="@id/buttonSignUpRegister"
-            app:layout_constraintEnd_toStartOf="@id/buttonSignUpRegister"
-            app:layout_constraintStart_toEndOf="@id/buttonSignUpGoogle"
-            app:layout_constraintTop_toTopOf="@id/buttonSignUpRegister" />
+            app:layout_constraintBottom_toTopOf="@id/buttonSignUpRegister"
+            app:layout_constraintEnd_toEndOf="@id/buttonSignUpGoogle"
+            app:layout_constraintStart_toStartOf="@id/buttonSignUpGoogle"
+            app:layout_constraintTop_toBottomOf="@id/buttonSignUpGoogle" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonSignUpRegister"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_register_height"
-            android:layout_marginStart="@dimen/large_margin"
             android:layout_marginTop="@dimen/smallest_margin"
-            android:layout_marginEnd="@dimen/large_margin"
             android:layout_marginBottom="@dimen/medium_margin"
             android:background="@drawable/frame_button_register"
             android:theme="@style/ButtonRegisterStyle"
+            app:layout_constraintTop_toBottomOf="@id/textViewSignUpOr"
             app:layout_constraintBottom_toTopOf="@id/textViewSignUpNoticeAgreement"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/textViewSignUpOr" />
+            app:layout_constraintEnd_toEndOf="@id/buttonSignUpGoogle"
+            app:layout_constraintStart_toStartOf="@id/buttonSignUpGoogle" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textViewSignUpNoticeAgreement"
@@ -182,6 +183,7 @@
             android:gravity="center"
             android:text="@string/notice_agreement"
             android:theme="@style/TextViewSubtitlesStyle"
+            app:layout_constraintTop_toBottomOf="@id/buttonSignUpRegister"
             app:layout_constraintBottom_toTopOf="@id/textViewSignUpHaveAccount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -68,9 +68,31 @@
         <item name="textAllCaps">true</item>
     </style>
 
+    <style name="ButtonLoginStyle">
+        <item name="android:text">@string/login</item>
+        <item name="android:textColor">?attr/colorMainText</item>
+        <item name="android:textSize">@dimen/text_medium_size</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
     <style name="ButtonEditProfileStyle">
         <item name="android:text">@string/edit_profile</item>
         <item name="android:textColor">?attr/colorSecondMainText</item>
+        <item name="android:textSize">@dimen/text_small_size</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="ButtonLogOutStyle">ButtonLogOutStyle
+        <item name="android:text">@string/log_out</item>
+        <item name="android:textColor">?attr/colorSecondaryText</item>
+        <item name="android:textSize">@dimen/text_small_size</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="ButtonSignUpExtendedCancel">
+        <item name="android:fontFamily">@font/open_sans_medium</item>
+        <item name="android:text">@string/cancel</item>
+        <item name="android:textColor">?attr/colorSecondBackground</item>
         <item name="android:textSize">@dimen/text_small_size</item>
         <item name="textAllCaps">false</item>
     </style>
